@@ -1,7 +1,9 @@
 #!/bin/bash
 
+cd `dirname $0`;pwd
+
 # Load Exp Settings
-source exp_setting.sh
+source ./exp_setting.sh
 
 
 # Remove previous files
