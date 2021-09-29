@@ -42,7 +42,23 @@ python3 -u main.py    --version                 resnet18                       \
 
 ## Class-wise noise for unlearnable example on CIFAR-10
 ##### Generate noise for unlearnable examples
+Generate unlearnable class-wise noise
 ```console
+python3 ssl_perturbation.py --config_path             configs/cifar10                \
+                        --exp_name                path/to/your/experiment/folder \
+                        --version                 resnet18                       \
+                        --train_data_type         CIFAR10                       \
+                        --noise_shape             10 3 32 32                     \
+                        --epsilon                 8                              \
+                        --num_steps               1                              \
+                        --step_size               0.8                            \
+                        --attack_type             min-min                        \
+                        --perturb_type            classwise                      \
+                        --universal_train_target  'classwise'
+```
+
+```console
+generate class-size noise
 python3 perturbation.py --config_path             configs/cifar10                \
                         --exp_name                path/to/your/experiment/folder \
                         --version                 resnet18                       \
@@ -57,6 +73,7 @@ python3 perturbation.py --config_path             configs/cifar10               
                         --universal_stop_error    0.1                            \
                         --use_subset
 ```
+
 ##### Train on unlearnable examples and eval on clean test
 ```console
 python3 -u main.py    --version                 resnet18                       \
