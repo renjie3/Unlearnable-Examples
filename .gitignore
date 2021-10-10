@@ -9,3 +9,6 @@ exp_results.json
 plots/
 data/
 results/
+fix_checkpoint/
+path/
+my_experiments/

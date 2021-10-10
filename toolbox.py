@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from torch.autograd import Variable
-from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_pos1_pertub
+from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_pos1_pertub, train_simclr_noise_return_loss_tensor
 
 if torch.cuda.is_available():
     device = torch.device('cuda')
@@ -42,12 +42,24 @@ class PerturbationTool():
             perturb_img.retain_grad()
             loss.backward()
             eta = self.step_size * perturb_img.grad.data.sign() * (-1)
+            # sign_print = perturb_img.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy()[0] == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy()[0] == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy()[0] == 0))
             perturb_img = Variable(perturb_img.data + eta, requires_grad=True)
             eta = torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon)
             perturb_img = Variable(images.data + eta, requires_grad=True)
             perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
+            print(loss.item())
+        input()
+        # print(eta.cpu().numpy()[0])
+        # print(eta.shape)
+        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
 
-        return perturb_img, eta
+        return perturb_img, eta, loss.item()
 
     def min_min_attack_noise_variable(self, images, labels, model, optimizer, criterion, random_noise=None, sample_wise=False):
         if random_noise is None:
@@ -75,18 +87,30 @@ class PerturbationTool():
             perturb = Variable(torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon), requires_grad=True)
             perturb_img = images.data + perturb
             perturb_img = torch.clamp(perturb_img, 0, 1)
+            print("min_min_attack_noise_variable:", loss.item())
+        input()
 
-        return perturb_img, eta
+        return perturb_img, perturb
 
     def min_min_attack_simclr(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
 
         perturb = Variable(random_noise, requires_grad=True)
-        perturb_img1 = Variable(torch.clamp(pos_samples_1.data + perturb, 0, 1), requires_grad=True)
-        perturb_img2 = Variable(torch.clamp(pos_samples_2.data + perturb, 0, 1), requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+        # perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        # eta1 = perturb_img1.data - pos_samples_1.data
+        # perturb_img2 = torch.clamp(pos_samples_2.data + eta1, 0, 1)
+        # eta2 = perturb_img2.data - pos_samples_2.data
+        # perturb_img1 = torch.clamp(pos_samples_1.data + eta2, 0, 1)
+        # perturb_img2 = torch.clamp(pos_samples_2.data + eta2, 0, 1)
+
+        # perturb_img1 = pos_samples_1.data + perturb
+        # perturb_img2 = pos_samples_2.data + perturb
         # perturb_img2 = Variable(torch.clamp(perturb_img2, 0, 1), requires_grad=True)
         eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
         for _ in range(self.num_steps):
             opt = torch.optim.SGD([perturb], lr=1e-3)
             # opt.zero_grad()
@@ -100,30 +124,265 @@ class PerturbationTool():
             #     logits, loss = criterion(model, perturb_img, labels, optimizer)
             # perturb_img.retain_grad()
             # loss.backward()
-            train_simclr_noise(model, perturb_img1, perturb_img2, perturb, opt, batch_size, temperature)
-
+            train_loss_batch = train_simclr_noise(model, pos_samples_1, pos_samples_2, perturb, opt, batch_size, temperature)
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
             # eta = self.step_size * perturb_img.grad.data.sign() * (-1)
             # perturb_img = Variable(perturb_img.data + eta, requires_grad=True)
             # eta = torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon)
             # perturb_img = Variable(images.data + eta, requires_grad=True)
             # perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
 
-            eta = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
-            perturb_img1 = perturb_img1.data + eta
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            sign_print = perturb.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+            perturb_img1 = perturb_img1.data + eta_step
             eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
-            perturb_img2 = perturb_img2.data + eta1
-            perturb = Variable(torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon), requires_grad=True)
-            perturb_img1 = pos_samples_1.data + eta
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            diff_eta = eta1 - eta2
+            print(diff_eta.cpu().numpy())
+            eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            # perturb_img2 = perturb_img2.data + eta1
+            # perturb = Variable(torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon), requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
             perturb_img1 = torch.clamp(perturb_img1, 0, 1)
-            perturb_img2 = pos_samples_2.data + eta
+            perturb_img2 = pos_samples_2.data + perturb
             perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+            # perturb_img1 = pos_samples_1.data + perturb
+            # perturb_img2 = pos_samples_2.data + perturb
 
             # perturb_img = Variable(images.data + eta, requires_grad=True)
             # perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
-        print(eta.cpu().numpy()[0])
-        print(eta.shape)
+        # print("eta all")
+        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
+        # print("=0:", np.sum(eta.cpu().numpy() == 0))
 
-        return None, eta
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+
+    def min_min_attack_simclr2(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
+    # after verified that using perturb as variable to train is working 
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            model.zero_grad()
+            # if isinstance(criterion, torch.nn.CrossEntropyLoss):
+            #     if hasattr(model, 'classify'):
+            #         model.classify = True
+            #     logits = model(perturb_img)
+            #     loss = criterion(logits, labels)
+            # else:
+            #     logits, loss = criterion(model, perturb_img, labels, optimizer)
+            # perturb_img.retain_grad()
+            # loss.backward()
+            train_loss_batch = train_simclr_noise(model, pos_samples_1, pos_samples_2, perturb, opt, batch_size, temperature)
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            sign_print = perturb.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
+            perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+            perturb_img2 = pos_samples_2.data + perturb
+            perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+        # print("eta all")
+        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
+        # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+
+    def min_min_attack_simclr_return_loss_tensor(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
+    # after verified that using perturb as variable to train is working 
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            model.zero_grad()
+            # perturb.retain_grad()
+            # loss.backward()
+            loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature)
+            perturb.retain_grad()
+            loss.backward()
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            sign_print = perturb.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+            perturb_img1 = perturb_img1.data + eta_step
+            eta = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            # eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            # diff_eta = eta1 - eta2
+            # print(diff_eta.cpu().numpy())
+            # eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
+            perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+            perturb_img2 = pos_samples_2.data + perturb
+            perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+        # print("eta all")
+        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
+        # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+
+    def min_min_attack_simclr_large_noise(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
+    # after verified that using perturb as variable to train is working 
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            model.zero_grad()
+            # perturb.retain_grad()
+            # loss.backward()
+            loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature)
+            perturb.retain_grad()
+            loss.backward()
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            sign_print = perturb.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            # diff_eta = eta1 - eta2
+            # print(diff_eta.cpu().numpy())
+            eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
+            perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+
+            # diff_img1 = perturb_img1_noclamp - perturb_img1
+            # print(perturb_img1_noclamp.shape)
+            # print(perturb_img1_noclamp.cpu().detach().numpy()[0][0][0])
+            # print(perturb_img1.cpu().detach().numpy()[0][0][0])
+            # print(pos_samples_1.data[0][0])
+            # print("eta: ", eta.cpu().detach().numpy()[0][0][0])
+            # print("diff_img1: ", diff_img1.cpu().detach().numpy()[0][0][0])
+            perturb_img2 = pos_samples_2.data + perturb
+            perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+
+        #     print(loss.item())
+        
+        # input()
+        # print("eta all")
+        # print(eta.cpu().numpy()[0][0])
+        # print("+:", np.sum(eta.cpu().numpy() > 63 / 255.0))
+        # print("-:", np.sum(eta.cpu().numpy() < -63 / 255.0))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
+        # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+
+    def min_min_attack_simclr_return_loss_tensor_print(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
+    # after verified that using perturb as variable to train is working 
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            model.zero_grad()
+            # perturb.retain_grad()
+            # loss.backward()
+            loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature)
+            perturb.retain_grad()
+            loss.backward()
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            sign_print = perturb.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
+            perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+            perturb_img2 = pos_samples_2.data + perturb
+            perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+        print("eta all")
+        print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        print(">0:", np.sum(eta.cpu().numpy() > 0))
+        print("<0:", np.sum(eta.cpu().numpy() < 0))
+        print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
     def min_min_attack_pos1_pertub(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
         # just train the noise on image 1
@@ -148,10 +407,62 @@ class PerturbationTool():
             # perturb_img.retain_grad()
             # loss.backward()
             eta = self.step_size * perturb_img1.grad.data.sign() * (-1)
+            # sign_print = perturb_img1.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy()[0] == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy()[0] == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy()[0] == 0))
             perturb_img1 = Variable(perturb_img1.data + eta, requires_grad=True)
             eta = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
             perturb_img1 = Variable(pos_samples_1.data + eta, requires_grad=True)
             perturb_img1 = Variable(torch.clamp(perturb_img1, 0, 1), requires_grad=True)
+        # print(eta.cpu().numpy()[0])
+        # print(eta.shape)
+        # sign_print = perturb_img1.grad.data.sign() * (-1)
+        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
+
+        return perturb_img1, eta
+
+    def min_min_attack_pos2_pertub(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None):
+        # just train the noise on image 1
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb_img1 = Variable(pos_samples_2.data + random_noise, requires_grad=True)
+        perturb_img1 = Variable(torch.clamp(perturb_img1, 0, 1), requires_grad=True)
+        eta = random_noise
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb_img1], lr=1e-3)
+            # opt.zero_grad()
+            model.zero_grad()
+            # if isinstance(criterion, torch.nn.CrossEntropyLoss):
+            #     if hasattr(model, 'classify'):
+            #         model.classify = True
+            #     logits = model(perturb_img)
+            #     loss = criterion(logits, labels)
+            # else:
+            #     logits, loss = criterion(model, perturb_img, labels, optimizer)
+            train_simclr_noise_pos1_pertub(model, perturb_img1, torch.clamp(pos_samples_1.data + eta, 0, 1), opt, batch_size, temperature)
+            # perturb_img.retain_grad()
+            # loss.backward()
+            eta = self.step_size * perturb_img1.grad.data.sign() * (-1)
+            # sign_print = perturb_img1.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy()[0] == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy()[0] == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy()[0] == 0))
+            perturb_img1 = Variable(perturb_img1.data + eta, requires_grad=True)
+            eta = torch.clamp(perturb_img1.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            perturb_img1 = Variable(pos_samples_2.data + eta, requires_grad=True)
+            perturb_img1 = Variable(torch.clamp(perturb_img1, 0, 1), requires_grad=True)
+        # print(eta.cpu().numpy()[0])
+        # print(eta.shape)
+        # sign_print = perturb_img1.grad.data.sign() * (-1)
+        print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        print(">0:", np.sum(eta.cpu().numpy() > 0))
+        print("<0:", np.sum(eta.cpu().numpy() < 0))
 
         return perturb_img1, eta
 

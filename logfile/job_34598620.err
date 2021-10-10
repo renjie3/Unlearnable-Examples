@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "ssl_perturbation_return_noise_tensor.py", line 10, in <module>
+    import toolbox
+  File "/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/toolbox.py", line 4, in <module>
+    from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_pos1_pertub, train_simclr_noise_return_loss_tensor
+  File "/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/simclr.py", line 11, in <module>
+    import utils
+  File "/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/utils.py", line 40
+    super(PoisonCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform, download=download)
+                                                                                                           ^
+SyntaxError: keyword argument repeated

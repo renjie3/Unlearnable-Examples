@@ -1,0 +1,21 @@
+python3 ssl_perturbation_visualization.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_return_noise_tensor_large_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 128 --num_steps 1 --step_size 12.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_return_noise_tensor_large_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_return_noise_tensor_large_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.1 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_same_img.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_train_noise_first.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_visualization.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+python3 ssl_perturbation_save_model2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 150
+
+python simclr.py --batch_size 512 --epochs 1000 --arch resnet18
+
+python3 ssl_perturbation_starting_fix_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10
+
+Job that works with epsilon 8 and step_size 1.6 : 34947805 34957280

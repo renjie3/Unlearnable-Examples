@@ -57,15 +57,29 @@ python3 ssl_perturbation.py --config_path             configs/cifar10           
                         --universal_train_target  'classwise'
 ```
 
+python3 ssl_perturbation.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 6 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise'
+
+python3 ssl_perturbation.py --config_path             configs/cifar10                \
+                        --exp_name                path/to/your/experiment/folder \
+                        --version                 resnet18                       \
+                        --train_data_type         CIFAR10                       \
+                        --noise_shape             10 3 32 32                     \
+                        --epsilon                 8                              \
+                        --num_steps               10                              \
+                        --step_size               0.8                            \
+                        --attack_type             min-min                        \
+                        --perturb_type            classwise                      \
+                        --universal_train_target  'classwise'
+
 ```console
 generate class-size noise
 python3 perturbation.py --config_path             configs/cifar10                \
-                        --exp_name                path/to/your/experiment/folder \
+                        --exp_name                my_experiments/class_wise_cifar10 \
                         --version                 resnet18                       \
-                        --train_data_type         CIFAR-10                       \
+                        --train_data_type         CIFAR10                       \
                         --noise_shape             10 3 32 32                     \
                         --epsilon                 8                              \
-                        --num_steps               1                              \
+                        --num_steps               30                              \
                         --step_size               0.8                            \
                         --attack_type             min-min                        \
                         --perturb_type            classwise                      \
@@ -77,12 +91,12 @@ python3 perturbation.py --config_path             configs/cifar10               
 ##### Train on unlearnable examples and eval on clean test
 ```console
 python3 -u main.py    --version                 resnet18                       \
-                      --exp_name                path/to/your/experiment/folder \
+                      --exp_name                my_experiments/class_wise_cifar10 \
                       --config_path             configs/cifar10                \
                       --train_data_type         PoisonCIFAR10                  \
                       --poison_rate             1.0                            \
                       --perturb_type            classwise                      \
-                      --perturb_tensor_filepath path/to/your/experiment/folder/perturbation.pt \
+                      --perturb_tensor_filepath my_experiments/class_wise_cifar10/perturbation.pt \
                       --train
 ```
 

@@ -1,0 +1,46 @@
+2021-10-09 16:34:22,908 PyTorch Version: 1.7.1
+2021-10-09 16:34:22,915 GPU List: ['Tesla V100-SXM2-32GB']
+2021-10-09 16:34:22,918 num_classes: 10
+2021-10-09 16:34:22,918 epochs: 60
+2021-10-09 16:34:22,918 grad_clip: 5.0
+2021-10-09 16:34:22,919 log_frequency: 100
+2021-10-09 16:34:22,919 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-09 16:34:22,919 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-09 16:34:22,920 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-09 16:34:22,920 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 60, 'eta_min': 0.0}
+2021-10-09 16:34:22,920 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-09 16:34:22,922 seed: 0
+2021-10-09 16:34:22,922 version: resnet18
+2021-10-09 16:34:22,922 exp_name: path/to/your/experiment/folder
+2021-10-09 16:34:22,923 config_path: configs/cifar10
+2021-10-09 16:34:22,923 load_model: False
+2021-10-09 16:34:22,923 data_parallel: False
+2021-10-09 16:34:22,923 train_batch_size: 512
+2021-10-09 16:34:22,924 eval_batch_size: 512
+2021-10-09 16:34:22,924 num_of_workers: 8
+2021-10-09 16:34:22,924 train_data_type: CIFAR10
+2021-10-09 16:34:22,924 train_data_path: ../datasets
+2021-10-09 16:34:22,925 test_data_type: CIFAR10
+2021-10-09 16:34:22,925 test_data_path: ../datasets
+2021-10-09 16:34:22,925 universal_train_portion: 0.2
+2021-10-09 16:34:22,925 universal_stop_error: 0.5
+2021-10-09 16:34:22,926 universal_train_target: 'classwise'
+2021-10-09 16:34:22,926 train_step: 10
+2021-10-09 16:34:22,926 use_subset: False
+2021-10-09 16:34:22,926 attack_type: min-min
+2021-10-09 16:34:22,927 perturb_type: classwise
+2021-10-09 16:34:22,927 patch_location: center
+2021-10-09 16:34:22,927 noise_shape: [10, 3, 32, 32]
+2021-10-09 16:34:22,927 epsilon: 0.03137254901960784
+2021-10-09 16:34:22,927 num_steps: 8
+2021-10-09 16:34:22,928 step_size: 0.0003921568627450981
+2021-10-09 16:34:22,928 random_start: False
+2021-10-09 16:34:22,928 feature_dim: 128
+2021-10-09 16:34:22,928 temperature: 0.5
+2021-10-09 16:34:22,929 k: 200
+2021-10-09 16:34:22,929 batch_size: 512
+2021-10-09 16:34:22,929 epochs: 150
+2021-10-09 16:34:22,929 arch: resnet18
+2021-10-09 16:34:22,930 noise_num: 10
+Training images:   0%|          | 0/98 [00:00<?, ?it/s]Training images:   1%|          | 1/98 [00:03<05:23,  3.34s/it]Training images:   2%|▏         | 2/98 [00:05<04:32,  2.84s/it]Training images:   3%|▎         | 3/98 [00:06<03:55,  2.48s/it]Training images:   4%|▍         | 4/98 [00:08<03:29,  2.23s/it]Training images:   5%|▌         | 5/98 [00:09<03:10,  2.05s/it]Training images:   6%|▌         | 6/98 [00:11<02:59,  1.95s/it]Training images:   7%|▋         | 7/98 [00:13<02:48,  1.86s/it]Training images:   8%|▊         | 8/98 [00:14<02:41,  1.79s/it]Training images:   9%|▉         | 9/98 [00:16<02:35,  1.74s/it]Training images:  10%|█         | 10/98 [00:18<02:30,  1.71s/it]Training images:  11%|█         | 11/98 [00:19<02:26,  1.69s/it]Training images:  12%|█▏        | 12/98 [00:21<02:23,  1.67s/it]Training images:  13%|█▎        | 13/98 [00:23<02:21,  1.66s/it]Training images:  14%|█▍        | 14/98 [00:24<02:18,  1.65s/it]Training images:  15%|█▌        | 15/98 [00:26<02:16,  1.65s/it]slurmstepd: error: *** JOB 34947757 ON nvl-007 CANCELLED AT 2021-10-09T16:35:04 ***
+Training images:  16%|█▋        | 16/98 [00:28<02:14,  1.64s/it]

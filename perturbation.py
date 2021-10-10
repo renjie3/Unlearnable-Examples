@@ -2,6 +2,7 @@ import argparse
 import collections
 import datetime
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 import shutil
 import time
 import dataset
@@ -165,6 +166,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
         model.classify = True
     while condition:
         if args.attack_type == 'min-min' and not args.load_model:
+            # pass
             # Train Batch for min-min noise
             for j in range(0, args.train_step):
                 try:
@@ -186,6 +188,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                     param.requires_grad = True
                 trainer.train_batch(torch.stack(train_imgs).to(device), labels, model, optimizer)
 
+        train_noise_loss_sum = 0
         for i, (images, labels) in tqdm(enumerate(data_loader[args.universal_train_target]), total=len(data_loader[args.universal_train_target])):
             images, labels, model = images.to(device), labels.to(device), model.to(device)
             # Add Class-wise Noise to each sample
@@ -203,7 +206,9 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
             batch_noise = torch.stack(batch_noise).to(device)
             if args.attack_type == 'min-min':
-                perturb_img, eta = noise_generator.min_min_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
+                perturb_img, eta, train_noise_loss = noise_generator.min_min_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
+                # perturb_img, eta = noise_generator.min_min_attack_noise_variable(images, labels, model, optimizer, criterion, random_noise=batch_noise)
+                # train_noise_loss_sum += train_noise_loss
             elif args.attack_type == 'min-max':
                 perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
             else:
@@ -220,6 +225,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 class_noise = random_noise[key]
                 class_noise += delta
                 random_noise[key] = torch.clamp(class_noise, -args.epsilon, args.epsilon)
+        print(train_noise_loss_sum / 19.0)
 
         # Eval termination conditions
         loss_avg, error_rate = universal_perturbation_eval(noise_generator, random_noise, data_loader, model, eval_target=args.universal_train_target)

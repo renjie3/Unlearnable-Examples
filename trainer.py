@@ -63,6 +63,7 @@ class Trainer():
         if isinstance(self.criterion, models.CutMixCrossEntropyLoss):
             _, labels = torch.max(labels.data, 1)
         loss.backward()
+        # print(loss.item())
         grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), self.config.grad_clip)
         optimizer.step()
         if logits.shape[1] >= 5:
