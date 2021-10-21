@@ -74,12 +74,12 @@ python3 ssl_perturbation.py --config_path             configs/cifar10           
 ```console
 generate class-size noise
 python3 perturbation.py --config_path             configs/cifar10                \
-                        --exp_name                my_experiments/class_wise_cifar10 \
+                        --exp_name                my_experiments/class_wise_cifar10_simclr_aug \
                         --version                 resnet18                       \
                         --train_data_type         CIFAR10                       \
                         --noise_shape             10 3 32 32                     \
                         --epsilon                 8                              \
-                        --num_steps               30                              \
+                        --num_steps               1                              \
                         --step_size               0.8                            \
                         --attack_type             min-min                        \
                         --perturb_type            classwise                      \

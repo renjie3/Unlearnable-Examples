@@ -273,6 +273,7 @@ def test_ssl_visualization(net, test_data_visualization, random_noise_class_test
 
         test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
         # generate feature bank
+        feature_bank = []
         for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting'):
             feature, out = net(data.cuda(non_blocking=True))
             feature_bank.append(feature)
@@ -286,7 +287,7 @@ def test_ssl_visualization(net, test_data_visualization, random_noise_class_test
         feature_tsne_output = tsne.fit_transform(feature_tsne_input)
         fig = plt.figure(figsize=(8, 8))
         ax = fig.add_subplot(1, 1, 1)
-        plt.title("clean data with original label")
+        plt.title("noise data with original label")
         plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
         ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         ax.yaxis.set_major_formatter(NullFormatter())
@@ -294,11 +295,43 @@ def test_ssl_visualization(net, test_data_visualization, random_noise_class_test
 
         fig = plt.figure(figsize=(8, 8))
         ax = fig.add_subplot(1, 1, 1)
-        plt.title("clean data with original label")
+        plt.title("noise data with noise label")
         plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=noise_labels, cmap=plt.cm.Spectral)
         ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         ax.yaxis.set_major_formatter(NullFormatter())
-        plt.savefig('./visualization/noisedata_orglabel.png')
+        plt.savefig('./visualization/noisedata_noiselabel.png')
+
+        for i in range(10):
+            index_group = np.where(labels_tsne_color==i)
+            # # labels_tsne_color_group = labels_tsne_color[index_group]
+            # # noise_labels_group = noise_labels[index_group]
+            # print(type(feature_tsne_output[index_group, 0]))
+            # print(type(feature_tsne_output[:,0]))
+            # print(type(feature_tsne_output[index_group, 1]))
+            # # print(type(noise_labels_group))
+            # print(feature_tsne_output[index_group, 0].shape)
+            # print(feature_tsne_output.shape)
+            # print(feature_tsne_output[index_group, 1].shape)
+            # # print(noise_labels_group.shape)
+
+            fig = plt.figure(figsize=(8, 8))
+            ax = fig.add_subplot(1, 1, 1)
+            plt.title("noise data with original label")
+            plt.scatter(feature_tsne_output[:,0][index_group], feature_tsne_output[:,1][index_group], s=10, c=labels_tsne_color[index_group], cmap=plt.cm.Spectral)
+            ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+            ax.yaxis.set_major_formatter(NullFormatter())
+            plt.savefig('./visualization/noisedata_orglabel_org{}.png'.format(i))
+            plt.close()
+
+            fig = plt.figure(figsize=(8, 8))
+            ax = fig.add_subplot(1, 1, 1)
+            plt.title("noise data with noise label")
+            plt.scatter(feature_tsne_output[:,0][index_group], feature_tsne_output[:,1][index_group], s=10, c=noise_labels[index_group], cmap=plt.cm.Spectral)
+            ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+            ax.yaxis.set_major_formatter(NullFormatter())
+            plt.savefig('./visualization/noisedata_noiselabel_org{}.png'.format(i))
+            plt.close()
+
 
     return 
 
@@ -363,26 +396,26 @@ if __name__ == '__main__':
     arch = args.arch
 
     # data prepare
-    # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
-    # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=16, pin_memory=True,
+    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
+    # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
     #                           drop_last=True)
-    train_data = utils.SameImgCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=16, pin_memory=True,
+    # train_data = utils.SameImgCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
+    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
                               drop_last=True)
     # sys.exit()
     memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
-    memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
+    memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
     test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
-    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
+    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
-    print(type(train_data))
+    # print(type(train_data))
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
     flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
     flops, params = clever_format([flops, params])
     print('# Model Params: {} FLOPs: {}'.format(params, flops))
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    optimizer = optim.Adam(model.parameters(), lr=1e-2, weight_decay=1e-6)
     c = len(memory_data.classes)
 
     # training loop

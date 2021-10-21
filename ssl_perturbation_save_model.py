@@ -24,6 +24,10 @@ import pandas as pd
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from simclr import test_ssl, train_simclr
+import random
+import matplotlib.pyplot as plt
+import matplotlib
+
 mlconfig.register(madrys.MadrysLoss)
 
 # General Options
@@ -64,6 +68,7 @@ parser.add_argument('--batch_size', default=512, type=int, help='Number of image
 parser.add_argument('--epochs', default=300, type=int, help='Number of sweeps over the dataset to train')
 parser.add_argument('--arch', default='resnet18', type=str, help='The backbone of encoder')
 parser.add_argument('--noise_num', default='10', type=str, help='The number of categories of misleading noise')
+parser.add_argument('--save_image_num', default=10, type=int, help='The number of groups of images with noise to save every 10 epochs. Evrey gourp has 9 images')
 args = parser.parse_args()
 
 # Convert Eps
@@ -159,7 +164,7 @@ def universal_perturbation_eval(noise_generator, random_noise, data_loader, mode
     return loss_meter.avg, err_meter.avg
 
 
-def universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k):
+def universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img):
     # Class-Wise perturbation
     # Generate Data loader
 
@@ -185,6 +190,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
     condition = True
     # data_iter = iter(data_loader['train_dataset'])
     epochs = args.epochs
+    save_image_num = args.save_image_num
     print("The whole epochs are {}".format(epochs))
     results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}
     save_name_pre = 'unlearnable_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
@@ -256,7 +262,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
                 batch_noise = torch.stack(batch_noise).to(device)
                 if args.attack_type == 'min-min':
-                    perturb_img, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
+                    _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
                     train_noise_loss_sum += train_noise_loss * pos_samples_1.shape[0]
                     train_noise_loss_count += pos_samples_1.shape[0]
                     # perturb_img, eta = noise_generator.min_min_attack_simclr(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
@@ -277,7 +283,16 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                     class_noise += delta
                     random_noise[key] = torch.clamp(class_noise, -args.epsilon, args.epsilon) # important.
                 # print(random_noise)
-            print(train_noise_loss_sum / float(train_noise_loss_count))
+            # print(train_noise_loss_sum / float(train_noise_loss_count))
+            
+        # Here we save some samples in image.
+        if epoch_idx % 10 == 0:
+        # if True:
+            if not os.path.exists('./images/'+save_name_pre):
+                os.mkdir('./images/'+save_name_pre)
+            images = []
+            for group_idx in range(save_image_num):
+                utils.save_img_group(train_data_for_save_img, random_noise, './images/{}/{}.png'.format(save_name_pre, group_idx))
 
             # # Eval termination conditions
             # loss_avg, error_rate = universal_perturbation_eval(noise_generator, random_noise, data_loader, model, eval_target=args.universal_train_target)
@@ -304,7 +319,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
         if epoch_idx % 10 == 0:
             torch.save(model.state_dict(), 'results/{}_checkpoint_model.pth'.format(save_name_pre))
-            torch.save(noise, 'results/{}_check_point_perturbation.pt'.format(save_name_pre))
+            torch.save(random_noise, 'results/{}_checkpoint_perturbation.pt'.format(save_name_pre))
             print("model saved at " + save_name_pre)
         
     torch.save(model.state_dict(), 'results/{}_final_model.pth'.format(save_name_pre))
@@ -590,7 +605,7 @@ def main():
             pass
         elif args.perturb_type == 'classwise':
             # noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
-            noise, save_name_pre = universal_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k)
+            noise, save_name_pre = universal_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
         torch.save(noise, 'results/{}perturbation.pt'.format(save_name_pre))
         logger.info(noise)
         logger.info(noise.shape)

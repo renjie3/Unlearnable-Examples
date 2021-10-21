@@ -187,7 +187,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
     # data_iter = iter(data_loader['train_dataset'])
     epochs = 3
     results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}
-    save_name_pre = 'unlearnable_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M"), temperature, batch_size, epochs)
+    save_name_pre = 'unlearnable_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
     if not os.path.exists('results'):
         os.mkdir('results')
     best_loss = 10000000
@@ -544,6 +544,13 @@ def main():
     # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
     # flops, params = clever_format([flops, params])
     # print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    # load pre-trained model parameters here by renjie3.
+    # unlearnable_20211011011237_0.5_512_150
+    pre_load_name = "unlearnable_20211011003354_0.5_512_150"
+    pretrained_model_path = "./results/{}_checkpoint_model.pth".format(pre_load_name)
+    model.load_state_dict(torch.load(pretrained_model_path))
+    # load noise here:
+    pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     c = len(memory_data.classes)
 
@@ -585,16 +592,16 @@ def main():
             pass
         elif args.perturb_type == 'classwise':
             # noise, save_name_pre = universal_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k)
-            save_name_pre = ''
+            # save_name_pre = ''
             # create new test dataset
             test_data_visualization = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
             # test_data_visualization_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
             # load model here:
             random_noise_class_test = np.load('noise_class_label_test.npy')
             # load noise here:
-            classwise_noise = None
+            # pretrained_classwise_noise = None
             # test_visualization
-            test_ssl_visualization(model, test_data_visualization, random_noise_class_test, classwise_noise)
+            test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise)
 
         # torch.save(noise, os.path.join(args.exp_name, save_name_pre+'_perturbation.pt'))
         

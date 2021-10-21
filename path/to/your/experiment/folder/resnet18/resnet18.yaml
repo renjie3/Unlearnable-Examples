@@ -1,5 +1,5 @@
 num_classes: 10
-epochs: 60
+epochs: 300
 grad_clip: 5.0
 log_frequency: 100
 

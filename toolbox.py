@@ -18,6 +18,7 @@ class PerturbationTool():
         np.random.seed(seed)
 
     def random_noise(self, noise_shape=[10, 3, 32, 32]):
+        # print("device", device)
         random_noise = torch.FloatTensor(*noise_shape).uniform_(-self.epsilon, self.epsilon).to(device)
         return random_noise
 
@@ -50,8 +51,8 @@ class PerturbationTool():
             eta = torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon)
             perturb_img = Variable(images.data + eta, requires_grad=True)
             perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
-            print(loss.item())
-        input()
+        #     print(loss.item())
+        # input()
         # print(eta.cpu().numpy()[0])
         # print(eta.shape)
         # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
@@ -87,8 +88,8 @@ class PerturbationTool():
             perturb = Variable(torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon), requires_grad=True)
             perturb_img = images.data + perturb
             perturb_img = torch.clamp(perturb_img, 0, 1)
-            print("min_min_attack_noise_variable:", loss.item())
-        input()
+        #     print("min_min_attack_noise_variable:", loss.item())
+        # input()
 
         return perturb_img, perturb
 

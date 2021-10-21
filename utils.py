@@ -1,9 +1,14 @@
 from PIL import Image
 import torch
+import torchvision
 from torchvision import transforms
 from torchvision.datasets import CIFAR10
 import numpy as np
 from dataset import patch_noise_extend_to_img
+
+import random
+import matplotlib.pyplot as plt
+import matplotlib
 
 if torch.cuda.is_available():
     device = torch.device('cuda')
@@ -41,14 +46,21 @@ class CIFAR10Pair(CIFAR10):
             raise('Replacing data noise class failed. Because the length is not consistent.')
 
     def add_noise_test_visualization(self, random_noise_class_test, noise):
-        print(type(noise))
+        # print(noise.shape)
+        # print(self.data[0][0][0])
+        noise_255 = noise.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        self.data = self.data.astype(np.float32)
 
         if len(self.data) == random_noise_class_test.shape[0]:
             for i in range(len(self.targets)):
+                # print(noise_255[random_noise_class_test[i]].cpu().numpy()[0][0])
+                # print(self.data[i][0][0])
                 # print(self.targets[i], random_noise_class[i])
-                self.data[i] += random_noise_class[random_noise_class_test[i]]
+                self.data[i] += noise_255[random_noise_class_test[i]]
         else:
             raise('Add noise to data failed. Because the length is not consistent.')
+
+        self.data = self.data.astype(np.uint8)
 
 
 class SameImgCIFAR10Pair(CIFAR10):
@@ -132,15 +144,89 @@ class PoisonCIFAR10Pair(CIFAR10):
             raise('Replacing data noise class failed. Because the length is not consistent.')
     
     def add_noise_test_visualization(self, random_noise_class_test, noise):
-        print(type(noise))# End here today. I think I can not finish it very soon.
 
+        noise_255 = noise.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        self.data = self.data.astype(np.float32)
+        if len(self.data) == random_noise_class_test.shape[0]:
+            for i in range(len(self.targets)):
+                self.data[i] += noise_255[random_noise_class_test[i]]
+        else:
+            raise('Add noise to data failed. Because the length is not consistent.')
+
+        self.data = self.data.astype(np.uint8)
+
+class TransferCIFAR10Pair(CIFAR10):
+    """CIFAR10 Dataset.
+    """
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None):
+        super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
+        if perturb_tensor_filepath != None:
+            self.perturb_tensor = torch.load(perturb_tensor_filepath)
+            self.noise_255 = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        else:
+            self.perturb_tensor = None
+
+        if random_noise_class_path != None:
+            self.random_noise_class = np.load(random_noise_class_path)
+        else:
+            self.random_noise_class = None
+
+    # random_noise_class = np.load('noise_class_label.npy')
+    #     self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
+    #     self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+    #     self.data = self.data.astype(np.float32)
+    #     for idx in range(len(self.data)):
+    #         noise = self.perturb_tensor[self.targets[idx]]
+    #         noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+    #         self.data[idx] = self.data[idx] + noise
+    #         self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+    #     self.data = self.data.astype(np.uint8)
+
+
+    def __getitem__(self, index):
+        img, target = self.data[index], self.targets[index]
+        # print(img.shape)
+        img = Image.fromarray(img)
+        # print("np.shape(img)", np.shape(img))
+
+        if self.transform is not None:
+            # print(self.perturb_tensor[self.random_noise_class[index]][0][0])
+            # print("self.transform(img)", self.transform(img).shape)
+            pos_1 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]], 0, 1)
+            pos_2 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]], 0, 1)
+
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        return pos_1, pos_2, target
+
+    def replace_random_noise_class(self, random_noise_class):
+        # print('length of targets is ', len(self.targets))
+        # print(random_noise_class.shape)
+        # for i in range(10):
+        #     print(i, np.sum(random_noise_class == i))
         if len(self.targets) == random_noise_class.shape[0]:
             for i in range(len(self.targets)):
                 # print(self.targets[i], random_noise_class[i])
                 self.targets[i] = random_noise_class[i]
         else:
             raise('Replacing data noise class failed. Because the length is not consistent.')
-            
+    
+    def make_unlearnable(self, random_noise_class, noise):
+
+        noise_255 = noise.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        self.data = self.data.astype(np.float32)
+        if len(self.data) == random_noise_class.shape[0]:
+            for i in range(len(self.targets)):
+                # print("data:", self.data[i][0])
+                # print("noise:", noise_255[random_noise_class[i]][0])
+                self.data[i] += noise_255[random_noise_class[i]]
+                # input()
+            print("Making data unlearnable done")
+        else:
+            raise('Making data unlearnable failed. Because the length is not consistent.')
+
+        self.data = self.data.astype(np.uint8)
 
 train_transform = transforms.Compose([
     transforms.RandomResizedCrop(32),
@@ -155,3 +241,29 @@ test_transform = transforms.Compose([
     transforms.ToTensor(),
     # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
     ])
+
+    
+def get_pairs_of_imgs(idx, clean_train_dataset, noise):
+    clean_img = clean_train_dataset.data[idx]
+    clean_img = transforms.functional.to_tensor(clean_img)
+    unlearnable_img = torch.clamp(clean_img + noise[clean_train_dataset.targets[idx]], 0, 1)
+
+    x = noise[clean_train_dataset.targets[idx]]
+    x_min = torch.min(x)
+    x_max = torch.max(x)
+    noise_norm = (x - x_min) / (x_max - x_min)
+    noise_norm = torch.clamp(noise_norm, 0, 1)
+
+    return [clean_img, noise_norm, unlearnable_img]
+
+def save_img_group(clean_train_dataset, noise, img_path):
+    fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+    selected_idx = [random.randint(0, 5000) for _ in range(9)]
+    img_grid = []
+    for idx in selected_idx:
+        img_grid += get_pairs_of_imgs(idx, clean_train_dataset, noise)
+
+    img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=9, pad_value=255)
+    npimg = img_grid_tensor.cpu().numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.savefig(img_path)

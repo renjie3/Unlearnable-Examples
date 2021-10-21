@@ -1,0 +1,54 @@
+2021-10-12 21:26:35,078 PyTorch Version: 1.7.1
+2021-10-12 21:26:35,105 GPU List: ['Tesla V100-SXM2-32GB']
+2021-10-12 21:26:35,108 num_classes: 10
+2021-10-12 21:26:35,109 epochs: 60
+2021-10-12 21:26:35,109 grad_clip: 5.0
+2021-10-12 21:26:35,109 log_frequency: 100
+2021-10-12 21:26:35,110 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-12 21:26:35,110 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-12 21:26:35,110 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-12 21:26:35,110 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 60, 'eta_min': 0.0}
+2021-10-12 21:26:35,111 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-12 21:26:35,112 seed: 0
+2021-10-12 21:26:35,112 version: resnet18
+2021-10-12 21:26:35,113 exp_name: path/to/your/experiment/folder
+2021-10-12 21:26:35,113 config_path: configs/cifar10
+2021-10-12 21:26:35,113 load_model: False
+2021-10-12 21:26:35,113 data_parallel: False
+2021-10-12 21:26:35,114 train_batch_size: 512
+2021-10-12 21:26:35,114 eval_batch_size: 512
+2021-10-12 21:26:35,114 num_of_workers: 8
+2021-10-12 21:26:35,114 train_data_type: CIFAR10
+2021-10-12 21:26:35,115 train_data_path: ../datasets
+2021-10-12 21:26:35,115 test_data_type: CIFAR10
+2021-10-12 21:26:35,115 test_data_path: ../datasets
+2021-10-12 21:26:35,115 universal_train_portion: 0.2
+2021-10-12 21:26:35,116 universal_stop_error: 0.5
+2021-10-12 21:26:35,116 universal_train_target: 'classwise'
+2021-10-12 21:26:35,116 train_step: 10
+2021-10-12 21:26:35,116 use_subset: False
+2021-10-12 21:26:35,117 attack_type: min-min
+2021-10-12 21:26:35,117 perturb_type: classwise
+2021-10-12 21:26:35,117 patch_location: center
+2021-10-12 21:26:35,117 noise_shape: [10, 3, 32, 32]
+2021-10-12 21:26:35,117 epsilon: 0.03137254901960784
+2021-10-12 21:26:35,118 num_steps: 1
+2021-10-12 21:26:35,118 step_size: 0.006274509803921569
+2021-10-12 21:26:35,118 random_start: False
+2021-10-12 21:26:35,118 feature_dim: 128
+2021-10-12 21:26:35,119 temperature: 0.5
+2021-10-12 21:26:35,119 k: 200
+2021-10-12 21:26:35,119 batch_size: 512
+2021-10-12 21:26:35,119 epochs: 1000
+2021-10-12 21:26:35,120 arch: resnet18
+2021-10-12 21:26:35,120 noise_num: 10
+2021-10-12 21:26:35,120 save_image_num: 10
+Training images:   0%|          | 0/98 [00:00<?, ?it/s]Training images:   0%|          | 0/98 [00:02<?, ?it/s]
+Traceback (most recent call last):
+  File "ssl_perturbation_save_model.py", line 622, in <module>
+    main()
+  File "ssl_perturbation_save_model.py", line 608, in main
+    noise, save_name_pre = universal_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
+  File "ssl_perturbation_save_model.py", line 281, in universal_perturbation
+    delta = torch.stack(class_noise_eta[key]).mean(dim=0).to(device) - random_noise[key]
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!

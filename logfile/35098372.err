@@ -1,0 +1,2 @@
+/var/lib/slurmd/job35098372/slurm_script: line 24: MY_ROOT_PATH-/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/: No such file or directory
+python3: can't open file 'main.py': [Errno 2] No such file or directory

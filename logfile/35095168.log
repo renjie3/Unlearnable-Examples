@@ -1,0 +1,117 @@
+This save model after 150 epochs. Number of workers 2. Removed Normalization transform.
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 71
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+The whole epochs are 71
+6.122017344248664
+5.909877000395785
+5.8276297579106595
+5.759286846082235
+5.72229100256851
+5.678242535935235
+5.658395639399893
+5.64383093843755
+5.62389038518532
+5.609006237737911
+model saved at unlearnable_20211014054108_0.5_512_71
+5.599818903146331
+5.585077334925072
+5.577892972021988
+5.5687497079986885
+5.556489477452543
+5.550874597018527
+5.5489542066436455
+5.539594925555987
+5.5351061181923775
+5.52769125122385
+model saved at unlearnable_20211014054108_0.5_512_71
+5.5292171743727225
+5.520579952554605
+5.513258319540122
+5.511916209741966
+5.5136128799202515
+5.504947308412532
+5.500960925190719
+5.497617637988219
+5.495870423071163
+5.489135860167828
+model saved at unlearnable_20211014054108_0.5_512_71
+5.496397632913491
+5.490162067806597
+5.48523473739624
+5.4805306945879435
+5.479922992666972
+5.475741052135978
+5.4736469258967135
+5.469973844351228
+5.470806456103768
+5.4688884941573
+model saved at unlearnable_20211014054108_0.5_512_71
+5.469408168006189
+5.463890464035506
+5.462633309905062
+5.462136519323919
+5.462348141621068
+5.455786105283757
+5.456107862216911
+5.450101926154697
+5.449802811612788
+5.445960374222588
+model saved at unlearnable_20211014054108_0.5_512_71
+5.452265547722885
+5.450033758104462
+5.445756051958222
+5.44377508360086
+5.443563412145241
+5.441546587599921
+5.439139076114929
+5.436585814682479
+5.43626346293184
+5.433908939361572
+model saved at unlearnable_20211014054108_0.5_512_71
+5.433458569123573
+5.430544533680394
+5.432478875229039
+5.431197766176204
+5.427780279179209
+5.428745333681402
+5.427193086171887
+5.42602468765888
+5.427891962307015
+5.4213263619806344
+model saved at unlearnable_20211014054108_0.5_512_71
+5.421462865219903
+JobId=35095168 JobName=SimCLR
+   UserId=renjie3(6007166) GroupId=cse(2010) MCS_label=N/A
+   Priority=18704 Nice=0 Account=general QOS=renjie3
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=10:54:34 TimeLimit=1-12:00:00 TimeMin=N/A
+   SubmitTime=2021-10-13T09:52:14 EligibleTime=2021-10-13T09:52:14
+   AccrueTime=2021-10-13T09:52:14
+   StartTime=2021-10-14T05:40:46 EndTime=2021-10-15T17:40:46 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2021-10-14T05:40:46
+   Partition=general-long-gpu AllocNode:Sid=dev-amd20-v100:79627
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=nvl-005
+   BatchHost=nvl-005
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=2,mem=16G,node=1,billing=2490,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=2 MinMemoryCPU=8G MinTmpDiskNode=0
+   Features=[intel14|intel16|intel18|amr|nvf] DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/submit.sb
+   WorkDir=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples
+   Comment=stdout=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/35095168.log 
+   StdErr=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/35095168.err
+   StdIn=/dev/null
+   StdOut=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/35095168.log
+   Power=
+   TresPerNode=gpu:v100:1
+   NtasksPerTRES:0
+

@@ -1,0 +1,43 @@
+This save model after 150 epochs. Number of workers 2. Removed Normalization transform.
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 150
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+The whole epochs are 150
+5.860886849078936
+5.372939144213175
+5.305562933695685
+5.287108849004372
+5.2842960652616835
+5.286702229804599
+5.276228732669477
+5.2687453338780355
+5.265799645296077
+5.262104934023828
+model saved at unlearnable_20211012194508_0.5_512_150
+5.2623817699471696
+5.256978772350194
+5.25409076140099
+5.253654229272272
+5.249640214074518
+5.24703986865958
+5.248815801954761
+5.2470330798748845
+5.243182673896711
+5.24202465765255
+model saved at unlearnable_20211012194508_0.5_512_150
+5.243669962145619
+5.242572066710167
+5.23852205768074
+5.240899410444436
+5.238093179525788
+5.240641230160428
+5.237746995748933
+5.23735361492511
+5.234581696618464
+5.235437884773176
+model saved at unlearnable_20211012194508_0.5_512_150
+5.235223150744881

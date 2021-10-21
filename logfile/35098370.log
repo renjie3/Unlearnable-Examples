@@ -1,0 +1,32 @@
+Train unlearnable with transformation of SimCLR.
+python3 -u main.py --version resnet18 --exp_name my_experiments/class_wise_cifar10_simclr_aug --config_path configs/cifar10 --train_data_type PoisonCIFAR10 --poison_rate 1.0 --perturb_type classwise --perturb_tensor_filepath my_experiments/class_wise_cifar10_simclr_aug/perturbation.pt --train
+JobId=35098370 JobName=SimCLR
+   UserId=renjie3(6007166) GroupId=cse(2010) MCS_label=N/A
+   Priority=14399 Nice=0 Account=general QOS=renjie3
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:08 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2021-10-13T11:10:35 EligibleTime=2021-10-13T11:10:35
+   AccrueTime=2021-10-13T11:10:35
+   StartTime=2021-10-14T17:27:38 EndTime=2021-10-16T17:27:38 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2021-10-14T17:27:38
+   Partition=general-long-gpu AllocNode:Sid=dev-amd20-v100:98426
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=nvl-005
+   BatchHost=nvl-005
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=2,mem=16G,node=1,billing=2490,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=2 MinMemoryCPU=8G MinTmpDiskNode=0
+   Features=[intel14|intel16|intel18|amr|nvf] DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/submit_unlearnable.sb
+   WorkDir=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples
+   Comment=stdout=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/35098369.log 
+   StdErr=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/35098370.err
+   StdIn=/dev/null
+   StdOut=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/35098370.log
+   Power=
+   TresPerNode=gpu:v100:1
+   NtasksPerTRES:0
+
