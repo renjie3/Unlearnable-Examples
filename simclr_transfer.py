@@ -14,6 +14,7 @@ from tqdm import tqdm
 
 import utils
 from model import Model
+from utils import train_diff_transform
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -28,6 +29,7 @@ def train(net, data_loader, train_optimizer):
     total_loss, total_num, train_bar = 0.0, 0, tqdm(data_loader)
     for pos_1, pos_2, target in train_bar:
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
         feature_1, out_1 = net(pos_1)
         feature_2, out_2 = net(pos_2)
         # [2*B, D]
@@ -399,7 +401,7 @@ if __name__ == '__main__':
     # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
     #                           drop_last=True)
     pre_load_name = "unlearnable_20211013094736_0.5_512_11"
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path='noise_class_label.npy')
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path='noise_class_label.npy')
     # load noise here:
     # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
     # random_noise_class = np.load('noise_class_label.npy')
@@ -407,9 +409,9 @@ if __name__ == '__main__':
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
                               drop_last=True)
     # sys.exit()
-    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
+    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
     memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
-    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
+    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True)
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
     # print(type(train_data))

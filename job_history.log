@@ -181,3 +181,31 @@ Thu Oct 14 17:27:45 EDT 2021
 Train unlearnable with transformation of SimCLR.
 python3 -u main.py --version resnet18 --exp_name my_experiments/class_wise_cifar10_simclr_aug --config_path configs/cifar10 --train_data_type PoisonCIFAR10 --poison_rate 1.0 --perturb_type classwise --perturb_tensor_filepath my_experiments/class_wise_cifar10_simclr_aug/perturbation.pt --train
 ---------------------------------------------------------------
+Thu Oct 21 23:22:25 EDT 2021
+35584746
+Differentiable augmentation first version.
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151
+---------------------------------------------------------------
+Thu Oct 21 23:22:27 EDT 2021
+35584735
+Differentiable augmentation first version.
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 2.4 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151
+---------------------------------------------------------------
+Thu Oct 21 23:22:27 EDT 2021
+35584740
+Differentiable augmentation first version.
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151
+---------------------------------------------------------------
+Sun Oct 24 06:58:13 EDT 2021
+35667778
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------

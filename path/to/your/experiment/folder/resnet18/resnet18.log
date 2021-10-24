@@ -21110,3 +21110,1292 @@
 2021-10-14 16:35:18,355 Noise saved at results/unlearnable_20211014054108_0.5_512_71perturbation.pt
 2021-10-14 16:35:18,364 Running Cost 0.45 Days 
 
+2021-10-21 20:37:59,617 PyTorch Version: 1.7.1
+2021-10-21 20:37:59,655 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 20:37:59,663 num_classes: 10
+2021-10-21 20:37:59,663 epochs: 300
+2021-10-21 20:37:59,663 grad_clip: 5.0
+2021-10-21 20:37:59,664 log_frequency: 100
+2021-10-21 20:37:59,664 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 20:37:59,664 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 20:37:59,664 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 20:37:59,665 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 20:37:59,665 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 20:37:59,667 seed: 0
+2021-10-21 20:37:59,667 version: resnet18
+2021-10-21 20:37:59,667 exp_name: path/to/your/experiment/folder
+2021-10-21 20:37:59,668 config_path: configs/cifar10
+2021-10-21 20:37:59,668 load_model: False
+2021-10-21 20:37:59,668 data_parallel: False
+2021-10-21 20:37:59,668 train_batch_size: 512
+2021-10-21 20:37:59,668 eval_batch_size: 512
+2021-10-21 20:37:59,669 num_of_workers: 8
+2021-10-21 20:37:59,669 train_data_type: CIFAR10
+2021-10-21 20:37:59,669 train_data_path: ../datasets
+2021-10-21 20:37:59,669 test_data_type: CIFAR10
+2021-10-21 20:37:59,670 test_data_path: ../datasets
+2021-10-21 20:37:59,670 universal_train_portion: 0.2
+2021-10-21 20:37:59,670 universal_stop_error: 0.5
+2021-10-21 20:37:59,670 universal_train_target: classwise
+2021-10-21 20:37:59,670 train_step: 10
+2021-10-21 20:37:59,671 use_subset: False
+2021-10-21 20:37:59,671 attack_type: min-min
+2021-10-21 20:37:59,671 perturb_type: classwise
+2021-10-21 20:37:59,671 patch_location: center
+2021-10-21 20:37:59,672 noise_shape: [10, 3, 32, 32]
+2021-10-21 20:37:59,672 epsilon: 0.03137254901960784
+2021-10-21 20:37:59,672 num_steps: 1
+2021-10-21 20:37:59,672 step_size: 0.006274509803921569
+2021-10-21 20:37:59,672 random_start: False
+2021-10-21 20:37:59,673 feature_dim: 128
+2021-10-21 20:37:59,673 temperature: 0.5
+2021-10-21 20:37:59,673 k: 200
+2021-10-21 20:37:59,673 batch_size: 512
+2021-10-21 20:37:59,674 epochs: 151
+2021-10-21 20:37:59,674 arch: resnet18
+2021-10-21 20:37:59,674 noise_num: 10
+2021-10-21 20:37:59,674 save_image_num: 10
+2021-10-21 21:31:49,422 PyTorch Version: 1.7.1
+2021-10-21 21:31:49,454 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 21:31:49,460 num_classes: 10
+2021-10-21 21:31:49,460 epochs: 300
+2021-10-21 21:31:49,461 grad_clip: 5.0
+2021-10-21 21:31:49,461 log_frequency: 100
+2021-10-21 21:31:49,461 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 21:31:49,462 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 21:31:49,462 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 21:31:49,462 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 21:31:49,462 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 21:31:49,465 seed: 0
+2021-10-21 21:31:49,465 version: resnet18
+2021-10-21 21:31:49,465 exp_name: path/to/your/experiment/folder
+2021-10-21 21:31:49,465 config_path: configs/cifar10
+2021-10-21 21:31:49,466 load_model: False
+2021-10-21 21:31:49,466 data_parallel: False
+2021-10-21 21:31:49,466 train_batch_size: 512
+2021-10-21 21:31:49,466 eval_batch_size: 512
+2021-10-21 21:31:49,466 num_of_workers: 8
+2021-10-21 21:31:49,467 train_data_type: CIFAR10
+2021-10-21 21:31:49,467 train_data_path: ../datasets
+2021-10-21 21:31:49,467 test_data_type: CIFAR10
+2021-10-21 21:31:49,467 test_data_path: ../datasets
+2021-10-21 21:31:49,468 universal_train_portion: 0.2
+2021-10-21 21:31:49,468 universal_stop_error: 0.5
+2021-10-21 21:31:49,468 universal_train_target: classwise
+2021-10-21 21:31:49,468 train_step: 10
+2021-10-21 21:31:49,469 use_subset: False
+2021-10-21 21:31:49,469 attack_type: min-min
+2021-10-21 21:31:49,469 perturb_type: classwise
+2021-10-21 21:31:49,469 patch_location: center
+2021-10-21 21:31:49,469 noise_shape: [10, 3, 32, 32]
+2021-10-21 21:31:49,470 epsilon: 0.06274509803921569
+2021-10-21 21:31:49,470 num_steps: 1
+2021-10-21 21:31:49,470 step_size: 0.012549019607843138
+2021-10-21 21:31:49,470 random_start: False
+2021-10-21 21:31:49,470 feature_dim: 128
+2021-10-21 21:31:49,471 temperature: 0.5
+2021-10-21 21:31:49,471 k: 200
+2021-10-21 21:31:49,471 batch_size: 512
+2021-10-21 21:31:49,471 epochs: 151
+2021-10-21 21:31:49,472 arch: resnet18
+2021-10-21 21:31:49,472 noise_num: 10
+2021-10-21 21:31:49,472 save_image_num: 10
+2021-10-21 21:52:56,601 PyTorch Version: 1.7.1
+2021-10-21 21:52:56,628 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 21:52:56,633 num_classes: 10
+2021-10-21 21:52:56,634 epochs: 300
+2021-10-21 21:52:56,634 grad_clip: 5.0
+2021-10-21 21:52:56,634 log_frequency: 100
+2021-10-21 21:52:56,634 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 21:52:56,635 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 21:52:56,635 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 21:52:56,635 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 21:52:56,636 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 21:52:56,638 seed: 0
+2021-10-21 21:52:56,638 version: resnet18
+2021-10-21 21:52:56,638 exp_name: path/to/your/experiment/folder
+2021-10-21 21:52:56,639 config_path: configs/cifar10
+2021-10-21 21:52:56,639 load_model: False
+2021-10-21 21:52:56,639 data_parallel: False
+2021-10-21 21:52:56,640 train_batch_size: 512
+2021-10-21 21:52:56,640 eval_batch_size: 512
+2021-10-21 21:52:56,640 num_of_workers: 8
+2021-10-21 21:52:56,640 train_data_type: CIFAR10
+2021-10-21 21:52:56,640 train_data_path: ../datasets
+2021-10-21 21:52:56,641 test_data_type: CIFAR10
+2021-10-21 21:52:56,641 test_data_path: ../datasets
+2021-10-21 21:52:56,641 universal_train_portion: 0.2
+2021-10-21 21:52:56,641 universal_stop_error: 0.5
+2021-10-21 21:52:56,641 universal_train_target: classwise
+2021-10-21 21:52:56,642 train_step: 10
+2021-10-21 21:52:56,642 use_subset: False
+2021-10-21 21:52:56,642 attack_type: min-min
+2021-10-21 21:52:56,643 perturb_type: classwise
+2021-10-21 21:52:56,643 patch_location: center
+2021-10-21 21:52:56,643 noise_shape: [10, 3, 32, 32]
+2021-10-21 21:52:56,643 epsilon: 0.06274509803921569
+2021-10-21 21:52:56,644 num_steps: 1
+2021-10-21 21:52:56,644 step_size: 0.012549019607843138
+2021-10-21 21:52:56,644 random_start: False
+2021-10-21 21:52:56,644 feature_dim: 128
+2021-10-21 21:52:56,645 temperature: 0.5
+2021-10-21 21:52:56,645 k: 200
+2021-10-21 21:52:56,645 batch_size: 512
+2021-10-21 21:52:56,645 epochs: 151
+2021-10-21 21:52:56,646 arch: resnet18
+2021-10-21 21:52:56,646 noise_num: 10
+2021-10-21 21:52:56,646 save_image_num: 10
+2021-10-21 21:54:12,540 PyTorch Version: 1.7.1
+2021-10-21 21:54:12,556 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 21:54:12,559 num_classes: 10
+2021-10-21 21:54:12,559 epochs: 300
+2021-10-21 21:54:12,560 grad_clip: 5.0
+2021-10-21 21:54:12,560 log_frequency: 100
+2021-10-21 21:54:12,560 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 21:54:12,560 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 21:54:12,561 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 21:54:12,561 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 21:54:12,561 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 21:54:12,563 seed: 0
+2021-10-21 21:54:12,563 version: resnet18
+2021-10-21 21:54:12,564 exp_name: path/to/your/experiment/folder
+2021-10-21 21:54:12,564 config_path: configs/cifar10
+2021-10-21 21:54:12,564 load_model: False
+2021-10-21 21:54:12,564 data_parallel: False
+2021-10-21 21:54:12,564 train_batch_size: 512
+2021-10-21 21:54:12,564 eval_batch_size: 512
+2021-10-21 21:54:12,565 num_of_workers: 8
+2021-10-21 21:54:12,565 train_data_type: CIFAR10
+2021-10-21 21:54:12,565 train_data_path: ../datasets
+2021-10-21 21:54:12,565 test_data_type: CIFAR10
+2021-10-21 21:54:12,565 test_data_path: ../datasets
+2021-10-21 21:54:12,565 universal_train_portion: 0.2
+2021-10-21 21:54:12,566 universal_stop_error: 0.5
+2021-10-21 21:54:12,566 universal_train_target: classwise
+2021-10-21 21:54:12,566 train_step: 10
+2021-10-21 21:54:12,566 use_subset: False
+2021-10-21 21:54:12,566 attack_type: min-min
+2021-10-21 21:54:12,567 perturb_type: classwise
+2021-10-21 21:54:12,567 patch_location: center
+2021-10-21 21:54:12,567 noise_shape: [10, 3, 32, 32]
+2021-10-21 21:54:12,567 epsilon: 0.06274509803921569
+2021-10-21 21:54:12,567 num_steps: 1
+2021-10-21 21:54:12,568 step_size: 0.012549019607843138
+2021-10-21 21:54:12,568 random_start: False
+2021-10-21 21:54:12,568 feature_dim: 128
+2021-10-21 21:54:12,568 temperature: 0.5
+2021-10-21 21:54:12,568 k: 200
+2021-10-21 21:54:12,568 batch_size: 512
+2021-10-21 21:54:12,568 epochs: 151
+2021-10-21 21:54:12,569 arch: resnet18
+2021-10-21 21:54:12,569 noise_num: 10
+2021-10-21 21:54:12,569 save_image_num: 10
+2021-10-21 21:59:14,677 PyTorch Version: 1.7.1
+2021-10-21 21:59:14,698 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 21:59:14,701 num_classes: 10
+2021-10-21 21:59:14,701 epochs: 300
+2021-10-21 21:59:14,701 grad_clip: 5.0
+2021-10-21 21:59:14,701 log_frequency: 100
+2021-10-21 21:59:14,702 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 21:59:14,702 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 21:59:14,702 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 21:59:14,702 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 21:59:14,702 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 21:59:14,704 seed: 0
+2021-10-21 21:59:14,705 version: resnet18
+2021-10-21 21:59:14,705 exp_name: path/to/your/experiment/folder
+2021-10-21 21:59:14,705 config_path: configs/cifar10
+2021-10-21 21:59:14,705 load_model: False
+2021-10-21 21:59:14,705 data_parallel: False
+2021-10-21 21:59:14,706 train_batch_size: 512
+2021-10-21 21:59:14,706 eval_batch_size: 512
+2021-10-21 21:59:14,706 num_of_workers: 8
+2021-10-21 21:59:14,706 train_data_type: CIFAR10
+2021-10-21 21:59:14,706 train_data_path: ../datasets
+2021-10-21 21:59:14,706 test_data_type: CIFAR10
+2021-10-21 21:59:14,707 test_data_path: ../datasets
+2021-10-21 21:59:14,707 universal_train_portion: 0.2
+2021-10-21 21:59:14,707 universal_stop_error: 0.5
+2021-10-21 21:59:14,707 universal_train_target: classwise
+2021-10-21 21:59:14,707 train_step: 10
+2021-10-21 21:59:14,707 use_subset: False
+2021-10-21 21:59:14,708 attack_type: min-min
+2021-10-21 21:59:14,708 perturb_type: classwise
+2021-10-21 21:59:14,708 patch_location: center
+2021-10-21 21:59:14,708 noise_shape: [10, 3, 32, 32]
+2021-10-21 21:59:14,708 epsilon: 0.06274509803921569
+2021-10-21 21:59:14,708 num_steps: 10
+2021-10-21 21:59:14,708 step_size: 0.012549019607843138
+2021-10-21 21:59:14,709 random_start: False
+2021-10-21 21:59:14,709 feature_dim: 128
+2021-10-21 21:59:14,709 temperature: 0.5
+2021-10-21 21:59:14,709 k: 200
+2021-10-21 21:59:14,709 batch_size: 512
+2021-10-21 21:59:14,710 epochs: 151
+2021-10-21 21:59:14,710 arch: resnet18
+2021-10-21 21:59:14,710 noise_num: 10
+2021-10-21 21:59:14,710 save_image_num: 10
+2021-10-21 21:59:14,710 local_dev: True
+2021-10-21 22:03:23,580 PyTorch Version: 1.7.1
+2021-10-21 22:03:23,797 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 22:03:23,805 num_classes: 10
+2021-10-21 22:03:23,805 epochs: 300
+2021-10-21 22:03:23,806 grad_clip: 5.0
+2021-10-21 22:03:23,806 log_frequency: 100
+2021-10-21 22:03:23,806 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 22:03:23,807 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 22:03:23,807 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 22:03:23,807 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 22:03:23,808 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 22:03:23,811 seed: 0
+2021-10-21 22:03:23,811 version: resnet18
+2021-10-21 22:03:23,811 exp_name: path/to/your/experiment/folder
+2021-10-21 22:03:23,812 config_path: configs/cifar10
+2021-10-21 22:03:23,812 load_model: False
+2021-10-21 22:03:23,812 data_parallel: False
+2021-10-21 22:03:23,813 train_batch_size: 512
+2021-10-21 22:03:23,813 eval_batch_size: 512
+2021-10-21 22:03:23,813 num_of_workers: 8
+2021-10-21 22:03:23,814 train_data_type: CIFAR10
+2021-10-21 22:03:23,814 train_data_path: ../datasets
+2021-10-21 22:03:23,814 test_data_type: CIFAR10
+2021-10-21 22:03:23,814 test_data_path: ../datasets
+2021-10-21 22:03:23,815 universal_train_portion: 0.2
+2021-10-21 22:03:23,815 universal_stop_error: 0.5
+2021-10-21 22:03:23,815 universal_train_target: classwise
+2021-10-21 22:03:23,816 train_step: 10
+2021-10-21 22:03:23,816 use_subset: False
+2021-10-21 22:03:23,816 attack_type: min-min
+2021-10-21 22:03:23,816 perturb_type: classwise
+2021-10-21 22:03:23,817 patch_location: center
+2021-10-21 22:03:23,817 noise_shape: [10, 3, 32, 32]
+2021-10-21 22:03:23,817 epsilon: 0.06274509803921569
+2021-10-21 22:03:23,818 num_steps: 10
+2021-10-21 22:03:23,818 step_size: 0.025098039215686277
+2021-10-21 22:03:23,818 random_start: False
+2021-10-21 22:03:23,818 feature_dim: 128
+2021-10-21 22:03:23,819 temperature: 0.5
+2021-10-21 22:03:23,819 k: 200
+2021-10-21 22:03:23,819 batch_size: 512
+2021-10-21 22:03:23,819 epochs: 151
+2021-10-21 22:03:23,820 arch: resnet18
+2021-10-21 22:03:23,820 noise_num: 10
+2021-10-21 22:03:23,820 save_image_num: 10
+2021-10-21 22:03:23,821 local_dev: True
+2021-10-21 23:07:24,004 PyTorch Version: 1.7.1
+2021-10-21 23:07:24,022 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:07:24,028 num_classes: 10
+2021-10-21 23:07:24,029 epochs: 300
+2021-10-21 23:07:24,029 grad_clip: 5.0
+2021-10-21 23:07:24,029 log_frequency: 100
+2021-10-21 23:07:24,030 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:07:24,030 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:07:24,030 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:07:24,030 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:07:24,031 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:07:24,034 seed: 0
+2021-10-21 23:07:24,034 version: resnet18
+2021-10-21 23:07:24,034 exp_name: path/to/your/experiment/folder
+2021-10-21 23:07:24,034 config_path: configs/cifar10
+2021-10-21 23:07:24,034 load_model: False
+2021-10-21 23:07:24,035 data_parallel: False
+2021-10-21 23:07:24,035 train_batch_size: 512
+2021-10-21 23:07:24,035 eval_batch_size: 512
+2021-10-21 23:07:24,035 num_of_workers: 8
+2021-10-21 23:07:24,036 train_data_type: CIFAR10
+2021-10-21 23:07:24,036 train_data_path: ../datasets
+2021-10-21 23:07:24,036 test_data_type: CIFAR10
+2021-10-21 23:07:24,036 test_data_path: ../datasets
+2021-10-21 23:07:24,037 universal_train_portion: 0.2
+2021-10-21 23:07:24,037 universal_stop_error: 0.5
+2021-10-21 23:07:24,037 universal_train_target: classwise
+2021-10-21 23:07:24,037 train_step: 10
+2021-10-21 23:07:24,037 use_subset: False
+2021-10-21 23:07:24,038 attack_type: min-min
+2021-10-21 23:07:24,038 perturb_type: classwise
+2021-10-21 23:07:24,038 patch_location: center
+2021-10-21 23:07:24,039 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:07:24,039 epsilon: 0.03137254901960784
+2021-10-21 23:07:24,039 num_steps: 1
+2021-10-21 23:07:24,039 step_size: 0.006274509803921569
+2021-10-21 23:07:24,039 random_start: False
+2021-10-21 23:07:24,040 feature_dim: 128
+2021-10-21 23:07:24,040 temperature: 0.5
+2021-10-21 23:07:24,040 k: 200
+2021-10-21 23:07:24,040 batch_size: 512
+2021-10-21 23:07:24,041 epochs: 151
+2021-10-21 23:07:24,041 arch: resnet18
+2021-10-21 23:07:24,041 noise_num: 10
+2021-10-21 23:07:24,041 save_image_num: 10
+2021-10-21 23:07:24,041 local_dev: True
+2021-10-21 23:08:24,911 PyTorch Version: 1.7.1
+2021-10-21 23:08:24,920 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:08:24,923 num_classes: 10
+2021-10-21 23:08:24,924 epochs: 300
+2021-10-21 23:08:24,924 grad_clip: 5.0
+2021-10-21 23:08:24,924 log_frequency: 100
+2021-10-21 23:08:24,924 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:08:24,925 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:08:24,925 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:08:24,925 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:08:24,925 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:08:24,927 seed: 0
+2021-10-21 23:08:24,928 version: resnet18
+2021-10-21 23:08:24,928 exp_name: path/to/your/experiment/folder
+2021-10-21 23:08:24,928 config_path: configs/cifar10
+2021-10-21 23:08:24,928 load_model: False
+2021-10-21 23:08:24,929 data_parallel: False
+2021-10-21 23:08:24,929 train_batch_size: 512
+2021-10-21 23:08:24,929 eval_batch_size: 512
+2021-10-21 23:08:24,929 num_of_workers: 8
+2021-10-21 23:08:24,929 train_data_type: CIFAR10
+2021-10-21 23:08:24,930 train_data_path: ../datasets
+2021-10-21 23:08:24,930 test_data_type: CIFAR10
+2021-10-21 23:08:24,930 test_data_path: ../datasets
+2021-10-21 23:08:24,930 universal_train_portion: 0.2
+2021-10-21 23:08:24,930 universal_stop_error: 0.5
+2021-10-21 23:08:24,931 universal_train_target: classwise
+2021-10-21 23:08:24,931 train_step: 10
+2021-10-21 23:08:24,931 use_subset: False
+2021-10-21 23:08:24,931 attack_type: min-min
+2021-10-21 23:08:24,931 perturb_type: classwise
+2021-10-21 23:08:24,932 patch_location: center
+2021-10-21 23:08:24,932 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:08:24,932 epsilon: 0.03137254901960784
+2021-10-21 23:08:24,932 num_steps: 10
+2021-10-21 23:08:24,932 step_size: 0.006274509803921569
+2021-10-21 23:08:24,933 random_start: False
+2021-10-21 23:08:24,933 feature_dim: 128
+2021-10-21 23:08:24,933 temperature: 0.5
+2021-10-21 23:08:24,933 k: 200
+2021-10-21 23:08:24,933 batch_size: 512
+2021-10-21 23:08:24,934 epochs: 151
+2021-10-21 23:08:24,934 arch: resnet18
+2021-10-21 23:08:24,934 noise_num: 10
+2021-10-21 23:08:24,934 save_image_num: 10
+2021-10-21 23:08:24,934 local_dev: True
+2021-10-21 23:09:34,092 PyTorch Version: 1.7.1
+2021-10-21 23:09:34,149 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:09:34,152 num_classes: 10
+2021-10-21 23:09:34,153 epochs: 300
+2021-10-21 23:09:34,153 grad_clip: 5.0
+2021-10-21 23:09:34,153 log_frequency: 100
+2021-10-21 23:09:34,153 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:09:34,154 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:09:34,154 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:09:34,154 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:09:34,154 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:09:34,157 seed: 0
+2021-10-21 23:09:34,157 version: resnet18
+2021-10-21 23:09:34,157 exp_name: path/to/your/experiment/folder
+2021-10-21 23:09:34,157 config_path: configs/cifar10
+2021-10-21 23:09:34,157 load_model: False
+2021-10-21 23:09:34,158 data_parallel: False
+2021-10-21 23:09:34,158 train_batch_size: 512
+2021-10-21 23:09:34,158 eval_batch_size: 512
+2021-10-21 23:09:34,158 num_of_workers: 8
+2021-10-21 23:09:34,159 train_data_type: CIFAR10
+2021-10-21 23:09:34,159 train_data_path: ../datasets
+2021-10-21 23:09:34,159 test_data_type: CIFAR10
+2021-10-21 23:09:34,159 test_data_path: ../datasets
+2021-10-21 23:09:34,159 universal_train_portion: 0.2
+2021-10-21 23:09:34,160 universal_stop_error: 0.5
+2021-10-21 23:09:34,160 universal_train_target: classwise
+2021-10-21 23:09:34,160 train_step: 10
+2021-10-21 23:09:34,160 use_subset: False
+2021-10-21 23:09:34,160 attack_type: min-min
+2021-10-21 23:09:34,161 perturb_type: classwise
+2021-10-21 23:09:34,161 patch_location: center
+2021-10-21 23:09:34,161 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:09:34,161 epsilon: 0.06274509803921569
+2021-10-21 23:09:34,161 num_steps: 10
+2021-10-21 23:09:34,161 step_size: 0.025098039215686277
+2021-10-21 23:09:34,162 random_start: False
+2021-10-21 23:09:34,162 feature_dim: 128
+2021-10-21 23:09:34,162 temperature: 0.5
+2021-10-21 23:09:34,162 k: 200
+2021-10-21 23:09:34,162 batch_size: 512
+2021-10-21 23:09:34,163 epochs: 151
+2021-10-21 23:09:34,163 arch: resnet18
+2021-10-21 23:09:34,163 noise_num: 10
+2021-10-21 23:09:34,163 save_image_num: 10
+2021-10-21 23:09:34,163 local_dev: True
+2021-10-21 23:10:20,714 PyTorch Version: 1.7.1
+2021-10-21 23:10:20,733 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:10:20,736 num_classes: 10
+2021-10-21 23:10:20,737 epochs: 300
+2021-10-21 23:10:20,737 grad_clip: 5.0
+2021-10-21 23:10:20,737 log_frequency: 100
+2021-10-21 23:10:20,737 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:10:20,738 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:10:20,738 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:10:20,738 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:10:20,738 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:10:20,741 seed: 0
+2021-10-21 23:10:20,741 version: resnet18
+2021-10-21 23:10:20,741 exp_name: path/to/your/experiment/folder
+2021-10-21 23:10:20,742 config_path: configs/cifar10
+2021-10-21 23:10:20,742 load_model: False
+2021-10-21 23:10:20,742 data_parallel: False
+2021-10-21 23:10:20,742 train_batch_size: 512
+2021-10-21 23:10:20,742 eval_batch_size: 512
+2021-10-21 23:10:20,742 num_of_workers: 8
+2021-10-21 23:10:20,743 train_data_type: CIFAR10
+2021-10-21 23:10:20,743 train_data_path: ../datasets
+2021-10-21 23:10:20,743 test_data_type: CIFAR10
+2021-10-21 23:10:20,743 test_data_path: ../datasets
+2021-10-21 23:10:20,743 universal_train_portion: 0.2
+2021-10-21 23:10:20,743 universal_stop_error: 0.5
+2021-10-21 23:10:20,744 universal_train_target: classwise
+2021-10-21 23:10:20,744 train_step: 10
+2021-10-21 23:10:20,744 use_subset: False
+2021-10-21 23:10:20,744 attack_type: min-min
+2021-10-21 23:10:20,744 perturb_type: classwise
+2021-10-21 23:10:20,744 patch_location: center
+2021-10-21 23:10:20,744 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:10:20,745 epsilon: 0.06274509803921569
+2021-10-21 23:10:20,745 num_steps: 10
+2021-10-21 23:10:20,745 step_size: 0.025098039215686277
+2021-10-21 23:10:20,745 random_start: False
+2021-10-21 23:10:20,745 feature_dim: 128
+2021-10-21 23:10:20,745 temperature: 0.5
+2021-10-21 23:10:20,746 k: 200
+2021-10-21 23:10:20,746 batch_size: 512
+2021-10-21 23:10:20,746 epochs: 151
+2021-10-21 23:10:20,746 arch: resnet18
+2021-10-21 23:10:20,746 noise_num: 10
+2021-10-21 23:10:20,746 save_image_num: 10
+2021-10-21 23:10:20,747 local_dev: True
+2021-10-21 23:11:11,348 PyTorch Version: 1.7.1
+2021-10-21 23:11:11,377 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:11:11,382 num_classes: 10
+2021-10-21 23:11:11,383 epochs: 300
+2021-10-21 23:11:11,383 grad_clip: 5.0
+2021-10-21 23:11:11,383 log_frequency: 100
+2021-10-21 23:11:11,383 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:11:11,384 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:11:11,384 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:11:11,384 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:11:11,385 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:11:11,388 seed: 0
+2021-10-21 23:11:11,388 version: resnet18
+2021-10-21 23:11:11,388 exp_name: path/to/your/experiment/folder
+2021-10-21 23:11:11,389 config_path: configs/cifar10
+2021-10-21 23:11:11,389 load_model: False
+2021-10-21 23:11:11,389 data_parallel: False
+2021-10-21 23:11:11,389 train_batch_size: 512
+2021-10-21 23:11:11,390 eval_batch_size: 512
+2021-10-21 23:11:11,390 num_of_workers: 8
+2021-10-21 23:11:11,390 train_data_type: CIFAR10
+2021-10-21 23:11:11,390 train_data_path: ../datasets
+2021-10-21 23:11:11,390 test_data_type: CIFAR10
+2021-10-21 23:11:11,391 test_data_path: ../datasets
+2021-10-21 23:11:11,391 universal_train_portion: 0.2
+2021-10-21 23:11:11,391 universal_stop_error: 0.5
+2021-10-21 23:11:11,392 universal_train_target: classwise
+2021-10-21 23:11:11,392 train_step: 10
+2021-10-21 23:11:11,392 use_subset: False
+2021-10-21 23:11:11,392 attack_type: min-min
+2021-10-21 23:11:11,392 perturb_type: classwise
+2021-10-21 23:11:11,393 patch_location: center
+2021-10-21 23:11:11,393 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:11:11,393 epsilon: 0.03137254901960784
+2021-10-21 23:11:11,393 num_steps: 10
+2021-10-21 23:11:11,394 step_size: 0.01568627450980392
+2021-10-21 23:11:11,394 random_start: False
+2021-10-21 23:11:11,394 feature_dim: 128
+2021-10-21 23:11:11,394 temperature: 0.5
+2021-10-21 23:11:11,395 k: 200
+2021-10-21 23:11:11,395 batch_size: 512
+2021-10-21 23:11:11,395 epochs: 151
+2021-10-21 23:11:11,395 arch: resnet18
+2021-10-21 23:11:11,396 noise_num: 10
+2021-10-21 23:11:11,396 save_image_num: 10
+2021-10-21 23:11:11,396 local_dev: True
+2021-10-21 23:12:58,159 PyTorch Version: 1.7.1
+2021-10-21 23:12:58,165 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:12:58,168 num_classes: 10
+2021-10-21 23:12:58,168 epochs: 300
+2021-10-21 23:12:58,169 grad_clip: 5.0
+2021-10-21 23:12:58,169 log_frequency: 100
+2021-10-21 23:12:58,169 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:12:58,169 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:12:58,170 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:12:58,170 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:12:58,170 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:12:58,173 seed: 0
+2021-10-21 23:12:58,173 version: resnet18
+2021-10-21 23:12:58,173 exp_name: path/to/your/experiment/folder
+2021-10-21 23:12:58,173 config_path: configs/cifar10
+2021-10-21 23:12:58,173 load_model: False
+2021-10-21 23:12:58,174 data_parallel: False
+2021-10-21 23:12:58,174 train_batch_size: 512
+2021-10-21 23:12:58,174 eval_batch_size: 512
+2021-10-21 23:12:58,174 num_of_workers: 8
+2021-10-21 23:12:58,174 train_data_type: CIFAR10
+2021-10-21 23:12:58,175 train_data_path: ../datasets
+2021-10-21 23:12:58,175 test_data_type: CIFAR10
+2021-10-21 23:12:58,175 test_data_path: ../datasets
+2021-10-21 23:12:58,175 universal_train_portion: 0.2
+2021-10-21 23:12:58,175 universal_stop_error: 0.5
+2021-10-21 23:12:58,176 universal_train_target: classwise
+2021-10-21 23:12:58,176 train_step: 10
+2021-10-21 23:12:58,176 use_subset: False
+2021-10-21 23:12:58,176 attack_type: min-min
+2021-10-21 23:12:58,177 perturb_type: classwise
+2021-10-21 23:12:58,177 patch_location: center
+2021-10-21 23:12:58,177 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:12:58,177 epsilon: 0.03137254901960784
+2021-10-21 23:12:58,177 num_steps: 10
+2021-10-21 23:12:58,177 step_size: 0.01568627450980392
+2021-10-21 23:12:58,178 random_start: False
+2021-10-21 23:12:58,178 feature_dim: 128
+2021-10-21 23:12:58,178 temperature: 0.5
+2021-10-21 23:12:58,178 k: 200
+2021-10-21 23:12:58,178 batch_size: 512
+2021-10-21 23:12:58,178 epochs: 151
+2021-10-21 23:12:58,179 arch: resnet18
+2021-10-21 23:12:58,179 noise_num: 10
+2021-10-21 23:12:58,179 save_image_num: 10
+2021-10-21 23:12:58,179 local_dev: True
+2021-10-21 23:14:47,321 PyTorch Version: 1.7.1
+2021-10-21 23:14:47,345 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-21 23:14:47,349 num_classes: 10
+2021-10-21 23:14:47,349 epochs: 300
+2021-10-21 23:14:47,350 grad_clip: 5.0
+2021-10-21 23:14:47,350 log_frequency: 100
+2021-10-21 23:14:47,350 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:14:47,350 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:14:47,350 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:14:47,350 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:14:47,351 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:14:47,353 seed: 0
+2021-10-21 23:14:47,353 version: resnet18
+2021-10-21 23:14:47,353 exp_name: path/to/your/experiment/folder
+2021-10-21 23:14:47,354 config_path: configs/cifar10
+2021-10-21 23:14:47,354 load_model: False
+2021-10-21 23:14:47,354 data_parallel: False
+2021-10-21 23:14:47,354 train_batch_size: 512
+2021-10-21 23:14:47,354 eval_batch_size: 512
+2021-10-21 23:14:47,355 num_of_workers: 8
+2021-10-21 23:14:47,355 train_data_type: CIFAR10
+2021-10-21 23:14:47,355 train_data_path: ../datasets
+2021-10-21 23:14:47,355 test_data_type: CIFAR10
+2021-10-21 23:14:47,355 test_data_path: ../datasets
+2021-10-21 23:14:47,355 universal_train_portion: 0.2
+2021-10-21 23:14:47,356 universal_stop_error: 0.5
+2021-10-21 23:14:47,356 universal_train_target: classwise
+2021-10-21 23:14:47,356 train_step: 10
+2021-10-21 23:14:47,356 use_subset: False
+2021-10-21 23:14:47,356 attack_type: min-min
+2021-10-21 23:14:47,356 perturb_type: classwise
+2021-10-21 23:14:47,357 patch_location: center
+2021-10-21 23:14:47,357 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:14:47,357 epsilon: 0.06274509803921569
+2021-10-21 23:14:47,357 num_steps: 1
+2021-10-21 23:14:47,357 step_size: 0.01568627450980392
+2021-10-21 23:14:47,358 random_start: False
+2021-10-21 23:14:47,358 feature_dim: 128
+2021-10-21 23:14:47,358 temperature: 0.5
+2021-10-21 23:14:47,358 k: 200
+2021-10-21 23:14:47,358 batch_size: 512
+2021-10-21 23:14:47,359 epochs: 151
+2021-10-21 23:14:47,359 arch: resnet18
+2021-10-21 23:14:47,359 noise_num: 10
+2021-10-21 23:14:47,359 save_image_num: 10
+2021-10-21 23:14:47,359 local_dev: True
+2021-10-21 23:22:38,132 PyTorch Version: 1.7.1
+2021-10-21 23:22:38,187 GPU List: ['Tesla V100-SXM2-32GB']
+2021-10-21 23:22:38,193 num_classes: 10
+2021-10-21 23:22:38,193 epochs: 300
+2021-10-21 23:22:38,194 grad_clip: 5.0
+2021-10-21 23:22:38,194 log_frequency: 100
+2021-10-21 23:22:38,194 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:22:38,194 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:22:38,195 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:22:38,195 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:22:38,195 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:22:38,198 seed: 0
+2021-10-21 23:22:38,198 version: resnet18
+2021-10-21 23:22:38,198 exp_name: path/to/your/experiment/folder
+2021-10-21 23:22:38,198 config_path: configs/cifar10
+2021-10-21 23:22:38,199 load_model: False
+2021-10-21 23:22:38,199 data_parallel: False
+2021-10-21 23:22:38,199 train_batch_size: 512
+2021-10-21 23:22:38,199 eval_batch_size: 512
+2021-10-21 23:22:38,200 num_of_workers: 8
+2021-10-21 23:22:38,200 train_data_type: CIFAR10
+2021-10-21 23:22:38,200 train_data_path: ../datasets
+2021-10-21 23:22:38,200 test_data_type: CIFAR10
+2021-10-21 23:22:38,201 test_data_path: ../datasets
+2021-10-21 23:22:38,201 universal_train_portion: 0.2
+2021-10-21 23:22:38,201 universal_stop_error: 0.5
+2021-10-21 23:22:38,201 universal_train_target: 'classwise'
+2021-10-21 23:22:38,202 train_step: 10
+2021-10-21 23:22:38,202 use_subset: False
+2021-10-21 23:22:38,202 attack_type: min-min
+2021-10-21 23:22:38,202 perturb_type: classwise
+2021-10-21 23:22:38,203 patch_location: center
+2021-10-21 23:22:38,203 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:22:38,204 epsilon: 0.06274509803921569
+2021-10-21 23:22:38,204 num_steps: 1
+2021-10-21 23:22:38,204 step_size: 0.012549019607843138
+2021-10-21 23:22:38,205 random_start: False
+2021-10-21 23:22:38,205 feature_dim: 128
+2021-10-21 23:22:38,205 temperature: 0.5
+2021-10-21 23:22:38,206 k: 200
+2021-10-21 23:22:38,206 batch_size: 512
+2021-10-21 23:22:38,206 epochs: 151
+2021-10-21 23:22:38,206 arch: resnet18
+2021-10-21 23:22:38,207 noise_num: 10
+2021-10-21 23:22:38,207 save_image_num: 10
+2021-10-21 23:22:38,207 local_dev: False
+2021-10-21 23:22:47,534 PyTorch Version: 1.7.1
+2021-10-21 23:22:47,546 PyTorch Version: 1.7.1
+2021-10-21 23:22:47,587 GPU List: ['Tesla V100-SXM2-32GB']
+2021-10-21 23:22:47,586 GPU List: ['Tesla V100-SXM2-32GB']
+2021-10-21 23:22:47,591 num_classes: 10
+2021-10-21 23:22:47,594 epochs: 300
+2021-10-21 23:22:47,592 num_classes: 10
+2021-10-21 23:22:47,594 grad_clip: 5.0
+2021-10-21 23:22:47,594 epochs: 300
+2021-10-21 23:22:47,598 log_frequency: 100
+2021-10-21 23:22:47,598 grad_clip: 5.0
+2021-10-21 23:22:47,602 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:22:47,601 log_frequency: 100
+2021-10-21 23:22:47,605 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:22:47,605 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-21 23:22:47,608 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:22:47,608 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-21 23:22:47,611 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:22:47,611 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-21 23:22:47,614 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:22:47,614 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-21 23:22:47,617 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-21 23:22:47,620 seed: 0
+2021-10-21 23:22:47,619 seed: 0
+2021-10-21 23:22:47,621 version: resnet18
+2021-10-21 23:22:47,621 version: resnet18
+2021-10-21 23:22:47,624 exp_name: path/to/your/experiment/folder
+2021-10-21 23:22:47,625 exp_name: path/to/your/experiment/folder
+2021-10-21 23:22:47,628 config_path: configs/cifar10
+2021-10-21 23:22:47,627 config_path: configs/cifar10
+2021-10-21 23:22:47,631 load_model: False
+2021-10-21 23:22:47,630 load_model: False
+2021-10-21 23:22:47,633 data_parallel: False
+2021-10-21 23:22:47,633 data_parallel: False
+2021-10-21 23:22:47,636 train_batch_size: 512
+2021-10-21 23:22:47,636 train_batch_size: 512
+2021-10-21 23:22:47,639 eval_batch_size: 512
+2021-10-21 23:22:47,642 eval_batch_size: 512
+2021-10-21 23:22:47,645 num_of_workers: 8
+2021-10-21 23:22:47,645 num_of_workers: 8
+2021-10-21 23:22:47,648 train_data_type: CIFAR10
+2021-10-21 23:22:47,648 train_data_type: CIFAR10
+2021-10-21 23:22:47,651 train_data_path: ../datasets
+2021-10-21 23:22:47,651 train_data_path: ../datasets
+2021-10-21 23:22:47,654 test_data_type: CIFAR10
+2021-10-21 23:22:47,653 test_data_type: CIFAR10
+2021-10-21 23:22:47,656 test_data_path: ../datasets
+2021-10-21 23:22:47,656 test_data_path: ../datasets
+2021-10-21 23:22:47,659 universal_train_portion: 0.2
+2021-10-21 23:22:47,659 universal_train_portion: 0.2
+2021-10-21 23:22:47,662 universal_stop_error: 0.5
+2021-10-21 23:22:47,661 universal_stop_error: 0.5
+2021-10-21 23:22:47,664 universal_train_target: 'classwise'
+2021-10-21 23:22:47,664 universal_train_target: 'classwise'
+2021-10-21 23:22:47,667 train_step: 10
+2021-10-21 23:22:47,666 train_step: 10
+2021-10-21 23:22:47,670 use_subset: False
+2021-10-21 23:22:47,669 use_subset: False
+2021-10-21 23:22:47,672 attack_type: min-min
+2021-10-21 23:22:47,672 attack_type: min-min
+2021-10-21 23:22:47,675 perturb_type: classwise
+2021-10-21 23:22:47,674 perturb_type: classwise
+2021-10-21 23:22:47,678 patch_location: center
+2021-10-21 23:22:47,677 patch_location: center
+2021-10-21 23:22:47,680 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:22:47,680 noise_shape: [10, 3, 32, 32]
+2021-10-21 23:22:47,683 epsilon: 0.03137254901960784
+2021-10-21 23:22:47,682 epsilon: 0.03137254901960784
+2021-10-21 23:22:47,686 num_steps: 1
+2021-10-21 23:22:47,685 num_steps: 5
+2021-10-21 23:22:47,688 step_size: 0.009411764705882352
+2021-10-21 23:22:47,688 step_size: 0.006274509803921569
+2021-10-21 23:22:47,691 random_start: False
+2021-10-21 23:22:47,690 random_start: False
+2021-10-21 23:22:47,693 feature_dim: 128
+2021-10-21 23:22:47,693 feature_dim: 128
+2021-10-21 23:22:47,696 temperature: 0.5
+2021-10-21 23:22:47,695 temperature: 0.5
+2021-10-21 23:22:47,698 k: 200
+2021-10-21 23:22:47,698 k: 200
+2021-10-21 23:22:47,701 batch_size: 512
+2021-10-21 23:22:47,700 batch_size: 512
+2021-10-21 23:22:47,703 epochs: 151
+2021-10-21 23:22:47,703 epochs: 151
+2021-10-21 23:22:47,706 arch: resnet18
+2021-10-21 23:22:47,706 arch: resnet18
+2021-10-21 23:22:47,709 noise_num: 10
+2021-10-21 23:22:47,708 noise_num: 10
+2021-10-21 23:22:47,712 save_image_num: 10
+2021-10-21 23:22:47,711 save_image_num: 10
+2021-10-21 23:22:47,714 local_dev: False
+2021-10-21 23:22:47,714 local_dev: False
+2021-10-23 11:50:14,798 PyTorch Version: 1.7.1
+2021-10-23 11:50:14,839 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 11:50:14,844 num_classes: 10
+2021-10-23 11:50:14,845 epochs: 300
+2021-10-23 11:50:14,845 grad_clip: 5.0
+2021-10-23 11:50:14,845 log_frequency: 100
+2021-10-23 11:50:14,846 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 11:50:14,846 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 11:50:14,846 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 11:50:14,846 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 11:50:14,847 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 11:50:14,849 seed: 0
+2021-10-23 11:50:14,849 version: resnet18
+2021-10-23 11:50:14,849 exp_name: path/to/your/experiment/folder
+2021-10-23 11:50:14,850 config_path: configs/cifar10
+2021-10-23 11:50:14,850 load_model: False
+2021-10-23 11:50:14,850 data_parallel: False
+2021-10-23 11:50:14,850 train_batch_size: 512
+2021-10-23 11:50:14,850 eval_batch_size: 512
+2021-10-23 11:50:14,851 num_of_workers: 8
+2021-10-23 11:50:14,851 train_data_type: CIFAR10
+2021-10-23 11:50:14,851 train_data_path: ../datasets
+2021-10-23 11:50:14,851 test_data_type: CIFAR10
+2021-10-23 11:50:14,851 test_data_path: ../datasets
+2021-10-23 11:50:14,852 universal_train_portion: 0.2
+2021-10-23 11:50:14,852 universal_stop_error: 0.5
+2021-10-23 11:50:14,852 universal_train_target: classwise
+2021-10-23 11:50:14,852 train_step: 10
+2021-10-23 11:50:14,852 use_subset: False
+2021-10-23 11:50:14,853 attack_type: min-min
+2021-10-23 11:50:14,853 perturb_type: classwise
+2021-10-23 11:50:14,853 patch_location: center
+2021-10-23 11:50:14,853 noise_shape: [10, 3, 32, 32]
+2021-10-23 11:50:14,853 epsilon: 0.06274509803921569
+2021-10-23 11:50:14,853 num_steps: 1
+2021-10-23 11:50:14,854 step_size: 0.01568627450980392
+2021-10-23 11:50:14,854 random_start: False
+2021-10-23 11:50:14,854 feature_dim: 128
+2021-10-23 11:50:14,854 temperature: 0.5
+2021-10-23 11:50:14,854 k: 200
+2021-10-23 11:50:14,854 batch_size: 512
+2021-10-23 11:50:14,855 epochs: 151
+2021-10-23 11:50:14,855 arch: resnet18
+2021-10-23 11:50:14,855 noise_num: 10
+2021-10-23 11:50:14,855 save_image_num: 10
+2021-10-23 11:50:14,855 local_dev: True
+2021-10-23 11:50:14,856 no_save: True
+2021-10-23 11:51:15,374 PyTorch Version: 1.7.1
+2021-10-23 11:51:15,383 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 11:51:15,388 num_classes: 10
+2021-10-23 11:51:15,388 epochs: 300
+2021-10-23 11:51:15,389 grad_clip: 5.0
+2021-10-23 11:51:15,389 log_frequency: 100
+2021-10-23 11:51:15,390 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 11:51:15,390 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 11:51:15,390 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 11:51:15,390 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 11:51:15,391 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 11:51:15,393 seed: 0
+2021-10-23 11:51:15,394 version: resnet18
+2021-10-23 11:51:15,394 exp_name: path/to/your/experiment/folder
+2021-10-23 11:51:15,395 config_path: configs/cifar10
+2021-10-23 11:51:15,395 load_model: False
+2021-10-23 11:51:15,395 data_parallel: False
+2021-10-23 11:51:15,395 train_batch_size: 512
+2021-10-23 11:51:15,396 eval_batch_size: 512
+2021-10-23 11:51:15,396 num_of_workers: 8
+2021-10-23 11:51:15,396 train_data_type: CIFAR10
+2021-10-23 11:51:15,396 train_data_path: ../datasets
+2021-10-23 11:51:15,397 test_data_type: CIFAR10
+2021-10-23 11:51:15,397 test_data_path: ../datasets
+2021-10-23 11:51:15,397 universal_train_portion: 0.2
+2021-10-23 11:51:15,397 universal_stop_error: 0.5
+2021-10-23 11:51:15,398 universal_train_target: classwise
+2021-10-23 11:51:15,398 train_step: 10
+2021-10-23 11:51:15,398 use_subset: False
+2021-10-23 11:51:15,398 attack_type: min-min
+2021-10-23 11:51:15,399 perturb_type: classwise
+2021-10-23 11:51:15,399 patch_location: center
+2021-10-23 11:51:15,399 noise_shape: [10, 3, 32, 32]
+2021-10-23 11:51:15,399 epsilon: 0.06274509803921569
+2021-10-23 11:51:15,400 num_steps: 10
+2021-10-23 11:51:15,400 step_size: 0.01568627450980392
+2021-10-23 11:51:15,400 random_start: False
+2021-10-23 11:51:15,400 feature_dim: 128
+2021-10-23 11:51:15,401 temperature: 0.5
+2021-10-23 11:51:15,401 k: 200
+2021-10-23 11:51:15,401 batch_size: 512
+2021-10-23 11:51:15,401 epochs: 151
+2021-10-23 11:51:15,402 arch: resnet18
+2021-10-23 11:51:15,402 noise_num: 10
+2021-10-23 11:51:15,402 save_image_num: 10
+2021-10-23 11:51:15,402 local_dev: True
+2021-10-23 11:51:15,403 no_save: True
+2021-10-23 11:52:02,751 PyTorch Version: 1.7.1
+2021-10-23 11:52:02,757 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 11:52:02,761 num_classes: 10
+2021-10-23 11:52:02,762 epochs: 300
+2021-10-23 11:52:02,762 grad_clip: 5.0
+2021-10-23 11:52:02,762 log_frequency: 100
+2021-10-23 11:52:02,762 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 11:52:02,763 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 11:52:02,763 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 11:52:02,763 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 11:52:02,763 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 11:52:02,766 seed: 0
+2021-10-23 11:52:02,766 version: resnet18
+2021-10-23 11:52:02,766 exp_name: path/to/your/experiment/folder
+2021-10-23 11:52:02,766 config_path: configs/cifar10
+2021-10-23 11:52:02,767 load_model: False
+2021-10-23 11:52:02,767 data_parallel: False
+2021-10-23 11:52:02,767 train_batch_size: 512
+2021-10-23 11:52:02,767 eval_batch_size: 512
+2021-10-23 11:52:02,768 num_of_workers: 8
+2021-10-23 11:52:02,768 train_data_type: CIFAR10
+2021-10-23 11:52:02,768 train_data_path: ../datasets
+2021-10-23 11:52:02,768 test_data_type: CIFAR10
+2021-10-23 11:52:02,769 test_data_path: ../datasets
+2021-10-23 11:52:02,769 universal_train_portion: 0.2
+2021-10-23 11:52:02,769 universal_stop_error: 0.5
+2021-10-23 11:52:02,769 universal_train_target: classwise
+2021-10-23 11:52:02,770 train_step: 10
+2021-10-23 11:52:02,770 use_subset: False
+2021-10-23 11:52:02,770 attack_type: min-min
+2021-10-23 11:52:02,770 perturb_type: classwise
+2021-10-23 11:52:02,770 patch_location: center
+2021-10-23 11:52:02,771 noise_shape: [10, 3, 32, 32]
+2021-10-23 11:52:02,771 epsilon: 0.06274509803921569
+2021-10-23 11:52:02,771 num_steps: 10
+2021-10-23 11:52:02,771 step_size: 0.01568627450980392
+2021-10-23 11:52:02,771 random_start: False
+2021-10-23 11:52:02,772 feature_dim: 128
+2021-10-23 11:52:02,772 temperature: 0.5
+2021-10-23 11:52:02,772 k: 200
+2021-10-23 11:52:02,772 batch_size: 512
+2021-10-23 11:52:02,773 epochs: 151
+2021-10-23 11:52:02,773 arch: resnet18
+2021-10-23 11:52:02,773 noise_num: 10
+2021-10-23 11:52:02,773 save_image_num: 10
+2021-10-23 11:52:02,773 local_dev: True
+2021-10-23 11:52:02,774 no_save: True
+2021-10-23 11:52:56,682 PyTorch Version: 1.7.1
+2021-10-23 11:52:56,696 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 11:52:56,699 num_classes: 10
+2021-10-23 11:52:56,700 epochs: 300
+2021-10-23 11:52:56,700 grad_clip: 5.0
+2021-10-23 11:52:56,700 log_frequency: 100
+2021-10-23 11:52:56,701 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 11:52:56,701 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 11:52:56,702 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 11:52:56,702 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 11:52:56,702 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 11:52:56,704 seed: 0
+2021-10-23 11:52:56,705 version: resnet18
+2021-10-23 11:52:56,705 exp_name: path/to/your/experiment/folder
+2021-10-23 11:52:56,705 config_path: configs/cifar10
+2021-10-23 11:52:56,705 load_model: False
+2021-10-23 11:52:56,706 data_parallel: False
+2021-10-23 11:52:56,706 train_batch_size: 512
+2021-10-23 11:52:56,706 eval_batch_size: 512
+2021-10-23 11:52:56,706 num_of_workers: 8
+2021-10-23 11:52:56,707 train_data_type: CIFAR10
+2021-10-23 11:52:56,707 train_data_path: ../datasets
+2021-10-23 11:52:56,707 test_data_type: CIFAR10
+2021-10-23 11:52:56,707 test_data_path: ../datasets
+2021-10-23 11:52:56,707 universal_train_portion: 0.2
+2021-10-23 11:52:56,708 universal_stop_error: 0.5
+2021-10-23 11:52:56,708 universal_train_target: classwise
+2021-10-23 11:52:56,708 train_step: 10
+2021-10-23 11:52:56,708 use_subset: False
+2021-10-23 11:52:56,708 attack_type: min-min
+2021-10-23 11:52:56,709 perturb_type: classwise
+2021-10-23 11:52:56,709 patch_location: center
+2021-10-23 11:52:56,709 noise_shape: [10, 3, 32, 32]
+2021-10-23 11:52:56,709 epsilon: 0.06274509803921569
+2021-10-23 11:52:56,709 num_steps: 10
+2021-10-23 11:52:56,710 step_size: 0.01568627450980392
+2021-10-23 11:52:56,710 random_start: False
+2021-10-23 11:52:56,710 feature_dim: 128
+2021-10-23 11:52:56,710 temperature: 0.5
+2021-10-23 11:52:56,710 k: 200
+2021-10-23 11:52:56,710 batch_size: 512
+2021-10-23 11:52:56,711 epochs: 151
+2021-10-23 11:52:56,711 arch: resnet18
+2021-10-23 11:52:56,711 noise_num: 10
+2021-10-23 11:52:56,711 save_image_num: 10
+2021-10-23 11:52:56,711 local_dev: True
+2021-10-23 11:52:56,712 no_save: True
+2021-10-23 11:53:47,659 PyTorch Version: 1.7.1
+2021-10-23 11:53:47,801 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 11:53:47,809 num_classes: 10
+2021-10-23 11:53:47,810 epochs: 300
+2021-10-23 11:53:47,811 grad_clip: 5.0
+2021-10-23 11:53:47,811 log_frequency: 100
+2021-10-23 11:53:47,811 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 11:53:47,812 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 11:53:47,812 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 11:53:47,812 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 11:53:47,813 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 11:53:47,815 seed: 0
+2021-10-23 11:53:47,816 version: resnet18
+2021-10-23 11:53:47,816 exp_name: path/to/your/experiment/folder
+2021-10-23 11:53:47,816 config_path: configs/cifar10
+2021-10-23 11:53:47,817 load_model: False
+2021-10-23 11:53:47,817 data_parallel: False
+2021-10-23 11:53:47,817 train_batch_size: 512
+2021-10-23 11:53:47,817 eval_batch_size: 512
+2021-10-23 11:53:47,818 num_of_workers: 8
+2021-10-23 11:53:47,818 train_data_type: CIFAR10
+2021-10-23 11:53:47,818 train_data_path: ../datasets
+2021-10-23 11:53:47,819 test_data_type: CIFAR10
+2021-10-23 11:53:47,819 test_data_path: ../datasets
+2021-10-23 11:53:47,819 universal_train_portion: 0.2
+2021-10-23 11:53:47,819 universal_stop_error: 0.5
+2021-10-23 11:53:47,820 universal_train_target: classwise
+2021-10-23 11:53:47,820 train_step: 10
+2021-10-23 11:53:47,820 use_subset: False
+2021-10-23 11:53:47,821 attack_type: min-min
+2021-10-23 11:53:47,821 perturb_type: classwise
+2021-10-23 11:53:47,821 patch_location: center
+2021-10-23 11:53:47,821 noise_shape: [10, 3, 32, 32]
+2021-10-23 11:53:47,822 epsilon: 0.06274509803921569
+2021-10-23 11:53:47,822 num_steps: 10
+2021-10-23 11:53:47,823 step_size: 0.01568627450980392
+2021-10-23 11:53:47,823 random_start: False
+2021-10-23 11:53:47,823 feature_dim: 128
+2021-10-23 11:53:47,823 temperature: 0.5
+2021-10-23 11:53:47,824 k: 200
+2021-10-23 11:53:47,824 batch_size: 512
+2021-10-23 11:53:47,825 epochs: 151
+2021-10-23 11:53:47,825 arch: resnet18
+2021-10-23 11:53:47,825 noise_num: 10
+2021-10-23 11:53:47,825 save_image_num: 10
+2021-10-23 11:53:47,826 local_dev: True
+2021-10-23 11:53:47,826 no_save: True
+2021-10-23 11:57:21,881 PyTorch Version: 1.7.1
+2021-10-23 11:57:22,030 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 11:57:22,039 num_classes: 10
+2021-10-23 11:57:22,040 epochs: 300
+2021-10-23 11:57:22,041 grad_clip: 5.0
+2021-10-23 11:57:22,041 log_frequency: 100
+2021-10-23 11:57:22,041 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 11:57:22,042 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 11:57:22,042 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 11:57:22,042 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 11:57:22,043 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 11:57:22,046 seed: 0
+2021-10-23 11:57:22,046 version: resnet18
+2021-10-23 11:57:22,047 exp_name: path/to/your/experiment/folder
+2021-10-23 11:57:22,047 config_path: configs/cifar10
+2021-10-23 11:57:22,047 load_model: False
+2021-10-23 11:57:22,047 data_parallel: False
+2021-10-23 11:57:22,048 train_batch_size: 512
+2021-10-23 11:57:22,048 eval_batch_size: 512
+2021-10-23 11:57:22,048 num_of_workers: 8
+2021-10-23 11:57:22,049 train_data_type: CIFAR10
+2021-10-23 11:57:22,049 train_data_path: ../datasets
+2021-10-23 11:57:22,049 test_data_type: CIFAR10
+2021-10-23 11:57:22,050 test_data_path: ../datasets
+2021-10-23 11:57:22,050 universal_train_portion: 0.2
+2021-10-23 11:57:22,051 universal_stop_error: 0.5
+2021-10-23 11:57:22,051 universal_train_target: classwise
+2021-10-23 11:57:22,051 train_step: 10
+2021-10-23 11:57:22,052 use_subset: False
+2021-10-23 11:57:22,052 attack_type: min-min
+2021-10-23 11:57:22,052 perturb_type: classwise
+2021-10-23 11:57:22,053 patch_location: center
+2021-10-23 11:57:22,053 noise_shape: [10, 3, 32, 32]
+2021-10-23 11:57:22,054 epsilon: 0.06274509803921569
+2021-10-23 11:57:22,054 num_steps: 10
+2021-10-23 11:57:22,054 step_size: 0.01568627450980392
+2021-10-23 11:57:22,055 random_start: False
+2021-10-23 11:57:22,055 feature_dim: 128
+2021-10-23 11:57:22,055 temperature: 0.5
+2021-10-23 11:57:22,056 k: 200
+2021-10-23 11:57:22,056 batch_size: 512
+2021-10-23 11:57:22,056 epochs: 151
+2021-10-23 11:57:22,057 arch: resnet18
+2021-10-23 11:57:22,057 noise_num: 10
+2021-10-23 11:57:22,057 save_image_num: 10
+2021-10-23 11:57:22,058 local_dev: True
+2021-10-23 11:57:22,058 no_save: True
+2021-10-23 12:02:34,642 PyTorch Version: 1.7.1
+2021-10-23 12:02:34,715 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 12:02:34,722 num_classes: 10
+2021-10-23 12:02:34,723 epochs: 300
+2021-10-23 12:02:34,723 grad_clip: 5.0
+2021-10-23 12:02:34,723 log_frequency: 100
+2021-10-23 12:02:34,724 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 12:02:34,724 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 12:02:34,724 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 12:02:34,724 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 12:02:34,725 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 12:02:34,727 seed: 0
+2021-10-23 12:02:34,727 version: resnet18
+2021-10-23 12:02:34,727 exp_name: path/to/your/experiment/folder
+2021-10-23 12:02:34,728 config_path: configs/cifar10
+2021-10-23 12:02:34,728 load_model: False
+2021-10-23 12:02:34,728 data_parallel: False
+2021-10-23 12:02:34,728 train_batch_size: 512
+2021-10-23 12:02:34,729 eval_batch_size: 512
+2021-10-23 12:02:34,729 num_of_workers: 8
+2021-10-23 12:02:34,729 train_data_type: CIFAR10
+2021-10-23 12:02:34,729 train_data_path: ../datasets
+2021-10-23 12:02:34,730 test_data_type: CIFAR10
+2021-10-23 12:02:34,730 test_data_path: ../datasets
+2021-10-23 12:02:34,730 universal_train_portion: 0.2
+2021-10-23 12:02:34,730 universal_stop_error: 0.5
+2021-10-23 12:02:34,730 universal_train_target: classwise
+2021-10-23 12:02:34,731 train_step: 10
+2021-10-23 12:02:34,731 use_subset: False
+2021-10-23 12:02:34,732 attack_type: min-min
+2021-10-23 12:02:34,732 perturb_type: classwise
+2021-10-23 12:02:34,732 patch_location: center
+2021-10-23 12:02:34,732 noise_shape: [10, 3, 32, 32]
+2021-10-23 12:02:34,733 epsilon: 0.06274509803921569
+2021-10-23 12:02:34,733 num_steps: 10
+2021-10-23 12:02:34,733 step_size: 0.01568627450980392
+2021-10-23 12:02:34,733 random_start: False
+2021-10-23 12:02:34,734 feature_dim: 128
+2021-10-23 12:02:34,734 temperature: 0.5
+2021-10-23 12:02:34,734 k: 200
+2021-10-23 12:02:34,734 batch_size: 512
+2021-10-23 12:02:34,735 epochs: 151
+2021-10-23 12:02:34,735 arch: resnet18
+2021-10-23 12:02:34,735 noise_num: 10
+2021-10-23 12:02:34,736 save_image_num: 10
+2021-10-23 12:02:34,736 local_dev: True
+2021-10-23 12:02:34,736 no_save: True
+2021-10-23 12:03:34,758 PyTorch Version: 1.7.1
+2021-10-23 12:03:34,762 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 12:03:34,765 num_classes: 10
+2021-10-23 12:03:34,766 epochs: 300
+2021-10-23 12:03:34,766 grad_clip: 5.0
+2021-10-23 12:03:34,766 log_frequency: 100
+2021-10-23 12:03:34,766 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 12:03:34,766 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 12:03:34,766 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 12:03:34,767 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 12:03:34,767 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 12:03:34,769 seed: 0
+2021-10-23 12:03:34,769 version: resnet18
+2021-10-23 12:03:34,769 exp_name: path/to/your/experiment/folder
+2021-10-23 12:03:34,769 config_path: configs/cifar10
+2021-10-23 12:03:34,770 load_model: False
+2021-10-23 12:03:34,770 data_parallel: False
+2021-10-23 12:03:34,770 train_batch_size: 512
+2021-10-23 12:03:34,771 eval_batch_size: 512
+2021-10-23 12:03:34,771 num_of_workers: 8
+2021-10-23 12:03:34,771 train_data_type: CIFAR10
+2021-10-23 12:03:34,772 train_data_path: ../datasets
+2021-10-23 12:03:34,772 test_data_type: CIFAR10
+2021-10-23 12:03:34,772 test_data_path: ../datasets
+2021-10-23 12:03:34,772 universal_train_portion: 0.2
+2021-10-23 12:03:34,773 universal_stop_error: 0.5
+2021-10-23 12:03:34,773 universal_train_target: classwise
+2021-10-23 12:03:34,773 train_step: 10
+2021-10-23 12:03:34,774 use_subset: False
+2021-10-23 12:03:34,774 attack_type: min-min
+2021-10-23 12:03:34,774 perturb_type: classwise
+2021-10-23 12:03:34,774 patch_location: center
+2021-10-23 12:03:34,774 noise_shape: [10, 3, 32, 32]
+2021-10-23 12:03:34,775 epsilon: 0.06274509803921569
+2021-10-23 12:03:34,775 num_steps: 10
+2021-10-23 12:03:34,775 step_size: 0.01568627450980392
+2021-10-23 12:03:34,775 random_start: False
+2021-10-23 12:03:34,776 feature_dim: 128
+2021-10-23 12:03:34,776 temperature: 0.5
+2021-10-23 12:03:34,776 k: 200
+2021-10-23 12:03:34,777 batch_size: 512
+2021-10-23 12:03:34,777 epochs: 151
+2021-10-23 12:03:34,777 arch: resnet18
+2021-10-23 12:03:34,777 noise_num: 10
+2021-10-23 12:03:34,778 save_image_num: 10
+2021-10-23 12:03:34,778 local_dev: True
+2021-10-23 12:03:34,778 no_save: True
+2021-10-23 12:04:59,196 PyTorch Version: 1.7.1
+2021-10-23 12:04:59,233 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 12:04:59,242 num_classes: 10
+2021-10-23 12:04:59,242 epochs: 300
+2021-10-23 12:04:59,243 grad_clip: 5.0
+2021-10-23 12:04:59,243 log_frequency: 100
+2021-10-23 12:04:59,244 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 12:04:59,244 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 12:04:59,244 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 12:04:59,245 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 12:04:59,245 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 12:04:59,248 seed: 0
+2021-10-23 12:04:59,248 version: resnet18
+2021-10-23 12:04:59,249 exp_name: path/to/your/experiment/folder
+2021-10-23 12:04:59,249 config_path: configs/cifar10
+2021-10-23 12:04:59,250 load_model: False
+2021-10-23 12:04:59,250 data_parallel: False
+2021-10-23 12:04:59,250 train_batch_size: 512
+2021-10-23 12:04:59,250 eval_batch_size: 512
+2021-10-23 12:04:59,251 num_of_workers: 8
+2021-10-23 12:04:59,251 train_data_type: CIFAR10
+2021-10-23 12:04:59,251 train_data_path: ../datasets
+2021-10-23 12:04:59,252 test_data_type: CIFAR10
+2021-10-23 12:04:59,252 test_data_path: ../datasets
+2021-10-23 12:04:59,252 universal_train_portion: 0.2
+2021-10-23 12:04:59,252 universal_stop_error: 0.5
+2021-10-23 12:04:59,253 universal_train_target: classwise
+2021-10-23 12:04:59,253 train_step: 10
+2021-10-23 12:04:59,253 use_subset: False
+2021-10-23 12:04:59,254 attack_type: min-min
+2021-10-23 12:04:59,254 perturb_type: classwise
+2021-10-23 12:04:59,254 patch_location: center
+2021-10-23 12:04:59,254 noise_shape: [10, 3, 32, 32]
+2021-10-23 12:04:59,255 epsilon: 0.06274509803921569
+2021-10-23 12:04:59,255 num_steps: 1
+2021-10-23 12:04:59,255 step_size: 0.01568627450980392
+2021-10-23 12:04:59,256 random_start: False
+2021-10-23 12:04:59,256 feature_dim: 128
+2021-10-23 12:04:59,256 temperature: 0.5
+2021-10-23 12:04:59,256 k: 200
+2021-10-23 12:04:59,257 batch_size: 512
+2021-10-23 12:04:59,257 epochs: 151
+2021-10-23 12:04:59,257 arch: resnet18
+2021-10-23 12:04:59,257 noise_num: 10
+2021-10-23 12:04:59,258 save_image_num: 10
+2021-10-23 12:04:59,258 local_dev: True
+2021-10-23 12:04:59,258 no_save: True
+2021-10-23 15:46:45,019 PyTorch Version: 1.7.1
+2021-10-23 15:46:45,048 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 15:46:45,056 num_classes: 10
+2021-10-23 15:46:45,057 epochs: 300
+2021-10-23 15:46:45,057 grad_clip: 5.0
+2021-10-23 15:46:45,057 log_frequency: 100
+2021-10-23 15:46:45,058 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 15:46:45,058 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 15:46:45,058 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 15:46:45,059 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 15:46:45,059 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 15:46:45,061 seed: 0
+2021-10-23 15:46:45,062 version: resnet18
+2021-10-23 15:46:45,062 exp_name: path/to/your/experiment/folder
+2021-10-23 15:46:45,062 config_path: configs/cifar10
+2021-10-23 15:46:45,062 load_model: False
+2021-10-23 15:46:45,063 data_parallel: False
+2021-10-23 15:46:45,063 train_batch_size: 512
+2021-10-23 15:46:45,063 eval_batch_size: 512
+2021-10-23 15:46:45,063 num_of_workers: 8
+2021-10-23 15:46:45,063 train_data_type: CIFAR10
+2021-10-23 15:46:45,064 train_data_path: ../datasets
+2021-10-23 15:46:45,064 test_data_type: CIFAR10
+2021-10-23 15:46:45,064 test_data_path: ../datasets
+2021-10-23 15:46:45,064 universal_train_portion: 0.2
+2021-10-23 15:46:45,064 universal_stop_error: 0.5
+2021-10-23 15:46:45,065 universal_train_target: classwise
+2021-10-23 15:46:45,065 train_step: 10
+2021-10-23 15:46:45,065 use_subset: False
+2021-10-23 15:46:45,065 attack_type: min-min
+2021-10-23 15:46:45,066 perturb_type: classwise
+2021-10-23 15:46:45,066 patch_location: center
+2021-10-23 15:46:45,066 noise_shape: [10, 3, 32, 32]
+2021-10-23 15:46:45,066 epsilon: 0.06274509803921569
+2021-10-23 15:46:45,067 num_steps: 1
+2021-10-23 15:46:45,067 step_size: 0.01568627450980392
+2021-10-23 15:46:45,067 random_start: False
+2021-10-23 15:46:45,067 feature_dim: 128
+2021-10-23 15:46:45,068 temperature: 0.5
+2021-10-23 15:46:45,068 k: 200
+2021-10-23 15:46:45,068 batch_size: 512
+2021-10-23 15:46:45,069 epochs: 151
+2021-10-23 15:46:45,069 arch: resnet18
+2021-10-23 15:46:45,069 noise_num: 10
+2021-10-23 15:46:45,069 save_image_num: 10
+2021-10-23 15:46:45,069 local_dev: True
+2021-10-23 15:46:45,070 no_save: True
+2021-10-23 15:58:54,336 PyTorch Version: 1.7.1
+2021-10-23 15:58:54,572 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 15:58:54,581 num_classes: 10
+2021-10-23 15:58:54,582 epochs: 300
+2021-10-23 15:58:54,582 grad_clip: 5.0
+2021-10-23 15:58:54,583 log_frequency: 100
+2021-10-23 15:58:54,584 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 15:58:54,585 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 15:58:54,586 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 15:58:54,587 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 15:58:54,587 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 15:58:54,592 seed: 0
+2021-10-23 15:58:54,593 version: resnet18
+2021-10-23 15:58:54,594 exp_name: path/to/your/experiment/folder
+2021-10-23 15:58:54,594 config_path: configs/cifar10
+2021-10-23 15:58:54,595 load_model: False
+2021-10-23 15:58:54,596 data_parallel: False
+2021-10-23 15:58:54,596 train_batch_size: 512
+2021-10-23 15:58:54,597 eval_batch_size: 512
+2021-10-23 15:58:54,597 num_of_workers: 8
+2021-10-23 15:58:54,598 train_data_type: CIFAR10
+2021-10-23 15:58:54,598 train_data_path: ../datasets
+2021-10-23 15:58:54,599 test_data_type: CIFAR10
+2021-10-23 15:58:54,600 test_data_path: ../datasets
+2021-10-23 15:58:54,600 universal_train_portion: 0.2
+2021-10-23 15:58:54,601 universal_stop_error: 0.5
+2021-10-23 15:58:54,602 universal_train_target: classwise
+2021-10-23 15:58:54,602 train_step: 10
+2021-10-23 15:58:54,603 use_subset: False
+2021-10-23 15:58:54,603 attack_type: min-min
+2021-10-23 15:58:54,604 perturb_type: classwise
+2021-10-23 15:58:54,604 patch_location: center
+2021-10-23 15:58:54,605 noise_shape: [10, 3, 32, 32]
+2021-10-23 15:58:54,606 epsilon: 0.06274509803921569
+2021-10-23 15:58:54,606 num_steps: 1
+2021-10-23 15:58:54,607 step_size: 0.01568627450980392
+2021-10-23 15:58:54,608 random_start: False
+2021-10-23 15:58:54,608 feature_dim: 128
+2021-10-23 15:58:54,609 temperature: 0.5
+2021-10-23 15:58:54,609 k: 200
+2021-10-23 15:58:54,610 batch_size: 512
+2021-10-23 15:58:54,610 epochs: 151
+2021-10-23 15:58:54,611 arch: resnet18
+2021-10-23 15:58:54,612 noise_num: 10
+2021-10-23 15:58:54,612 save_image_num: 10
+2021-10-23 15:58:54,613 local_dev: True
+2021-10-23 15:58:54,613 no_save: True
+2021-10-23 16:00:44,610 PyTorch Version: 1.7.1
+2021-10-23 16:00:44,858 GPU List: ['Tesla V100S-PCIE-32GB']
+2021-10-23 16:00:44,866 num_classes: 10
+2021-10-23 16:00:44,867 epochs: 300
+2021-10-23 16:00:44,867 grad_clip: 5.0
+2021-10-23 16:00:44,867 log_frequency: 100
+2021-10-23 16:00:44,868 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-10-23 16:00:44,868 criterion: {'name': 'CrossEntropyLoss'}
+2021-10-23 16:00:44,869 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-10-23 16:00:44,869 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-10-23 16:00:44,869 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-10-23 16:00:44,872 seed: 0
+2021-10-23 16:00:44,873 version: resnet18
+2021-10-23 16:00:44,873 exp_name: path/to/your/experiment/folder
+2021-10-23 16:00:44,873 config_path: configs/cifar10
+2021-10-23 16:00:44,874 load_model: False
+2021-10-23 16:00:44,874 data_parallel: False
+2021-10-23 16:00:44,874 train_batch_size: 512
+2021-10-23 16:00:44,875 eval_batch_size: 512
+2021-10-23 16:00:44,875 num_of_workers: 8
+2021-10-23 16:00:44,875 train_data_type: CIFAR10
+2021-10-23 16:00:44,876 train_data_path: ../datasets
+2021-10-23 16:00:44,876 test_data_type: CIFAR10
+2021-10-23 16:00:44,876 test_data_path: ../datasets
+2021-10-23 16:00:44,877 universal_train_portion: 0.2
+2021-10-23 16:00:44,877 universal_stop_error: 0.5
+2021-10-23 16:00:44,877 universal_train_target: classwise
+2021-10-23 16:00:44,878 train_step: 10
+2021-10-23 16:00:44,878 use_subset: False
+2021-10-23 16:00:44,878 attack_type: min-min
+2021-10-23 16:00:44,879 perturb_type: classwise
+2021-10-23 16:00:44,879 patch_location: center
+2021-10-23 16:00:44,879 noise_shape: [10, 3, 32, 32]
+2021-10-23 16:00:44,880 epsilon: 0.06274509803921569
+2021-10-23 16:00:44,880 num_steps: 1
+2021-10-23 16:00:44,880 step_size: 0.01568627450980392
+2021-10-23 16:00:44,881 random_start: False
+2021-10-23 16:00:44,881 feature_dim: 128
+2021-10-23 16:00:44,881 temperature: 0.5
+2021-10-23 16:00:44,882 k: 200

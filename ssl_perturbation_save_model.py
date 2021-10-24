@@ -1,35 +1,4 @@
 import argparse
-import collections
-import datetime
-import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-import shutil
-import time
-import dataset
-import mlconfig
-import toolbox
-import torch
-import util
-import madrys
-import numpy as np
-from evaluator import Evaluator
-from tqdm import tqdm
-from trainer import Trainer
-import sys
-
-import utils
-import datetime
-from model import Model
-import pandas as pd
-import torch.optim as optim
-from torch.utils.data import DataLoader
-from simclr import test_ssl, train_simclr
-import random
-import matplotlib.pyplot as plt
-import matplotlib
-
-mlconfig.register(madrys.MadrysLoss)
-
 # General Options
 parser = argparse.ArgumentParser(description='ClasswiseNoise')
 parser.add_argument('--seed', type=int, default=0, help='seed')
@@ -69,7 +38,46 @@ parser.add_argument('--epochs', default=300, type=int, help='Number of sweeps ov
 parser.add_argument('--arch', default='resnet18', type=str, help='The backbone of encoder')
 parser.add_argument('--noise_num', default='10', type=str, help='The number of categories of misleading noise')
 parser.add_argument('--save_image_num', default=10, type=int, help='The number of groups of images with noise to save every 10 epochs. Evrey gourp has 9 images')
+parser.add_argument('--min_min_attack_fn', default="eot_v2", type=str, help='The function of min_min_attack')
+parser.add_argument('--local_dev', action='store_true', default=False)
+parser.add_argument('--no_save', action='store_true', default=False)
 args = parser.parse_args()
+
+
+import collections
+import datetime
+
+import os
+if args.local_dev:
+    os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+
+import shutil
+import time
+import dataset
+import mlconfig
+import toolbox
+import torch
+import util
+import madrys
+import numpy as np
+from evaluator import Evaluator
+from tqdm import tqdm
+from trainer import Trainer
+import sys
+
+import utils
+from utils import train_diff_transform
+import datetime
+from model import Model
+import pandas as pd
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from simclr import test_ssl, train_simclr
+import random
+import matplotlib.pyplot as plt
+import matplotlib
+
+mlconfig.register(madrys.MadrysLoss)
 
 # Convert Eps
 args.epsilon = args.epsilon / 255
@@ -88,14 +96,16 @@ util.build_dirs(checkpoint_path)
 logger = util.setup_logger(name=args.version, log_file=log_file_path + ".log")
 
 # CUDA Options
-logger.info("PyTorch Version: %s" % (torch.__version__))
+if not args.no_save:
+    logger.info("PyTorch Version: %s" % (torch.__version__))
 if torch.cuda.is_available():
     torch.cuda.manual_seed(args.seed)
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
     device = torch.device('cuda')
     device_list = [torch.cuda.get_device_name(i) for i in range(0, torch.cuda.device_count())]
-    logger.info("GPU List: %s" % (device_list))
+    if not args.no_save:
+        logger.info("GPU List: %s" % (device_list))
 else:
     device = torch.device('cpu')
 
@@ -103,8 +113,9 @@ else:
 config_file = os.path.join(args.config_path, args.version)+'.yaml'
 config = mlconfig.load(config_file)
 config.set_immutable()
-for key in config:
-    logger.info("%s: %s" % (key, config[key]))
+if not args.no_save:
+    for key in config:
+        logger.info("%s: %s" % (key, config[key]))
 shutil.copyfile(config_file, os.path.join(exp_path, args.version+'.yaml'))
 
 
@@ -262,9 +273,12 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
                 batch_noise = torch.stack(batch_noise).to(device)
                 if args.attack_type == 'min-min':
-                    _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
-                    train_noise_loss_sum += train_noise_loss * pos_samples_1.shape[0]
-                    train_noise_loss_count += pos_samples_1.shape[0]
+                    if args.min_min_attack_fn == "eot_v1":
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
+                    else:
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v2(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
+                    # train_noise_loss_sum += train_noise_loss * pos_samples_1.shape[0]
+                    # train_noise_loss_count += pos_samples_1.shape[0]
                     # perturb_img, eta = noise_generator.min_min_attack_simclr(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
                 # elif args.attack_type == 'min-max':
                 #     perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
@@ -286,7 +300,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
             # print(train_noise_loss_sum / float(train_noise_loss_count))
             
         # Here we save some samples in image.
-        if epoch_idx % 10 == 0:
+        if epoch_idx % 10 == 0 and not args.no_save:
         # if True:
             if not os.path.exists('./images/'+save_name_pre):
                 os.mkdir('./images/'+save_name_pre)
@@ -312,17 +326,20 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
         results['test_acc@5'].append(test_acc_5)
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
-        data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
+        if not args.no_save:
+            data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
         if train_loss < best_loss:
             best_loss = train_loss
-            torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
+            if not args.no_save:
+                torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
 
-        if epoch_idx % 10 == 0:
+        if epoch_idx % 10 == 0 and not args.no_save:
             torch.save(model.state_dict(), 'results/{}_checkpoint_model.pth'.format(save_name_pre))
             torch.save(random_noise, 'results/{}_checkpoint_perturbation.pt'.format(save_name_pre))
             print("model saved at " + save_name_pre)
-        
-    torch.save(model.state_dict(), 'results/{}_final_model.pth'.format(save_name_pre))
+    
+    if not args.no_save:
+        torch.save(model.state_dict(), 'results/{}_final_model.pth'.format(save_name_pre))
 
     return random_noise, save_name_pre
 
@@ -383,7 +400,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     condition = True
     train_idx = 0
     data_iter = iter(data_loader['train_dataset'])
-    logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
+    # logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
     while condition:
         if args.attack_type == 'min-min' and not args.load_model:
             # Train Batch for min-min noise
@@ -551,9 +568,9 @@ def main():
     train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
     # test data don't have to change the target. by renjie3
     memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
-    memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=True)
+    memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
     test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
-    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=True)
+    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
 
     noise_generator = toolbox.PerturbationTool(epsilon=args.epsilon,
                                                num_steps=args.num_steps,
@@ -606,18 +623,19 @@ def main():
         elif args.perturb_type == 'classwise':
             # noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
             noise, save_name_pre = universal_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
-        torch.save(noise, 'results/{}perturbation.pt'.format(save_name_pre))
-        logger.info(noise)
-        logger.info(noise.shape)
-        logger.info('Noise saved at %s' % 'results/{}perturbation.pt'.format(save_name_pre))
+        if not args.no_save:
+            torch.save(noise, 'results/{}perturbation.pt'.format(save_name_pre))
+            logger.info(noise)
+            logger.info(noise.shape)
+            logger.info('Noise saved at %s' % 'results/{}perturbation.pt'.format(save_name_pre))
     else:
         raise('Not implemented yet')
     return
 
 
 if __name__ == '__main__':
-    for arg in vars(args):
-        logger.info("%s: %s" % (arg, getattr(args, arg)))
+    # for arg in vars(args):
+    #     logger.info("%s: %s" % (arg, getattr(args, arg)))
     start = time.time()
     main()
     end = time.time()

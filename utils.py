@@ -10,6 +10,9 @@ import random
 import matplotlib.pyplot as plt
 import matplotlib
 
+import kornia.augmentation as Kaug
+import torch.nn as nn
+
 if torch.cuda.is_available():
     device = torch.device('cuda')
 else:
@@ -242,6 +245,16 @@ test_transform = transforms.Compose([
     # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
     ])
 
+ToTensor_transform = transforms.Compose([
+    transforms.ToTensor(),
+])
+
+train_diff_transform = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    Kaug.RandomGrayscale(p=0.2)
+)
     
 def get_pairs_of_imgs(idx, clean_train_dataset, noise):
     clean_img = clean_train_dataset.data[idx]
