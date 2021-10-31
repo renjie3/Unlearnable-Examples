@@ -1,0 +1,118 @@
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+The whole epochs are 151
+Training images:   0%|          | 0/98 [00:00<?, ?it/s]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.900905132293701
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.890145778656006
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.8921051025390625
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.869608402252197
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.845452785491943
+Training images:   1%|          | 1/98 [00:19<32:09, 19.90s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.909678936004639
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.903614044189453
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.8961710929870605
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.894080638885498
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.883939266204834
+Training images:   2%|▏         | 2/98 [00:34<29:29, 18.43s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.906719207763672
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.891882419586182
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.888764381408691
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.879292964935303
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.869689464569092
+Training images:   3%|▎         | 3/98 [00:50<27:38, 17.46s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.923110485076904
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.906238079071045
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.897727966308594
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.890828609466553
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.887860298156738
+Training images:   4%|▍         | 4/98 [01:04<25:54, 16.54s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.915899753570557
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.907223701477051
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.908425807952881
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.891726016998291
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.889952182769775
+Training images:   5%|▌         | 5/98 [01:18<24:35, 15.87s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.905393123626709
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.902395725250244
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.901225566864014
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.885228157043457
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.880163669586182
+Training images:   6%|▌         | 6/98 [01:33<23:40, 15.44s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.913717746734619
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.90890645980835
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.905054569244385
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.8984832763671875
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.88422155380249
+Training images:   7%|▋         | 7/98 [01:47<22:57, 15.14s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.91778039932251
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.911390781402588
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.908504009246826
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.903078556060791
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.891876220703125
+Training images:   8%|▊         | 8/98 [02:03<22:49, 15.22s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.913303375244141
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.90993070602417
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.902028560638428
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.899277687072754
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.8831634521484375
+Training images:   9%|▉         | 9/98 [02:18<22:30, 15.18s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.922860622406006
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.918039798736572
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.912186622619629
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.903056621551514
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.9009881019592285
+Training images:  10%|█         | 10/98 [02:33<22:20, 15.23s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.913806915283203
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.908759593963623
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.904537200927734
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.890927791595459
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.889218807220459
+Training images:  11%|█         | 11/98 [02:48<22:02, 15.20s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.913350582122803
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.899917125701904
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.900346279144287
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.8943376541137695
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.887760162353516
+Training images:  12%|█▏        | 12/98 [03:03<21:36, 15.08s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.916236400604248
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.909706115722656
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.900770664215088
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.890700817108154
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.891757965087891
+Training images:  13%|█▎        | 13/98 [03:18<21:12, 14.97s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.926491737365723
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.914622783660889
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.9060282707214355
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.901925563812256
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.899962902069092
+Training images:  14%|█▍        | 14/98 [03:32<20:43, 14.80s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.9240617752075195
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.923522472381592
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.901001930236816
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.90337610244751
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.898175239562988
+Training images:  15%|█▌        | 15/98 [03:47<20:32, 14.84s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.916408061981201
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.907752513885498
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.911113739013672
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.894964694976807
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.898468017578125
+Training images:  16%|█▋        | 16/98 [04:01<19:58, 14.62s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.922510623931885
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.909649848937988
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.913680553436279
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.905124187469482
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.89499044418335
+Training images:  17%|█▋        | 17/98 [04:16<19:46, 14.64s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.9172282218933105
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.91409158706665
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.897902011871338
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.8919677734375
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.891637325286865
+Training images:  18%|█▊        | 18/98 [04:31<19:38, 14.73s/it]
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.924951076507568
+min_min_attack_simclr_return_loss_tensor_eot_v2: 6.920660495758057

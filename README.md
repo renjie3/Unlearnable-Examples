@@ -74,7 +74,7 @@ python3 ssl_perturbation.py --config_path             configs/cifar10           
 ```console
 generate class-size noise
 python3 perturbation.py --config_path             configs/cifar10                \
-                        --exp_name                my_experiments/class_wise_cifar10_simclr_aug \
+                        --exp_name                my_experiments/class_wise_cifar10_diff_simclr_aug \
                         --version                 resnet18                       \
                         --train_data_type         CIFAR10                       \
                         --noise_shape             10 3 32 32                     \
@@ -91,12 +91,12 @@ python3 perturbation.py --config_path             configs/cifar10               
 ##### Train on unlearnable examples and eval on clean test
 ```console
 python3 -u main.py    --version                 resnet18                       \
-                      --exp_name                my_experiments/class_wise_cifar10 \
+                      --exp_name                my_experiments/class_wise_cifar10_diff_simclr_aug \
                       --config_path             configs/cifar10                \
                       --train_data_type         PoisonCIFAR10                  \
                       --poison_rate             1.0                            \
                       --perturb_type            classwise                      \
-                      --perturb_tensor_filepath my_experiments/class_wise_cifar10/perturbation.pt \
+                      --perturb_tensor_filepath my_experiments/class_wise_cifar10_diff_simclr_aug/perturbation.pt \
                       --train
 ```
 

@@ -15,6 +15,7 @@ import numpy as np
 from evaluator import Evaluator
 from tqdm import tqdm
 from trainer import Trainer
+from utils import train_diff_transform, train_diff_transform2
 mlconfig.register(madrys.MadrysLoss)
 
 # General Options
@@ -186,7 +187,11 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 model.train()
                 for param in model.parameters():
                     param.requires_grad = True
-                trainer.train_batch(torch.stack(train_imgs).to(device), labels, model, optimizer)
+
+                # input differantaible transform
+                input_imgs = train_diff_transform(torch.stack(train_imgs).to(device))
+
+                trainer.train_batch(input_imgs, labels, model, optimizer)
 
         train_noise_loss_sum = 0
         for i, (images, labels) in tqdm(enumerate(data_loader[args.universal_train_target]), total=len(data_loader[args.universal_train_target])):

@@ -41,3 +41,513 @@ Sun Oct 24 13:16:52 EDT 2021
 Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
 python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --no_save
 ---------------------------------------------------------------
+Sun Oct 24 22:12:53 EDT 2021
+35685005
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v1
+---------------------------------------------------------------
+Sun Oct 24 22:13:06 EDT 2021
+35685006
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+---------------------------------------------------------------
+Sun Oct 24 22:13:11 EDT 2021
+35685007
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v3
+---------------------------------------------------------------
+Sun Oct 24 22:13:17 EDT 2021
+35685009 canceled
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v1
+---------------------------------------------------------------
+Sun Oct 24 22:13:21 EDT 2021
+35685010
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+---------------------------------------------------------------
+Sun Oct 24 22:13:25 EDT 2021
+35685011 canceled
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v3
+---------------------------------------------------------------
+Sun Oct 24 22:13:41 EDT 2021
+35685012
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+---------------------------------------------------------------
+Sun Oct 24 22:14:05 EDT 2021
+35685015
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v3
+---------------------------------------------------------------
+Sun Oct 24 22:14:46 EDT 2021
+35685044 canceled
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v1
+---------------------------------------------------------------
+Sun Oct 24 22:14:51 EDT 2021
+35685045
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+---------------------------------------------------------------
+Sun Oct 24 22:14:55 EDT 2021
+35685046 canceled
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v3
+---------------------------------------------------------------
+Sun Oct 24 22:17:19 EDT 2021
+35685095
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot
+---------------------------------------------------------------
+Sun Oct 24 22:17:25 EDT 2021
+35685097 cancel
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot
+---------------------------------------------------------------
+Sun Oct 24 22:21:51 EDT 2021
+35685135
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:07 EDT 2021
+35685136
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:15 EDT 2021
+35685139
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v1 --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:17 EDT 2021
+35685140
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v1 --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:22 EDT 2021
+35685142
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:23 EDT 2021
+35685143
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:28 EDT 2021
+35685144
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v3 --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:28 EDT 2021
+35685145
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v3 --strong_aug
+---------------------------------------------------------------
+Sun Oct 24 22:22:44 EDT 2021
+35685146
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Mon Oct 25 15:07:27 EDT 2021
+35699203
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Mon Oct 25 15:07:35 EDT 2021
+35699204
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+---------------------------------------------------------------
+Mon Oct 25 15:13:19 EDT 2021
+35699217
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 4 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot
+---------------------------------------------------------------
+Mon Oct 25 15:18:13 EDT 2021
+35699237
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+---------------------------------------------------------------
+Mon Oct 25 16:43:29 EDT 2021
+35699729
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot
+---------------------------------------------------------------
+Mon Oct 25 16:44:13 EDT 2021
+35699738
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot
+---------------------------------------------------------------
+Mon Oct 25 16:45:51 EDT 2021
+35699746
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Mon Oct 25 16:55:02 EDT 2021
+35699796
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Mon Oct 25 16:55:08 EDT 2021
+35699797
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot
+---------------------------------------------------------------
+Mon Oct 25 17:06:32 EDT 2021
+35699944
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Tue Oct 26 16:08:19 EDT 2021
+35746346
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 1 --step_size 6.4 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Tue Oct 26 16:09:20 EDT 2021
+35746400
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 1 --step_size 6.4 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Tue Oct 26 16:17:53 EDT 2021
+35747498
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 5 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Tue Oct 26 17:21:10 EDT 2021
+35757425
+Retrain SimCLR to test the transferability.
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18
+---------------------------------------------------------------
+Wed Oct 27 19:06:21 EDT 2021
+35875260
+Retrain SimCLR to test the transferability.
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18
+---------------------------------------------------------------
+Wed Oct 27 19:06:32 EDT 2021
+35875261
+Retrain SimCLR to test the transferability.
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18
+---------------------------------------------------------------
+Wed Oct 27 19:06:42 EDT 2021
+35875262
+Retrain SimCLR to test the transferability.
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18
+---------------------------------------------------------------
+Wed Oct 27 19:06:45 EDT 2021
+35875263
+Retrain SimCLR to test the transferability.
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18
+---------------------------------------------------------------
+Wed Oct 27 19:06:54 EDT 2021
+35875264
+[1000/1000] Acc@1:71.10%
+这是用之前生成的10种noise 在4种上面训练之后的结果
+Retrain SimCLR to test the transferability.
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18
+---------------------------------------------------------------
+Wed Oct 27 23:00:53 EDT 2021
+35890315
+New small dataset
+[822/1000] Acc@1:79.25%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 4 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Wed Oct 27 23:01:02 EDT 2021
+35890364
+New small dataset
+[831/1000] Acc@1:77.55%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Wed Oct 27 23:01:06 EDT 2021
+35890368
+New small dataset
+[1000/1000] Acc@1:81.12%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Wed Oct 27 23:01:24 EDT 2021
+35890369
+New small dataset
+[1000/1000] Acc@1:80.10%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Wed Oct 27 23:01:30 EDT 2021
+35890372
+New small dataset
+[830/1000] Acc@1:78.30%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Wed Oct 27 23:01:39 EDT 2021
+35890381
+New small dataset
+[831/1000] Acc@1:75.05%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Wed Oct 27 23:01:45 EDT 2021
+35890382
+New small dataset
+[1000/1000] Acc@1:77.45%
+unlearnable_20211028064842_0.5_512_1000
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:40:08 EDT 2021
+35973275
+New small dataset
+[990/1000] Acc@1:80.62%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:40:16 EDT 2021
+35973277
+New small dataset
+[995/1000] Acc@1:80.58%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:40:25 EDT 2021
+35973279
+New small dataset
+[1000/1000] Acc@1:78.83%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:40:31 EDT 2021
+35973282
+New small dataset
+[985/1000] Acc@1:79.25%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:40:35 EDT 2021
+35973287
+New small dataset
+[1000/1000] Acc@1:81.58%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:42:35 EDT 2021
+35973575
+[376/1000] Acc@1:71.17%
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:42:42 EDT 2021
+35973585
+[373/1000] Acc@1:70.88%
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:42:45 EDT 2021
+35973590
+[373/1000] Acc@1:72.10%
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Thu Oct 28 16:43:46 EDT 2021
+35973723
+New small dataset
+[1000/1000] Acc@1:79.15%
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Fri Oct 29 21:17:10 EDT 2021
+36067214
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Fri Oct 29 21:17:17 EDT 2021
+36067215
+[1000/1000] Acc@1:79.95%
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Fri Oct 29 21:20:09 EDT 2021
+36067243
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Fri Oct 29 21:20:21 EDT 2021
+36067244
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Fri Oct 29 21:20:27 EDT 2021
+36067245
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Fri Oct 29 21:20:33 EDT 2021
+36067249
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:48:10 EDT 2021
+36080892
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 20 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:48:20 EDT 2021
+36080900
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:48:26 EDT 2021
+36080901
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:48:48 EDT 2021
+36080902
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 20 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:55:00 EDT 2021
+36080926
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:55:31 EDT 2021
+36080941
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:56:58 EDT 2021
+36081002
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 09:57:03 EDT 2021
+36081003
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn eot_v2 --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:32:53 EDT 2021
+36082318
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:32:56 EDT 2021
+36082319
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:33:02 EDT 2021
+36082320
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:33:03 EDT 2021
+36082321
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:39:48 EDT 2021
+36082385
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:39:55 EDT 2021
+36082386
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 11:40:26 EDT 2021
+36082387
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 19:35:24 EDT 2021
+36094808
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 19:51:29 EDT 2021
+36095048
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos --strong_aug
+---------------------------------------------------------------
+Sat Oct 30 19:51:33 EDT 2021
+36095050
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 10:41:40 EDT 2021
+36111034
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 10:42:25 EDT 2021
+36111037
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 10:42:59 EDT 2021
+36111038
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 10:44:18 EDT 2021
+36111078
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 10:45:27 EDT 2021
+36111727
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:07:08 EDT 2021
+36113357
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:07:17 EDT 2021
+36113359
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:26:16 EDT 2021
+36113724
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:29:30 EDT 2021
+36113727
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:30:30 EDT 2021
+36113731
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos/neg --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:30:36 EDT 2021
+36113732
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 11:30:42 EDT 2021
+36113733
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 14:45:13 EDT 2021
+36116337
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 14:45:42 EDT 2021
+36116338
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 14:47:16 EDT 2021
+36116341
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos/neg --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 14:47:26 EDT 2021
+36116342
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn pos --strong_aug
+---------------------------------------------------------------
+Sun Oct 31 14:49:03 EDT 2021
+36116349
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug
+---------------------------------------------------------------

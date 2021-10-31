@@ -30,9 +30,10 @@ else:
 # Datasets
 transform_options = {
     "CIFAR10": {
-        "train_transform": [transforms.RandomCrop(32, padding=4),
-                            transforms.RandomHorizontalFlip(),
-                            transforms.ToTensor()],
+        "train_transform": [
+            # transforms.RandomCrop(32, padding=4),
+            # transforms.RandomHorizontalFlip(),
+            transforms.ToTensor()],
         # "train_transform": [
         #     # transforms.RandomResizedCrop(32),
         #     transforms.RandomHorizontalFlip(p=0.5),

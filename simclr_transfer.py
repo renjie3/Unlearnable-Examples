@@ -1,6 +1,18 @@
 import argparse
+parser = argparse.ArgumentParser(description='Train SimCLR')
+parser.add_argument('--feature_dim', default=128, type=int, help='Feature dim for latent vector')
+parser.add_argument('--temperature', default=0.5, type=float, help='Temperature used in softmax')
+parser.add_argument('--k', default=200, type=int, help='Top k most similar images used to predict the label')
+parser.add_argument('--batch_size', default=512, type=int, help='Number of images in each mini-batch')
+parser.add_argument('--epochs', default=500, type=int, help='Number of sweeps over the dataset to train')
+parser.add_argument('--arch', default='resnet18', type=str, help='The backbone of encoder')
+parser.add_argument('--local_dev', action='store_true', default=False)
+
+# args parse
+args = parser.parse_args()
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+if args.local_dev:
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import sys
 
 import numpy as np
@@ -14,7 +26,7 @@ from tqdm import tqdm
 
 import utils
 from model import Model
-from utils import train_diff_transform
+from utils import train_diff_transform, train_diff_transform2
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -29,7 +41,7 @@ def train(net, data_loader, train_optimizer):
     total_loss, total_num, train_bar = 0.0, 0, tqdm(data_loader)
     for pos_1, pos_2, target in train_bar:
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+        pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
         feature_1, out_1 = net(pos_1)
         feature_2, out_2 = net(pos_2)
         # [2*B, D]
@@ -382,16 +394,6 @@ def test_ssl_for_simclrpy(net, memory_data_loader, test_data_loader):
 
 print ("__name__", __name__)
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Train SimCLR')
-    parser.add_argument('--feature_dim', default=128, type=int, help='Feature dim for latent vector')
-    parser.add_argument('--temperature', default=0.5, type=float, help='Temperature used in softmax')
-    parser.add_argument('--k', default=200, type=int, help='Top k most similar images used to predict the label')
-    parser.add_argument('--batch_size', default=512, type=int, help='Number of images in each mini-batch')
-    parser.add_argument('--epochs', default=500, type=int, help='Number of sweeps over the dataset to train')
-    parser.add_argument('--arch', default='resnet18', type=str, help='The backbone of encoder')
-
-    # args parse
-    args = parser.parse_args()
     feature_dim, temperature, k = args.feature_dim, args.temperature, args.k
     batch_size, epochs = args.batch_size, args.epochs
     arch = args.arch
@@ -400,8 +402,8 @@ if __name__ == '__main__':
     # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
     # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
     #                           drop_last=True)
-    pre_load_name = "unlearnable_20211013094736_0.5_512_11"
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path='noise_class_label.npy')
+    pre_load_name = "unlearnable_20211025164521_0.5_512_151"
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path='noise_class_label.npy', perturbation_budget=2.0)
     # load noise here:
     # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
     # random_noise_class = np.load('noise_class_label.npy')

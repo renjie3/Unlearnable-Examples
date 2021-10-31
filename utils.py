@@ -12,6 +12,10 @@ import matplotlib
 
 import kornia.augmentation as Kaug
 import torch.nn as nn
+import os
+import pickle
+from typing import Any, Callable, Optional, Tuple
+import pandas as pd
 
 if torch.cuda.is_available():
     device = torch.device('cuda')
@@ -22,6 +26,26 @@ else:
 class CIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+    ) -> None:
+
+        super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+        with open(sampled_filepath, "rb") as f:
+            sampled_data = pickle.load(f)
+        if train:
+            self.data = sampled_data["train_data"]
+            self.targets = sampled_data["train_targets"]
+        else:
+            self.data = sampled_data["test_data"]
+            self.targets = sampled_data["test_targets"]
 
     def __getitem__(self, index):
         img, target = self.data[index], self.targets[index]
@@ -70,6 +94,26 @@ class SameImgCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
 
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+    ) -> None:
+
+        super(SameImgCIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+        with open(sampled_filepath, "rb") as f:
+            sampled_data = pickle.load(f)
+        if train:
+            self.data = sampled_data["train_data"]
+            self.targets = sampled_data["train_targets"]
+        else:
+            self.data = sampled_data["test_data"]
+            self.targets = sampled_data["test_targets"]
+
     def __getitem__(self, index):
         img, target = self.data[index], self.targets[index]
         img = Image.fromarray(img)
@@ -110,6 +154,17 @@ class PoisonCIFAR10Pair(CIFAR10):
     """
     def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath='my_experiments/class_wise_cifar10/perturbation.pt'):
         super(PoisonCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
+
+        sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+        with open(sampled_filepath, "rb") as f:
+            sampled_data = pickle.load(f)
+        if train:
+            self.data = sampled_data["train_data"]
+            self.targets = sampled_data["train_targets"]
+        else:
+            self.data = sampled_data["test_data"]
+            self.targets = sampled_data["test_targets"]
+        
         self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
         self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         self.data = self.data.astype(np.float32)
@@ -119,6 +174,7 @@ class PoisonCIFAR10Pair(CIFAR10):
             self.data[idx] = self.data[idx] + noise
             self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
         self.data = self.data.astype(np.uint8)
+
 
 
     def __getitem__(self, index):
@@ -161,8 +217,19 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
+
+        sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+        with open(sampled_filepath, "rb") as f:
+            sampled_data = pickle.load(f)
+        if train:
+            self.data = sampled_data["train_data"]
+            self.targets = sampled_data["train_targets"]
+        else:
+            self.data = sampled_data["test_data"]
+            self.targets = sampled_data["test_targets"]
+
         if perturb_tensor_filepath != None:
             self.perturb_tensor = torch.load(perturb_tensor_filepath)
             self.noise_255 = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
@@ -173,6 +240,8 @@ class TransferCIFAR10Pair(CIFAR10):
             self.random_noise_class = np.load(random_noise_class_path)
         else:
             self.random_noise_class = None
+        
+        self.perturbation_budget = perturbation_budget
 
     # random_noise_class = np.load('noise_class_label.npy')
     #     self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
@@ -195,8 +264,8 @@ class TransferCIFAR10Pair(CIFAR10):
         if self.transform is not None:
             # print(self.perturb_tensor[self.random_noise_class[index]][0][0])
             # print("self.transform(img)", self.transform(img).shape)
-            pos_1 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]], 0, 1)
-            pos_2 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]], 0, 1)
+            pos_1 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
+            pos_2 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
 
         if self.target_transform is not None:
             target = self.target_transform(target)
@@ -255,6 +324,18 @@ train_diff_transform = nn.Sequential(
     Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
     Kaug.RandomGrayscale(p=0.2)
 )
+
+train_diff_transform2 = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    # Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform3 = nn.Sequential(
+    Kaug.RandomCrop([32,32], padding=4),
+    Kaug.RandomHorizontalFlip(p=0.5),
+)
     
 def get_pairs_of_imgs(idx, clean_train_dataset, noise):
     clean_img = clean_train_dataset.data[idx]
@@ -271,7 +352,7 @@ def get_pairs_of_imgs(idx, clean_train_dataset, noise):
 
 def save_img_group(clean_train_dataset, noise, img_path):
     fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
-    selected_idx = [random.randint(0, 5000) for _ in range(9)]
+    selected_idx = [random.randint(0, 1023) for _ in range(9)]
     img_grid = []
     for idx in selected_idx:
         img_grid += get_pairs_of_imgs(idx, clean_train_dataset, noise)
@@ -280,3 +361,28 @@ def save_img_group(clean_train_dataset, noise, img_path):
     npimg = img_grid_tensor.cpu().numpy()
     plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.savefig(img_path)
+
+def plot_loss(file_prename):
+    pd_reader = pd.read_csv(file_prename+".csv")
+    # print(pd_reader)
+
+    epoch = pd_reader.values[:,0]
+    loss = pd_reader.values[:,1]
+    acc = pd_reader.values[:,2]
+
+    fig, ax=plt.subplots(1,1,figsize=(9,6))
+    ax1 = ax.twinx()
+
+    p2 = ax.plot(epoch, loss,'r-', label = 'loss')
+    ax.legend()
+    p3 = ax1.plot(epoch,acc, 'b-', label = 'test_acc')
+    ax1.legend()
+
+    #显示图例
+    # p3 = pl.plot(epoch,acc, 'b-', label = 'test_acc')
+    # plt.legend()
+    ax.set_xlabel('epoch')
+    ax.set_ylabel('loss')
+    ax1.set_ylabel('acc')
+    plt.title('Training loss on generating model and clean test acc')
+    plt.savefig(file_prename + ".png")

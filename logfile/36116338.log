@@ -1,0 +1,1698 @@
+New small dataset
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+The whole epochs are 1000
+
+min_min_attack_simclr_return_loss_tensor: 6.940620422363281
+
+min_min_attack_simclr_return_loss_tensor: 6.934343338012695
+
+min_min_attack_simclr_return_loss_tensor: 6.92086124420166
+
+min_min_attack_simclr_return_loss_tensor: 6.915467262268066
+
+min_min_attack_simclr_return_loss_tensor: 6.9272918701171875
+
+min_min_attack_simclr_return_loss_tensor: 6.911767482757568
+6.937367677688599
+
+min_min_attack_simclr_return_loss_tensor: 6.986058235168457
+
+min_min_attack_simclr_return_loss_tensor: 6.973893165588379
+
+min_min_attack_simclr_return_loss_tensor: 7.029238700866699
+
+min_min_attack_simclr_return_loss_tensor: 7.074265480041504
+
+min_min_attack_simclr_return_loss_tensor: 7.068155765533447
+
+min_min_attack_simclr_return_loss_tensor: 7.09153938293457
+6.838094472885132
+
+min_min_attack_simclr_return_loss_tensor: 7.012618064880371
+
+min_min_attack_simclr_return_loss_tensor: 7.061437129974365
+
+min_min_attack_simclr_return_loss_tensor: 6.94438362121582
+
+min_min_attack_simclr_return_loss_tensor: 6.937800884246826
+
+min_min_attack_simclr_return_loss_tensor: 6.983965873718262
+
+min_min_attack_simclr_return_loss_tensor: 6.997888565063477
+6.885691404342651
+
+min_min_attack_simclr_return_loss_tensor: 6.954256057739258
+
+min_min_attack_simclr_return_loss_tensor: 6.908453941345215
+
+min_min_attack_simclr_return_loss_tensor: 6.871406555175781
+
+min_min_attack_simclr_return_loss_tensor: 6.890268325805664
+
+min_min_attack_simclr_return_loss_tensor: 6.901985168457031
+
+min_min_attack_simclr_return_loss_tensor: 6.858654022216797
+6.8570592403411865
+
+min_min_attack_simclr_return_loss_tensor: 6.898049831390381
+
+min_min_attack_simclr_return_loss_tensor: 6.902396202087402
+
+min_min_attack_simclr_return_loss_tensor: 6.916603088378906
+
+min_min_attack_simclr_return_loss_tensor: 6.889652729034424
+
+min_min_attack_simclr_return_loss_tensor: 6.903200626373291
+
+min_min_attack_simclr_return_loss_tensor: 6.903641223907471
+6.841130971908569
+
+min_min_attack_simclr_return_loss_tensor: 6.934639930725098
+
+min_min_attack_simclr_return_loss_tensor: 6.904803276062012
+
+min_min_attack_simclr_return_loss_tensor: 6.86668586730957
+
+min_min_attack_simclr_return_loss_tensor: 6.869049072265625
+
+min_min_attack_simclr_return_loss_tensor: 6.863722801208496
+
+min_min_attack_simclr_return_loss_tensor: 6.879603385925293
+6.841352701187134
+
+min_min_attack_simclr_return_loss_tensor: 6.889697074890137
+
+min_min_attack_simclr_return_loss_tensor: 6.868902683258057
+
+min_min_attack_simclr_return_loss_tensor: 6.835058212280273
+
+min_min_attack_simclr_return_loss_tensor: 6.831151962280273
+
+min_min_attack_simclr_return_loss_tensor: 6.8588361740112305
+
+min_min_attack_simclr_return_loss_tensor: 6.849421501159668
+6.815715789794922
+
+min_min_attack_simclr_return_loss_tensor: 6.819639205932617
+
+min_min_attack_simclr_return_loss_tensor: 6.850152015686035
+
+min_min_attack_simclr_return_loss_tensor: 6.882699012756348
+
+min_min_attack_simclr_return_loss_tensor: 6.896660804748535
+
+min_min_attack_simclr_return_loss_tensor: 6.8831787109375
+
+min_min_attack_simclr_return_loss_tensor: 6.911870002746582
+6.82954740524292
+
+min_min_attack_simclr_return_loss_tensor: 6.926241397857666
+
+min_min_attack_simclr_return_loss_tensor: 6.967358589172363
+
+min_min_attack_simclr_return_loss_tensor: 6.952018737792969
+
+min_min_attack_simclr_return_loss_tensor: 6.989389419555664
+
+min_min_attack_simclr_return_loss_tensor: 6.916426181793213
+
+min_min_attack_simclr_return_loss_tensor: 6.938241481781006
+6.8126912117004395
+
+min_min_attack_simclr_return_loss_tensor: 6.930694103240967
+
+min_min_attack_simclr_return_loss_tensor: 6.892271041870117
+
+min_min_attack_simclr_return_loss_tensor: 6.837824821472168
+
+min_min_attack_simclr_return_loss_tensor: 6.829822540283203
+
+min_min_attack_simclr_return_loss_tensor: 6.789516925811768
+
+min_min_attack_simclr_return_loss_tensor: 6.840700149536133
+6.791287899017334
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.829011917114258
+
+min_min_attack_simclr_return_loss_tensor: 6.7953596115112305
+
+min_min_attack_simclr_return_loss_tensor: 6.80153226852417
+
+min_min_attack_simclr_return_loss_tensor: 6.861772060394287
+
+min_min_attack_simclr_return_loss_tensor: 6.819423675537109
+
+min_min_attack_simclr_return_loss_tensor: 6.835728645324707
+6.777465343475342
+
+min_min_attack_simclr_return_loss_tensor: 6.901556015014648
+
+min_min_attack_simclr_return_loss_tensor: 6.910343647003174
+
+min_min_attack_simclr_return_loss_tensor: 6.797242164611816
+
+min_min_attack_simclr_return_loss_tensor: 6.819658279418945
+
+min_min_attack_simclr_return_loss_tensor: 6.792733669281006
+
+min_min_attack_simclr_return_loss_tensor: 6.819673538208008
+6.7880377769470215
+
+min_min_attack_simclr_return_loss_tensor: 6.861784934997559
+
+min_min_attack_simclr_return_loss_tensor: 6.8332014083862305
+
+min_min_attack_simclr_return_loss_tensor: 6.834206581115723
+
+min_min_attack_simclr_return_loss_tensor: 6.835338592529297
+
+min_min_attack_simclr_return_loss_tensor: 6.823702335357666
+
+min_min_attack_simclr_return_loss_tensor: 6.828204154968262
+6.793850660324097
+
+min_min_attack_simclr_return_loss_tensor: 6.833205699920654
+
+min_min_attack_simclr_return_loss_tensor: 6.881532669067383
+
+min_min_attack_simclr_return_loss_tensor: 6.874979496002197
+
+min_min_attack_simclr_return_loss_tensor: 6.824315071105957
+
+min_min_attack_simclr_return_loss_tensor: 6.809100151062012
+
+min_min_attack_simclr_return_loss_tensor: 6.8318681716918945
+6.808594226837158
+
+min_min_attack_simclr_return_loss_tensor: 6.809926509857178
+
+min_min_attack_simclr_return_loss_tensor: 6.763805866241455
+
+min_min_attack_simclr_return_loss_tensor: 6.772659778594971
+
+min_min_attack_simclr_return_loss_tensor: 6.782218933105469
+
+min_min_attack_simclr_return_loss_tensor: 6.7966508865356445
+
+min_min_attack_simclr_return_loss_tensor: 6.845136642456055
+6.785549879074097
+
+min_min_attack_simclr_return_loss_tensor: 6.873407363891602
+
+min_min_attack_simclr_return_loss_tensor: 6.7860107421875
+
+min_min_attack_simclr_return_loss_tensor: 6.845332145690918
+
+min_min_attack_simclr_return_loss_tensor: 6.840670108795166
+
+min_min_attack_simclr_return_loss_tensor: 6.845932960510254
+
+min_min_attack_simclr_return_loss_tensor: 6.819822311401367
+6.768135070800781
+
+min_min_attack_simclr_return_loss_tensor: 6.768372535705566
+
+min_min_attack_simclr_return_loss_tensor: 6.853854179382324
+
+min_min_attack_simclr_return_loss_tensor: 6.8559064865112305
+
+min_min_attack_simclr_return_loss_tensor: 6.801064491271973
+
+min_min_attack_simclr_return_loss_tensor: 6.816906929016113
+
+min_min_attack_simclr_return_loss_tensor: 6.8252363204956055
+6.7926740646362305
+
+min_min_attack_simclr_return_loss_tensor: 6.769946098327637
+
+min_min_attack_simclr_return_loss_tensor: 6.840694904327393
+
+min_min_attack_simclr_return_loss_tensor: 6.778298377990723
+
+min_min_attack_simclr_return_loss_tensor: 6.810949325561523
+
+min_min_attack_simclr_return_loss_tensor: 6.817651271820068
+
+min_min_attack_simclr_return_loss_tensor: 6.799543380737305
+6.762285947799683
+
+min_min_attack_simclr_return_loss_tensor: 6.773144721984863
+
+min_min_attack_simclr_return_loss_tensor: 6.838222503662109
+
+min_min_attack_simclr_return_loss_tensor: 6.782134056091309
+
+min_min_attack_simclr_return_loss_tensor: 6.812167167663574
+
+min_min_attack_simclr_return_loss_tensor: 6.800742149353027
+
+min_min_attack_simclr_return_loss_tensor: 6.827927589416504
+6.789528131484985
+
+min_min_attack_simclr_return_loss_tensor: 6.796281337738037
+
+min_min_attack_simclr_return_loss_tensor: 6.873085021972656
+
+min_min_attack_simclr_return_loss_tensor: 6.8116350173950195
+
+min_min_attack_simclr_return_loss_tensor: 6.842696189880371
+
+min_min_attack_simclr_return_loss_tensor: 6.818686485290527
+
+min_min_attack_simclr_return_loss_tensor: 6.895214080810547
+6.7748541831970215
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.807730197906494
+
+min_min_attack_simclr_return_loss_tensor: 6.778115749359131
+
+min_min_attack_simclr_return_loss_tensor: 6.820757865905762
+
+min_min_attack_simclr_return_loss_tensor: 6.757903099060059
+
+min_min_attack_simclr_return_loss_tensor: 6.785493850708008
+
+min_min_attack_simclr_return_loss_tensor: 6.727755069732666
+6.779544830322266
+
+min_min_attack_simclr_return_loss_tensor: 6.81065034866333
+
+min_min_attack_simclr_return_loss_tensor: 6.831145286560059
+
+min_min_attack_simclr_return_loss_tensor: 6.779052257537842
+
+min_min_attack_simclr_return_loss_tensor: 6.86112642288208
+
+min_min_attack_simclr_return_loss_tensor: 6.788329124450684
+
+min_min_attack_simclr_return_loss_tensor: 6.803220748901367
+6.749815940856934
+
+min_min_attack_simclr_return_loss_tensor: 6.80489444732666
+
+min_min_attack_simclr_return_loss_tensor: 6.784563064575195
+
+min_min_attack_simclr_return_loss_tensor: 6.747762680053711
+
+min_min_attack_simclr_return_loss_tensor: 6.773727893829346
+
+min_min_attack_simclr_return_loss_tensor: 6.774871349334717
+
+min_min_attack_simclr_return_loss_tensor: 6.732107639312744
+6.778282165527344
+
+min_min_attack_simclr_return_loss_tensor: 6.776493072509766
+
+min_min_attack_simclr_return_loss_tensor: 6.764552593231201
+
+min_min_attack_simclr_return_loss_tensor: 6.797318935394287
+
+min_min_attack_simclr_return_loss_tensor: 6.696871757507324
+
+min_min_attack_simclr_return_loss_tensor: 6.752494812011719
+
+min_min_attack_simclr_return_loss_tensor: 6.73734712600708
+6.754786968231201
+
+min_min_attack_simclr_return_loss_tensor: 6.772690773010254
+
+min_min_attack_simclr_return_loss_tensor: 6.785859107971191
+
+min_min_attack_simclr_return_loss_tensor: 6.728518009185791
+
+min_min_attack_simclr_return_loss_tensor: 6.758450031280518
+
+min_min_attack_simclr_return_loss_tensor: 6.774843215942383
+
+min_min_attack_simclr_return_loss_tensor: 6.788303375244141
+6.764028310775757
+
+min_min_attack_simclr_return_loss_tensor: 6.718963623046875
+
+min_min_attack_simclr_return_loss_tensor: 6.760471820831299
+
+min_min_attack_simclr_return_loss_tensor: 6.740715026855469
+
+min_min_attack_simclr_return_loss_tensor: 6.701076507568359
+
+min_min_attack_simclr_return_loss_tensor: 6.728687763214111
+
+min_min_attack_simclr_return_loss_tensor: 6.771724700927734
+6.731881856918335
+
+min_min_attack_simclr_return_loss_tensor: 6.761063575744629
+
+min_min_attack_simclr_return_loss_tensor: 6.776464462280273
+
+min_min_attack_simclr_return_loss_tensor: 6.787113189697266
+
+min_min_attack_simclr_return_loss_tensor: 6.761361122131348
+
+min_min_attack_simclr_return_loss_tensor: 6.742332935333252
+
+min_min_attack_simclr_return_loss_tensor: 6.78615140914917
+6.739547252655029
+
+min_min_attack_simclr_return_loss_tensor: 6.768895626068115
+
+min_min_attack_simclr_return_loss_tensor: 6.799713134765625
+
+min_min_attack_simclr_return_loss_tensor: 6.806074142456055
+
+min_min_attack_simclr_return_loss_tensor: 6.758594989776611
+
+min_min_attack_simclr_return_loss_tensor: 6.775783538818359
+
+min_min_attack_simclr_return_loss_tensor: 6.773070335388184
+6.763537406921387
+
+min_min_attack_simclr_return_loss_tensor: 6.817797660827637
+
+min_min_attack_simclr_return_loss_tensor: 6.759047508239746
+
+min_min_attack_simclr_return_loss_tensor: 6.823279857635498
+
+min_min_attack_simclr_return_loss_tensor: 6.841917037963867
+
+min_min_attack_simclr_return_loss_tensor: 6.861484527587891
+
+min_min_attack_simclr_return_loss_tensor: 6.877545356750488
+6.7223381996154785
+
+min_min_attack_simclr_return_loss_tensor: 6.8415327072143555
+
+min_min_attack_simclr_return_loss_tensor: 6.819319725036621
+
+min_min_attack_simclr_return_loss_tensor: 6.708288192749023
+
+min_min_attack_simclr_return_loss_tensor: 6.76572322845459
+
+min_min_attack_simclr_return_loss_tensor: 6.706478595733643
+
+min_min_attack_simclr_return_loss_tensor: 6.70235538482666
+6.7364678382873535
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.738889694213867
+
+min_min_attack_simclr_return_loss_tensor: 6.729569435119629
+
+min_min_attack_simclr_return_loss_tensor: 6.7135772705078125
+
+min_min_attack_simclr_return_loss_tensor: 6.790129661560059
+
+min_min_attack_simclr_return_loss_tensor: 6.683537006378174
+
+min_min_attack_simclr_return_loss_tensor: 6.730429172515869
+6.708775043487549
+
+min_min_attack_simclr_return_loss_tensor: 6.70503568649292
+
+min_min_attack_simclr_return_loss_tensor: 6.726569175720215
+
+min_min_attack_simclr_return_loss_tensor: 6.72573184967041
+
+min_min_attack_simclr_return_loss_tensor: 6.723448276519775
+
+min_min_attack_simclr_return_loss_tensor: 6.6766743659973145
+
+min_min_attack_simclr_return_loss_tensor: 6.727215766906738
+6.747605085372925
+
+min_min_attack_simclr_return_loss_tensor: 6.767201900482178
+
+min_min_attack_simclr_return_loss_tensor: 6.740016937255859
+
+min_min_attack_simclr_return_loss_tensor: 6.727333068847656
+
+min_min_attack_simclr_return_loss_tensor: 6.74213981628418
+
+min_min_attack_simclr_return_loss_tensor: 6.738368988037109
+
+min_min_attack_simclr_return_loss_tensor: 6.767724990844727
+6.7593255043029785
+
+min_min_attack_simclr_return_loss_tensor: 6.779391765594482
+
+min_min_attack_simclr_return_loss_tensor: 6.797097206115723
+
+min_min_attack_simclr_return_loss_tensor: 6.732071876525879
+
+min_min_attack_simclr_return_loss_tensor: 6.711176872253418
+
+min_min_attack_simclr_return_loss_tensor: 6.712850093841553
+
+min_min_attack_simclr_return_loss_tensor: 6.759906768798828
+6.733139753341675
+
+min_min_attack_simclr_return_loss_tensor: 6.757177352905273
+
+min_min_attack_simclr_return_loss_tensor: 6.714376449584961
+
+min_min_attack_simclr_return_loss_tensor: 6.708495616912842
+
+min_min_attack_simclr_return_loss_tensor: 6.799834251403809
+
+min_min_attack_simclr_return_loss_tensor: 6.7537078857421875
+
+min_min_attack_simclr_return_loss_tensor: 6.729011535644531
+6.75976824760437
+
+min_min_attack_simclr_return_loss_tensor: 6.754305839538574
+
+min_min_attack_simclr_return_loss_tensor: 6.731748104095459
+
+min_min_attack_simclr_return_loss_tensor: 6.684543609619141
+
+min_min_attack_simclr_return_loss_tensor: 6.725201606750488
+
+min_min_attack_simclr_return_loss_tensor: 6.746201992034912
+
+min_min_attack_simclr_return_loss_tensor: 6.705699920654297
+6.709188461303711
+
+min_min_attack_simclr_return_loss_tensor: 6.713908672332764
+
+min_min_attack_simclr_return_loss_tensor: 6.776397705078125
+
+min_min_attack_simclr_return_loss_tensor: 6.795634746551514
+
+min_min_attack_simclr_return_loss_tensor: 6.736924171447754
+
+min_min_attack_simclr_return_loss_tensor: 6.786811828613281
+
+min_min_attack_simclr_return_loss_tensor: 6.7948150634765625
+6.698165416717529
+
+min_min_attack_simclr_return_loss_tensor: 6.781439781188965
+
+min_min_attack_simclr_return_loss_tensor: 6.750497817993164
+
+min_min_attack_simclr_return_loss_tensor: 6.713789939880371
+
+min_min_attack_simclr_return_loss_tensor: 6.7749457359313965
+
+min_min_attack_simclr_return_loss_tensor: 6.742299556732178
+
+min_min_attack_simclr_return_loss_tensor: 6.716194152832031
+6.7061848640441895
+
+min_min_attack_simclr_return_loss_tensor: 6.747685432434082
+
+min_min_attack_simclr_return_loss_tensor: 6.791481018066406
+
+min_min_attack_simclr_return_loss_tensor: 6.709996700286865
+
+min_min_attack_simclr_return_loss_tensor: 6.7005720138549805
+
+min_min_attack_simclr_return_loss_tensor: 6.707067012786865
+
+min_min_attack_simclr_return_loss_tensor: 6.748394966125488
+6.679422616958618
+
+min_min_attack_simclr_return_loss_tensor: 6.78352165222168
+
+min_min_attack_simclr_return_loss_tensor: 6.791322708129883
+
+min_min_attack_simclr_return_loss_tensor: 6.703069686889648
+
+min_min_attack_simclr_return_loss_tensor: 6.762506008148193
+
+min_min_attack_simclr_return_loss_tensor: 6.710788726806641
+
+min_min_attack_simclr_return_loss_tensor: 6.74848747253418
+6.719066381454468
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.736379623413086
+
+min_min_attack_simclr_return_loss_tensor: 6.703361511230469
+
+min_min_attack_simclr_return_loss_tensor: 6.756648063659668
+
+min_min_attack_simclr_return_loss_tensor: 6.737584114074707
+
+min_min_attack_simclr_return_loss_tensor: 6.683556079864502
+
+min_min_attack_simclr_return_loss_tensor: 6.713412284851074
+6.704688787460327
+
+min_min_attack_simclr_return_loss_tensor: 6.697263717651367
+
+min_min_attack_simclr_return_loss_tensor: 6.772799015045166
+
+min_min_attack_simclr_return_loss_tensor: 6.7351837158203125
+
+min_min_attack_simclr_return_loss_tensor: 6.733577728271484
+
+min_min_attack_simclr_return_loss_tensor: 6.730186939239502
+
+min_min_attack_simclr_return_loss_tensor: 6.718800067901611
+6.6916444301605225
+
+min_min_attack_simclr_return_loss_tensor: 6.699002265930176
+
+min_min_attack_simclr_return_loss_tensor: 6.709412097930908
+
+min_min_attack_simclr_return_loss_tensor: 6.739927291870117
+
+min_min_attack_simclr_return_loss_tensor: 6.755804061889648
+
+min_min_attack_simclr_return_loss_tensor: 6.737122535705566
+
+min_min_attack_simclr_return_loss_tensor: 6.772215843200684
+6.677839994430542
+
+min_min_attack_simclr_return_loss_tensor: 6.756364822387695
+
+min_min_attack_simclr_return_loss_tensor: 6.855561256408691
+
+min_min_attack_simclr_return_loss_tensor: 6.73795223236084
+
+min_min_attack_simclr_return_loss_tensor: 6.72572135925293
+
+min_min_attack_simclr_return_loss_tensor: 6.767458915710449
+
+min_min_attack_simclr_return_loss_tensor: 6.781167030334473
+6.689021110534668
+
+min_min_attack_simclr_return_loss_tensor: 6.742522239685059
+
+min_min_attack_simclr_return_loss_tensor: 6.820740699768066
+
+min_min_attack_simclr_return_loss_tensor: 6.762693405151367
+
+min_min_attack_simclr_return_loss_tensor: 6.774506092071533
+
+min_min_attack_simclr_return_loss_tensor: 6.781421661376953
+
+min_min_attack_simclr_return_loss_tensor: 6.71891975402832
+6.722519874572754
+
+min_min_attack_simclr_return_loss_tensor: 6.742955207824707
+
+min_min_attack_simclr_return_loss_tensor: 6.7479352951049805
+
+min_min_attack_simclr_return_loss_tensor: 6.807615280151367
+
+min_min_attack_simclr_return_loss_tensor: 6.742097854614258
+
+min_min_attack_simclr_return_loss_tensor: 6.756871700286865
+
+min_min_attack_simclr_return_loss_tensor: 6.684906959533691
+6.707717418670654
+
+min_min_attack_simclr_return_loss_tensor: 6.7088117599487305
+
+min_min_attack_simclr_return_loss_tensor: 6.707464218139648
+
+min_min_attack_simclr_return_loss_tensor: 6.733390808105469
+
+min_min_attack_simclr_return_loss_tensor: 6.708042144775391
+
+min_min_attack_simclr_return_loss_tensor: 6.689547538757324
+
+min_min_attack_simclr_return_loss_tensor: 6.697850227355957
+6.695507287979126
+
+min_min_attack_simclr_return_loss_tensor: 6.783398628234863
+
+min_min_attack_simclr_return_loss_tensor: 6.7488508224487305
+
+min_min_attack_simclr_return_loss_tensor: 6.782549858093262
+
+min_min_attack_simclr_return_loss_tensor: 6.783749103546143
+
+min_min_attack_simclr_return_loss_tensor: 6.839044094085693
+
+min_min_attack_simclr_return_loss_tensor: 6.842710494995117
+6.703211307525635
+
+min_min_attack_simclr_return_loss_tensor: 6.747317314147949
+
+min_min_attack_simclr_return_loss_tensor: 6.7582221031188965
+
+min_min_attack_simclr_return_loss_tensor: 6.699035167694092
+
+min_min_attack_simclr_return_loss_tensor: 6.686918258666992
+
+min_min_attack_simclr_return_loss_tensor: 6.699188709259033
+
+min_min_attack_simclr_return_loss_tensor: 6.701969623565674
+6.672307729721069
+
+min_min_attack_simclr_return_loss_tensor: 6.762210369110107
+
+min_min_attack_simclr_return_loss_tensor: 6.769276142120361
+
+min_min_attack_simclr_return_loss_tensor: 6.773269176483154
+
+min_min_attack_simclr_return_loss_tensor: 6.7930402755737305
+
+min_min_attack_simclr_return_loss_tensor: 6.731160640716553
+
+min_min_attack_simclr_return_loss_tensor: 6.765878677368164
+6.720588445663452
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.7081522941589355
+
+min_min_attack_simclr_return_loss_tensor: 6.754085540771484
+
+min_min_attack_simclr_return_loss_tensor: 6.720474720001221
+
+min_min_attack_simclr_return_loss_tensor: 6.757967948913574
+
+min_min_attack_simclr_return_loss_tensor: 6.774975776672363
+
+min_min_attack_simclr_return_loss_tensor: 6.739805698394775
+6.708728551864624
+
+min_min_attack_simclr_return_loss_tensor: 6.686047077178955
+
+min_min_attack_simclr_return_loss_tensor: 6.75130558013916
+
+min_min_attack_simclr_return_loss_tensor: 6.690253257751465
+
+min_min_attack_simclr_return_loss_tensor: 6.716833591461182
+
+min_min_attack_simclr_return_loss_tensor: 6.716103553771973
+
+min_min_attack_simclr_return_loss_tensor: 6.747145175933838
+6.66742730140686
+
+min_min_attack_simclr_return_loss_tensor: 6.692316055297852
+
+min_min_attack_simclr_return_loss_tensor: 6.701491355895996
+
+min_min_attack_simclr_return_loss_tensor: 6.765275001525879
+
+min_min_attack_simclr_return_loss_tensor: 6.724145889282227
+
+min_min_attack_simclr_return_loss_tensor: 6.693097114562988
+
+min_min_attack_simclr_return_loss_tensor: 6.758112907409668
+6.701167821884155
+
+min_min_attack_simclr_return_loss_tensor: 6.729954719543457
+
+min_min_attack_simclr_return_loss_tensor: 6.7313995361328125
+
+min_min_attack_simclr_return_loss_tensor: 6.797900199890137
+
+min_min_attack_simclr_return_loss_tensor: 6.72404670715332
+
+min_min_attack_simclr_return_loss_tensor: 6.72147798538208
+
+min_min_attack_simclr_return_loss_tensor: 6.780622482299805
+6.642307758331299
+
+min_min_attack_simclr_return_loss_tensor: 6.781336784362793
+
+min_min_attack_simclr_return_loss_tensor: 6.788513660430908
+
+min_min_attack_simclr_return_loss_tensor: 6.7087602615356445
+
+min_min_attack_simclr_return_loss_tensor: 6.757264137268066
+
+min_min_attack_simclr_return_loss_tensor: 6.707720756530762
+
+min_min_attack_simclr_return_loss_tensor: 6.704424858093262
+6.675577640533447
+
+min_min_attack_simclr_return_loss_tensor: 6.649692535400391
+
+min_min_attack_simclr_return_loss_tensor: 6.645871639251709
+
+min_min_attack_simclr_return_loss_tensor: 6.602199554443359
+
+min_min_attack_simclr_return_loss_tensor: 6.6928558349609375
+
+min_min_attack_simclr_return_loss_tensor: 6.63663911819458
+
+min_min_attack_simclr_return_loss_tensor: 6.7136945724487305
+6.6391072273254395
+
+min_min_attack_simclr_return_loss_tensor: 6.6940202713012695
+
+min_min_attack_simclr_return_loss_tensor: 6.716130256652832
+
+min_min_attack_simclr_return_loss_tensor: 6.775155067443848
+
+min_min_attack_simclr_return_loss_tensor: 6.787683486938477
+
+min_min_attack_simclr_return_loss_tensor: 6.747673034667969
+
+min_min_attack_simclr_return_loss_tensor: 6.721884727478027
+6.640538930892944
+
+min_min_attack_simclr_return_loss_tensor: 6.789187431335449
+
+min_min_attack_simclr_return_loss_tensor: 6.768092632293701
+
+min_min_attack_simclr_return_loss_tensor: 6.810163974761963
+
+min_min_attack_simclr_return_loss_tensor: 6.7568769454956055
+
+min_min_attack_simclr_return_loss_tensor: 6.727483749389648
+
+min_min_attack_simclr_return_loss_tensor: 6.78398323059082
+6.679667949676514
+
+min_min_attack_simclr_return_loss_tensor: 6.738161563873291
+
+min_min_attack_simclr_return_loss_tensor: 6.774405479431152
+
+min_min_attack_simclr_return_loss_tensor: 6.728574752807617
+
+min_min_attack_simclr_return_loss_tensor: 6.706616401672363
+
+min_min_attack_simclr_return_loss_tensor: 6.736908912658691
+
+min_min_attack_simclr_return_loss_tensor: 6.710047721862793
+6.659677505493164
+
+min_min_attack_simclr_return_loss_tensor: 6.769010543823242
+
+min_min_attack_simclr_return_loss_tensor: 6.717281818389893
+
+min_min_attack_simclr_return_loss_tensor: 6.7314453125
+
+min_min_attack_simclr_return_loss_tensor: 6.731525421142578
+
+min_min_attack_simclr_return_loss_tensor: 6.769637584686279
+
+min_min_attack_simclr_return_loss_tensor: 6.780569553375244
+6.685441732406616
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.737211227416992
+
+min_min_attack_simclr_return_loss_tensor: 6.755746841430664
+
+min_min_attack_simclr_return_loss_tensor: 6.706256866455078
+
+min_min_attack_simclr_return_loss_tensor: 6.663461685180664
+
+min_min_attack_simclr_return_loss_tensor: 6.729792594909668
+
+min_min_attack_simclr_return_loss_tensor: 6.678449630737305
+6.683391094207764
+
+min_min_attack_simclr_return_loss_tensor: 6.673151969909668
+
+min_min_attack_simclr_return_loss_tensor: 6.7208452224731445
+
+min_min_attack_simclr_return_loss_tensor: 6.630787372589111
+
+min_min_attack_simclr_return_loss_tensor: 6.64581298828125
+
+min_min_attack_simclr_return_loss_tensor: 6.63796329498291
+
+min_min_attack_simclr_return_loss_tensor: 6.695492744445801
+6.646204233169556
+
+min_min_attack_simclr_return_loss_tensor: 6.614327907562256
+
+min_min_attack_simclr_return_loss_tensor: 6.6762542724609375
+
+min_min_attack_simclr_return_loss_tensor: 6.680956840515137
+
+min_min_attack_simclr_return_loss_tensor: 6.722365379333496
+
+min_min_attack_simclr_return_loss_tensor: 6.645264625549316
+
+min_min_attack_simclr_return_loss_tensor: 6.764348983764648
+6.643301248550415
+
+min_min_attack_simclr_return_loss_tensor: 6.660643577575684
+
+min_min_attack_simclr_return_loss_tensor: 6.645042419433594
+
+min_min_attack_simclr_return_loss_tensor: 6.645879745483398
+
+min_min_attack_simclr_return_loss_tensor: 6.6121087074279785
+
+min_min_attack_simclr_return_loss_tensor: 6.67240571975708
+
+min_min_attack_simclr_return_loss_tensor: 6.602450370788574
+6.628689527511597
+
+min_min_attack_simclr_return_loss_tensor: 6.670175552368164
+
+min_min_attack_simclr_return_loss_tensor: 6.637456893920898
+
+min_min_attack_simclr_return_loss_tensor: 6.743001461029053
+
+min_min_attack_simclr_return_loss_tensor: 6.731586456298828
+
+min_min_attack_simclr_return_loss_tensor: 6.701169013977051
+
+min_min_attack_simclr_return_loss_tensor: 6.746704578399658
+6.628499746322632
+
+min_min_attack_simclr_return_loss_tensor: 6.646393775939941
+
+min_min_attack_simclr_return_loss_tensor: 6.66486930847168
+
+min_min_attack_simclr_return_loss_tensor: 6.620342254638672
+
+min_min_attack_simclr_return_loss_tensor: 6.675973892211914
+
+min_min_attack_simclr_return_loss_tensor: 6.655722618103027
+
+min_min_attack_simclr_return_loss_tensor: 6.644728660583496
+6.628940582275391
+
+min_min_attack_simclr_return_loss_tensor: 6.636733055114746
+
+min_min_attack_simclr_return_loss_tensor: 6.684736251831055
+
+min_min_attack_simclr_return_loss_tensor: 6.753655433654785
+
+min_min_attack_simclr_return_loss_tensor: 6.699236869812012
+
+min_min_attack_simclr_return_loss_tensor: 6.73927640914917
+
+min_min_attack_simclr_return_loss_tensor: 6.712596893310547
+6.644258975982666
+
+min_min_attack_simclr_return_loss_tensor: 6.776577949523926
+
+min_min_attack_simclr_return_loss_tensor: 6.750339031219482
+
+min_min_attack_simclr_return_loss_tensor: 6.7594146728515625
+
+min_min_attack_simclr_return_loss_tensor: 6.8447394371032715
+
+min_min_attack_simclr_return_loss_tensor: 6.8574018478393555
+
+min_min_attack_simclr_return_loss_tensor: 6.835857391357422
+6.626004457473755
+
+min_min_attack_simclr_return_loss_tensor: 6.70525598526001
+
+min_min_attack_simclr_return_loss_tensor: 6.758277893066406
+
+min_min_attack_simclr_return_loss_tensor: 6.735215663909912
+
+min_min_attack_simclr_return_loss_tensor: 6.649614334106445
+
+min_min_attack_simclr_return_loss_tensor: 6.631773948669434
+
+min_min_attack_simclr_return_loss_tensor: 6.6365251541137695
+6.623914003372192
+
+min_min_attack_simclr_return_loss_tensor: 6.73103141784668
+
+min_min_attack_simclr_return_loss_tensor: 6.734466552734375
+
+min_min_attack_simclr_return_loss_tensor: 6.717379570007324
+
+min_min_attack_simclr_return_loss_tensor: 6.7531280517578125
+
+min_min_attack_simclr_return_loss_tensor: 6.650338649749756
+
+min_min_attack_simclr_return_loss_tensor: 6.608699321746826
+6.597947597503662
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.640788555145264
+
+min_min_attack_simclr_return_loss_tensor: 6.646934509277344
+
+min_min_attack_simclr_return_loss_tensor: 6.638022422790527
+
+min_min_attack_simclr_return_loss_tensor: 6.675182819366455
+
+min_min_attack_simclr_return_loss_tensor: 6.650765895843506
+
+min_min_attack_simclr_return_loss_tensor: 6.661054611206055
+6.5688865184783936
+
+min_min_attack_simclr_return_loss_tensor: 6.634661674499512
+
+min_min_attack_simclr_return_loss_tensor: 6.64525032043457
+
+min_min_attack_simclr_return_loss_tensor: 6.732765197753906
+
+min_min_attack_simclr_return_loss_tensor: 6.684948444366455
+
+min_min_attack_simclr_return_loss_tensor: 6.671443939208984
+
+min_min_attack_simclr_return_loss_tensor: 6.691709518432617
+6.63277006149292
+
+min_min_attack_simclr_return_loss_tensor: 6.68289852142334
+
+min_min_attack_simclr_return_loss_tensor: 6.780149459838867
+
+min_min_attack_simclr_return_loss_tensor: 6.697979927062988
+
+min_min_attack_simclr_return_loss_tensor: 6.683735370635986
+
+min_min_attack_simclr_return_loss_tensor: 6.667084693908691
+
+min_min_attack_simclr_return_loss_tensor: 6.686686038970947
+6.570318698883057
+
+min_min_attack_simclr_return_loss_tensor: 6.689874172210693
+
+min_min_attack_simclr_return_loss_tensor: 6.7037200927734375
+
+min_min_attack_simclr_return_loss_tensor: 6.645973205566406
+
+min_min_attack_simclr_return_loss_tensor: 6.686093330383301
+
+min_min_attack_simclr_return_loss_tensor: 6.675135612487793
+
+min_min_attack_simclr_return_loss_tensor: 6.7569780349731445
+6.589230537414551
+
+min_min_attack_simclr_return_loss_tensor: 6.71824836730957
+
+min_min_attack_simclr_return_loss_tensor: 6.685650825500488
+
+min_min_attack_simclr_return_loss_tensor: 6.660772323608398
+
+min_min_attack_simclr_return_loss_tensor: 6.67015266418457
+
+min_min_attack_simclr_return_loss_tensor: 6.702498435974121
+
+min_min_attack_simclr_return_loss_tensor: 6.669227123260498
+6.597470998764038
+
+min_min_attack_simclr_return_loss_tensor: 6.599355697631836
+
+min_min_attack_simclr_return_loss_tensor: 6.608625411987305
+
+min_min_attack_simclr_return_loss_tensor: 6.600124835968018
+
+min_min_attack_simclr_return_loss_tensor: 6.662881851196289
+
+min_min_attack_simclr_return_loss_tensor: 6.647802829742432
+
+min_min_attack_simclr_return_loss_tensor: 6.617409706115723
+6.564379930496216
+
+min_min_attack_simclr_return_loss_tensor: 6.725264549255371
+
+min_min_attack_simclr_return_loss_tensor: 6.726566791534424
+
+min_min_attack_simclr_return_loss_tensor: 6.589868545532227
+
+min_min_attack_simclr_return_loss_tensor: 6.588942050933838
+
+min_min_attack_simclr_return_loss_tensor: 6.576513767242432
+
+min_min_attack_simclr_return_loss_tensor: 6.586358070373535
+6.626854658126831
+
+min_min_attack_simclr_return_loss_tensor: 6.5930585861206055
+
+min_min_attack_simclr_return_loss_tensor: 6.580367565155029
+
+min_min_attack_simclr_return_loss_tensor: 6.599511623382568
+
+min_min_attack_simclr_return_loss_tensor: 6.609271049499512
+
+min_min_attack_simclr_return_loss_tensor: 6.635562419891357
+
+min_min_attack_simclr_return_loss_tensor: 6.584381103515625
+6.604564666748047
+
+min_min_attack_simclr_return_loss_tensor: 6.624046325683594
+
+min_min_attack_simclr_return_loss_tensor: 6.653962135314941
+
+min_min_attack_simclr_return_loss_tensor: 6.6340789794921875
+
+min_min_attack_simclr_return_loss_tensor: 6.667393684387207
+
+min_min_attack_simclr_return_loss_tensor: 6.609362602233887
+
+min_min_attack_simclr_return_loss_tensor: 6.638352394104004
+6.581037282943726
+
+min_min_attack_simclr_return_loss_tensor: 6.590099334716797
+
+min_min_attack_simclr_return_loss_tensor: 6.708652496337891
+
+min_min_attack_simclr_return_loss_tensor: 6.751150608062744
+
+min_min_attack_simclr_return_loss_tensor: 6.725903511047363
+
+min_min_attack_simclr_return_loss_tensor: 6.623011112213135
+
+min_min_attack_simclr_return_loss_tensor: 6.698150157928467
+6.6019792556762695
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.7627363204956055
+
+min_min_attack_simclr_return_loss_tensor: 6.733036041259766
+
+min_min_attack_simclr_return_loss_tensor: 6.613256454467773
+
+min_min_attack_simclr_return_loss_tensor: 6.625552654266357
+
+min_min_attack_simclr_return_loss_tensor: 6.641199111938477
+
+min_min_attack_simclr_return_loss_tensor: 6.663227081298828
+6.587791204452515
+
+min_min_attack_simclr_return_loss_tensor: 6.596502304077148
+
+min_min_attack_simclr_return_loss_tensor: 6.631954193115234
+
+min_min_attack_simclr_return_loss_tensor: 6.583663463592529
+
+min_min_attack_simclr_return_loss_tensor: 6.582640171051025
+
+min_min_attack_simclr_return_loss_tensor: 6.553628921508789
+
+min_min_attack_simclr_return_loss_tensor: 6.673388481140137
+6.5813140869140625
+
+min_min_attack_simclr_return_loss_tensor: 6.608263969421387
+
+min_min_attack_simclr_return_loss_tensor: 6.601238250732422
+
+min_min_attack_simclr_return_loss_tensor: 6.5612568855285645
+
+min_min_attack_simclr_return_loss_tensor: 6.640535831451416
+
+min_min_attack_simclr_return_loss_tensor: 6.574418067932129
+
+min_min_attack_simclr_return_loss_tensor: 6.550656795501709
+6.554968595504761
+
+min_min_attack_simclr_return_loss_tensor: 6.501428604125977
+
+min_min_attack_simclr_return_loss_tensor: 6.566162109375
+
+min_min_attack_simclr_return_loss_tensor: 6.555792808532715
+
+min_min_attack_simclr_return_loss_tensor: 6.627507209777832
+
+min_min_attack_simclr_return_loss_tensor: 6.634840488433838
+
+min_min_attack_simclr_return_loss_tensor: 6.611051082611084
+6.576910734176636
+
+min_min_attack_simclr_return_loss_tensor: 6.636107921600342
+
+min_min_attack_simclr_return_loss_tensor: 6.63184928894043
+
+min_min_attack_simclr_return_loss_tensor: 6.77209997177124
+
+min_min_attack_simclr_return_loss_tensor: 6.734280109405518
+
+min_min_attack_simclr_return_loss_tensor: 6.66524076461792
+
+min_min_attack_simclr_return_loss_tensor: 6.6847052574157715
+6.564889907836914
+
+min_min_attack_simclr_return_loss_tensor: 6.690990447998047
+
+min_min_attack_simclr_return_loss_tensor: 6.745378017425537
+
+min_min_attack_simclr_return_loss_tensor: 6.635087013244629
+
+min_min_attack_simclr_return_loss_tensor: 6.59218692779541
+
+min_min_attack_simclr_return_loss_tensor: 6.604409217834473
+
+min_min_attack_simclr_return_loss_tensor: 6.592556953430176
+6.566582679748535
+
+min_min_attack_simclr_return_loss_tensor: 6.546236991882324
+
+min_min_attack_simclr_return_loss_tensor: 6.521249771118164
+
+min_min_attack_simclr_return_loss_tensor: 6.635430812835693
+
+min_min_attack_simclr_return_loss_tensor: 6.59968376159668
+
+min_min_attack_simclr_return_loss_tensor: 6.596924781799316
+
+min_min_attack_simclr_return_loss_tensor: 6.61933708190918
+6.545240879058838
+
+min_min_attack_simclr_return_loss_tensor: 6.584446907043457
+
+min_min_attack_simclr_return_loss_tensor: 6.602198600769043
+
+min_min_attack_simclr_return_loss_tensor: 6.615972518920898
+
+min_min_attack_simclr_return_loss_tensor: 6.616438865661621
+
+min_min_attack_simclr_return_loss_tensor: 6.612003326416016
+
+min_min_attack_simclr_return_loss_tensor: 6.608421325683594
+6.506110668182373
+
+min_min_attack_simclr_return_loss_tensor: 6.683185577392578
+
+min_min_attack_simclr_return_loss_tensor: 6.673091888427734
+
+min_min_attack_simclr_return_loss_tensor: 6.594545364379883
+
+min_min_attack_simclr_return_loss_tensor: 6.697274208068848
+
+min_min_attack_simclr_return_loss_tensor: 6.606802940368652
+
+min_min_attack_simclr_return_loss_tensor: 6.575296401977539
+6.610706329345703
+
+min_min_attack_simclr_return_loss_tensor: 6.631961822509766
+
+min_min_attack_simclr_return_loss_tensor: 6.62238073348999
+
+min_min_attack_simclr_return_loss_tensor: 6.599274635314941
+
+min_min_attack_simclr_return_loss_tensor: 6.650247573852539
+
+min_min_attack_simclr_return_loss_tensor: 6.568798542022705
+
+min_min_attack_simclr_return_loss_tensor: 6.636316776275635
+6.55509090423584
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.600451469421387
+
+min_min_attack_simclr_return_loss_tensor: 6.614500999450684
+
+min_min_attack_simclr_return_loss_tensor: 6.645355224609375
+
+min_min_attack_simclr_return_loss_tensor: 6.691986560821533
+
+min_min_attack_simclr_return_loss_tensor: 6.648857116699219
+
+min_min_attack_simclr_return_loss_tensor: 6.670953273773193
+6.540586709976196
+
+min_min_attack_simclr_return_loss_tensor: 6.690242767333984
+
+min_min_attack_simclr_return_loss_tensor: 6.670637130737305
+
+min_min_attack_simclr_return_loss_tensor: 6.697132110595703
+
+min_min_attack_simclr_return_loss_tensor: 6.7054290771484375
+
+min_min_attack_simclr_return_loss_tensor: 6.69486141204834
+
+min_min_attack_simclr_return_loss_tensor: 6.689747333526611
+6.566732883453369
+
+min_min_attack_simclr_return_loss_tensor: 6.602033615112305
+
+min_min_attack_simclr_return_loss_tensor: 6.578915596008301
+
+min_min_attack_simclr_return_loss_tensor: 6.609288215637207
+
+min_min_attack_simclr_return_loss_tensor: 6.599624156951904
+
+min_min_attack_simclr_return_loss_tensor: 6.560614585876465
+
+min_min_attack_simclr_return_loss_tensor: 6.654723167419434
+6.575202226638794
+
+min_min_attack_simclr_return_loss_tensor: 6.591614723205566
+
+min_min_attack_simclr_return_loss_tensor: 6.646998405456543
+
+min_min_attack_simclr_return_loss_tensor: 6.6606669425964355
+
+min_min_attack_simclr_return_loss_tensor: 6.663524150848389
+
+min_min_attack_simclr_return_loss_tensor: 6.64423131942749
+
+min_min_attack_simclr_return_loss_tensor: 6.687376499176025
+6.5251405239105225
+
+min_min_attack_simclr_return_loss_tensor: 6.646049976348877
+
+min_min_attack_simclr_return_loss_tensor: 6.750655651092529
+
+min_min_attack_simclr_return_loss_tensor: 6.6759748458862305
+
+min_min_attack_simclr_return_loss_tensor: 6.7381391525268555
+
+min_min_attack_simclr_return_loss_tensor: 6.6856489181518555
+
+min_min_attack_simclr_return_loss_tensor: 6.731165885925293
+6.54056978225708
+
+min_min_attack_simclr_return_loss_tensor: 6.62337589263916
+
+min_min_attack_simclr_return_loss_tensor: 6.5710248947143555
+
+min_min_attack_simclr_return_loss_tensor: 6.5901780128479
+
+min_min_attack_simclr_return_loss_tensor: 6.653680801391602
+
+min_min_attack_simclr_return_loss_tensor: 6.584001541137695
+
+min_min_attack_simclr_return_loss_tensor: 6.593816757202148
+6.507258653640747
+
+min_min_attack_simclr_return_loss_tensor: 6.602921485900879
+
+min_min_attack_simclr_return_loss_tensor: 6.605169773101807
+
+min_min_attack_simclr_return_loss_tensor: 6.56744909286499
+
+min_min_attack_simclr_return_loss_tensor: 6.658000469207764
+
+min_min_attack_simclr_return_loss_tensor: 6.655466556549072
+
+min_min_attack_simclr_return_loss_tensor: 6.629895210266113
+6.504090070724487
+
+min_min_attack_simclr_return_loss_tensor: 6.554813385009766
+
+min_min_attack_simclr_return_loss_tensor: 6.570777893066406
+
+min_min_attack_simclr_return_loss_tensor: 6.587074279785156
+
+min_min_attack_simclr_return_loss_tensor: 6.547215461730957
+
+min_min_attack_simclr_return_loss_tensor: 6.5193986892700195
+
+min_min_attack_simclr_return_loss_tensor: 6.531503200531006
+6.564639091491699
+
+min_min_attack_simclr_return_loss_tensor: 6.539033889770508
+
+min_min_attack_simclr_return_loss_tensor: 6.51353120803833
+
+min_min_attack_simclr_return_loss_tensor: 6.515347480773926
+
+min_min_attack_simclr_return_loss_tensor: 6.532688140869141
+
+min_min_attack_simclr_return_loss_tensor: 6.4984025955200195
+
+min_min_attack_simclr_return_loss_tensor: 6.5496063232421875
+6.500636100769043
+
+min_min_attack_simclr_return_loss_tensor: 6.571484565734863
+
+min_min_attack_simclr_return_loss_tensor: 6.587837219238281
+
+min_min_attack_simclr_return_loss_tensor: 6.559568405151367
+
+min_min_attack_simclr_return_loss_tensor: 6.58090353012085
+
+min_min_attack_simclr_return_loss_tensor: 6.606427192687988
+
+min_min_attack_simclr_return_loss_tensor: 6.575766086578369
+6.5102503299713135
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.602599620819092
+
+min_min_attack_simclr_return_loss_tensor: 6.685117721557617
+
+min_min_attack_simclr_return_loss_tensor: 6.551236152648926
+
+min_min_attack_simclr_return_loss_tensor: 6.631015777587891
+
+min_min_attack_simclr_return_loss_tensor: 6.5584716796875
+
+min_min_attack_simclr_return_loss_tensor: 6.518847465515137
+6.487813949584961
+
+min_min_attack_simclr_return_loss_tensor: 6.555930137634277
+
+min_min_attack_simclr_return_loss_tensor: 6.633047103881836
+
+min_min_attack_simclr_return_loss_tensor: 6.544034004211426
+
+min_min_attack_simclr_return_loss_tensor: 6.539480209350586
+
+min_min_attack_simclr_return_loss_tensor: 6.545257568359375
+
+min_min_attack_simclr_return_loss_tensor: 6.54259729385376
+6.515066146850586
+
+min_min_attack_simclr_return_loss_tensor: 6.559804916381836
+
+min_min_attack_simclr_return_loss_tensor: 6.555049419403076
+
+min_min_attack_simclr_return_loss_tensor: 6.566125869750977
+
+min_min_attack_simclr_return_loss_tensor: 6.575671672821045
+
+min_min_attack_simclr_return_loss_tensor: 6.5059661865234375
+
+min_min_attack_simclr_return_loss_tensor: 6.570982933044434
+6.486612319946289
+
+min_min_attack_simclr_return_loss_tensor: 6.517291069030762
+
+min_min_attack_simclr_return_loss_tensor: 6.509064197540283
+
+min_min_attack_simclr_return_loss_tensor: 6.478761672973633
+
+min_min_attack_simclr_return_loss_tensor: 6.476169586181641
+
+min_min_attack_simclr_return_loss_tensor: 6.509275436401367
+
+min_min_attack_simclr_return_loss_tensor: 6.511491775512695
+6.502976894378662
+
+min_min_attack_simclr_return_loss_tensor: 6.456722259521484
+
+min_min_attack_simclr_return_loss_tensor: 6.45920991897583
+
+min_min_attack_simclr_return_loss_tensor: 6.510715007781982
+
+min_min_attack_simclr_return_loss_tensor: 6.5604753494262695
+
+min_min_attack_simclr_return_loss_tensor: 6.526645183563232
+
+min_min_attack_simclr_return_loss_tensor: 6.544641494750977
+6.476407766342163
+
+min_min_attack_simclr_return_loss_tensor: 6.552240371704102
+
+min_min_attack_simclr_return_loss_tensor: 6.547332286834717
+
+min_min_attack_simclr_return_loss_tensor: 6.556175231933594
+
+min_min_attack_simclr_return_loss_tensor: 6.609675407409668
+
+min_min_attack_simclr_return_loss_tensor: 6.555702209472656
+
+min_min_attack_simclr_return_loss_tensor: 6.567229747772217
+6.519412040710449
+
+min_min_attack_simclr_return_loss_tensor: 6.563381671905518
+
+min_min_attack_simclr_return_loss_tensor: 6.543590545654297
+
+min_min_attack_simclr_return_loss_tensor: 6.5355634689331055
+
+min_min_attack_simclr_return_loss_tensor: 6.52117919921875
+
+min_min_attack_simclr_return_loss_tensor: 6.508740425109863
+
+min_min_attack_simclr_return_loss_tensor: 6.53796911239624
+6.492051124572754
+
+min_min_attack_simclr_return_loss_tensor: 6.528696060180664
+
+min_min_attack_simclr_return_loss_tensor: 6.468149185180664
+
+min_min_attack_simclr_return_loss_tensor: 6.548144340515137
+
+min_min_attack_simclr_return_loss_tensor: 6.557353973388672
+
+min_min_attack_simclr_return_loss_tensor: 6.530592441558838
+
+min_min_attack_simclr_return_loss_tensor: 6.5414886474609375
+6.509439945220947
+
+min_min_attack_simclr_return_loss_tensor: 6.543924331665039
+
+min_min_attack_simclr_return_loss_tensor: 6.5402727127075195
+
+min_min_attack_simclr_return_loss_tensor: 6.5427069664001465
+
+min_min_attack_simclr_return_loss_tensor: 6.550423622131348
+
+min_min_attack_simclr_return_loss_tensor: 6.548079490661621
+
+min_min_attack_simclr_return_loss_tensor: 6.53591251373291
+6.449589729309082
+
+min_min_attack_simclr_return_loss_tensor: 6.542313575744629
+
+min_min_attack_simclr_return_loss_tensor: 6.582361221313477
+
+min_min_attack_simclr_return_loss_tensor: 6.517908573150635
+
+min_min_attack_simclr_return_loss_tensor: 6.544506549835205
+
+min_min_attack_simclr_return_loss_tensor: 6.515429496765137
+
+min_min_attack_simclr_return_loss_tensor: 6.541116714477539
+6.467431545257568
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.505642414093018
+
+min_min_attack_simclr_return_loss_tensor: 6.558221817016602
+
+min_min_attack_simclr_return_loss_tensor: 6.456164836883545
+
+min_min_attack_simclr_return_loss_tensor: 6.533573150634766
+
+min_min_attack_simclr_return_loss_tensor: 6.480687141418457
+
+min_min_attack_simclr_return_loss_tensor: 6.520415306091309
+6.4607133865356445
+
+min_min_attack_simclr_return_loss_tensor: 6.496667385101318
+
+min_min_attack_simclr_return_loss_tensor: 6.529181480407715
+
+min_min_attack_simclr_return_loss_tensor: 6.5742082595825195
+
+min_min_attack_simclr_return_loss_tensor: 6.523972511291504
+
+min_min_attack_simclr_return_loss_tensor: 6.533008575439453
+
+min_min_attack_simclr_return_loss_tensor: 6.519210338592529
+6.497606992721558
+
+min_min_attack_simclr_return_loss_tensor: 6.592803001403809
+
+min_min_attack_simclr_return_loss_tensor: 6.607295036315918
+
+min_min_attack_simclr_return_loss_tensor: 6.4715986251831055
+
+min_min_attack_simclr_return_loss_tensor: 6.511068344116211
+
+min_min_attack_simclr_return_loss_tensor: 6.451284408569336
+
+min_min_attack_simclr_return_loss_tensor: 6.524195671081543
+6.4683074951171875
+
+min_min_attack_simclr_return_loss_tensor: 6.550610542297363
+
+min_min_attack_simclr_return_loss_tensor: 6.515057563781738
+
+min_min_attack_simclr_return_loss_tensor: 6.602060317993164
+
+min_min_attack_simclr_return_loss_tensor: 6.552556991577148
+
+min_min_attack_simclr_return_loss_tensor: 6.558126449584961
+
+min_min_attack_simclr_return_loss_tensor: 6.556206703186035
+6.479138612747192
+
+min_min_attack_simclr_return_loss_tensor: 6.494643688201904
+
+min_min_attack_simclr_return_loss_tensor: 6.51993465423584
+
+min_min_attack_simclr_return_loss_tensor: 6.463462829589844
+
+min_min_attack_simclr_return_loss_tensor: 6.474581241607666
+
+min_min_attack_simclr_return_loss_tensor: 6.466971397399902
+
+min_min_attack_simclr_return_loss_tensor: 6.573983192443848
+6.487364053726196
+
+min_min_attack_simclr_return_loss_tensor: 6.505694389343262
+
+min_min_attack_simclr_return_loss_tensor: 6.499563217163086
+
+min_min_attack_simclr_return_loss_tensor: 6.577243804931641
+
+min_min_attack_simclr_return_loss_tensor: 6.561234474182129
+
+min_min_attack_simclr_return_loss_tensor: 6.572620868682861
+
+min_min_attack_simclr_return_loss_tensor: 6.532978534698486
+6.467153787612915
+
+min_min_attack_simclr_return_loss_tensor: 6.527626037597656
+
+min_min_attack_simclr_return_loss_tensor: 6.456335067749023
+
+min_min_attack_simclr_return_loss_tensor: 6.507240295410156
+
+min_min_attack_simclr_return_loss_tensor: 6.460064888000488
+
+min_min_attack_simclr_return_loss_tensor: 6.480620384216309
+
+min_min_attack_simclr_return_loss_tensor: 6.5105390548706055
+6.492326259613037
+
+min_min_attack_simclr_return_loss_tensor: 6.5063066482543945
+
+min_min_attack_simclr_return_loss_tensor: 6.510419845581055
+
+min_min_attack_simclr_return_loss_tensor: 6.5184712409973145
+
+min_min_attack_simclr_return_loss_tensor: 6.525566101074219
+
+min_min_attack_simclr_return_loss_tensor: 6.498351097106934
+
+min_min_attack_simclr_return_loss_tensor: 6.573225975036621
+6.498676776885986
+
+min_min_attack_simclr_return_loss_tensor: 6.572032928466797
+
+min_min_attack_simclr_return_loss_tensor: 6.532310962677002
+
+min_min_attack_simclr_return_loss_tensor: 6.522753715515137
+
+min_min_attack_simclr_return_loss_tensor: 6.595309734344482
+
+min_min_attack_simclr_return_loss_tensor: 6.5309648513793945
+
+min_min_attack_simclr_return_loss_tensor: 6.560210704803467
+6.461230993270874
+
+min_min_attack_simclr_return_loss_tensor: 6.508182525634766
+
+min_min_attack_simclr_return_loss_tensor: 6.590455055236816
+
+min_min_attack_simclr_return_loss_tensor: 6.5311808586120605
+
+min_min_attack_simclr_return_loss_tensor: 6.527012825012207
+
+min_min_attack_simclr_return_loss_tensor: 6.523052215576172
+
+min_min_attack_simclr_return_loss_tensor: 6.573298454284668
+6.469048976898193
+model saved at unlearnable_20211031144635_0.5_512_1000
+
+min_min_attack_simclr_return_loss_tensor: 6.583930015563965
+
+min_min_attack_simclr_return_loss_tensor: 6.562283515930176
+
+min_min_attack_simclr_return_loss_tensor: 6.488443851470947
+
+min_min_attack_simclr_return_loss_tensor: 6.505924224853516
+
+min_min_attack_simclr_return_loss_tensor: 6.474697113037109
+
+min_min_attack_simclr_return_loss_tensor: 6.589217185974121
+6.4642558097839355
+
+min_min_attack_simclr_return_loss_tensor: 6.489526748657227
+
+min_min_attack_simclr_return_loss_tensor: 6.522122383117676
+
+min_min_attack_simclr_return_loss_tensor: 6.479889869689941
+
+min_min_attack_simclr_return_loss_tensor: 6.473693370819092
+
+min_min_attack_simclr_return_loss_tensor: 6.509937286376953
+
+min_min_attack_simclr_return_loss_tensor: 6.476605415344238
+6.460944652557373
+
+min_min_attack_simclr_return_loss_tensor: 6.461804389953613
+
+min_min_attack_simclr_return_loss_tensor: 6.446295738220215
+
+min_min_attack_simclr_return_loss_tensor: 6.540536880493164
+
+min_min_attack_simclr_return_loss_tensor: 6.517147064208984
+
+min_min_attack_simclr_return_loss_tensor: 6.529275417327881
+
+min_min_attack_simclr_return_loss_tensor: 6.5430216789245605
+6.462667226791382
+
+min_min_attack_simclr_return_loss_tensor: 6.508929252624512
+
+min_min_attack_simclr_return_loss_tensor: 6.506137371063232
+
+min_min_attack_simclr_return_loss_tensor: 6.563943862915039
+
+min_min_attack_simclr_return_loss_tensor: 6.556302547454834
+
+min_min_attack_simclr_return_loss_tensor: 6.5116682052612305
+
+min_min_attack_simclr_return_loss_tensor: 6.495739459991455
+6.412084102630615
+
+min_min_attack_simclr_return_loss_tensor: 6.481807708740234
+
+min_min_attack_simclr_return_loss_tensor: 6.491332054138184
+
+min_min_attack_simclr_return_loss_tensor: 6.480548858642578
+
+min_min_attack_simclr_return_loss_tensor: 6.469210147857666
+
+min_min_attack_simclr_return_loss_tensor: 6.446994781494141
+
+min_min_attack_simclr_return_loss_tensor: 6.450406551361084
+6.463444232940674
+
+min_min_attack_simclr_return_loss_tensor: 6.468006134033203
+
+min_min_attack_simclr_return_loss_tensor: 6.508584976196289
+
+min_min_attack_simclr_return_loss_tensor: 6.478667259216309
+
+min_min_attack_simclr_return_loss_tensor: 6.493378639221191
+
+min_min_attack_simclr_return_loss_tensor: 6.437055587768555
+
+min_min_attack_simclr_return_loss_tensor: 6.429961681365967
+6.406740188598633
+
+min_min_attack_simclr_return_loss_tensor: 6.433867931365967
+
+min_min_attack_simclr_return_loss_tensor: 6.4591875076293945
+
+min_min_attack_simclr_return_loss_tensor: 6.433012008666992
+
+min_min_attack_simclr_return_loss_tensor: 6.480071544647217
+
+min_min_attack_simclr_return_loss_tensor: 6.452271461486816
+
+min_min_attack_simclr_return_loss_tensor: 6.478601455688477
+6.430917739868164
+
+min_min_attack_simclr_return_loss_tensor: 6.492114543914795
+
+min_min_attack_simclr_return_loss_tensor: 6.481658458709717
+
+min_min_attack_simclr_return_loss_tensor: 6.4463605880737305
+
+min_min_attack_simclr_return_loss_tensor: 6.431591033935547
+
+min_min_attack_simclr_return_loss_tensor: 6.44659423828125
+
+min_min_attack_simclr_return_loss_tensor: 6.441381931304932
+6.424098253250122
+
+min_min_attack_simclr_return_loss_tensor: 6.4741950035095215
+
+min_min_attack_simclr_return_loss_tensor: 6.404804229736328
+
+min_min_attack_simclr_return_loss_tensor: 6.502840042114258
+
+min_min_attack_simclr_return_loss_tensor: 6.471271514892578
+
+min_min_attack_simclr_return_loss_tensor: 6.430925369262695
+
+min_min_attack_simclr_return_loss_tensor: 6.49040412902832
+6.464695453643799

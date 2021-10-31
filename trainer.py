@@ -2,6 +2,7 @@ import time
 import models
 import torch
 import util
+from utils import train_diff_transform, train_diff_transform2, train_diff_transform3
 
 if torch.cuda.is_available():
     device = torch.device('cuda')
@@ -29,7 +30,7 @@ class Trainer():
         self.acc_meters = util.AverageMeter()
         self.acc5_meters = util.AverageMeter()
 
-    def train(self, epoch, model, criterion, optimizer, random_noise=None):
+    def train(self, epoch, model, criterion, optimizer, random_noise=None, diff_sug=False):
         model.train()
         for i, (images, labels) in enumerate(self.data_loader[self.target]):
             images, labels = images.to(device, non_blocking=True), labels.to(device, non_blocking=True)
@@ -39,6 +40,9 @@ class Trainer():
                     class_index = labels[i].item()
                     images[i] += random_noise[class_index].clone()
                     images[i] = torch.clamp(images[i], 0, 1)
+            if diff_sug:
+                # print("check diff_aug")
+                images = train_diff_transform3(images)
             start = time.time()
             log_payload = self.train_batch(images, labels, model, optimizer)
             end = time.time()

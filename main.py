@@ -1,7 +1,7 @@
 import argparse
 import datetime
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import shutil
 import time
 import numpy as np
@@ -81,7 +81,7 @@ def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evalu
         logger.info("="*20 + "Training Epoch %d" % (epoch) + "="*20)
 
         # Train
-        ENV['global_step'] = trainer.train(epoch, model, criterion, optimizer)
+        ENV['global_step'] = trainer.train(epoch, model, criterion, optimizer, diff_sug=True)
         ENV['train_history'].append(trainer.acc_meters.avg*100)
         scheduler.step()
 

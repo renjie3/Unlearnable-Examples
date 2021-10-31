@@ -1,0 +1,23 @@
+Train unlearnable simclr with differentiable data augmentation. Larger step 3.2
+python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --min_min_attack_fn eot_v2
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+The whole epochs are 151
+6.774198881129629
+6.64872569644574
+6.5347923396788925
+6.453051753879822
+6.396089711140111
+6.354315364483705
+6.317725388045163
+6.282692456982799
+6.259967513920105
+6.241187646216953
+model saved at unlearnable_20211025030744_0.5_512_151
+6.224369226042757
+6.202418750094385
+6.189027997636304

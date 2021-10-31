@@ -4,9 +4,13 @@ MY_JOB_ROOT_PATH=`pwd`
 # echo $MY_JOB_ROOT_PATH
 cd $MY_JOB_ROOT_PATH
 
-JOB_INFO="Train unlearnable simclr with differentiable data augmentation. Larger step 3.2"
+JOB_INFO="New small dataset"
 
-MYCOMMEND="python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 1 --step_size 6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 151 --no_save"
+MYCOMMEND="python3 ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 1 --epochs 1000 --min_min_attack_fn neg --strong_aug"
+
+# JOB_INFO="Retrain SimCLR to test the transferability."
+
+# MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18"
 
 cat ./slurm_files/sconfigs1.sb > submit.sb
 echo "JOB_INFO=\"${JOB_INFO}\"" >> submit.sb
