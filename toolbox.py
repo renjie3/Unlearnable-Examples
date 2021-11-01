@@ -277,6 +277,55 @@ class PerturbationTool():
         # print("=0:", np.sum(eta.cpu().numpy() == 0))
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+    
+    def min_min_attack_simclr_return_loss_tensor_model_group(self, pos_samples_1, pos_samples_2, labels, model_group, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot"):
+    # after verified that using perturb as variable to train is working 
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            for idx_model, model in enumerate(model_group):
+                model.zero_grad()
+            # perturb.retain_grad()
+            # loss.backward()
+            loss = 0
+            for model in model_group:
+                if target_task == "non_eot":
+                    loss += train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug)
+                else:
+                    loss += train_simclr_noise_return_loss_tensor_target_task(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, target_task)
+            perturb.retain_grad()
+            loss.backward()
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0] * len(model_group)
+
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            sign_print = perturb.grad.data.sign() * (-1)
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            # diff_eta = eta1 - eta2
+            # print(diff_eta.cpu().numpy())
+            eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
+            perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+            perturb_img2 = pos_samples_2.data + perturb
+            perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+            print("min_min_attack_simclr_return_loss_tensor:", loss.item())
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
     def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True):
     # v1 means it can repeat min_min_attack many times serially and average the results.
