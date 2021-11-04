@@ -1,0 +1,37 @@
+2021-11-04 19:16:01,678 PyTorch Version: 1.7.1
+2021-11-04 19:16:01,684 GPU List: ['Tesla V100S-PCIE-32GB', 'Tesla V100S-PCIE-32GB', 'Tesla V100S-PCIE-32GB', 'Tesla V100S-PCIE-32GB']
+2021-11-04 19:16:01,690 num_classes: 10
+2021-11-04 19:16:01,690 epochs: 60
+2021-11-04 19:16:01,691 grad_clip: 5.0
+2021-11-04 19:16:01,691 log_frequency: 100
+2021-11-04 19:16:01,691 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-11-04 19:16:01,691 criterion: {'name': 'CrossEntropyLoss'}
+2021-11-04 19:16:01,691 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-11-04 19:16:01,692 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 60, 'eta_min': 0.0}
+2021-11-04 19:16:01,692 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-11-04 19:16:01,693 seed: 0
+2021-11-04 19:16:01,693 version: resnet18
+2021-11-04 19:16:01,693 exp_name: path/to/your/experiment/folder
+2021-11-04 19:16:01,694 config_path: configs/cifar10
+2021-11-04 19:16:01,694 load_model: False
+2021-11-04 19:16:01,694 data_parallel: False
+2021-11-04 19:16:01,694 train_batch_size: 512
+2021-11-04 19:16:01,694 eval_batch_size: 512
+2021-11-04 19:16:01,695 num_of_workers: 8
+2021-11-04 19:16:01,695 train_data_type: CIFAR-10
+2021-11-04 19:16:01,695 train_data_path: ../datasets
+2021-11-04 19:16:01,695 test_data_type: CIFAR10
+2021-11-04 19:16:01,695 test_data_path: ../datasets
+2021-11-04 19:16:01,696 universal_train_portion: 0.2
+2021-11-04 19:16:01,696 universal_stop_error: 0.1
+2021-11-04 19:16:01,696 universal_train_target: train_subset
+2021-11-04 19:16:01,696 train_step: 10
+2021-11-04 19:16:01,696 use_subset: True
+2021-11-04 19:16:01,696 attack_type: min-min
+2021-11-04 19:16:01,697 perturb_type: classwise
+2021-11-04 19:16:01,697 patch_location: center
+2021-11-04 19:16:01,697 noise_shape: [10, 3, 32, 32]
+2021-11-04 19:16:01,697 epsilon: 0.03137254901960784
+2021-11-04 19:16:01,697 num_steps: 1
+2021-11-04 19:16:01,697 step_size: 0.0031372549019607846
+2021-11-04 19:16:01,698 random_start: False
