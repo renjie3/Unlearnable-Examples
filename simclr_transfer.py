@@ -5,14 +5,20 @@ parser.add_argument('--temperature', default=0.5, type=float, help='Temperature 
 parser.add_argument('--k', default=200, type=int, help='Top k most similar images used to predict the label')
 parser.add_argument('--batch_size', default=512, type=int, help='Number of images in each mini-batch')
 parser.add_argument('--epochs', default=500, type=int, help='Number of sweeps over the dataset to train')
+parser.add_argument('--perturbation_budget', default=32.0, type=float, help='perturbation_budget')
 parser.add_argument('--arch', default='resnet18', type=str, help='The backbone of encoder')
-parser.add_argument('--local_dev', action='store_true', default=False)
+parser.add_argument('--local_dev', default='', type=str, help='The gpu number used on developing node.')
+parser.add_argument('--class_4', action='store_true', default=False)
+parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
+parser.add_argument('--pre_load_name', default='', type=str, help='The backbone of encoder')
+parser.add_argument('--samplewise', action='store_true', default=False)
+parser.add_argument('--orglabel', action='store_true', default=False)
 
 # args parse
 args = parser.parse_args()
 import os
-if args.local_dev:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+if args.local_dev != '':
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.local_dev
 import sys
 
 import numpy as np
@@ -26,7 +32,7 @@ from tqdm import tqdm
 
 import utils
 from model import Model
-from utils import train_diff_transform, train_diff_transform2
+from utils import train_diff_transform
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -41,7 +47,7 @@ def train(net, data_loader, train_optimizer):
     total_loss, total_num, train_bar = 0.0, 0, tqdm(data_loader)
     for pos_1, pos_2, target in train_bar:
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-        pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
+        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
         feature_1, out_1 = net(pos_1)
         feature_2, out_2 = net(pos_2)
         # [2*B, D]
@@ -402,18 +408,38 @@ if __name__ == '__main__':
     # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
     # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
     #                           drop_last=True)
-    pre_load_name = "unlearnable_20211025164521_0.5_512_151"
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path='noise_class_label.npy', perturbation_budget=2.0)
+
+
+    if args.pre_load_name == '':
+        raise("Use pre_load_name.")
+    else:
+        pre_load_name = args.pre_load_name
+    
+    class_4 = args.class_4
+    perturbation_budget = args.perturbation_budget
+    samplewise_perturb = args.samplewise
+    if class_4:
+        random_noise_class_path = 'noise_class_label_1024_4class.npy'
+        save_name_pre = pre_load_name + "_budget{}_class4".format(perturbation_budget)
+    else:
+        random_noise_class_path = 'noise_class_label.npy'
+        save_name_pre = pre_load_name + "_budget{}_class10".format(perturbation_budget)
+
+    if args.orglabel:
+        save_name_pre += '_orglabel'
+    print(save_name_pre)
+
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel)
+    # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
     # load noise here:
     # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
-    # random_noise_class = np.load('noise_class_label.npy')
+    # random_noise_class = np.load('noise_class_label_1024_4class.npy')
     # train_data.make_unlearnable(random_noise_class, pretrained_classwise_noise)
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
-                              drop_last=True)
+    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
     # sys.exit()
-    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
+    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=class_4)
     memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
-    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True)
+    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=class_4)
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
     # print(type(train_data))
@@ -428,20 +454,25 @@ if __name__ == '__main__':
     c = len(memory_data.classes)
 
     # training loop
-    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}
-    save_name_pre = '{}_{}_{}_{}_{}'.format(feature_dim, temperature, k, batch_size, epochs)
+    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_acc': [], 'best_acc_loss': []}
+    save_name_pre = '{}_retrain_model'.format(save_name_pre)
     if not os.path.exists('results'):
         os.mkdir('results')
     best_acc = 0.0
+    best_acc_loss = 10
     for epoch in range(1, epochs + 1):
         train_loss = train(model, train_loader, optimizer)
         results['train_loss'].append(train_loss)
         test_acc_1, test_acc_5 = test_ssl_for_simclrpy(model, memory_loader, test_loader)
         results['test_acc@1'].append(test_acc_1)
         results['test_acc@5'].append(test_acc_5)
+        if test_acc_1 > best_acc:
+            best_acc = test_acc_1
+            best_acc_loss = train_loss
+            torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
+        results['best_acc'].append(best_acc)
+        results['best_acc_loss'].append(best_acc_loss)
+
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch + 1))
         data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
-        if test_acc_1 > best_acc:
-            best_acc = test_acc_1
-            torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))

@@ -1,0 +1,51 @@
+/mnt/home/renjie3/miniconda3/envs/simclr/lib/python3.7/site-packages/thop/utils.py:1: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import Iterable
+2021-11-05 17:29:52,347 PyTorch Version: 1.7.1
+2021-11-05 17:29:52,402 GPU List: ['Tesla K80']
+2021-11-05 17:29:52,409 num_classes: 10
+2021-11-05 17:29:52,409 epochs: 300
+2021-11-05 17:29:52,410 grad_clip: 5.0
+2021-11-05 17:29:52,410 log_frequency: 100
+2021-11-05 17:29:52,410 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-11-05 17:29:52,411 criterion: {'name': 'CrossEntropyLoss'}
+2021-11-05 17:29:52,411 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-11-05 17:29:52,412 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-11-05 17:29:52,412 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-11-05 17:29:52,414 seed: 0
+2021-11-05 17:29:52,415 version: resnet18
+2021-11-05 17:29:52,415 exp_name: my_experiments/class_wise_cifar10_random_assign_8_10_0.8
+2021-11-05 17:29:52,416 config_path: configs/cifar10
+2021-11-05 17:29:52,416 load_model: False
+2021-11-05 17:29:52,416 data_parallel: False
+2021-11-05 17:29:52,417 train_batch_size: 512
+2021-11-05 17:29:52,417 eval_batch_size: 512
+2021-11-05 17:29:52,418 num_of_workers: 8
+2021-11-05 17:29:52,418 train_data_type: CIFAR10
+2021-11-05 17:29:52,419 train_data_path: ../datasets
+2021-11-05 17:29:52,419 test_data_type: CIFAR10
+2021-11-05 17:29:52,419 test_data_path: ../datasets
+2021-11-05 17:29:52,420 universal_train_portion: 0.2
+2021-11-05 17:29:52,420 universal_stop_error: 0.1
+2021-11-05 17:29:52,420 universal_train_target: 'train_dataset'
+2021-11-05 17:29:52,421 train_step: 10
+2021-11-05 17:29:52,421 use_subset: False
+2021-11-05 17:29:52,422 attack_type: min-min
+2021-11-05 17:29:52,422 perturb_type: classwise
+2021-11-05 17:29:52,423 patch_location: center
+2021-11-05 17:29:52,423 noise_shape: [10, 3, 32, 32]
+2021-11-05 17:29:52,423 epsilon: 0.03137254901960784
+2021-11-05 17:29:52,423 num_steps: 10
+2021-11-05 17:29:52,424 step_size: 0.0031372549019607846
+2021-11-05 17:29:52,424 random_start: False
+2021-11-05 17:29:52,425 job_id: 103482142
+2021-11-05 17:29:52,425 local_dev: 
+2021-11-05 17:30:04,132 param size = 11.173962MB
+2021-11-05 17:30:06,426 ====================Searching Universal Perturbation====================
+Traceback (most recent call last):
+  File "perturbation.py", line 494, in <module>
+    main()
+  File "perturbation.py", line 480, in main
+    noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
+  File "perturbation.py", line 199, in universal_perturbation
+    for i, (images, labels) in tqdm(enumerate(data_loader[args.universal_train_target]), total=len(data_loader[args.universal_train_target])):
+KeyError: "'train_dataset'"

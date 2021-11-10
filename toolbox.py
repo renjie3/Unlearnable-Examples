@@ -34,35 +34,61 @@ class PerturbationTool():
             opt = torch.optim.SGD([perturb_img], lr=1e-3)
             opt.zero_grad()
             model.zero_grad()
-            aug_perturb_img = train_diff_transform(perturb_img)
             if isinstance(criterion, torch.nn.CrossEntropyLoss):
                 if hasattr(model, 'classify'):
                     model.classify = True
-                logits = model(aug_perturb_img)
+                logits = model(perturb_img)
                 loss = criterion(logits, labels)
             else:
-                logits, loss = criterion(model, aug_perturb_img, labels, optimizer)
+                logits, loss = criterion(model, perturb_img, labels, optimizer)
             perturb_img.retain_grad()
             loss.backward()
             eta = self.step_size * perturb_img.grad.data.sign() * (-1)
-            # sign_print = perturb_img.grad.data.sign() * (-1)
-            # print("+:", np.sum(sign_print.cpu().numpy()[0] == 1))
-            # print("-:", np.sum(sign_print.cpu().numpy()[0] == -1))
-            # print("0:", np.sum(sign_print.cpu().numpy()[0] == 0))
             perturb_img = Variable(perturb_img.data + eta, requires_grad=True)
             eta = torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon)
             perturb_img = Variable(images.data + eta, requires_grad=True)
             perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
-        #     print(loss.item())
-        # input()
-        # print(eta.cpu().numpy()[0])
-        # print(eta.shape)
-        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
-        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
-        # print(">0:", np.sum(eta.cpu().numpy() > 0))
-        # print("<0:", np.sum(eta.cpu().numpy() < 0))
 
         return perturb_img, eta, loss.item()
+
+    def feature_space_distribution_attack(self, group_model, images, target_feature_space, random_noise):
+        # if random_noise is None:
+        #     random_noise = torch.FloatTensor(*images.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+        # model.eval()
+        # for param in model.parameters():
+        #     param.requires_grad = False
+        criterion = torch.nn.MSELoss(reduce=True, size_average=True)
+        group_feature = []
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img = torch.clamp(perturb + images.data, 0, 1)
+        for step_idx in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            loss = 0
+
+            # Here MSE loss between feature space (1) random_initialized_model(perturbation+images) (2) well_trained_simclr(images)
+            for model in group_model:
+                model.eval()
+                for param in model.parameters():
+                    param.requires_grad = False
+                model.zero_grad()
+                feature_perturb, _ = model(perturb_img)
+                if step_idx == 0:
+                    group_feature.append(feature_perturb)
+                loss += criterion(feature_perturb, target_feature_space)
+
+            perturb.retain_grad()
+            loss.backward()
+            eta = self.step_size * perturb.grad.data.sign() * (-1)
+            perturb_img = perturb_img.data + eta
+            perturb = Variable(torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon), requires_grad=True)
+            perturb_img = images.data + perturb
+            perturb_img = torch.clamp(perturb_img, 0, 1)
+            # print("feature_space_distribution_attack:", loss.item())
+        # input()
+
+        return perturb_img, perturb, loss.item(), group_feature
 
     def min_min_attack_noise_variable(self, images, labels, model, optimizer, criterion, random_noise=None, sample_wise=False):
         if random_noise is None:
@@ -278,7 +304,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
     
-    def min_min_attack_simclr_return_loss_tensor_model_group(self, pos_samples_1, pos_samples_2, labels, model_group, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot"):
+    def min_min_attack_simclr_return_loss_tensor_model_group(self, pos_samples_1, pos_samples_2, labels, model_group, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", step_size_schedule=8.0 / 255.0):
     # after verified that using perturb as variable to train is working 
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -308,7 +334,8 @@ class PerturbationTool():
             train_loss_batch_sum += train_loss_batch * perturb.shape[0]
             train_loss_batch_count += perturb.shape[0] * len(model_group)
 
-            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            print("step_size_schedule", step_size_schedule)
+            eta_step = step_size_schedule * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
             sign_print = perturb.grad.data.sign() * (-1)
             perturb_img1 = perturb_img1.data + eta_step
             eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)

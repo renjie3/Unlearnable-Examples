@@ -34,9 +34,20 @@ class Evaluator():
         self.confusion_matrix = torch.zeros(self.config.num_classes, self.config.num_classes)
         return
 
-    def eval(self, epoch, model):
+    def eval(self, epoch, model, random_noise=None):
         model.eval()
         for i, (images, labels) in enumerate(self.data_loader["test_dataset"]):
+            # if random_noise is not None:
+                # # print("random_noise.shape", random_noise.shape)
+                # random_noise_torch = torch.tensor(random_noise.copy()).detach().to(images.device)
+                # # print(random_noise.shape)
+                # random_noise_torch = random_noise_torch.permute(0, 3, 2, 1)
+                # # print("print check1", images.shape)
+                # # print("print check2", random_noise.shape)
+                # for idx in range(len(labels)):
+                #     class_index = labels[idx].item()
+                #     images[idx] += random_noise_torch[class_index].clone()
+                #     images[idx] = torch.clamp(images[idx], 0, 1)
             start = time.time()
             log_payload = self.eval_batch(images=images, labels=labels, model=model)
             end = time.time()

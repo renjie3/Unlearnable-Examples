@@ -1,31 +1,4 @@
 import argparse
-import collections
-import datetime
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-import shutil
-import time
-import dataset
-import mlconfig
-import toolbox
-import torch
-import util
-import madrys
-import numpy as np
-from evaluator import Evaluator
-from tqdm import tqdm
-from trainer import Trainer
-import sys
-
-import utils
-import datetime
-from model import Model
-import pandas as pd
-import torch.optim as optim
-from torch.utils.data import DataLoader
-from simclr import test_ssl, train_simclr, test_ssl_visualization
-mlconfig.register(madrys.MadrysLoss)
-
 # General Options
 parser = argparse.ArgumentParser(description='ClasswiseNoise')
 parser.add_argument('--seed', type=int, default=0, help='seed')
@@ -63,9 +36,39 @@ parser.add_argument('--k', default=200, type=int, help='Top k most similar image
 parser.add_argument('--batch_size', default=512, type=int, help='Number of images in each mini-batch')
 parser.add_argument('--epochs', default=500, type=int, help='Number of sweeps over the dataset to train')
 parser.add_argument('--arch', default='resnet18', type=str, help='The backbone of encoder')
+parser.add_argument('--local_dev', default='', type=str, help='The gpu number used on developing node.')
 parser.add_argument('--noise_num', default='10', type=int, help='The number of categories of misleading noise')
 parser.add_argument('--model_parameters_path', default='./my_model_parameters', type=str, help='The path to save model parameters')
 args = parser.parse_args()
+
+import collections
+import datetime
+import os
+if args.local_dev != '':
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.local_dev
+import shutil
+import time
+import dataset
+import mlconfig
+import toolbox
+import torch
+import util
+import madrys
+import numpy as np
+from evaluator import Evaluator
+from tqdm import tqdm
+from trainer import Trainer
+import sys
+
+import utils
+import datetime
+from model import Model
+import pandas as pd
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from simclr import test_ssl, train_simclr, test_ssl_visualization
+mlconfig.register(madrys.MadrysLoss)
+from thop import profile, clever_format
 
 # Convert Eps
 args.epsilon = args.epsilon / 255
@@ -521,19 +524,19 @@ def main():
     #     logger.info("File %s loaded!" % (checkpoint_path_file))
 
     # data prepare
-    random_noise_class = np.load('noise_class_label.npy')
-    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
-    # we have to change the target randomly to give the noise a label
-    train_data.replace_random_noise_class(random_noise_class)
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=16, pin_memory=True, drop_last=True)
-    train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
-    train_noise_data.replace_random_noise_class(random_noise_class)
-    train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
+    # random_noise_class = np.load('noise_class_label.npy')
+    # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
+    # # we have to change the target randomly to give the noise a label
+    # train_data.replace_random_noise_class(random_noise_class)
+    # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=16, pin_memory=True, drop_last=True)
+    # train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
+    # train_noise_data.replace_random_noise_class(random_noise_class)
+    # train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
     # test data don't have to change the target. by renjie3
-    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
-    memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
-    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
-    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
+    # memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
+    # memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
+    # test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
+    # test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
 
     noise_generator = toolbox.PerturbationTool(epsilon=args.epsilon,
                                                num_steps=args.num_steps,
@@ -541,18 +544,23 @@ def main():
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
-    # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    # flops, params = clever_format([flops, params])
-    # print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+    flops, params = clever_format([flops, params])
+    print('# Model Params: {} FLOPs: {}'.format(params, flops))
     # load pre-trained model parameters here by renjie3.
     # unlearnable_20211011011237_0.5_512_150
-    pre_load_name = "unlearnable_20211011003354_0.5_512_150"
-    pretrained_model_path = "./results/{}_checkpoint_model.pth".format(pre_load_name)
+    # unlearnable_36176425_20211102011903_0.5_512_1000_statistics
+    pre_load_name = "differentiable_20211102231654_0.5_200_512"
+    pretrained_model_path = "./results/{}_model.pth".format(pre_load_name)
     model.load_state_dict(torch.load(pretrained_model_path))
-    # load noise here:
-    pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
-    c = len(memory_data.classes)
+    perturbation_budget = 16
+    # # load noise here:
+    # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name)).mul(perturbation_budget)
+    # random_noise_class_path = 'noise_class_label_test.npy'
+
+    # train_data = utils.TransferCIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=False)
+    # optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    # c = len(memory_data.classes)
 
     # training loop
     # results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}
@@ -594,14 +602,16 @@ def main():
             # noise, save_name_pre = universal_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k)
             # save_name_pre = ''
             # create new test dataset
-            test_data_visualization = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True)
+            # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
+            test_data_visualization = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True, class_4=True)
             # test_data_visualization_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
             # load model here:
             random_noise_class_test = np.load('noise_class_label_test.npy')
             # load noise here:
-            # pretrained_classwise_noise = None
+            pretrained_classwise_noise = None
             # test_visualization
-            test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise)
+            test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise, pre_load_name+"retrain", True)
+            # test_ssl_visualization(model, train_data, None, None, pre_load_name)
 
         # torch.save(noise, os.path.join(args.exp_name, save_name_pre+'_perturbation.pt'))
         

@@ -4,7 +4,7 @@ import torchvision
 from torchvision import transforms
 from torchvision.datasets import CIFAR10
 import numpy as np
-from dataset import patch_noise_extend_to_img
+# from dataset import patch_noise_extend_to_img
 
 import random
 import matplotlib.pyplot as plt
@@ -22,8 +22,32 @@ if torch.cuda.is_available():
 else:
     device = torch.device('cpu')
 
+ToTensor_transform = transforms.Compose([
+    transforms.ToTensor(),
+])
 
-class CIFAR10Pair(CIFAR10):
+def patch_noise_extend_to_img(noise, image_size=[32, 32, 3], patch_location='center'):
+    h, w, c = image_size[0], image_size[1], image_size[2]
+    mask = np.zeros((h, w, c), np.float32)
+    x_len, y_len = noise.shape[0], noise.shape[1]
+
+    if patch_location == 'center' or (h == w == x_len == y_len):
+        x = h // 2
+        y = w // 2
+    elif patch_location == 'random':
+        x = np.random.randint(x_len // 2, w - x_len // 2)
+        y = np.random.randint(y_len // 2, h - y_len // 2)
+    else:
+        raise('Invalid patch location')
+
+    x1 = np.clip(x - x_len // 2, 0, h)
+    x2 = np.clip(x + x_len // 2, 0, h)
+    y1 = np.clip(y - y_len // 2, 0, w)
+    y2 = np.clip(y + y_len // 2, 0, w)
+    mask[x1: x2, y1: y2, :] = noise
+    return mask
+
+class RandomLabelCIFAR10(CIFAR10):
     """CIFAR10 Dataset.
     """
 
@@ -36,16 +60,86 @@ class CIFAR10Pair(CIFAR10):
         download: bool = False,
     ) -> None:
 
-        super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
-        sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
-        with open(sampled_filepath, "rb") as f:
-            sampled_data = pickle.load(f)
+        super(RandomLabelCIFAR10, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+
         if train:
-            self.data = sampled_data["train_data"]
-            self.targets = sampled_data["train_targets"]
+            random_noise_class = np.load("/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/noise_class_label.npy")
         else:
-            self.data = sampled_data["test_data"]
-            self.targets = sampled_data["test_targets"]
+            random_noise_class = np.load("/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/noise_class_label_test.npy")
+            # my_perturb = torch.load("my_experiments/class_wise_cifar10_diff_simclr_aug/perturbation.pt")
+
+            # noise_255 = my_perturb.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+
+            # self.data = self.data.astype(np.float32)
+
+            # if len(self.data) == random_noise_class.shape[0]:
+            #     for i in range(len(self.targets)):
+            #         self.data[i] += noise_255[random_noise_class[i]]
+            #         self.data[i] = np.clip(self.data[i], a_min=0, a_max=255)
+            # else:
+            #     raise('Add noise to data failed. Because the length is not consistent.')
+
+            # self.data = self.data.astype(np.uint8)
+
+        
+        if len(self.targets) == random_noise_class.shape[0]:
+            for i in range(len(self.targets)):
+                # print(self.targets[i], random_noise_class[i])
+                self.targets[i] = random_noise_class[i]
+        else:
+            raise('Replacing data noise class failed. Because the length is not consistent.')
+
+class SampledCIFAR10(CIFAR10):
+    """Sample 4 class * 256 pictures from CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        class_4: bool = True,
+    ) -> None:
+
+        super(SampledCIFAR10, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        if class_4:
+            sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+            with open(sampled_filepath, "rb") as f:
+                sampled_data = pickle.load(f)
+            if train:
+                self.data = sampled_data["train_data"]
+                self.targets = sampled_data["train_targets"]
+            else:
+                self.data = sampled_data["test_data"]
+                self.targets = sampled_data["test_targets"]
+
+class CIFAR10Pair(CIFAR10):
+    """CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        class_4: bool = True,
+    ) -> None:
+
+        super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        if class_4:
+            sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+            with open(sampled_filepath, "rb") as f:
+                sampled_data = pickle.load(f)
+            if train:
+                self.data = sampled_data["train_data"]
+                self.targets = sampled_data["train_targets"]
+            else:
+                self.data = sampled_data["test_data"]
+                self.targets = sampled_data["test_targets"]
 
     def __getitem__(self, index):
         img, target = self.data[index], self.targets[index]
@@ -75,19 +169,36 @@ class CIFAR10Pair(CIFAR10):
     def add_noise_test_visualization(self, random_noise_class_test, noise):
         # print(noise.shape)
         # print(self.data[0][0][0])
-        noise_255 = noise.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        noise_255 = noise.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        org_data = self.data
+        # print(org_data[0])
         self.data = self.data.astype(np.float32)
 
         if len(self.data) == random_noise_class_test.shape[0]:
             for i in range(len(self.targets)):
-                # print(noise_255[random_noise_class_test[i]].cpu().numpy()[0][0])
+                # print(noise_255[random_noise_class_test[i]][0][0])
                 # print(self.data[i][0][0])
                 # print(self.targets[i], random_noise_class[i])
                 self.data[i] += noise_255[random_noise_class_test[i]]
+                self.data[i] = np.clip(self.data[i], a_min=0, a_max=255)
         else:
             raise('Add noise to data failed. Because the length is not consistent.')
 
         self.data = self.data.astype(np.uint8)
+        # print("org_data[0]", org_data[0,0,28])
+        # print("self.data[0]", self.data[0,0,28])
+        # for i in range(len(org_data[0,0])):
+        #     print(i, np.mean(org_data[0,0,i] - self.data[0,0,i]))
+        # print(np.mean(org_data.astype(np.float32) - self.data.astype(np.float32)))
+        # input()
+
+        # self.data = self.data.astype(np.float32)
+        # for idx in range(len(self.data)):
+        #     noise = self.noise_255[self.targets[idx]]
+        #     noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+        #     self.data[idx] = self.data[idx] + noise
+        #     self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+        # self.data = self.data.astype(np.uint8)
 
 
 class SameImgCIFAR10Pair(CIFAR10):
@@ -166,7 +277,7 @@ class PoisonCIFAR10Pair(CIFAR10):
             self.targets = sampled_data["test_targets"]
         
         self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
-        self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         self.data = self.data.astype(np.float32)
         for idx in range(len(self.data)):
             noise = self.perturb_tensor[self.targets[idx]]
@@ -204,7 +315,7 @@ class PoisonCIFAR10Pair(CIFAR10):
     
     def add_noise_test_visualization(self, random_noise_class_test, noise):
 
-        noise_255 = noise.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        noise_255 = noise.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         self.data = self.data.astype(np.float32)
         if len(self.data) == random_noise_class_test.shape[0]:
             for i in range(len(self.targets)):
@@ -217,22 +328,23 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
 
-        sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
-        with open(sampled_filepath, "rb") as f:
-            sampled_data = pickle.load(f)
-        if train:
-            self.data = sampled_data["train_data"]
-            self.targets = sampled_data["train_targets"]
-        else:
-            self.data = sampled_data["test_data"]
-            self.targets = sampled_data["test_targets"]
+        if class_4:
+            sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+            with open(sampled_filepath, "rb") as f:
+                sampled_data = pickle.load(f)
+            if train:
+                self.data = sampled_data["train_data"]
+                self.targets = sampled_data["train_targets"]
+            else:
+                self.data = sampled_data["test_data"]
+                self.targets = sampled_data["test_targets"]
 
         if perturb_tensor_filepath != None:
             self.perturb_tensor = torch.load(perturb_tensor_filepath)
-            self.noise_255 = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+            self.noise_255 = self.perturb_tensor.mul(255*perturbation_budget).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         else:
             self.perturb_tensor = None
 
@@ -244,28 +356,37 @@ class TransferCIFAR10Pair(CIFAR10):
         self.perturbation_budget = perturbation_budget
 
     # random_noise_class = np.load('noise_class_label.npy')
-    #     self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
-    #     self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
-    #     self.data = self.data.astype(np.float32)
-    #     for idx in range(len(self.data)):
-    #         noise = self.perturb_tensor[self.targets[idx]]
-    #         noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
-    #         self.data[idx] = self.data[idx] + noise
-    #         self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
-    #     self.data = self.data.astype(np.uint8)
+        # self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
+        # self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        self.data = self.data.astype(np.float32)
+        for idx in range(len(self.data)):
+            if not samplewise_perturb:
+                if org_label_flag:
+                    noise = self.noise_255[self.targets[idx]]
+                else:
+                    noise = self.noise_255[self.random_noise_class[idx]]
+            else:
+                noise = self.noise_255[idx]
+                # print("check it goes samplewise.")
+            noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+            self.data[idx] = self.data[idx] + noise
+            self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+        self.data = self.data.astype(np.uint8)
 
 
     def __getitem__(self, index):
         img, target = self.data[index], self.targets[index]
-        # print(img.shape)
+        # print(img[0][0])
         img = Image.fromarray(img)
         # print("np.shape(img)", np.shape(img))
 
         if self.transform is not None:
             # print(self.perturb_tensor[self.random_noise_class[index]][0][0])
             # print("self.transform(img)", self.transform(img).shape)
-            pos_1 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
-            pos_2 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
+            # pos_1 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
+            # pos_2 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
+            pos_1 = torch.clamp(self.transform(img), 0, 1)
+            pos_2 = torch.clamp(self.transform(img), 0, 1)
 
         if self.target_transform is not None:
             target = self.target_transform(target)
@@ -286,7 +407,7 @@ class TransferCIFAR10Pair(CIFAR10):
     
     def make_unlearnable(self, random_noise_class, noise):
 
-        noise_255 = noise.mul(255).clamp_(0, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        noise_255 = noise.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         self.data = self.data.astype(np.float32)
         if len(self.data) == random_noise_class.shape[0]:
             for i in range(len(self.targets)):
@@ -299,6 +420,93 @@ class TransferCIFAR10Pair(CIFAR10):
             raise('Making data unlearnable failed. Because the length is not consistent.')
 
         self.data = self.data.astype(np.uint8)
+
+
+# class TransferFloatCIFAR10Pair(CIFAR10):
+#     """CIFAR10 Dataset.
+#     """
+#     def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0):
+#         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
+
+#         sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+#         with open(sampled_filepath, "rb") as f:
+#             sampled_data = pickle.load(f)
+#         if train:
+#             self.data = sampled_data["train_data"]
+#             self.targets = sampled_data["train_targets"]
+#         else:
+#             self.data = sampled_data["test_data"]
+#             self.targets = sampled_data["test_targets"]
+
+#         if perturb_tensor_filepath != None:
+#             self.perturb_tensor = torch.load(perturb_tensor_filepath)
+#             self.noise_255 = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+#         else:
+#             self.perturb_tensor = None
+
+#         if random_noise_class_path != None:
+#             self.random_noise_class = np.load(random_noise_class_path)
+#         else:
+#             self.random_noise_class = None
+        
+#         self.perturbation_budget = perturbation_budget
+
+#     # random_noise_class = np.load('noise_class_label.npy')
+#         # self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
+#         # self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+#         # self.data = self.data.astype(np.float32)
+#         # for idx in range(len(self.data)):
+#         #     noise = self.noise_255[self.targets[idx]]
+#         #     noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+#         #     self.data[idx] = self.data[idx] + noise
+#         #     self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+#         # self.data = self.data.astype(np.uint8)
+
+
+#     def __getitem__(self, index):
+#         img, target = self.data[index], self.targets[index]
+#         # print(img[0][0])
+#         img = Image.fromarray(img)
+#         # print("np.shape(img)", np.shape(img))
+
+#         if self.transform is not None:
+#             # print(self.perturb_tensor[self.random_noise_class[index]][0][0])
+#             # print("self.transform(img)", self.transform(img).shape)
+#             pos_1 = torch.clamp(self.transform((ToTensor_transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget).to('cpu').numpy()), 0, 1)
+#             pos_2 = torch.clamp(self.transform((ToTensor_transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget).to('cpu').numpy()), 0, 1)
+
+#         if self.target_transform is not None:
+#             target = self.target_transform(target)
+
+#         return pos_1, pos_2, target
+
+#     def replace_random_noise_class(self, random_noise_class):
+#         # print('length of targets is ', len(self.targets))
+#         # print(random_noise_class.shape)
+#         # for i in range(10):
+#         #     print(i, np.sum(random_noise_class == i))
+#         if len(self.targets) == random_noise_class.shape[0]:
+#             for i in range(len(self.targets)):
+#                 # print(self.targets[i], random_noise_class[i])
+#                 self.targets[i] = random_noise_class[i]
+#         else:
+#             raise('Replacing data noise class failed. Because the length is not consistent.')
+    
+#     def make_unlearnable(self, random_noise_class, noise):
+
+#         noise_255 = noise.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+#         self.data = self.data.astype(np.float32)
+#         if len(self.data) == random_noise_class.shape[0]:
+#             for i in range(len(self.targets)):
+#                 # print("data:", self.data[i][0])
+#                 # print("noise:", noise_255[random_noise_class[i]][0])
+#                 self.data[i] += noise_255[random_noise_class[i]]
+#                 # input()
+#             print("Making data unlearnable done")
+#         else:
+#             raise('Making data unlearnable failed. Because the length is not consistent.')
+
+#         self.data = self.data.astype(np.uint8)
 
 train_transform = transforms.Compose([
     transforms.RandomResizedCrop(32),
@@ -313,10 +521,6 @@ test_transform = transforms.Compose([
     transforms.ToTensor(),
     # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
     ])
-
-ToTensor_transform = transforms.Compose([
-    transforms.ToTensor(),
-])
 
 train_diff_transform = nn.Sequential(
     Kaug.RandomResizedCrop([32,32]),

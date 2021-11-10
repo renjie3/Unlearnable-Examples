@@ -42,6 +42,7 @@ parser.add_argument('--min_min_attack_fn', default="non_eot", type=str, help='Th
 parser.add_argument('--strong_aug', action='store_true', default=False)
 parser.add_argument('--local_dev', action='store_true', default=False)
 parser.add_argument('--no_save', action='store_true', default=False)
+parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
 args = parser.parse_args()
 
 
@@ -50,7 +51,7 @@ import datetime
 
 import os
 if args.local_dev:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import shutil
 import time
@@ -180,7 +181,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
     # Class-Wise perturbation
     # Generate Data loader
 
-    print(random_noise)
+    print(random_noise * 255)
 
     # # training loop
     # results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}
@@ -207,7 +208,10 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
     save_image_num = args.save_image_num
     print("The whole epochs are {}".format(epochs))
     results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": []}
-    save_name_pre = 'unlearnable_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
+    if args.job_id == '':
+        save_name_pre = 'unlearnable_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
+    else:
+        save_name_pre = 'unlearnable_{}_{}_{}_{}'.format(args.job_id, temperature, batch_size, epochs)
     if not os.path.exists('results'):
         os.mkdir('results')
     best_loss = 10000000
@@ -640,6 +644,21 @@ def main():
             random_noise = noise_generator.random_noise(noise_shape=args.noise_shape)
         else:
             random_noise = torch.zeros(*args.noise_shape)
+        pre_load_name = "unlearnable_103343532_20211103085614_0.5_512_1000"
+        perturb_tensor_filepath = "./results/{}_checkpoint_perturbation.pt".format(pre_load_name)
+        random_noise = torch.load(perturb_tensor_filepath).to('cpu').numpy()
+
+        random_noise_255 = random_noise*255
+        # print(type(random_noise))
+
+        print("+:", np.sum(random_noise_255 > 4))
+        print("-:", np.sum(random_noise_255 < -4))
+        print("all:", np.sum(random_noise_255 < 1000))
+        # print(">0:", np.sum(random_noise_255 > 0))
+        # print("<0:", np.sum(random_noise_255 < 0))
+
+        # print(random_noise*255)
+        input()
         if args.perturb_type == 'samplewise':
             # noise = sample_wise_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
             pass

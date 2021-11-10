@@ -30,7 +30,7 @@ class Trainer():
         self.acc_meters = util.AverageMeter()
         self.acc5_meters = util.AverageMeter()
 
-    def train(self, epoch, model, criterion, optimizer, random_noise=None, diff_sug=False):
+    def train(self, epoch, model, criterion, optimizer, random_noise=None, diff_sug=True):
         model.train()
         for i, (images, labels) in enumerate(self.data_loader[self.target]):
             images, labels = images.to(device, non_blocking=True), labels.to(device, non_blocking=True)

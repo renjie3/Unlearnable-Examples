@@ -346,7 +346,7 @@ def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, e
     return total_top1 / total_num * 100, total_top5 / total_num * 100
 
 # test for one epoch, use noised image to visualize
-def test_ssl_visualization(net, test_data_visualization, random_noise_class_test, classwise_noise):
+def test_ssl_visualization(net, test_data_visualization, random_noise_class_test, classwise_noise, pre_load_name, flag_test=False):
     net.eval()
     c = 10
     feature_bank = []
@@ -370,70 +370,72 @@ def test_ssl_visualization(net, test_data_visualization, random_noise_class_test
         plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
         ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         ax.yaxis.set_major_formatter(NullFormatter())
-        plt.savefig('./visualization/cleandata_orglabel.png')
+        plt.savefig('./results/{}_cleandata_orglabel.png'.format(pre_load_name))
 
-        test_data_visualization.add_noise_test_visualization(random_noise_class_test, classwise_noise)
+        if flag_test:
 
-        test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
-        # generate feature bank
-        feature_bank = []
-        for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting'):
-            feature, out = net(data.cuda(non_blocking=True))
-            feature_bank.append(feature)
-        # [D, N]
-        feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
-        # [N]
-        # feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=feature_bank.device)
-        noise_labels = random_noise_class_test[:1000]
-        feature_tsne_input = feature_bank.cpu().numpy().transpose()[:1000]
-        # labels_tsne_color = feature_labels.cpu().numpy()[:1000]
-        feature_tsne_output = tsne.fit_transform(feature_tsne_input)
-        fig = plt.figure(figsize=(8, 8))
-        ax = fig.add_subplot(1, 1, 1)
-        plt.title("noise data with original label")
-        plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
-        ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
-        ax.yaxis.set_major_formatter(NullFormatter())
-        plt.savefig('./visualization/noisedata_orglabel.png')
+            test_data_visualization.add_noise_test_visualization(random_noise_class_test, classwise_noise)
 
-        fig = plt.figure(figsize=(8, 8))
-        ax = fig.add_subplot(1, 1, 1)
-        plt.title("noise data with noise label")
-        plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=noise_labels, cmap=plt.cm.Spectral)
-        ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
-        ax.yaxis.set_major_formatter(NullFormatter())
-        plt.savefig('./visualization/noisedata_noiselabel.png')
-
-        for i in range(10):
-            index_group = np.where(labels_tsne_color==i)
-            # # labels_tsne_color_group = labels_tsne_color[index_group]
-            # # noise_labels_group = noise_labels[index_group]
-            # print(type(feature_tsne_output[index_group, 0]))
-            # print(type(feature_tsne_output[:,0]))
-            # print(type(feature_tsne_output[index_group, 1]))
-            # # print(type(noise_labels_group))
-            # print(feature_tsne_output[index_group, 0].shape)
-            # print(feature_tsne_output.shape)
-            # print(feature_tsne_output[index_group, 1].shape)
-            # # print(noise_labels_group.shape)
-
+            test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
+            # generate feature bank
+            feature_bank = []
+            for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting'):
+                feature, out = net(data.cuda(non_blocking=True))
+                feature_bank.append(feature)
+            # [D, N]
+            feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
+            # [N]
+            # feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=feature_bank.device)
+            noise_labels = random_noise_class_test[:1000]
+            feature_tsne_input = feature_bank.cpu().numpy().transpose()[:1000]
+            # labels_tsne_color = feature_labels.cpu().numpy()[:1000]
+            feature_tsne_output = tsne.fit_transform(feature_tsne_input)
             fig = plt.figure(figsize=(8, 8))
             ax = fig.add_subplot(1, 1, 1)
             plt.title("noise data with original label")
-            plt.scatter(feature_tsne_output[:,0][index_group], feature_tsne_output[:,1][index_group], s=10, c=labels_tsne_color[index_group], cmap=plt.cm.Spectral)
+            plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
             ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
             ax.yaxis.set_major_formatter(NullFormatter())
-            plt.savefig('./visualization/noisedata_orglabel_org{}.png'.format(i))
-            plt.close()
+            plt.savefig('./results/{}_noisedata_orglabel.png'.format(pre_load_name))
 
             fig = plt.figure(figsize=(8, 8))
             ax = fig.add_subplot(1, 1, 1)
             plt.title("noise data with noise label")
-            plt.scatter(feature_tsne_output[:,0][index_group], feature_tsne_output[:,1][index_group], s=10, c=noise_labels[index_group], cmap=plt.cm.Spectral)
+            plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=noise_labels, cmap=plt.cm.Spectral)
             ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
             ax.yaxis.set_major_formatter(NullFormatter())
-            plt.savefig('./visualization/noisedata_noiselabel_org{}.png'.format(i))
-            plt.close()
+            plt.savefig('./results/{}_noisedata_noiselabel.png'.format(pre_load_name))
+
+            # for i in range(10):
+            #     index_group = np.where(labels_tsne_color==i)
+            #     # # labels_tsne_color_group = labels_tsne_color[index_group]
+            #     # # noise_labels_group = noise_labels[index_group]
+            #     # print(type(feature_tsne_output[index_group, 0]))
+            #     # print(type(feature_tsne_output[:,0]))
+            #     # print(type(feature_tsne_output[index_group, 1]))
+            #     # # print(type(noise_labels_group))
+            #     # print(feature_tsne_output[index_group, 0].shape)
+            #     # print(feature_tsne_output.shape)
+            #     # print(feature_tsne_output[index_group, 1].shape)
+            #     # # print(noise_labels_group.shape)
+
+            #     fig = plt.figure(figsize=(8, 8))
+            #     ax = fig.add_subplot(1, 1, 1)
+            #     plt.title("noise data with original label")
+            #     plt.scatter(feature_tsne_output[:,0][index_group], feature_tsne_output[:,1][index_group], s=10, c=labels_tsne_color[index_group], cmap=plt.cm.Spectral)
+            #     ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+            #     ax.yaxis.set_major_formatter(NullFormatter())
+            #     plt.savefig('./visualization/noisedata_orglabel_org{}.png'.format(i))
+            #     plt.close()
+
+            #     fig = plt.figure(figsize=(8, 8))
+            #     ax = fig.add_subplot(1, 1, 1)
+            #     plt.title("noise data with noise label")
+            #     plt.scatter(feature_tsne_output[:,0][index_group], feature_tsne_output[:,1][index_group], s=10, c=noise_labels[index_group], cmap=plt.cm.Spectral)
+            #     ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+            #     ax.yaxis.set_major_formatter(NullFormatter())
+            #     plt.savefig('./visualization/noisedata_noiselabel_org{}.png'.format(i))
+            #     plt.close()
 
 
     return 

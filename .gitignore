@@ -10,6 +10,7 @@ plots/
 data/cifar-10-batches-py/
 data/cifar-10-python.tar.gz
 results/
+results_1109_bakup/
 fix_checkpoint/
 path/
 my_experiments/

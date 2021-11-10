@@ -1,23 +1,4 @@
 import argparse
-import collections
-import datetime
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
-import shutil
-import time
-import dataset
-import mlconfig
-import toolbox
-import torch
-import util
-import madrys
-import numpy as np
-from evaluator import Evaluator
-from tqdm import tqdm
-from trainer import Trainer
-from utils import train_diff_transform, train_diff_transform2
-mlconfig.register(madrys.MadrysLoss)
-
 # General Options
 parser = argparse.ArgumentParser(description='ClasswiseNoise')
 parser.add_argument('--seed', type=int, default=0, help='seed')
@@ -31,9 +12,9 @@ parser.add_argument('--train_batch_size', default=512, type=int, help='perturb s
 parser.add_argument('--eval_batch_size', default=512, type=int, help='perturb step size')
 parser.add_argument('--num_of_workers', default=8, type=int, help='workers for loader')
 parser.add_argument('--train_data_type', type=str, default='CIFAR10')
-parser.add_argument('--train_data_path', type=str, default='../datasets')
+parser.add_argument('--train_data_path', type=str, default='./data')
 parser.add_argument('--test_data_type', type=str, default='CIFAR10')
-parser.add_argument('--test_data_path', type=str, default='../datasets')
+parser.add_argument('--test_data_path', type=str, default='./data')
 # Perturbation Options
 parser.add_argument('--universal_train_portion', default=0.2, type=float)
 parser.add_argument('--universal_stop_error', default=0.5, type=float)
@@ -48,7 +29,28 @@ parser.add_argument('--epsilon', default=8, type=float, help='perturbation')
 parser.add_argument('--num_steps', default=1, type=int, help='perturb number of steps')
 parser.add_argument('--step_size', default=0.8, type=float, help='perturb step size')
 parser.add_argument('--random_start', action='store_true', default=False)
+parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
+parser.add_argument('--local_dev', default='', type=str, help='The gpu number used on developing node.')
 args = parser.parse_args()
+import collections
+import datetime
+import os
+if args.local_dev != '':
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.local_dev
+import shutil
+import time
+import dataset
+import mlconfig
+import toolbox
+import torch
+import util
+import madrys
+import numpy as np
+from evaluator import Evaluator
+from tqdm import tqdm
+from trainer import Trainer
+from utils import train_diff_transform, train_diff_transform2
+mlconfig.register(madrys.MadrysLoss)
 
 # Convert Eps
 args.epsilon = args.epsilon / 255
@@ -156,11 +158,12 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
     if args.use_subset:
         data_loader = datasets_generator._split_validation_set(train_portion=args.universal_train_portion,
-                                                               train_shuffle=True, train_drop_last=True)
+                                                               train_shuffle=True, train_drop_last=False)
     else:
-        data_loader = datasets_generator.getDataLoader(train_shuffle=True, train_drop_last=True)
+        data_loader = datasets_generator.getDataLoader(train_shuffle=True, train_drop_last=False)
 
     condition = True
+    print('check1')
     data_iter = iter(data_loader['train_dataset'])
     logger.info('=' * 20 + 'Searching Universal Perturbation' + '=' * 20)
     if hasattr(model, 'classify'):
@@ -179,6 +182,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 images, labels = images.to(device), labels.to(device)
                 # Add Class-wise Noise to each sample
                 train_imgs = []
+                # print('check2')
                 for i, (image, label) in enumerate(zip(images, labels)):
                     noise = random_noise[label.item()]
                     mask_cord, class_noise = noise_generator._patch_noise_extend_to_img(noise, image_size=image.shape, patch_location=args.patch_location)
@@ -190,14 +194,18 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
                 # input differantaible transform
                 input_imgs = train_diff_transform(torch.stack(train_imgs).to(device))
+                # print('check3')
 
                 trainer.train_batch(input_imgs, labels, model, optimizer)
 
         train_noise_loss_sum = 0
+        # print(data_loader[args.universal_train_target])
+        # print(args.universal_train_target)
         for i, (images, labels) in tqdm(enumerate(data_loader[args.universal_train_target]), total=len(data_loader[args.universal_train_target])):
             images, labels, model = images.to(device), labels.to(device), model.to(device)
             # Add Class-wise Noise to each sample
             batch_noise, mask_cord_list = [], []
+            # print('check4')
             for i, (image, label) in enumerate(zip(images, labels)):
                 noise = random_noise[label.item()]
                 mask_cord, class_noise = noise_generator._patch_noise_extend_to_img(noise, image_size=image.shape, patch_location=args.patch_location)
@@ -210,6 +218,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 param.requires_grad = False
 
             batch_noise = torch.stack(batch_noise).to(device)
+            # print('check5')
             if args.attack_type == 'min-min':
                 perturb_img, eta, train_noise_loss = noise_generator.min_min_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
                 # perturb_img, eta = noise_generator.min_min_attack_noise_variable(images, labels, model, optimizer, criterion, random_noise=batch_noise)
@@ -220,6 +229,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 raise('Invalid attack')
 
             class_noise_eta = collections.defaultdict(list)
+            # print('check6')
             for i in range(len(eta)):
                 x1, x2, y1, y2 = mask_cord_list[i]
                 delta = eta[i][:, x1: x2, y1: y2]
@@ -284,10 +294,10 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                                                   seed=args.seed, no_train_augments=True)
 
     if args.train_data_type == 'ImageNetMini' and args.perturb_type == 'samplewise':
-        data_loader = datasets_generator._split_validation_set(0.2, train_shuffle=False, train_drop_last=False)
+        data_loader = datasets_generator._split_validation_set(0.2, train_shuffle=False, train_drop_last=True)
         data_loader['train_dataset'] = data_loader['train_subset']
     else:
-        data_loader = datasets_generator.getDataLoader(train_shuffle=False, train_drop_last=False)
+        data_loader = datasets_generator.getDataLoader(train_shuffle=False, train_drop_last=True)
     mask_cord_list = []
     idx = 0
     for images, labels in data_loader['train_dataset']:

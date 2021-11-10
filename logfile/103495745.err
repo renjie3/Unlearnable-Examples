@@ -1,0 +1,45 @@
+/mnt/home/renjie3/miniconda3/envs/simclr/lib/python3.7/site-packages/thop/utils.py:1: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import Iterable
+2021-11-06 11:01:31,087 PyTorch Version: 1.7.1
+2021-11-06 11:01:31,110 GPU List: ['Tesla V100-SXM2-32GB']
+2021-11-06 11:01:31,113 num_classes: 10
+2021-11-06 11:01:31,114 epochs: 300
+2021-11-06 11:01:31,114 grad_clip: 5.0
+2021-11-06 11:01:31,115 log_frequency: 100
+2021-11-06 11:01:31,115 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-11-06 11:01:31,116 criterion: {'name': 'CrossEntropyLoss'}
+2021-11-06 11:01:31,116 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-11-06 11:01:31,116 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-11-06 11:01:31,117 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+2021-11-06 11:01:31,119 seed: 0
+2021-11-06 11:01:31,119 version: resnet18
+2021-11-06 11:01:31,119 exp_name: my_experiments/class_wise_cifar10_random_assign_32_10_1.6
+2021-11-06 11:01:31,120 config_path: configs/cifar10
+2021-11-06 11:01:31,120 load_model: False
+2021-11-06 11:01:31,120 data_parallel: False
+2021-11-06 11:01:31,121 train_batch_size: 512
+2021-11-06 11:01:31,121 eval_batch_size: 512
+2021-11-06 11:01:31,121 num_of_workers: 8
+2021-11-06 11:01:31,121 train_data_type: CIFAR10
+2021-11-06 11:01:31,122 train_data_path: ../datasets
+2021-11-06 11:01:31,122 test_data_type: CIFAR10
+2021-11-06 11:01:31,122 test_data_path: ../datasets
+2021-11-06 11:01:31,122 universal_train_portion: 0.2
+2021-11-06 11:01:31,123 universal_stop_error: 0.1
+2021-11-06 11:01:31,123 universal_train_target: train_dataset
+2021-11-06 11:01:31,123 train_step: 10
+2021-11-06 11:01:31,123 use_subset: True
+2021-11-06 11:01:31,124 attack_type: min-min
+2021-11-06 11:01:31,124 perturb_type: classwise
+2021-11-06 11:01:31,124 patch_location: center
+2021-11-06 11:01:31,124 noise_shape: [10, 3, 32, 32]
+2021-11-06 11:01:31,125 epsilon: 0.12549019607843137
+2021-11-06 11:01:31,125 num_steps: 10
+2021-11-06 11:01:31,125 step_size: 0.006274509803921569
+2021-11-06 11:01:31,125 random_start: False
+2021-11-06 11:01:31,125 job_id: 103495745
+2021-11-06 11:01:31,126 local_dev: 
+2021-11-06 11:01:35,277 param size = 11.173962MB
+2021-11-06 11:01:38,218 ====================Searching Universal Perturbation====================
+slurmstepd: error: *** JOB 103495745 ON nvl-001 CANCELLED AT 2021-11-06T11:01:43 ***
+  0%|          | 0/97 [00:00<?, ?it/s]

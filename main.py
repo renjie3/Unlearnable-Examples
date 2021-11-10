@@ -75,7 +75,7 @@ for key in config:
 shutil.copyfile(config_file, os.path.join(exp_path, args.version+'.yaml'))
 
 
-def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evaluator, ENV, data_loader):
+def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evaluator, ENV, data_loader, datasets_generator=None):
     for epoch in range(starting_epoch, config.epochs):
         logger.info("")
         logger.info("="*20 + "Training Epoch %d" % (epoch) + "="*20)
@@ -89,7 +89,10 @@ def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evalu
         logger.info("="*20 + "Eval Epoch %d" % (epoch) + "="*20)
         is_best = False
         if not args.train_face:
-            evaluator.eval(epoch, model)
+            if datasets_generator == None:
+                evaluator.eval(epoch, model)
+            else:
+                evaluator.eval(epoch, model, datasets_generator.datasets['train_dataset'].perturb_tensor)
             payload = ('Eval Loss:%.4f\tEval acc: %.2f' % (evaluator.loss_meters.avg, evaluator.acc_meters.avg*100))
             logger.info(payload)
             ENV['eval_history'].append(evaluator.acc_meters.avg*100)
@@ -142,6 +145,7 @@ def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evalu
 
 def main():
     model = config.model().to(device)
+    print(args.test_data_type)
     datasets_generator = config.dataset(train_data_type=args.train_data_type,
                                         train_data_path=args.train_data_path,
                                         test_data_type=args.test_data_type,
@@ -208,7 +212,7 @@ def main():
         model = torch.nn.DataParallel(model)
 
     if args.train:
-        train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evaluator, ENV, data_loader)
+        train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evaluator, ENV, data_loader, datasets_generator)
 
 
 if __name__ == '__main__':

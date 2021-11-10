@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "simclr_transfer.py", line 425, in <module>
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
+  File "/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/utils.py", line 321, in __init__
+    self.perturb_tensor = torch.load(perturb_tensor_filepath)
+  File "/mnt/home/renjie3/miniconda3/envs/simclr/lib/python3.7/site-packages/torch/serialization.py", line 581, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/mnt/home/renjie3/miniconda3/envs/simclr/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/mnt/home/renjie3/miniconda3/envs/simclr/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './results/randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation.pt'
+/var/lib/slurmd/job103499494/slurm_script: line 44: [1: command not found

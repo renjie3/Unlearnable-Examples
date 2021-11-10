@@ -1,0 +1,337 @@
+Retrain SimCLR with perturbation from feature space
+python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 30 --step_size 0.8 --batch_size=512 --model_group 10 --job_id 103522399
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+feature loss:  0.5285885673947632
+feature loss:  0.5224647684954107
+feature loss:  0.5202583218924701
+feature loss:  0.5194686055183411
+feature loss:  0.5190716218203306
+feature loss:  0.5188365331850946
+feature loss:  0.518676633015275
+feature loss:  0.5185590055771172
+feature loss:  0.5184684279374778
+feature loss:  0.5183959230780602
+feature loss:  0.518335625063628
+feature loss:  0.5182849927805364
+feature loss:  0.5182410338893533
+feature loss:  0.5182026321999729
+feature loss:  0.5181686240248382
+feature loss:  0.5181380831636488
+feature loss:  0.5181109621189535
+feature loss:  0.518086239695549
+feature loss:  0.5180639396421611
+feature loss:  0.5180436344817281
+feature loss:  0.5180244692601264
+feature loss:  0.5180066814646125
+feature loss:  0.5179904135875404
+feature loss:  0.5179750481620431
+feature loss:  0.5179607276804745
+feature loss:  0.5179471671581268
+feature loss:  0.5179340341128409
+feature loss:  0.5179216372780502
+feature loss:  0.5179098816588521
+feature loss:  0.5178987672552466
+feature loss:  0.5178881278261542
+feature loss:  0.5178780821152031
+feature loss:  0.5178684163838625
+feature loss:  0.5178592731244862
+feature loss:  0.5178505098447204
+feature loss:  0.5178418653085828
+feature loss:  0.5178338144905865
+feature loss:  0.5178260249085724
+feature loss:  0.5178183065727353
+feature loss:  0.5178113956935704
+feature loss:  0.5178045085631311
+feature loss:  0.5177980726584792
+feature loss:  0.517791660502553
+feature loss:  0.5177855808287859
+feature loss:  0.517779691144824
+feature loss:  0.5177738964557648
+feature loss:  0.5177683630026877
+feature loss:  0.5177628532983363
+feature loss:  0.517757676076144
+feature loss:  0.517752546351403
+feature loss:  0.5177475828677416
+feature loss:  0.5177428568713367
+feature loss:  0.5177383446134627
+feature loss:  0.5177339510992169
+feature loss:  0.5177297000773251
+feature loss:  0.5177254253067076
+feature loss:  0.5177212692797184
+feature loss:  0.5177171370014548
+feature loss:  0.5177131709642708
+feature loss:  0.5177091336809099
+feature loss:  0.5177054051309824
+feature loss:  0.5177017240785062
+feature loss:  0.5176979717798531
+feature loss:  0.5176942194812
+feature loss:  0.5176907046698034
+feature loss:  0.5176871898584068
+feature loss:  0.5176838650368154
+feature loss:  0.5176804927177727
+feature loss:  0.5176773341372609
+feature loss:  0.5176738905720413
+feature loss:  0.5176707794889808
+feature loss:  0.5176679533906281
+feature loss:  0.5176649135537446
+feature loss:  0.5176620399579406
+feature loss:  0.5176590238697827
+feature loss:  0.5176561027765274
+feature loss:  0.5176531341858208
+feature loss:  0.5176502130925655
+feature loss:  0.5176475057378411
+feature loss:  0.5176447271369398
+feature loss:  0.5176421385258436
+feature loss:  0.5176396211609244
+feature loss:  0.5176371512934566
+feature loss:  0.5176345151849091
+feature loss:  0.5176321165636182
+feature loss:  0.5176298366859555
+feature loss:  0.5176274618133903
+feature loss:  0.5176252294331789
+feature loss:  0.5176228783093393
+feature loss:  0.5176206221804023
+feature loss:  0.5176184847950935
+feature loss:  0.5176163236610591
+feature loss:  0.5176141862757504
+feature loss:  0.5176121201366186
+feature loss:  0.5176100302487612
+feature loss:  0.5176081066019833
+feature loss:  0.5176060404628515
+feature loss:  0.517604164313525
+feature loss:  0.517602311912924
+feature loss:  0.5176003882661462
+feature loss:  0.5175987496040761
+feature loss:  0.5175968022085726
+feature loss:  0.5175950923003256
+feature loss:  0.5175934536382556
+feature loss:  0.5175916724838316
+feature loss:  0.517590010073036
+feature loss:  0.5175883476622403
+feature loss:  0.517586590256542
+feature loss:  0.5175849040970206
+feature loss:  0.5175834079273045
+feature loss:  0.5175818880088627
+feature loss:  0.517580296844244
+feature loss:  0.5175787056796253
+feature loss:  0.5175771145150065
+feature loss:  0.5175754996016622
+feature loss:  0.5175740271806717
+feature loss:  0.5175723885186017
+feature loss:  0.5175709635950625
+feature loss:  0.5175694674253464
+feature loss:  0.5175679475069046
+feature loss:  0.5175664038397372
+feature loss:  0.5175648601725698
+feature loss:  0.5175634352490306
+feature loss:  0.5175621528178453
+feature loss:  0.5175606803968549
+feature loss:  0.517559302970767
+feature loss:  0.5175579255446792
+feature loss:  0.5175565956160426
+feature loss:  0.51755540817976
+feature loss:  0.5175539120100439
+feature loss:  0.517552605830133
+feature loss:  0.517551370896399
+feature loss:  0.5175501122139394
+feature loss:  0.5175488535314798
+feature loss:  0.5175475948490202
+feature loss:  0.5175464549101889
+feature loss:  0.5175450537353754
+feature loss:  0.5175438900478184
+feature loss:  0.5175426313653588
+feature loss:  0.5175414914265275
+feature loss:  0.5175403277389705
+feature loss:  0.5175392827950418
+feature loss:  0.5175379291176796
+feature loss:  0.5175370029173791
+feature loss:  0.5175358154810965
+feature loss:  0.5175348180346191
+feature loss:  0.5175337018445134
+feature loss:  0.5175325619056821
+feature loss:  0.5175316357053816
+feature loss:  0.5175305670127273
+feature loss:  0.5175294983200729
+feature loss:  0.5175285008735955
+feature loss:  0.5175273846834898
+feature loss:  0.5175263872370124
+feature loss:  0.5175255085341632
+feature loss:  0.5175244635902345
+feature loss:  0.5175234186463058
+feature loss:  0.5175227061845362
+feature loss:  0.5175216137431562
+feature loss:  0.5175208300352097
+feature loss:  0.5175198088400066
+feature loss:  0.5175189063884318
+feature loss:  0.5175179801881313
+feature loss:  0.5175170777365565
+feature loss:  0.5175160565413535
+feature loss:  0.5175150828436017
+feature loss:  0.5175141091458499
+feature loss:  0.5175133729353547
+feature loss:  0.5175124229863286
+feature loss:  0.5175115917809308
+feature loss:  0.5175106418319046
+feature loss:  0.5175096681341529
+feature loss:  0.517508836928755
+feature loss:  0.5175080057233572
+feature loss:  0.5175071032717824
+feature loss:  0.5175063195638359
+feature loss:  0.5175052983686328
+feature loss:  0.5175045384094119
+feature loss:  0.5175036834552884
+feature loss:  0.5175028522498906
+feature loss:  0.5175018073059618
+feature loss:  0.5175010710954666
+feature loss:  0.5175003348849714
+feature loss:  0.5174994086846709
+feature loss:  0.5174986962229013
+feature loss:  0.5174978175200522
+feature loss:  0.5174970338121057
+feature loss:  0.5174962263554335
+feature loss:  0.5174954426474869
+feature loss:  0.5174944689497352
+feature loss:  0.5174938514828682
+feature loss:  0.5174930915236473
+feature loss:  0.5174922603182495
+feature loss:  0.517491405364126
+feature loss:  0.5174906929023564
+feature loss:  0.5174899804405868
+feature loss:  0.5174892679788172
+feature loss:  0.5174885080195963
+feature loss:  0.5174877718091011
+feature loss:  0.5174871305935085
+feature loss:  0.5174863468855619
+feature loss:  0.5174856819212437
+feature loss:  0.517485040705651
+feature loss:  0.5174843519926071
+feature loss:  0.5174837582744658
+feature loss:  0.5174829983152449
+feature loss:  0.5174823570996523
+feature loss:  0.517481763381511
+feature loss:  0.5174811221659184
+feature loss:  0.5174804334528744
+feature loss:  0.5174797684885561
+feature loss:  0.5174789847806096
+feature loss:  0.5174784623086452
+feature loss:  0.5174778923392296
+feature loss:  0.5174773223698139
+feature loss:  0.517476704902947
+feature loss:  0.5174761586822569
+feature loss:  0.5174754937179387
+feature loss:  0.5174747575074434
+feature loss:  0.5174741875380278
+feature loss:  0.5174736888147891
+feature loss:  0.5174730001017451
+feature loss:  0.5174724301323295
+feature loss:  0.5174718839116395
+feature loss:  0.5174713139422238
+feature loss:  0.517470886465162
+feature loss:  0.5174702927470207
+feature loss:  0.5174697465263307
+feature loss:  0.5174692715518177
+feature loss:  0.517468630336225
+feature loss:  0.5174681316129863
+feature loss:  0.5174675853922963
+feature loss:  0.517466991674155
+feature loss:  0.5174665641970932
+feature loss:  0.517465899232775
+feature loss:  0.5174653767608106
+feature loss:  0.5174648542888463
+feature loss:  0.5174643318168819
+feature loss:  0.5174637380987406
+feature loss:  0.5174633106216788
+feature loss:  0.5174627169035375
+feature loss:  0.5174623369239271
+feature loss:  0.5174617432057858
+feature loss:  0.5174611969850957
+feature loss:  0.517460698261857
+feature loss:  0.517460223287344
+feature loss:  0.5174597720615566
+feature loss:  0.5174592020921409
+feature loss:  0.5174587746150792
+feature loss:  0.5174583471380174
+feature loss:  0.5174578721635044
+feature loss:  0.5174573259428144
+feature loss:  0.5174568509683013
+feature loss:  0.5174562809988856
+feature loss:  0.5174558297730982
+feature loss:  0.5174554497934878
+feature loss:  0.5174549035727978
+feature loss:  0.5174543811008334
+feature loss:  0.5174538823775947
+feature loss:  0.5174534074030817
+feature loss:  0.5174528849311173
+feature loss:  0.5174524574540555
+feature loss:  0.5174520062282681
+feature loss:  0.5174515312537551
+feature loss:  0.5174509850330651
+feature loss:  0.517450510058552
+feature loss:  0.5174500588327646
+feature loss:  0.5174496551044285
+feature loss:  0.5174490613862872
+feature loss:  0.5174486814066768
+feature loss:  0.5174481351859868
+feature loss:  0.5174478264525533
+feature loss:  0.5174473752267659
+feature loss:  0.5174468765035272
+feature loss:  0.5174463065341115
+feature loss:  0.5174459028057754
+feature loss:  0.5174455465748906
+feature loss:  0.5174450953491032
+feature loss:  0.5174446916207671
+feature loss:  0.5174442166462541
+feature loss:  0.517443741671741
+feature loss:  0.517443195451051
+feature loss:  0.5174428629688919
+feature loss:  0.5174423879943788
+feature loss:  0.5174419367685914
+feature loss:  0.5174414617940784
+feature loss:  0.5174411055631936
+feature loss:  0.5174406780861318
+feature loss:  0.5174402031116188
+feature loss:  0.5174397993832827
+feature loss:  0.5174394906498492
+feature loss:  0.5174390869215131
+feature loss:  0.5174385881982744
+feature loss:  0.5174381844699383
+feature loss:  0.5174378519877791
+feature loss:  0.5174374720081687
+feature loss:  0.5174369257874787
+feature loss:  0.5174365220591426
+feature loss:  0.5174361658282578
+feature loss:  0.5174356908537447
+JobId=103522399 JobName=SimCLR
+   UserId=renjie3(6007166) GroupId=cse(2010) MCS_label=N/A
+   Priority=8125 Nice=0 Account=cmse QOS=normal
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=05:05:50 TimeLimit=1-06:00:00 TimeMin=N/A
+   SubmitTime=2021-11-08T00:21:11 EligibleTime=2021-11-08T00:21:11
+   AccrueTime=2021-11-08T00:21:11
+   StartTime=2021-11-08T01:00:20 EndTime=2021-11-09T07:00:20 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2021-11-08T01:00:20
+   Partition=cmse-gpu AllocNode:Sid=dev-amd20-v100:199643
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=nvl-001
+   BatchHost=nvl-001
+   FedOrigin=msuhpcc FedViableSiblings=msuhpcc,preemptable FedActiveSiblings=msuhpcc
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=2,mem=16G,node=1,billing=2490,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=2 MinMemoryCPU=8G MinTmpDiskNode=0
+   Features=[intel14|intel16|intel18|amr|nvf] DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/submit.sb
+   WorkDir=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples
+   Comment=stdout=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/103522399.log 
+   StdErr=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/103522399.err
+   StdIn=/dev/null
+   StdOut=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/103522399.log
+   Power=
+   TresPerNode=gpu:v100:1
+   NtasksPerTRES:0
+

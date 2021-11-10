@@ -323,3 +323,1078 @@ Mon Nov  1 02:08:21 EDT 2021
 New small dataset
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 1 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn neg --strong_aug
 ---------------------------------------------------------------
+Mon Nov  1 10:14:48 EDT 2021
+36143038
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 36143038
+---------------------------------------------------------------
+Mon Nov  1 10:37:19 EDT 2021
+36143808
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 36143808
+---------------------------------------------------------------
+Mon Nov  1 10:37:38 EDT 2021
+36143806
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 36143806
+---------------------------------------------------------------
+Mon Nov  1 10:37:57 EDT 2021
+36143824
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 36143824
+---------------------------------------------------------------
+Mon Nov  1 10:56:27 EDT 2021
+36145064
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 36145064
+---------------------------------------------------------------
+Mon Nov  1 10:56:28 EDT 2021
+36145478
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 36145478
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  1 15:09:31 EDT 2021
+36160048
+New small dataset
+python3 -u ssl_perturbation_save_model_random_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36160048
+---------------------------------------------------------------
+Mon Nov  1 15:10:15 EDT 2021
+36160119
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn pos --strong_aug --job_id 36160119
+---------------------------------------------------------------
+Mon Nov  1 15:20:02 EDT 2021
+36160138
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn neg --strong_aug --job_id 36160138
+---------------------------------------------------------------
+Mon Nov  1 15:25:48 EDT 2021
+36160133
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn pos --strong_aug --job_id 36160133
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  1 15:58:49 EDT 2021
+36160453
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36160453
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  1 15:59:45 EDT 2021
+36160455
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36160455
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  1 16:15:09 EDT 2021
+36162960
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36162960
+---------------------------------------------------------------
+Mon Nov  1 16:21:21 EDT 2021
+36162961
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36162961
+---------------------------------------------------------------
+Mon Nov  1 16:27:22 EDT 2021
+36163160
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --org_label_noise --job_id 36163160
+---------------------------------------------------------------
+Mon Nov  1 16:27:22 EDT 2021
+36163161
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --org_label_noise --job_id 36163161
+---------------------------------------------------------------
+Mon Nov  1 16:50:16 EDT 2021
+Mon Nov  1 16:50:16 EDT 2021
+36163771
+36163770
+New small dataset
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --org_label_noise --job_id 36163771
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --org_label_noise --job_id 36163770
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+Tue Nov  2 01:18:37 EDT 2021
+36176425
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36176425
+---------------------------------------------------------------
+Tue Nov  2 01:18:38 EDT 2021
+36166308
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 36166308
+---------------------------------------------------------------
+Tue Nov  2 01:52:32 EDT 2021
+36176479
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36176479
+---------------------------------------------------------------
+Tue Nov  2 02:08:12 EDT 2021
+36166303
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 36166303
+---------------------------------------------------------------
+Tue Nov  2 02:23:30 EDT 2021
+36176516
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36176516
+---------------------------------------------------------------
+Tue Nov  2 02:23:31 EDT 2021
+36190046
+random_baseline
+python3 -u ssl_perturbation_save_model_random_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 16 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36190046
+---------------------------------------------------------------
+Tue Nov  2 02:23:33 EDT 2021
+36190047
+random_baseline
+python3 -u ssl_perturbation_save_model_random_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36190047
+---------------------------------------------------------------
+Tue Nov  2 02:23:34 EDT 2021
+36190048
+random_baseline
+python3 -u ssl_perturbation_save_model_random_noise.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --job_id 36190048
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+Tue Nov  2 19:20:32 EDT 2021
+103337156
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1200 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 103337156
+---------------------------------------------------------------
+Tue Nov  2 23:55:33 EDT 2021
+103337441
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1200 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 103337441
+---------------------------------------------------------------
+Wed Nov  3 04:29:22 EDT 2021
+103341068
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1200 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 103341068
+---------------------------------------------------------------
+Wed Nov  3 08:40:06 EDT 2021
+103341079
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1200 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 103341079
+---------------------------------------------------------------
+Wed Nov  3 08:54:28 EDT 2021
+103343531
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn neg --strong_aug --random_start --org_label_noise --job_id 103343531
+---------------------------------------------------------------
+Wed Nov  3 08:56:06 EDT 2021
+103343532
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --random_start --org_label_noise --job_id 103343532
+---------------------------------------------------------------
+Wed Nov  3 12:52:41 EDT 2021
+103371785
+New small dataset
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1200 --min_min_attack_fn non_eot --strong_aug --model_group 3 --job_id 103371785
+---------------------------------------------------------------
+Wed Nov  3 19:50:53 EDT 2021
+103408226
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408226
+---------------------------------------------------------------
+Wed Nov  3 19:50:53 EDT 2021
+103408228
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 64 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408228
+---------------------------------------------------------------
+Wed Nov  3 20:00:53 EDT 2021
+103408231
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408231
+---------------------------------------------------------------
+Wed Nov  3 20:11:05 EDT 2021
+103408253
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408253
+---------------------------------------------------------------
+Wed Nov  3 20:11:09 EDT 2021
+103408340
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408340
+---------------------------------------------------------------
+Wed Nov  3 20:12:56 EDT 2021
+103408341
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408341
+---------------------------------------------------------------
+Wed Nov  3 22:04:46 EDT 2021
+103408655
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 64 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408655
+---------------------------------------------------------------
+Thu Nov  4 00:23:55 EDT 2021
+103408656
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name unlearnable_20211025164521_0.5_512_151 --job_id 103408656
+---------------------------------------------------------------
+Thu Nov  4 23:04:23 EDT 2021
+103465371
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103465371
+---------------------------------------------------------------
+Thu Nov  4 23:04:23 EDT 2021
+103465373
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103465373
+---------------------------------------------------------------
+Thu Nov  4 23:04:24 EDT 2021
+103465376
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103465376
+---------------------------------------------------------------
+Thu Nov  4 23:17:13 EDT 2021
+103465379
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103465379
+---------------------------------------------------------------
+Fri Nov  5 14:00:07 EDT 2021
+103477543
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103477543
+---------------------------------------------------------------
+Fri Nov  5 14:07:32 EDT 2021
+103477833
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103477833
+---------------------------------------------------------------
+Fri Nov  5 14:08:14 EDT 2021
+103477985
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103477985
+---------------------------------------------------------------
+Fri Nov  5 14:08:26 EDT 2021
+103478006
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103478006
+---------------------------------------------------------------
+Fri Nov  5 14:09:33 EDT 2021
+103478008
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103478008
+---------------------------------------------------------------
+Fri Nov  5 14:09:47 EDT 2021
+103478009
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103478009
+---------------------------------------------------------------
+Fri Nov  5 14:09:55 EDT 2021
+103478010
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103478010
+---------------------------------------------------------------
+Fri Nov  5 17:29:19 EDT 2021
+103482142
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103482142
+---------------------------------------------------------------
+Fri Nov  5 17:41:34 EDT 2021
+103482143
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103482143
+---------------------------------------------------------------
+Fri Nov  5 17:56:41 EDT 2021
+103482153
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103482153
+---------------------------------------------------------------
+Fri Nov  5 18:10:30 EDT 2021
+103482154
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_1_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --job_id 103482154
+---------------------------------------------------------------
+Sat Nov  6 10:47:59 EDT 2021
+103495385
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_subset' --universal_stop_error 0.1 --use_subset --job_id 103495385
+---------------------------------------------------------------
+Sat Nov  6 10:48:13 EDT 2021
+103495386
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_subset' --universal_stop_error 0.1 --use_subset --job_id 103495386
+---------------------------------------------------------------
+Sat Nov  6 10:48:29 EDT 2021
+103495387
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target 'train_subset' --universal_stop_error 0.1 --use_subset --job_id 103495387
+---------------------------------------------------------------
+Sat Nov  6 10:48:43 EDT 2021
+103495388
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_subset' --universal_stop_error 0.1 --use_subset --job_id 103495388
+---------------------------------------------------------------
+Sat Nov  6 10:50:59 EDT 2021
+103495553
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_subset' --universal_stop_error 0.1 --use_subset --job_id 103495553
+---------------------------------------------------------------
+Sat Nov  6 10:53:01 EDT 2021
+103495647
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_subset' --universal_stop_error 0.1 --use_subset --job_id 103495647
+---------------------------------------------------------------
+Sat Nov  6 10:58:08 EDT 2021
+103495714
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --use_subset --job_id 103495714
+---------------------------------------------------------------
+Sat Nov  6 10:59:03 EDT 2021
+103495741
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'train_dataset' --universal_stop_error 0.1 --use_subset --job_id 103495741
+---------------------------------------------------------------
+Sat Nov  6 10:59:18 EDT 2021
+103495742
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --use_subset --job_id 103495742
+---------------------------------------------------------------
+Sat Nov  6 10:59:30 EDT 2021
+103495743
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --use_subset --job_id 103495743
+---------------------------------------------------------------
+Sat Nov  6 10:59:39 EDT 2021
+103495744
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --use_subset --job_id 103495744
+---------------------------------------------------------------
+Sat Nov  6 11:01:28 EDT 2021
+103495745
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --use_subset --job_id 103495745
+---------------------------------------------------------------
+Sat Nov  6 11:02:01 EDT 2021
+103495746
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --job_id 103495746
+---------------------------------------------------------------
+Sat Nov  6 11:02:13 EDT 2021
+103495747
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --job_id 103495747
+---------------------------------------------------------------
+Sat Nov  6 11:02:23 EDT 2021
+103495749
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --job_id 103495749
+---------------------------------------------------------------
+Sat Nov  6 11:22:37 EDT 2021
+103495750
+Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
+python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_32_1_0.8 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 32 --num_steps 1 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --job_id 103495750
+---------------------------------------------------------------
+Sat Nov  6 20:09:42 EDT 2021
+103499492
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8 --job_id 103499492
+---------------------------------------------------------------
+Sat Nov  6 20:09:59 EDT 2021
+103499493
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8 --job_id 103499493
+---------------------------------------------------------------
+Sat Nov  6 20:10:09 EDT 2021
+103499494
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8 --job_id 103499494
+---------------------------------------------------------------
+Sat Nov  6 20:10:20 EDT 2021
+103499495
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8 --job_id 103499495
+---------------------------------------------------------------
+Sat Nov  6 20:10:33 EDT 2021
+103499496
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8 --job_id 103499496
+---------------------------------------------------------------
+Sat Nov  6 20:10:44 EDT 2021
+103499497
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6 --job_id 103499497
+---------------------------------------------------------------
+Sat Nov  6 20:10:56 EDT 2021
+103499498
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6 --job_id 103499498
+---------------------------------------------------------------
+Sat Nov  6 20:11:09 EDT 2021
+103499499
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6 --job_id 103499499
+---------------------------------------------------------------
+Sat Nov  6 20:11:21 EDT 2021
+103499500
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6 --job_id 103499500
+---------------------------------------------------------------
+Sat Nov  6 20:22:56 EDT 2021
+103499514
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6 --job_id 103499514
+---------------------------------------------------------------
+Sat Nov  6 20:27:31 EDT 2021
+103499522
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499522
+---------------------------------------------------------------
+Sat Nov  6 20:31:08 EDT 2021
+103499534
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499534
+Sat Nov  6 20:31:08 EDT 2021
+---------------------------------------------------------------
+103499536
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499536
+---------------------------------------------------------------
+Sat Nov  6 20:31:09 EDT 2021
+103499535
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499535
+---------------------------------------------------------------
+Sat Nov  6 20:32:10 EDT 2021
+103499539
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499539
+---------------------------------------------------------------
+Sat Nov  6 20:32:10 EDT 2021
+103499541
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499541
+---------------------------------------------------------------
+Sat Nov  6 20:32:10 EDT 2021
+103499540
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499540
+---------------------------------------------------------------
+Sat Nov  6 20:33:10 EDT 2021
+103499543
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499543
+---------------------------------------------------------------
+Sat Nov  6 20:33:10 EDT 2021
+103499545
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499545
+---------------------------------------------------------------
+Sat Nov  6 20:33:10 EDT 2021
+103499544
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499544
+---------------------------------------------------------------
+Sat Nov  6 20:33:10 EDT 2021
+103499548
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499548
+---------------------------------------------------------------
+Sat Nov  6 20:33:11 EDT 2021
+Sat Nov  6 20:33:11 EDT 2021
+103499549
+103499550
+Retrain SimCLR with perturbation from supervised
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499549
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499550
+---------------------------------------------------------------
+---------------------------------------------------------------
+Sat Nov  6 20:35:12 EDT 2021
+103499553
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499553
+---------------------------------------------------------------
+Sat Nov  6 20:35:13 EDT 2021
+103499554
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499554
+---------------------------------------------------------------
+Sat Nov  6 20:35:14 EDT 2021
+103499555
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499555
+---------------------------------------------------------------
+Sat Nov  6 20:36:15 EDT 2021
+103499556
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499556
+---------------------------------------------------------------
+Sat Nov  6 20:36:17 EDT 2021
+103499557
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499557
+---------------------------------------------------------------
+Sat Nov  6 20:36:18 EDT 2021
+103499558
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499558
+---------------------------------------------------------------
+Sat Nov  6 20:38:19 EDT 2021
+103499560
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499560
+---------------------------------------------------------------
+Sat Nov  6 20:38:20 EDT 2021
+103499561
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499561
+---------------------------------------------------------------
+Sat Nov  6 20:38:21 EDT 2021
+Sat Nov  6 20:38:21 EDT 2021
+Sat Nov  6 20:38:21 EDT 2021
+103499563
+103499562
+103499564
+Retrain SimCLR with perturbation from supervised
+Retrain SimCLR with perturbation from supervised
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499562
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499564
+---------------------------------------------------------------
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499563
+---------------------------------------------------------------
+---------------------------------------------------------------
+Sat Nov  6 20:38:21 EDT 2021
+103499565
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499565
+---------------------------------------------------------------
+Sat Nov  6 20:50:45 EDT 2021
+103499578
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499578
+---------------------------------------------------------------
+Sat Nov  6 22:03:18 EDT 2021
+103499523
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499523
+---------------------------------------------------------------
+Sat Nov  6 22:31:18 EDT 2021
+103499524
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499524
+---------------------------------------------------------------
+Sat Nov  6 22:31:19 EDT 2021
+103499525
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499525
+---------------------------------------------------------------
+Sat Nov  6 22:31:21 EDT 2021
+103499526
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499526
+---------------------------------------------------------------
+Sat Nov  6 22:44:28 EDT 2021
+103499527
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499527
+---------------------------------------------------------------
+Sat Nov  6 22:44:29 EDT 2021
+103499528
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499528
+---------------------------------------------------------------
+Sat Nov  6 22:44:33 EDT 2021
+103499529
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499529
+---------------------------------------------------------------
+Sat Nov  6 22:44:35 EDT 2021
+103499530
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499530
+---------------------------------------------------------------
+Sun Nov  7 01:50:34 EST 2021
+103499531
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499531
+---------------------------------------------------------------
+Sun Nov  7 02:51:02 EST 2021
+103499532
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_1_0.8 --job_id 103499532
+---------------------------------------------------------------
+Sun Nov  7 19:59:22 EST 2021
+103499579
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8 --job_id 103499579
+---------------------------------------------------------------
+Mon Nov  8 01:00:26 EST 2021
+103522399
+Retrain SimCLR with perturbation from feature space
+python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 30 --step_size 0.8 --batch_size=512 --model_group 10 --job_id 103522399
+---------------------------------------------------------------
+Mon Nov  8 11:23:36 EST 2021
+103553555
+Retrain SimCLR with perturbation from supervised
+Mon Nov  8 11:23:36 EST 2021
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103553555
+103553552
+---------------------------------------------------------------
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103553552
+---------------------------------------------------------------
+Mon Nov  8 11:23:38 EST 2021
+Mon Nov  8 11:23:38 EST 2021
+103553558
+103553559
+Retrain SimCLR with perturbation from supervised
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103553559
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103553558
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  8 11:23:38 EST 2021
+103553556
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103553556
+---------------------------------------------------------------
+Mon Nov  8 11:23:39 EST 2021
+103553557
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8 --job_id 103553557
+---------------------------------------------------------------
+Mon Nov  8 11:30:36 EST 2021
+103553604
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553604
+---------------------------------------------------------------
+Mon Nov  8 11:30:37 EST 2021
+103553605
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553605
+---------------------------------------------------------------
+Mon Nov  8 11:31:37 EST 2021
+103553608
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553608
+---------------------------------------------------------------
+Mon Nov  8 11:31:37 EST 2021
+103553606
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553606
+---------------------------------------------------------------
+Mon Nov  8 11:31:39 EST 2021
+103553609
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553609
+---------------------------------------------------------------
+Mon Nov  8 11:31:39 EST 2021
+103553607
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553607
+---------------------------------------------------------------
+Mon Nov  8 11:31:40 EST 2021
+103553610
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553610
+---------------------------------------------------------------
+Mon Nov  8 11:31:42 EST 2021
+103553611
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_1_0.8_checkpoint_perturbation --job_id 103553611
+---------------------------------------------------------------
+Mon Nov  8 11:49:06 EST 2021
+103555343
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103555343
+---------------------------------------------------------------
+Mon Nov  8 11:49:06 EST 2021
+103555344
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 2 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103555344
+---------------------------------------------------------------
+Mon Nov  8 11:49:07 EST 2021
+103555345
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103555345
+---------------------------------------------------------------
+Mon Nov  8 12:02:24 EST 2021
+103555543
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6_checkpoint_perturbation --job_id 103555543
+---------------------------------------------------------------
+Mon Nov  8 12:02:24 EST 2021
+103555545
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6_checkpoint_perturbation --job_id 103555545
+---------------------------------------------------------------
+Mon Nov  8 12:02:26 EST 2021
+103555546
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6_checkpoint_perturbation --job_id 103555546
+---------------------------------------------------------------
+Mon Nov  8 12:03:21 EST 2021
+103555547
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6_checkpoint_perturbation --job_id 103555547
+---------------------------------------------------------------
+Mon Nov  8 12:03:23 EST 2021
+103555555
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103555555
+---------------------------------------------------------------
+Mon Nov  8 12:03:23 EST 2021
+Mon Nov  8 12:03:23 EST 2021
+103555549
+103555550
+Retrain SimCLR with perturbation from supervised
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6_checkpoint_perturbation --job_id 103555549
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103555550
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  8 12:03:24 EST 2021
+103555551
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103555551
+---------------------------------------------------------------
+Mon Nov  8 12:03:25 EST 2021
+103555548
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_1.6_checkpoint_perturbation --job_id 103555548
+---------------------------------------------------------------
+Mon Nov  8 12:03:25 EST 2021
+103555552
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103555552
+---------------------------------------------------------------
+Mon Nov  8 12:03:27 EST 2021
+103555553
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103555553
+---------------------------------------------------------------
+Mon Nov  8 12:03:28 EST 2021
+103555554
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103555554
+---------------------------------------------------------------
+Mon Nov  8 12:30:06 EST 2021
+103555451
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103555451
+---------------------------------------------------------------
+Mon Nov  8 16:41:15 EST 2021
+103565418
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103565418
+---------------------------------------------------------------
+Mon Nov  8 16:47:26 EST 2021
+103565419
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103565419
+---------------------------------------------------------------
+Mon Nov  8 16:47:28 EST 2021
+Mon Nov  8 16:47:28 EST 2021
+103565425
+103565426
+Retrain SimCLR with perturbation from supervised
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103565425
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103565426
+---------------------------------------------------------------
+---------------------------------------------------------------
+Mon Nov  8 16:47:28 EST 2021
+103565423
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103565423
+---------------------------------------------------------------
+Mon Nov  8 16:47:29 EST 2021
+103565424
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103565424
+---------------------------------------------------------------
+Mon Nov  8 20:01:20 EST 2021
+103568699
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103568699
+---------------------------------------------------------------
+Mon Nov  8 22:32:58 EST 2021
+103568700
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103568700
+---------------------------------------------------------------
+Mon Nov  8 22:32:58 EST 2021
+103568701
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103568701
+---------------------------------------------------------------
+Mon Nov  8 22:35:58 EST 2021
+103568702
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103568702
+---------------------------------------------------------------
+Mon Nov  8 22:36:00 EST 2021
+103568703
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103568703
+---------------------------------------------------------------
+Tue Nov  9 00:51:15 EST 2021
+103583633
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103583633
+---------------------------------------------------------------
+Tue Nov  9 00:51:15 EST 2021
+103583644
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103583644
+---------------------------------------------------------------
+Tue Nov  9 00:51:16 EST 2021
+103583645
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103583645
+---------------------------------------------------------------
+Tue Nov  9 00:51:18 EST 2021
+103583647
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103583647
+---------------------------------------------------------------
+Tue Nov  9 00:51:19 EST 2021
+103583648
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103583648
+---------------------------------------------------------------
+Tue Nov  9 00:51:21 EST 2021
+103583649
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103583649
+---------------------------------------------------------------
+Tue Nov  9 00:54:33 EST 2021
+103583703
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --orglabel --class_4 --pre_load_name supervised_orglabel_4class_perturbation --job_id 103583703
+---------------------------------------------------------------
+Tue Nov  9 00:54:34 EST 2021
+103583704
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --orglabel --class_4 --pre_load_name supervised_orglabel_4class_perturbation --job_id 103583704
+---------------------------------------------------------------
+Tue Nov  9 00:54:35 EST 2021
+103583705
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --orglabel --class_4 --pre_load_name supervised_orglabel_4class_perturbation --job_id 103583705
+---------------------------------------------------------------
+Tue Nov  9 00:54:35 EST 2021
+103583721
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --orglabel --class_4 --pre_load_name supervised_orglabel_4class_perturbation --job_id 103583721
+---------------------------------------------------------------
+Tue Nov  9 00:54:35 EST 2021
+103583732
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --orglabel --class_4 --pre_load_name supervised_orglabel_4class_perturbation --job_id 103583732
+---------------------------------------------------------------
+Tue Nov  9 00:54:36 EST 2021
+103583733
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --orglabel --class_4 --pre_load_name supervised_orglabel_4class_perturbation --job_id 103583733
+---------------------------------------------------------------
+Tue Nov  9 00:56:25 EST 2021
+103584050
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 6 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584050
+---------------------------------------------------------------
+Tue Nov  9 00:57:23 EST 2021
+103584051
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 10 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584051
+---------------------------------------------------------------
+Tue Nov  9 00:57:23 EST 2021
+103584054
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 18 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584054
+---------------------------------------------------------------
+Tue Nov  9 00:57:24 EST 2021
+103584055
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 20 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584055
+---------------------------------------------------------------
+Tue Nov  9 00:57:24 EST 2021
+103584052
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 12 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584052
+---------------------------------------------------------------
+Tue Nov  9 00:57:26 EST 2021
+103584056
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 22 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584056
+---------------------------------------------------------------
+Tue Nov  9 00:57:26 EST 2021
+103584053
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 14 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584053
+---------------------------------------------------------------
+Tue Nov  9 00:57:26 EST 2021
+103584057
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 24 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584057
+---------------------------------------------------------------
+Tue Nov  9 00:57:29 EST 2021
+103584058
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 26 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584058
+---------------------------------------------------------------
+Tue Nov  9 00:57:30 EST 2021
+103584059
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 28 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584059
+---------------------------------------------------------------
+Tue Nov  9 00:57:32 EST 2021
+103584060
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 30 --class_4 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103584060
+---------------------------------------------------------------
+Tue Nov  9 09:58:39 EST 2021
+103591444
+Retrain SimCLR with perturbation from feature space
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise --job_id 103591444
+---------------------------------------------------------------
+Tue Nov  9 09:58:39 EST 2021
+103591446
+Retrain SimCLR with perturbation from feature space
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 2 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise --job_id 103591446
+---------------------------------------------------------------
+Tue Nov  9 09:58:40 EST 2021
+103591447
+Retrain SimCLR with perturbation from feature space
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise --job_id 103591447
+---------------------------------------------------------------
+Tue Nov  9 10:00:42 EST 2021
+103591449
+Retrain SimCLR with perturbation from feature space
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 8 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise --job_id 103591449
+---------------------------------------------------------------
+Tue Nov  9 10:00:42 EST 2021
+103591450
+Retrain SimCLR with perturbation from feature space
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 16 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise --job_id 103591450
+---------------------------------------------------------------
+Tue Nov  9 10:00:44 EST 2021
+103591454
+Retrain SimCLR with perturbation from feature space
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 32 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise --job_id 103591454
+---------------------------------------------------------------
+Tue Nov  9 10:40:49 EST 2021
+103568704
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --pre_load_name randomassign_supervised_10class_classwise_32_10_0.8_checkpoint_perturbation --job_id 103568704
+---------------------------------------------------------------
+Tue Nov  9 11:11:32 EST 2021
+103592129
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation --job_id 103592129
+---------------------------------------------------------------
+Tue Nov  9 11:11:32 EST 2021
+103592140
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation --job_id 103592140
+---------------------------------------------------------------
+Tue Nov  9 11:11:35 EST 2021
+103592144
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation --job_id 103592144
+---------------------------------------------------------------
+Tue Nov  9 11:11:35 EST 2021
+103592146
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation --job_id 103592146
+---------------------------------------------------------------
+Tue Nov  9 11:11:38 EST 2021
+103592147
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation --job_id 103592147
+---------------------------------------------------------------
+Tue Nov  9 11:11:38 EST 2021
+103592148
+Retrain SimCLR with perturbation from supervised
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation --job_id 103592148
+---------------------------------------------------------------
+Tue Nov  9 11:15:42 EST 2021
+103592706
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103592706
+---------------------------------------------------------------
+Tue Nov  9 11:15:42 EST 2021
+103592708
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103592708
+---------------------------------------------------------------
+Tue Nov  9 11:15:44 EST 2021
+103592707
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103592707
+---------------------------------------------------------------
+Tue Nov  9 11:16:40 EST 2021
+103592709
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103592709
+---------------------------------------------------------------
+Tue Nov  9 11:16:41 EST 2021
+103592710
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103592710
+---------------------------------------------------------------
+Tue Nov  9 11:16:43 EST 2021
+103592716
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name unlearnable_20211025164521_0.5_512_151_checkpoint_perturbation --job_id 103592716
+---------------------------------------------------------------
+Tue Nov  9 17:06:14 EST 2021
+103611117
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 32 --class_4 --pre_load_name random_noise32_perturbation --job_id 103611117
+---------------------------------------------------------------
+Tue Nov  9 17:06:14 EST 2021
+103611118
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 16 --class_4 --pre_load_name random_noise32_perturbation --job_id 103611118
+---------------------------------------------------------------
+Tue Nov  9 17:06:17 EST 2021
+103611119
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 8 --class_4 --pre_load_name random_noise32_perturbation --job_id 103611119
+---------------------------------------------------------------
+Tue Nov  9 17:06:17 EST 2021
+103611121
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 4 --class_4 --pre_load_name random_noise32_perturbation --job_id 103611121
+---------------------------------------------------------------
+Tue Nov  9 17:06:19 EST 2021
+103611122
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 2 --class_4 --pre_load_name random_noise32_perturbation --job_id 103611122
+---------------------------------------------------------------
+Tue Nov  9 17:06:20 EST 2021
+103611123
+Retrain SimCLR to test the transferability.
+python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name random_noise32_perturbation --job_id 103611123
+---------------------------------------------------------------
+Wed Nov 10 09:38:02 EST 2021
+103610129
+Retrain SimCLR with perturbation from feature space
+python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 30 --step_size 0.8 --batch_size=512 --model_group 10 --job_id 103610129
+---------------------------------------------------------------
+Wed Nov 10 10:38:56 EST 2021
+103610130
+Retrain SimCLR with perturbation from feature space
+python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 50 --step_size 0.8 --batch_size=512 --model_group 10 --job_id 103610130
+---------------------------------------------------------------
+Wed Nov 10 10:39:58 EST 2021
+103610131
+Retrain SimCLR with perturbation from feature space
+python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 30 --step_size 0.4 --batch_size=512 --model_group 10 --job_id 103610131
+---------------------------------------------------------------

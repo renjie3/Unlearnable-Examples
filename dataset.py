@@ -21,26 +21,12 @@ if torch.cuda.is_available():
 else:
     device = torch.device('cpu')
 
-
-    # transforms.RandomResizedCrop(32),
-    # transforms.RandomHorizontalFlip(p=0.5),
-    # transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
-    # transforms.RandomGrayscale(p=0.2),
-
 # Datasets
 transform_options = {
     "CIFAR10": {
-        "train_transform": [
-            # transforms.RandomCrop(32, padding=4),
-            # transforms.RandomHorizontalFlip(),
-            transforms.ToTensor()],
-        # "train_transform": [
-        #     # transforms.RandomResizedCrop(32),
-        #     transforms.RandomHorizontalFlip(p=0.5),
-        #     transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
-        #     transforms.RandomGrayscale(p=0.2),
-        #     transforms.ToTensor(),
-        # ],
+        "train_transform": [#transforms.RandomCrop(32, padding=4),
+                            #transforms.RandomHorizontalFlip(),
+                            transforms.ToTensor()],
         "test_transform": [transforms.ToTensor()]},
     "CIFAR100": {
          "train_transform": [transforms.RandomCrop(32, padding=4),
