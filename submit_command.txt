@@ -97,3 +97,7 @@ python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_2021110
 
 
 python simclr_transfer_for_base.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 4 --pre_load_name differentiable_20211102231654_0.5_200_512_32.0_30_0.8_perturb_on_random_initial_model --samplewise
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug

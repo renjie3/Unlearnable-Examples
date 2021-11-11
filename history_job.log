@@ -1751,3 +1751,13 @@ Tue Nov  9 17:04:37 EST 2021
 Retrain SimCLR to test the transferability.
 python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name random_noise32_perturbation
 ---------------------------------------------------------------
+Wed Nov 10 18:57:27 EST 2021
+103672420
+Samplewise
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------
+Thu Nov 11 10:53:45 EST 2021
+103704762
+Samplewise
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug
+---------------------------------------------------------------

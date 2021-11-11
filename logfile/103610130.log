@@ -223,3 +223,115 @@ feature loss:  0.536717114970088
 feature loss:  0.536717114970088
 feature loss:  0.536717114970088
 feature loss:  0.536717114970088
+feature loss:  0.5367170912213624
+feature loss:  0.5367170199751854
+feature loss:  0.5367170199751854
+feature loss:  0.5367170674726367
+feature loss:  0.5367170199751854
+feature loss:  0.5367170199751854
+feature loss:  0.5367170199751854
+feature loss:  0.5367169962264597
+feature loss:  0.5367169962264597
+feature loss:  0.5367168774828315
+feature loss:  0.5367169724777341
+feature loss:  0.5367169249802828
+feature loss:  0.5367169487290084
+feature loss:  0.5367169962264597
+feature loss:  0.5367168299853802
+feature loss:  0.5367168537341058
+feature loss:  0.5367168774828315
+feature loss:  0.5367169012315571
+feature loss:  0.5367167824879289
+feature loss:  0.5367168774828315
+feature loss:  0.5367167824879289
+feature loss:  0.5367167824879289
+feature loss:  0.5367167587392032
+feature loss:  0.5367167824879289
+feature loss:  0.5367167112417519
+feature loss:  0.5367167587392032
+feature loss:  0.5367167112417519
+feature loss:  0.5367166874930263
+feature loss:  0.5367167112417519
+feature loss:  0.536716639995575
+feature loss:  0.5367167112417519
+feature loss:  0.5367167112417519
+feature loss:  0.5367166637443006
+feature loss:  0.536716639995575
+feature loss:  0.5367165924981236
+feature loss:  0.5367165924981236
+feature loss:  0.5367165212519467
+feature loss:  0.536716568749398
+feature loss:  0.536716568749398
+feature loss:  0.536716497503221
+feature loss:  0.5367165450006723
+feature loss:  0.5367164262570441
+feature loss:  0.5367165212519467
+feature loss:  0.536716497503221
+feature loss:  0.5367164500057697
+feature loss:  0.536716497503221
+feature loss:  0.5367164500057697
+feature loss:  0.5367164262570441
+feature loss:  0.536716497503221
+feature loss:  0.5367163787595928
+feature loss:  0.5367163787595928
+feature loss:  0.5367164025083184
+feature loss:  0.5367163550108671
+feature loss:  0.5367163550108671
+feature loss:  0.5367163312621415
+feature loss:  0.5367163550108671
+feature loss:  0.5367162837646902
+feature loss:  0.5367162837646902
+feature loss:  0.5367162600159645
+feature loss:  0.5367162837646902
+feature loss:  0.5367163075134158
+feature loss:  0.5367162362672389
+feature loss:  0.5367162125185132
+feature loss:  0.5367161650210619
+feature loss:  0.5367161412723362
+feature loss:  0.5367161887697875
+feature loss:  0.5367161650210619
+feature loss:  0.5367161650210619
+feature loss:  0.5367162125185132
+feature loss:  0.5367161650210619
+feature loss:  0.5367160937748849
+feature loss:  0.5367161412723362
+feature loss:  0.5367161175236106
+feature loss:  0.5367162125185132
+feature loss:  0.5367160937748849
+feature loss:  0.5367161175236106
+feature loss:  0.5367160937748849
+feature loss:  0.5367160937748849
+feature loss:  0.5367160700261593
+feature loss:  0.5367160937748849
+feature loss:  0.5367160462774336
+JobId=103610130 JobName=SimCLR
+   UserId=renjie3(6007166) GroupId=cse(2010) MCS_label=N/A
+   Priority=12117 Nice=0 Account=cmse QOS=normal
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=08:19:28 TimeLimit=1-06:00:00 TimeMin=N/A
+   SubmitTime=2021-11-09T16:51:33 EligibleTime=2021-11-09T16:51:33
+   AccrueTime=2021-11-09T16:51:33
+   StartTime=2021-11-10T10:38:51 EndTime=2021-11-11T16:38:51 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2021-11-10T10:38:51
+   Partition=cmse-gpu AllocNode:Sid=dev-amd20-v100:204881
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=nvl-001
+   BatchHost=nvl-001
+   FedOrigin=msuhpcc FedViableSiblings=msuhpcc,preemptable FedActiveSiblings=msuhpcc
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=2,mem=16G,node=1,billing=2490,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=2 MinMemoryCPU=8G MinTmpDiskNode=0
+   Features=[intel14|intel16|intel18|amr|nvf] DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/submit.sb
+   WorkDir=/mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples
+   Comment=stdout=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/103610130.log 
+   StdErr=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/103610130.err
+   StdIn=/dev/null
+   StdOut=/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/103610130.log
+   Power=
+   TresPerNode=gpu:v100:1
+   NtasksPerTRES:0
+

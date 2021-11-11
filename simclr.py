@@ -90,6 +90,38 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature):
 
     return total_loss * pos_1.shape[0], pos_1.shape[0]
 
+def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True):
+    net.eval()
+    total_loss, total_num = 0.0, 0
+    
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+    # if flag_strong_aug:
+    #     pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    # else:
+    #     pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
+    pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    feature_1, out_1 = net(pos_1)
+    feature_2, out_2 = net(pos_2)
+
+    # [2*B, D]
+    out = torch.cat([out_1, out_2], dim=0)
+    # [2*B, 2*B]
+    sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+    mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
+    # [2*B, 2*B-1]
+    sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
+
+    # compute loss
+    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+    # [2*B]
+    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+    loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    # train_optimizer.zero_grad()
+    # perturb.retain_grad()
+    # loss.backward()
+
+    return loss
+
 def train_simclr_noise(net, pos_samples_1, pos_samples_2, perturb, train_optimizer, batch_size, temperature):
     # train a batch
     # print(pos_1.shape)
@@ -129,44 +161,6 @@ def train_simclr_noise(net, pos_samples_1, pos_samples_2, perturb, train_optimiz
     # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
 
     return total_loss / pos_1.shape[0]
-
-def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True):
-    # train a batch
-    # print(pos_1.shape)
-    # print(pos_2.shape)
-    # print("batch_size", batch_size)
-    # print("this is train_simclr_noise")
-    # pos_1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
-    # pos_2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
-    net.eval()
-    total_loss, total_num = 0.0, 0
-    
-    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-    if flag_strong_aug:
-        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
-    else:
-        pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
-    feature_1, out_1 = net(pos_1)
-    feature_2, out_2 = net(pos_2)
-
-    # [2*B, D]
-    out = torch.cat([out_1, out_2], dim=0)
-    # [2*B, 2*B]
-    sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
-    mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
-    # [2*B, 2*B-1]
-    sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
-
-    # compute loss
-    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
-    # [2*B]
-    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
-    loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
-    # train_optimizer.zero_grad()
-    # perturb.retain_grad()
-    # loss.backward()
-
-    return loss
 
 def train_simclr_noise_return_loss_tensor_target_task(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, target_task="pos/neg"):
     # train a batch

@@ -314,7 +314,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                     class_noise = random_noise[key]
                     class_noise += delta
                     random_noise[key] = torch.clamp(class_noise, -args.epsilon, args.epsilon) # important.
-                print(random_noise * 255)
+                # print(random_noise * 255)
             # print(train_noise_loss_sum / float(train_noise_loss_count))
             
         # Here we save some samples in image.
@@ -570,31 +570,30 @@ def samplewise_perturbation_eval(random_noise, data_loader, model, eval_target='
     return loss_meter.avg, err_meter.avg
 
 
-def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV):
-    datasets_generator = dataset.DatasetGenerator(train_batch_size=args.train_batch_size,
-                                                  eval_batch_size=args.eval_batch_size,
-                                                  train_data_type=args.train_data_type,
-                                                  train_data_path=args.train_data_path,
-                                                  test_data_type=args.test_data_type,
-                                                  test_data_path=args.test_data_path,
-                                                  num_of_workers=args.num_of_workers,
-                                                  seed=args.seed, no_train_augments=True)
+def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img):
+    # datasets_generator = dataset.DatasetGenerator(train_batch_size=args.train_batch_size,
+    #                                               eval_batch_size=args.eval_batch_size,
+    #                                               train_data_type=args.train_data_type,
+    #                                               train_data_path=args.train_data_path,
+    #                                               test_data_type=args.test_data_type,
+    #                                               test_data_path=args.test_data_path,
+    #                                               num_of_workers=args.num_of_workers,
+    #                                               seed=args.seed, no_train_augments=True)
 
-    if args.train_data_type == 'ImageNetMini' and args.perturb_type == 'samplewise':
-        data_loader = datasets_generator._split_validation_set(0.2, train_shuffle=False, train_drop_last=False)
-        data_loader['train_dataset'] = data_loader['train_subset']
-    else:
-        data_loader = datasets_generator.getDataLoader(train_shuffle=False, train_drop_last=False)
+    # if args.train_data_type == 'ImageNetMini' and args.perturb_type == 'samplewise':
+    #     data_loader = datasets_generator._split_validation_set(0.2, train_shuffle=False, train_drop_last=False)
+    #     data_loader['train_dataset'] = data_loader['train_subset']
+    # else:
+    #     data_loader = datasets_generator.getDataLoader(train_shuffle=False, train_drop_last=False)
     mask_cord_list = []
     idx = 0
-    for images, labels in data_loader['train_dataset']:
-        for i, (image, label) in enumerate(zip(images, labels)):
+    for pos_samples_1, pos_samples_2, labels in train_loader_simclr:
+        for i, (pos1, pos2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
             noise = random_noise[idx]
-            mask_cord, _ = noise_generator._patch_noise_extend_to_img(noise, image_size=image.shape, patch_location=args.patch_location)
+            mask_cord, _ = noise_generator._patch_noise_extend_to_img(noise, image_size=pos1.shape, patch_location=args.patch_location)
             mask_cord_list.append(mask_cord)
             idx += 1
 
-    condition = True
     epochs = args.epochs
     save_image_num = args.save_image_num
     print("The whole epochs are {}".format(epochs))
@@ -607,11 +606,12 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         os.mkdir('results')
     best_loss = 10000000
     best_loss_acc = 0
-    train_idx = 0
     # data_iter = iter(data_loader['train_dataset'])
 
     # logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
     for epoch_idx in range(1, epochs+1):
+        train_idx = 0
+        condition = True
         data_iter = iter(train_loader_simclr)
         sum_train_loss, sum_train_batch_size = 0,0
         while condition:
@@ -688,7 +688,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     param.requires_grad = False
                 batch_noise = torch.stack(batch_noise).to(device)
                 if args.attack_type == 'min-min':
-                    perturb_img, eta = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug)
+                    _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug)
                 # elif args.attack_type == 'min-max':
                 #     perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
                 else:
@@ -707,13 +707,13 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
             #                                                     mask_cord_list=mask_cord_list)
             # logger.info('Loss: {:.4f} Acc: {:.2f}%'.format(loss_avg, 100 - error_rate*100))
 
-            if torch.is_tensor(random_noise):
-                random_noise = random_noise.detach()
-                ENV['random_noise'] = random_noise
-            if args.attack_type == 'min-min':
-                condition = error_rate > args.universal_stop_error
-            elif args.attack_type == 'min-max':
-                condition = error_rate < args.universal_stop_error
+            # if torch.is_tensor(random_noise):
+            #     random_noise = random_noise.detach()
+            #     ENV['random_noise'] = random_noise
+            # if args.attack_type == 'min-min':
+            #     condition = error_rate > args.universal_stop_error
+            # elif args.attack_type == 'min-max':
+            #     condition = error_rate < args.universal_stop_error
 
         # Here we save some samples in image.
         if epoch_idx % 10 == 0 and not args.no_save:
@@ -768,7 +768,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         new_random_noise = []
         for idx in range(len(random_noise)):
             sample_noise = random_noise[idx]
-            c, h, w = image.shape[0], image.shape[1], image.shape[2]
+            c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
             mask = np.zeros((c, h, w), np.float32)
             x1, x2, y1, y2 = mask_cord_list[idx]
             mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
@@ -843,15 +843,15 @@ def main():
     #     random_noise_class = np.load('noise_class_label.npy')
     # else:
     #     random_noise_class = np.load('noise_class_label_' + str(args.noise_shape[0]) + 'class.npy')
-    random_noise_class = np.load('noise_class_label_1024_' + str(args.noise_shape[0]) + 'class.npy')
-    # which transform?
-    # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
-    # we have to change the target randomly to give the noise a label
-    if not args.org_label_noise:
+    if args.perturb_type == 'classwise':
+        random_noise_class = np.load('noise_class_label_1024_' + str(args.noise_shape[0]) + 'class.npy')
+    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
+    if not args.org_label_noise and args.perturb_type == 'classwise':
+        # we have to change the target randomly to give the noise a label
         train_data.replace_random_noise_class(random_noise_class)
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=2, pin_memory=True, drop_last=True)
-    # train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
-    if not args.org_label_noise:
+    train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
+    if not args.org_label_noise and args.perturb_type == 'classwise':
         train_noise_data.replace_random_noise_class(random_noise_class)
     train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
     # test data don't have to change the target. by renjie3
@@ -911,8 +911,8 @@ def main():
         else:
             random_noise = torch.zeros(*args.noise_shape)
         if args.perturb_type == 'samplewise':
-            # noise = sample_wise_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
-            pass
+            noise, save_name_pre = sample_wise_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
+            
         elif args.perturb_type == 'classwise':
             # noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
             if args.model_group > 1:

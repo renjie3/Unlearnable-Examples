@@ -944,3 +944,13 @@ Wed Nov 10 15:52:00 EST 2021
 Retrain SimCLR with perturbation from feature space
 python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 30 --step_size 0.4 --batch_size=512 --model_group 10 --job_id 103610131
 ---------------------------------------------------------------
+Wed Nov 10 18:58:19 EST 2021
+103610130
+Retrain SimCLR with perturbation from feature space
+python3 ssl_perturbation_feature_space.py --pre_load_name differentiable_20211102231654_0.5_200_512 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 50 --step_size 0.8 --batch_size=512 --model_group 10 --job_id 103610130
+---------------------------------------------------------------
+Thu Nov 11 06:37:22 EST 2021
+103672420
+Samplewise
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --job_id 103672420
+---------------------------------------------------------------

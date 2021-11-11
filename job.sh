@@ -4,13 +4,13 @@ MY_JOB_ROOT_PATH=`pwd`
 # echo $MY_JOB_ROOT_PATH
 cd $MY_JOB_ROOT_PATH
 
-MYTIME="2:00:00"
+MYTIME="48:00:00"
 
-# JOB_INFO="New small dataset"
-# MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 32 --num_steps 10 --step_size 3.2 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1200 --min_min_attack_fn non_eot --strong_aug --model_group 3"
+JOB_INFO="Samplewise"
+MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 5 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug"
 
-JOB_INFO="Retrain SimCLR to test the transferability."
-MYCOMMEND="python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name random_noise32_perturbation"
+# JOB_INFO="Retrain SimCLR to test the transferability."
+# MYCOMMEND="python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name random_noise32_perturbation"
 
 # 32_10_0.8 32_10_1.6 32_1_0.8 8_10_0.8 ./my_experiments/random_noise/perturbation
 # JOB_INFO="Retrain SimCLR with perturbation from supervised"
