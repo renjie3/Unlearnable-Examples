@@ -1,0 +1,19 @@
+2021-11-11 18:43:06,626 PyTorch Version: 1.7.1
+2021-11-11 18:43:06,679 GPU List: ['Tesla V100-SXM2-32GB']
+2021-11-11 18:43:06,684 num_classes: 10
+2021-11-11 18:43:06,685 epochs: 300
+2021-11-11 18:43:06,686 grad_clip: 5.0
+2021-11-11 18:43:06,686 log_frequency: 100
+2021-11-11 18:43:06,687 model: {'name': 'ResNet18', 'num_classes': 10}
+2021-11-11 18:43:06,687 criterion: {'name': 'CrossEntropyLoss'}
+2021-11-11 18:43:06,688 optimizer: {'name': 'SGD', 'lr': 0.1, 'weight_decay': 0.0005, 'momentum': 0.9}
+2021-11-11 18:43:06,688 scheduler: {'name': 'CosineAnnealingLR', 'T_max': 300, 'eta_min': 0.0}
+2021-11-11 18:43:06,689 dataset: {'name': 'DatasetGenerator', 'train_batch_size': 128, 'eval_batch_size': 128}
+Traceback (most recent call last):
+  File "ssl_perturbation_save_model.py", line 944, in <module>
+    main()
+  File "ssl_perturbation_save_model.py", line 922, in main
+    noise, save_name_pre = sample_wise_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
+  File "ssl_perturbation_save_model.py", line 593, in sample_wise_perturbation
+    noise = random_noise[idx]
+IndexError: index 1024 is out of bounds for dimension 0 with size 1024

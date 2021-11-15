@@ -56,7 +56,7 @@ def train(net, data_loader, train_optimizer):
 
     return total_loss / total_num
 
-def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature):
+def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False):
     # train a batch
     # print("pos_1.shape: ", pos_1.shape)
     # print("pos_2.shape: ", pos_2.shape)
@@ -64,7 +64,8 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature):
     total_loss, total_num = 0.0, 0
     # for pos_1, pos_2, target in train_bar:
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-    pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    if not noise_after_transform:
+        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     feature_1, out_1 = net(pos_1)
     feature_2, out_2 = net(pos_2)
     # [2*B, D]
@@ -90,7 +91,7 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature):
 
     return total_loss * pos_1.shape[0], pos_1.shape[0]
 
-def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True):
+def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False):
     net.eval()
     total_loss, total_num = 0.0, 0
     
@@ -99,7 +100,8 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     #     pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     # else:
     #     pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
-    pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    if not noise_after_transform:
+        os_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     feature_1, out_1 = net(pos_1)
     feature_2, out_2 = net(pos_2)
 

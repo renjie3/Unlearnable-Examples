@@ -249,7 +249,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot"):
+    def min_min_attack_simclr_return_loss_tensor(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", noise_after_transform=False):
     # after verified that using perturb as variable to train is working 
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -276,7 +276,7 @@ class PerturbationTool():
             train_loss_batch_sum += train_loss_batch * perturb.shape[0]
             train_loss_batch_count += perturb.shape[0]
 
-            eta_step = self.step_size * perturb.grad.data.sign() * (-1) # why here used sign?? renjie3
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1)
             sign_print = perturb.grad.data.sign() * (-1)
             # print("+:", np.sum(sign_print.cpu().numpy() == 1))
             # print("-:", np.sum(sign_print.cpu().numpy() == -1))
@@ -288,6 +288,7 @@ class PerturbationTool():
             # diff_eta = eta1 - eta2
             # print(diff_eta.cpu().numpy())
             eta = (eta1 + eta2) / 2
+            print(np.mean(np.absolute(eta.mean(dim=0).to('cpu').numpy())) * 255)
             # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
             perturb = Variable(eta, requires_grad=True)
             perturb_img1 = pos_samples_1.data + perturb

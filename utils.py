@@ -26,6 +26,39 @@ ToTensor_transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 
+train_transform = transforms.Compose([
+    transforms.RandomResizedCrop(32),
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
+    transforms.RandomGrayscale(p=0.2),
+    transforms.ToTensor(),
+    # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+    ])
+
+test_transform = transforms.Compose([
+    transforms.ToTensor(),
+    # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+    ])
+
+train_diff_transform = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform2 = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    # Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform3 = nn.Sequential(
+    Kaug.RandomCrop([32,32], padding=4),
+    Kaug.RandomHorizontalFlip(p=0.5),
+)
+
 def patch_noise_extend_to_img(noise, image_size=[32, 32, 3], patch_location='center'):
     h, w, c = image_size[0], image_size[1], image_size[2]
     mask = np.zeros((h, w, c), np.float32)
@@ -127,6 +160,7 @@ class CIFAR10Pair(CIFAR10):
         target_transform: Optional[Callable] = None,
         download: bool = False,
         class_4: bool = True,
+        train_noise_after_transform: bool = True,
     ) -> None:
 
         super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
@@ -140,14 +174,19 @@ class CIFAR10Pair(CIFAR10):
             else:
                 self.data = sampled_data["test_data"]
                 self.targets = sampled_data["test_targets"]
+        self.train_noise_after_transform = train_noise_after_transform
 
     def __getitem__(self, index):
         img, target = self.data[index], self.targets[index]
         img = Image.fromarray(img)
 
         if self.transform is not None:
-            pos_1 = self.transform(img)
-            pos_2 = self.transform(img)
+            if self.train_noise_after_transform:
+                pos_1 = train_transform(img)
+                pos_2 = train_transform(img)
+            else:
+                pos_1 = self.transform(img)
+                pos_2 = self.transform(img)
 
         if self.target_transform is not None:
             target = self.target_transform(target)
@@ -165,6 +204,11 @@ class CIFAR10Pair(CIFAR10):
                 self.targets[i] = random_noise_class[i]
         else:
             raise('Replacing data noise class failed. Because the length is not consistent.')
+
+    def replace_targets_with_id():
+        for i in range(len(self.targets)):
+            # print(self.targets[i], random_noise_class[i])
+            self.targets[i] = i
 
     def add_noise_test_visualization(self, random_noise_class_test, noise):
         # print(noise.shape)
@@ -507,39 +551,6 @@ class TransferCIFAR10Pair(CIFAR10):
 #             raise('Making data unlearnable failed. Because the length is not consistent.')
 
 #         self.data = self.data.astype(np.uint8)
-
-train_transform = transforms.Compose([
-    transforms.RandomResizedCrop(32),
-    transforms.RandomHorizontalFlip(p=0.5),
-    transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
-    transforms.RandomGrayscale(p=0.2),
-    transforms.ToTensor(),
-    # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
-    ])
-
-test_transform = transforms.Compose([
-    transforms.ToTensor(),
-    # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
-    ])
-
-train_diff_transform = nn.Sequential(
-    Kaug.RandomResizedCrop([32,32]),
-    Kaug.RandomHorizontalFlip(p=0.5),
-    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
-    Kaug.RandomGrayscale(p=0.2)
-)
-
-train_diff_transform2 = nn.Sequential(
-    Kaug.RandomResizedCrop([32,32]),
-    # Kaug.RandomHorizontalFlip(p=0.5),
-    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
-    # Kaug.RandomGrayscale(p=0.2)
-)
-
-train_diff_transform3 = nn.Sequential(
-    Kaug.RandomCrop([32,32], padding=4),
-    Kaug.RandomHorizontalFlip(p=0.5),
-)
     
 def get_pairs_of_imgs(idx, clean_train_dataset, noise):
     clean_img = clean_train_dataset.data[idx]

@@ -14,9 +14,9 @@ $MYCOMMEND
 
 if [ $? -eq 0 ]
 then
-    echo "JobID:$SLURM_JOB_ID Python_command: ${MYCOMMEND}" | mail -s "[Success] ${MY_ROOT_PATH}" thurenjie@outlook.com
+    echo "JobID:$SLURM_JOB_ID Python_command: ${MYCOMMEND}" | mail -s "[Success] ${SLURM_JOB_ID}" thurenjie@outlook.com
 else 
-    echo "JobID:$SLURM_JOB_ID Python_command: ${MYCOMMEND}" | mail -s "[Fail] ${MY_ROOT_PATH}" thurenjie@outlook.com
+    echo "JobID:$SLURM_JOB_ID Python_command: ${MYCOMMEND}" | mail -s "[Fail] ${SLURM_JOB_ID}" thurenjie@outlook.com
 fi
 
 date >>${MY_ROOT_PATH}finish_history.log

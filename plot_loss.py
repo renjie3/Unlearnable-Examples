@@ -38,22 +38,22 @@ import numpy as np
 acc_name = ['randomassign_supervised_8', 'randomassign_supervised_32', 'supervised_orglabel_32', 'randomassign_bilevel_selfsupervised_16', 'perturb_on_random_initial_model_32', 'random_noise_32', 'clean simclr']
 color = ['r-', 'g-', 'b-', 'y-', 'c-', 'm-', 'tab:orange', 'tab:purple']
 
-# file_prename = "./results/unlearnable_20211025164521_0.5_512_151_budget8.0_class4_retrain_model_statistics"
-# # 20211031144658
-# pd_reader = pd.read_csv(file_prename+".csv")
-# # print(pd_reader)
+file_prename = "./results/unlearnable_cleantrain_104645774_20211115112200_0.5_512_1000_statistics"
+# 20211031144658
+pd_reader = pd.read_csv(file_prename+".csv")
+# print(pd_reader)
 
-# epoch1 = pd_reader.values[:,0]
-epoch = np.array([i for i in range(1,1001)])
-# loss = pd_reader.values[:,1]
+epoch1 = pd_reader.values[:,0]
+epoch = np.array([i for i in range(1,301)])
+loss = pd_reader.values[:,1]
 # acc = pd_reader.values[:,2]
 
-# file_prename_base = "./results/differentiable_20211102231654_0.5_200_512_statistics"
-# pd_reader = pd.read_csv(file_prename_base+".csv")
-# loss1 = pd_reader.values[:,1]
+file_prename_base = "./results/unlearnable_samplewise_104645799_20211115112213_0.5_512_1000_statistics"
+pd_reader = pd.read_csv(file_prename_base+".csv")
+loss1 = pd_reader.values[:300,1]
 # acc1 = pd_reader.values[:,2]
 
-loss = []
+# loss = []
 
 file_name_list = [
     './results/randomassign_supervised_10class_classwise_8_10_0.8_checkpoint_perturbation_budget8.0_class4_retrain_model_statistics',
@@ -68,14 +68,14 @@ file_name_list = [
 fig, ax=plt.subplots(1,1,figsize=(9,6))
 ax1 = ax.twinx()
 
-for i in range(len(acc_name)):
-    file_prename_base = file_name_list[i]
-    pd_reader = pd.read_csv(file_prename_base+".csv")
-    loss.append(pd_reader.values[:,1])
-    _ = ax.plot(epoch, loss[i], color[i], label = acc_name[i], linewidth =1.5)
+# for i in range(len(acc_name)):
+#     file_prename_base = file_name_list[i]
+#     pd_reader = pd.read_csv(file_prename_base+".csv")
+#     loss.append(pd_reader.values[:,1])
+#     _ = ax.plot(epoch, loss[i], color[i], label = acc_name[i], linewidth =1.5)
 
-# p2 = ax.plot(epoch1, loss,'r-', label = 'generating model')
-# p2 = ax.plot(epoch1, loss1,'g-', label = 'clean')
+p2 = ax.plot(epoch1, loss,'r-', label = 'clean')
+p2 = ax.plot(epoch, loss1,'g-', label = 'samplewise')
 ax.legend()
 # p3 = ax1.plot(epoch1,acc, 'b-', label = 'test_acc')
 # p3 = ax1.plot(epoch,acc1, 'y-', label = 'test_acc1')
@@ -87,6 +87,6 @@ ax.legend()
 ax.set_xlabel('epoch')
 ax.set_ylabel('loss')
 # ax1.set_ylabel('acc')
-plt.title('Retrain loss vs. clean SimCLR loss')
-plt.savefig("./visualization/retrain_loss.png")
+plt.title('Generating loss vs. clean SimCLR loss')
+plt.savefig("./visualization/noshuffle_loss.png")
 
