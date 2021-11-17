@@ -4,25 +4,50 @@ date >>${MY_ROOT_PATH}submit_history.log
 echo $SLURM_JOB_ID >>${MY_ROOT_PATH}submit_history.log
 echo $JOB_INFO >>${MY_ROOT_PATH}submit_history.log
 echo $MYCOMMEND >>${MY_ROOT_PATH}submit_history.log
+if [[ "$MYCOMMEND2" != *"No_commend2"* ]]
+then
+    echo $MYCOMMEND2 >>${MY_ROOT_PATH}submit_history.log
+fi
+if [[ "$MYCOMMEND3" != *"No_commend3"* ]]
+then
+    echo $MYCOMMEND3 >>${MY_ROOT_PATH}submit_history.log
+fi
 echo "---------------------------------------------------------------" >>${MY_ROOT_PATH}submit_history.log
 
 echo $JOB_INFO
 
 echo $MYCOMMEND
-$MYCOMMEND
+$MYCOMMEND 1>${MY_ROOT_PATH}logfile/${SLURM_JOB_ID}_1.log 2>${MY_ROOT_PATH}logfile/${SLURM_JOB_ID}.err &
+
+if [[ "$MYCOMMEND2" != *"No_commend2"* ]]
+then
+    echo $MYCOMMEND2
+    $MYCOMMEND2 1>${MY_ROOT_PATH}logfile/${SLURM_JOB_ID}_2.log 2>${MY_ROOT_PATH}logfile/${SLURM_JOB_ID}_2.err &
+fi
+
+if [[ "$MYCOMMEND3" != *"No_commend3"* ]]
+then
+    echo $MYCOMMEND3
+    $MYCOMMEND3 1>${MY_ROOT_PATH}logfile/${SLURM_JOB_ID}_3.log 2>${MY_ROOT_PATH}logfile/${SLURM_JOB_ID}_3.err &
+fi
 ###python main.py --batch_size 512 --epochs 1000 --arch resnet18
 
-if [ $? -eq 0 ]
-then
-    echo "JobID:$SLURM_JOB_ID Python_command: ${MYCOMMEND}" | mail -s "[Success] ${SLURM_JOB_ID}" thurenjie@outlook.com
-else 
-    echo "JobID:$SLURM_JOB_ID Python_command: ${MYCOMMEND}" | mail -s "[Fail] ${SLURM_JOB_ID}" thurenjie@outlook.com
-fi
+wait
+
+echo -e "JobID:$SLURM_JOB_ID \n Python_command: \n ${MYCOMMEND} \n ${MYCOMMEND2} \n ${MYCOMMEND3} \n " | mail -s "[Done] ${SLURM_JOB_ID}" thurenjie@outlook.com
 
 date >>${MY_ROOT_PATH}finish_history.log
 echo $SLURM_JOB_ID >>${MY_ROOT_PATH}finish_history.log
 echo $JOB_INFO >>${MY_ROOT_PATH}finish_history.log
 echo $MYCOMMEND >>${MY_ROOT_PATH}finish_history.log
+if [[ "$MYCOMMEND2" != *"No_commend2"* ]]
+then
+    echo $MYCOMMEND2 >>${MY_ROOT_PATH}finish_history.log
+fi
+if [[ "$MYCOMMEND3" != *"No_commend3"* ]]
+then
+    echo $MYCOMMEND3 >>${MY_ROOT_PATH}finish_history.log
+fi
 echo "---------------------------------------------------------------" >>${MY_ROOT_PATH}finish_history.log
 
 scontrol show job $SLURM_JOB_ID     ### write job information to SLURM output file.

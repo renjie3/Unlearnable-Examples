@@ -205,7 +205,7 @@ class CIFAR10Pair(CIFAR10):
         else:
             raise('Replacing data noise class failed. Because the length is not consistent.')
 
-    def replace_targets_with_id():
+    def replace_targets_with_id(self):
         for i in range(len(self.targets)):
             # print(self.targets[i], random_noise_class[i])
             self.targets[i] = i

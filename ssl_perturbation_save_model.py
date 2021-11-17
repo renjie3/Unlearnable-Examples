@@ -213,7 +213,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
     epochs = args.epochs
     save_image_num = args.save_image_num
     print("The whole epochs are {}".format(epochs))
-    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": [], 'noise_ave_value': []}
+    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": [], 'noise_ave_value': [], "numerator": [], "denominator": []}
     if args.job_id == '':
         save_name_pre = 'unlearnable_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
     else:
@@ -228,6 +228,8 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
             # print("item shape: ", item[0].shape)
         data_iter = iter(train_loader_simclr)
         sum_train_loss, sum_train_batch_size = 0,0
+        sum_numerator, sum_numerator_count = 0, 0
+        sum_denominator, sum_denominator_count = 0, 0
         # logger.info('=' * 20 + 'Searching Universal Perturbation' + '=' * 20)
         condition = True
         if hasattr(model, 'classify'):
@@ -265,9 +267,13 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                     for param in model.parameters():
                         param.requires_grad = True
                     # trainer.train_batch(torch.stack(train_imgs).to(device), labels, model, optimizer)
-                    batch_train_loss, batch_size_count = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
+                    sum_numerator += numerator
+                    sum_numerator_count += 1
+                    sum_denominator += denominator
+                    sum_denominator_count += 1
                 
             train_noise_loss_sum, train_noise_loss_count = 0, 0
             for i, (pos_samples_1, pos_samples_2, labels) in tqdm(enumerate(train_noise_data_loader_simclr), total=len(train_noise_data_loader_simclr), desc="Training perturbation"):
@@ -326,7 +332,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                     random_noise[key] = torch.clamp(class_noise, -args.epsilon, args.epsilon) # important.
                     # print("check random_noise: {}".format(np.mean(np.absolute(random_noise[key].to('cpu').numpy())) * 255))
                 # print("check all random_noise after clamp: {}".format(np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255))
-                noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy()))
+                noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255
                 # input()
             # print(train_noise_loss_sum / float(train_noise_loss_count))
             
@@ -350,6 +356,8 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
             #     condition = error_rate < args.universal_stop_error
         
         train_loss = sum_train_loss / float(sum_train_batch_size)
+        numerator = sum_numerator / float(sum_numerator_count)
+        denominator = sum_denominator / float(sum_denominator_count)
         print("train_loss:", train_loss)
         results['train_loss'].append(train_loss)
         results['noise_ave_value'].append(noise_ave_value)
@@ -364,6 +372,12 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
         results['best_loss'].append(best_loss)
         results['best_loss_acc'].append(best_loss_acc)
+
+        results['numerator'].append(numerator)
+        results['denominator'].append(denominator)
+
+        # print("results['numerator']", results['numerator'])
+        # print("results['denominator']", results['denominator'])
 
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
@@ -446,7 +460,7 @@ def universal_perturbation_model_group(noise_generator, trainer, evaluator, mode
                         for param in model.parameters():
                             param.requires_grad = True
                         # trainer.train_batch(torch.stack(train_imgs).to(device), labels, model, optimizer)
-                        batch_train_loss, batch_size_count = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer[idx_model], batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                        batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer[idx_model], batch_size, temperature, noise_after_transform=args.noise_after_transform)
                         sum_train_loss += batch_train_loss
                         sum_train_batch_size += batch_size_count
                         break
@@ -604,7 +618,10 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     idx = 0
     for pos_samples_1, pos_samples_2, labels in train_loader_simclr:
         for i, (pos1, pos2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
-            noise = random_noise[idx]
+            if args.shuffle_train_perturb_data:
+                noise = random_noise[label.item()]
+            else:
+                noise = random_noise[idx]
             mask_cord, _ = noise_generator._patch_noise_extend_to_img(noise, image_size=pos1.shape, patch_location=args.patch_location)
             mask_cord_list.append(mask_cord)
             idx += 1
@@ -612,7 +629,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     epochs = args.epochs
     save_image_num = args.save_image_num
     print("The whole epochs are {}".format(epochs))
-    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": []}
+    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": [], 'noise_ave_value': [], "numerator": [], "denominator": []}
     if args.job_id == '':
         save_name_pre = 'unlearnable_samplewise_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
     else:
@@ -629,6 +646,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         condition = True
         data_iter = iter(train_loader_simclr)
         sum_train_loss, sum_train_batch_size = 0,0
+        sum_numerator, sum_numerator_count = 0, 0
+        sum_denominator, sum_denominator_count = 0, 0
         while condition:
             if args.attack_type == 'min-min' and not args.load_model:
                 # Train Batch for min-min noise
@@ -674,8 +693,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     model.train()
                     for param in model.parameters():
                         param.requires_grad = True
-                    batch_train_loss, batch_size_count = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
-                    # batch_train_loss, batch_size_count = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    # batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
                     # for debug
                     # print("batch_train_loss: ", batch_train_loss / float(batch_size_count))
                     # debug_loss = train_simclr_noise_return_loss_tensor(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature)
@@ -683,6 +702,10 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     # input()
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
+                    sum_numerator += numerator
+                    sum_numerator_count += 1
+                    sum_denominator += denominator
+                    sum_denominator_count += 1
 
             # Search For Noise
             
@@ -732,6 +755,9 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     else:
                         random_noise[batch_start_idx+i] = delta.detach().cpu().numpy()
 
+                noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255
+                # print("noise_ave_value", noise_ave_value)
+
         # Here we save some samples in image.
         if epoch_idx % 10 == 0 and not args.no_save:
         # if True:
@@ -742,11 +768,14 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 utils.save_img_group(train_data_for_save_img, random_noise, './images/{}/{}.png'.format(save_name_pre, group_idx))
         
         train_loss = sum_train_loss / float(sum_train_batch_size)
+        numerator = sum_numerator / float(sum_numerator_count)
+        denominator = sum_denominator / float(sum_denominator_count)
         print(train_loss)
         results['train_loss'].append(train_loss)
         test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
         results['test_acc@1'].append(test_acc_1)
         results['test_acc@5'].append(test_acc_5)
+        results['noise_ave_value'].append(noise_ave_value)
 
         if train_loss < best_loss:
             best_loss = train_loss
@@ -755,6 +784,12 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
         results['best_loss'].append(best_loss)
         results['best_loss_acc'].append(best_loss_acc)
+
+        results['numerator'].append(numerator)
+        results['denominator'].append(denominator)
+
+        print("results['numerator']", results['numerator'])
+        print("results['denominator']", results['denominator'])
 
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
@@ -813,7 +848,7 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
     epochs = args.epochs
     save_image_num = args.save_image_num
     print("The whole epochs are {}".format(epochs))
-    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": []}
+    results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": [], "numerator": [], "denominator": []}
     if args.job_id == '':
         save_name_pre = 'unlearnable_cleantrain_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
     else:
@@ -829,7 +864,9 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
         train_idx = 0
         condition = True
         data_iter = iter(train_loader_simclr)
-        sum_train_loss, sum_train_batch_size = 0,0
+        sum_train_loss, sum_train_batch_size = 0, 0
+        sum_numerator, sum_numerator_count = 0, 0
+        sum_denominator, sum_denominator_count = 0, 0
         while condition:
             if args.attack_type == 'min-min' and not args.load_model:
                 # Train Batch for min-min noise
@@ -872,8 +909,8 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
                     model.train()
                     for param in model.parameters():
                         param.requires_grad = True
-                    batch_train_loss, batch_size_count = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
-                    # batch_train_loss, batch_size_count = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    # batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
                     # for debug
                     # print("batch_train_loss: ", batch_train_loss / float(batch_size_count))
                     # debug_loss = train_simclr_noise_return_loss_tensor(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature)
@@ -881,6 +918,10 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
                     # input()
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
+                    sum_numerator += numerator
+                    sum_numerator_count += 1
+                    sum_denominator += denominator
+                    sum_denominator_count += 1
 
             # # Search For Noise
             
@@ -963,11 +1004,15 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
             #     condition = error_rate < args.universal_stop_error
         
         train_loss = sum_train_loss / float(sum_train_batch_size)
-        print(train_loss)
+        numerator = sum_numerator / float(sum_numerator_count)
+        denominator = sum_denominator / float(sum_denominator_count)
         results['train_loss'].append(train_loss)
         test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
         results['test_acc@1'].append(test_acc_1)
         results['test_acc@5'].append(test_acc_5)
+
+        results['numerator'].append(numerator)
+        results['denominator'].append(denominator)
 
         if train_loss < best_loss:
             best_loss = train_loss

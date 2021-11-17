@@ -1,0 +1,47 @@
+check check
+__name__ simclr
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+The whole epochs are 1000
+0.03132214602374006
+min_min_attack_simclr_return_loss_tensor: 6.838218688964844
+0.03215832381101791
+min_min_attack_simclr_return_loss_tensor: 6.8390398025512695
+6.85822319984436
+0.04369802998553496
+min_min_attack_simclr_return_loss_tensor: 6.725785732269287
+0.04533173079835251
+min_min_attack_simclr_return_loss_tensor: 6.729069709777832
+6.759268760681152
+0.05846296153322328
+min_min_attack_simclr_return_loss_tensor: 6.637269020080566
+0.06158058291475754
+min_min_attack_simclr_return_loss_tensor: 6.6907639503479
+6.720971584320068
+0.09034784845425747
+min_min_attack_simclr_return_loss_tensor: 6.627508163452148
+0.10047558156657033
+min_min_attack_simclr_return_loss_tensor: 6.639745712280273
+6.632831573486328
+0.12414934288244694
+min_min_attack_simclr_return_loss_tensor: 6.571641445159912
+0.12938697589561343
+min_min_attack_simclr_return_loss_tensor: 6.550656318664551
+6.538074970245361
+0.128438986139372
+min_min_attack_simclr_return_loss_tensor: 6.459176063537598
+0.14507470128592104
+min_min_attack_simclr_return_loss_tensor: 6.5276641845703125
+6.540318965911865
+0.14966111455578357
+min_min_attack_simclr_return_loss_tensor: 6.475372314453125
+0.16614995867712423
+min_min_attack_simclr_return_loss_tensor: 6.446924686431885
+6.492771863937378
+0.16850357613293454
+min_min_attack_simclr_return_loss_tensor: 6.348426818847656
+0.186985932814423
+min_min_attack_simclr_return_loss_tensor: 6.407100200653076
+6.467265367507935

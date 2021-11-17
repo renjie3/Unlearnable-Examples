@@ -87,9 +87,12 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
 
     # total_num += batch_size
     total_loss = loss.item()
-    # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
+    # # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
+    # print(pos_sim.shape)
+    # print(sim_matrix.sum(dim=-1).shape)
+    # input()
 
-    return total_loss * pos_1.shape[0], pos_1.shape[0]
+    return total_loss * pos_1.shape[0], pos_1.shape[0], pos_sim.mean().item(), sim_matrix.sum(dim=-1).mean().item()
 
 def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False):
     net.eval()
