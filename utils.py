@@ -244,6 +244,26 @@ class CIFAR10Pair(CIFAR10):
         #     self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
         # self.data = self.data.astype(np.uint8)
 
+    def add_samplewise_noise_test_visualization(self, noise):
+        # print(noise.shape)
+        # print(self.data[0][0][0])
+        noise_255 = noise.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        # org_data = self.data
+        # # print(org_data[0])
+        self.data = self.data.astype(np.float32)
+
+        if len(self.data) == noise.shape[0]:
+            for i in range(len(self.targets)):
+                # print(noise_255[random_noise_class_test[i]][0][0])
+                # print(self.data[i][0][0])
+                # print(self.targets[i], random_noise_class[i])
+                self.data[i] += noise_255[i]
+                self.data[i] = np.clip(self.data[i], a_min=0, a_max=255)
+        else:
+            raise('Add noise to data failed. Because the length is not consistent.')
+
+        self.data = self.data.astype(np.uint8)
+
 
 class SameImgCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.

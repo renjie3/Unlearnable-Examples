@@ -79,7 +79,10 @@ ax1 = ax.twinx()
 for i in range(len(acc_name)):
     file_prename_base = file_name_list[i]
     pd_reader = pd.read_csv(file_prename_base+".csv")
-    loss.append(pd_reader.values[:,1])
+    if i == 4:
+        loss.append(pd_reader.values[:,7])
+    else:
+        loss.append(pd_reader.values[:,8])
     _ = ax.plot(epoch, loss[i], color[i], label = acc_name[i], linewidth =1.5)
 
 # p2 = ax.plot(epoch1, loss,'r-', label = 'clean')
@@ -93,8 +96,8 @@ ax.legend()
 # p3 = pl.plot(epoch,acc, 'b-', label = 'test_acc')
 # plt.legend()
 ax.set_xlabel('epoch')
-ax.set_ylabel('loss')
+ax.set_ylabel('denominator')
 # ax1.set_ylabel('acc')
-plt.title('generating loss')
-plt.savefig("./visualization/generating_loss.png")
+plt.title('denominator')
+plt.savefig("./visualization/denominator.png")
 

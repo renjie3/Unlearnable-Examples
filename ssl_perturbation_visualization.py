@@ -70,6 +70,12 @@ from simclr import test_ssl, train_simclr, test_ssl_visualization
 mlconfig.register(madrys.MadrysLoss)
 from thop import profile, clever_format
 
+import matplotlib.pyplot as plt
+import matplotlib
+from sklearn import manifold, datasets
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.ticker import NullFormatter
+
 # Convert Eps
 args.epsilon = args.epsilon / 255
 args.step_size = args.step_size / 255
@@ -106,6 +112,55 @@ for key in config:
     logger.info("%s: %s" % (key, config[key]))
 shutil.copyfile(config_file, os.path.join(exp_path, args.version+'.yaml'))
 
+
+def plot_distribution(net, test_data_visualization, samplewise_noise, pre_load_name):
+    net.eval()
+    c = 10
+    feature_bank = []
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+    with torch.no_grad():
+        test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
+        # generate feature bank
+        for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting on org images'):
+            feature, out = net(data.cuda(non_blocking=True))
+            feature_bank.append(feature)
+        # [D, N]
+        feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
+        # [N]
+        feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=feature_bank.device)
+        feature_tsne_input = feature_bank.cpu().numpy().transpose()[:1000]
+        labels_tsne_color = feature_labels.cpu().numpy()[:1000]
+        feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+        fig = plt.figure(figsize=(8, 8))
+        ax = fig.add_subplot(1, 1, 1)
+        plt.title("clean data with original label")
+        plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
+        ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+        ax.yaxis.set_major_formatter(NullFormatter())
+        plt.savefig('./results/{}_cleandata_orglabel.png'.format(pre_load_name))
+
+        test_data_visualization.add_samplewise_noise_test_visualization(samplewise_noise)
+
+        test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
+        # generate feature bank
+        perturbed_feature_bank = []
+        for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting on perturbed images'):
+            feature, out = net(data.cuda(non_blocking=True))
+            perturbed_feature_bank.append(feature)
+        # [D, N]
+        perturbed_feature_bank = torch.cat(perturbed_feature_bank, dim=0).t().contiguous()
+        # [N]
+        # feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=feature_bank.device)
+        perturbed_feature_tsne_input = perturbed_feature_bank.cpu().numpy().transpose()[:1000]
+        # labels_tsne_color = feature_labels.cpu().numpy()[:1000]
+        perturbed_feature_tsne_output = tsne.fit_transform(perturbed_feature_tsne_input)
+        fig = plt.figure(figsize=(8, 8))
+        ax = fig.add_subplot(1, 1, 1)
+        plt.title("noise data with original label")
+        plt.scatter(perturbed_feature_tsne_output[:, 0], perturbed_feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
+        ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+        ax.yaxis.set_major_formatter(NullFormatter())
+        plt.savefig('./results/{}_noisedata_orglabel.png'.format(pre_load_name))
 
 def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evaluator, ENV, data_loader):
     # ssl does not use this
@@ -468,6 +523,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     else:
         return random_noise
 
+
 def main():
     feature_dim, temperature, k = args.feature_dim, args.temperature, args.k
     batch_size, epochs = args.batch_size, args.epochs
@@ -544,18 +600,18 @@ def main():
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
-    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    flops, params = clever_format([flops, params])
-    print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+    # flops, params = clever_format([flops, params])
+    # print('# Model Params: {} FLOPs: {}'.format(params, flops))
     # load pre-trained model parameters here by renjie3.
     # unlearnable_20211011011237_0.5_512_150
     # unlearnable_36176425_20211102011903_0.5_512_1000_statistics
-    pre_load_name = "differentiable_20211102231654_0.5_200_512"
+    pre_load_name = "unlearnable_cleantrain_105483054_1_20211116165927_0.5_512_1000"
     pretrained_model_path = "./results/{}_model.pth".format(pre_load_name)
     model.load_state_dict(torch.load(pretrained_model_path))
     perturbation_budget = 16
     # # load noise here:
-    # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name)).mul(perturbation_budget)
+    pretrained_samplewise_noise = torch.load("./results/unlearnable_samplewise_105461910_2_20211116200103_0.5_512_1000_checkpoint_perturbation.pt")
     # random_noise_class_path = 'noise_class_label_test.npy'
 
     # train_data = utils.TransferCIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=False)
@@ -603,14 +659,15 @@ def main():
             # save_name_pre = ''
             # create new test dataset
             # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True)
-            test_data_visualization = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True, class_4=True)
+            test_data_visualization = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True, class_4=True)
             # test_data_visualization_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
             # load model here:
             random_noise_class_test = np.load('noise_class_label_test.npy')
             # load noise here:
-            pretrained_classwise_noise = None
+            # pretrained_classwise_noise = None
             # test_visualization
-            test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise, pre_load_name+"retrain", True)
+            # test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise, pre_load_name+"retrain", True)
+            plot_distribution(model, test_data_visualization, pretrained_samplewise_noise, pre_load_name+"_feature")
             # test_ssl_visualization(model, train_data, None, None, pre_load_name)
 
         # torch.save(noise, os.path.join(args.exp_name, save_name_pre+'_perturbation.pt'))

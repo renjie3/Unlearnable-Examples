@@ -4,20 +4,20 @@ MY_JOB_ROOT_PATH=`pwd`
 # echo $MY_JOB_ROOT_PATH
 cd $MY_JOB_ROOT_PATH
 
-MYTIME="2:00:00"
+MYTIME="160:00:00"
 MYCPU="6"
 
 # JOB_INFO="noise_ave_value"
 # MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4"
 
-JOB_INFO="clean train"
-MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data"
+JOB_INFO="no shuffle"
+MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --class_4 --not_shuffle_train_data"
 
-MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4"
+# MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 16 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --class_4 --not_shuffle_train_data"
 
-MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 16 --num_steps 20 --step_size 3.2 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --random_start"
+# MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --class_4 --not_shuffle_train_data"
 
-# MYCOMMEND2="No_commend2"
+MYCOMMEND2="No_commend2"
 MYCOMMEND3="No_commend3"
 
 # JOB_INFO="Retrain SimCLR to test the transferability."
