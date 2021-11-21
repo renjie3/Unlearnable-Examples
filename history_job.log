@@ -2147,3 +2147,57 @@ Wed Nov 17 17:26:29 EST 2021
 no shuffle
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --class_4 --not_shuffle_train_data
 ---------------------------------------------------------------
+Wed Nov 17 22:51:51 EST 2021
+107359842
+samplewise_myshuffle
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 2
+---------------------------------------------------------------
+Wed Nov 17 22:52:00 EST 2021
+107359851
+samplewise_myshuffle
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 5
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 10
+---------------------------------------------------------------
+Thu Nov 18 17:12:35 EST 2021
+107434055
+samplewise_myshuffle 500 1000 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 500
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 1000
+---------------------------------------------------------------
+Thu Nov 18 17:13:59 EST 2021
+107435691
+samplewise_myshuffle 500 1000 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --perturb_first --shuffle_step 10
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --perturb_first --shuffle_step 20
+---------------------------------------------------------------
+Fri Nov 19 19:09:00 EST 2021
+107535314
+samplewise_myshuffle 500 1000 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 2000
+---------------------------------------------------------------
+Fri Nov 19 19:32:30 EST 2021
+107536566
+samplewise_myshuffle 500 1000 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 500
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 1000
+---------------------------------------------------------------
+Fri Nov 19 19:32:41 EST 2021
+107536567
+samplewise_myshuffle 10 20 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 10
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --shuffle_step 20
+---------------------------------------------------------------
+Fri Nov 19 19:38:12 EST 2021
+107536677
+samplewise_myshuffle 10 20 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --perturb_first --shuffle_step 10
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_myshuffle --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --perturb_first --shuffle_step 20
+---------------------------------------------------------------
+Sat Nov 20 21:05:45 EST 2021
+107559015
+samplewise_myshuffle 10 20 shuffle_step
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --feature_dim 2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --feature_dim 2
+---------------------------------------------------------------

@@ -22,7 +22,7 @@ parser.add_argument('--universal_train_target', default='train_subset', type=str
 parser.add_argument('--train_step', default=10, type=int)
 parser.add_argument('--use_subset', action='store_true', default=False)
 parser.add_argument('--attack_type', default='min-min', type=str, choices=['min-min', 'min-max', 'random'], help='Attack type')
-parser.add_argument('--perturb_type', default='classwise', type=str, choices=['classwise', 'samplewise', 'clean_train'], help='Perturb type')
+parser.add_argument('--perturb_type', default='classwise', type=str, choices=['classwise', 'samplewise', 'clean_train', 'samplewise_myshuffle'], help='Perturb type')
 parser.add_argument('--patch_location', default='center', type=str, choices=['center', 'random'], help='Location of the noise')
 parser.add_argument('--noise_shape', default=[10, 3, 32, 32], nargs='+', type=int, help='noise shape')
 parser.add_argument('--epsilon', default=8, type=float, help='perturbation')
@@ -49,7 +49,8 @@ parser.add_argument('--class_4', action='store_true', default=False)
 parser.add_argument('--noise_after_transform', action='store_true', default=False)
 parser.add_argument('--shuffle_train_perturb_data', action='store_true', default=False)
 parser.add_argument('--not_shuffle_train_data', action='store_true', default=False)
-parser.add_argument('--same_shuffle_train_data_and_train_perturb_data', action='store_true', default=False)
+parser.add_argument('--shuffle_step', default=5, type=int, help='Reshuffle the idx every n steps.')
+parser.add_argument('--perturb_first', action='store_true', default=False)
 args = parser.parse_args()
 
 
@@ -789,8 +790,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         results['numerator'].append(numerator)
         results['denominator'].append(denominator)
 
-        print("results['numerator']", results['numerator'])
-        print("results['denominator']", results['denominator'])
+        # print("results['numerator']", results['numerator'])
+        # print("results['denominator']", results['denominator'])
 
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
@@ -822,18 +823,14 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         return random_noise, save_name_pre
 
 
-def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img):
+def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img, train_dataset):
     mask_cord_list = []
     idx = 0
-    for pos_samples_1, pos_samples_2, labels in train_loader_simclr:
-        for i, (pos1, pos2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
-            if args.shuffle_train_perturb_data:
-                noise = random_noise[label.item()]
-            else:
-                noise = random_noise[idx]
-            mask_cord, _ = noise_generator._patch_noise_extend_to_img(noise, image_size=pos1.shape, patch_location=args.patch_location)
-            mask_cord_list.append(mask_cord)
-            idx += 1
+    for pos_samples_1, pos_samples_2, labels in train_dataset:
+        noise = random_noise[idx]
+        mask_cord, _ = noise_generator._patch_noise_extend_to_img(noise, image_size=pos_samples_1.shape, patch_location=args.patch_location)
+        mask_cord_list.append(mask_cord)
+        idx += 1
 
     epochs = args.epochs
     save_image_num = args.save_image_num
@@ -853,23 +850,36 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
     for epoch_idx in range(1, epochs+1):
         train_idx = 0
         condition = True
-        data_iter = iter(train_loader_simclr)
+        if (epoch_idx-1) % args.shuffle_step == 0:
+            shuffle_idx = np.random.permutation(1024).reshape((2, batch_size))
+        batch_idx_iter = iter(shuffle_idx)
+        # data_iter = iter(train_loader_simclr)
         sum_train_loss, sum_train_batch_size = 0,0
         sum_numerator, sum_numerator_count = 0, 0
         sum_denominator, sum_denominator_count = 0, 0
         while condition:
-            if args.attack_type == 'min-min' and not args.load_model:
+            if args.attack_type == 'min-min' and not args.load_model and not args.perturb_first:
                 # Train Batch for min-min noise
                 end_of_iteration = "END_OF_ITERATION"
                 for j in range(0, args.train_step):
                     try:
-                        next_item = next(data_iter, end_of_iteration)
+                    # if True:
+                        next_item = next(batch_idx_iter, end_of_iteration)
                         if next_item != end_of_iteration:
-                            (pos_samples_1, pos_samples_2, labels) = next_item
-                            
+                            pos_samples_1 = []
+                            pos_samples_2 = []
+                            labels = []
+                            for s_idx in next_item:
+                                pos_1, pos_2, label = train_dataset[s_idx]
+                                pos_samples_1.append(pos_1)
+                                pos_samples_2.append(pos_2)
+                                labels.append(label)
+                            pos_samples_1 = torch.stack(pos_samples_1)
+                            pos_samples_2 = torch.stack(pos_samples_2)
+                            labels = torch.tensor(labels)
                         else:
                             condition = False
-                            del data_iter
+                            del batch_idx_iter
                             break
                     except:
                         # data_iter = iter(data_loader['train_dataset'])
@@ -881,13 +891,10 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
                     train_pos_1 = []
                     train_pos_2 = []
                     for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
-                        if args.shuffle_train_perturb_data:
-                            sample_noise = random_noise[label.item()]
-                        else:
-                            sample_noise = random_noise[train_idx]
+                        sample_noise = random_noise[label.item()]
                         c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
                         mask = np.zeros((c, h, w), np.float32)
-                        x1, x2, y1, y2 = mask_cord_list[train_idx]
+                        x1, x2, y1, y2 = mask_cord_list[label.item()]
                         if type(sample_noise) is np.ndarray:
                             mask[:, x1: x2, y1: y2] = sample_noise
                         else:
@@ -897,7 +904,6 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
                         # images[i] = images[i] + sample_noise
                         train_pos_1.append(pos_samples_1[i]+sample_noise)
                         train_pos_2.append(pos_samples_2[i]+sample_noise)
-                        train_idx += 1
 
                     model.train()
                     for param in model.parameters():
@@ -920,7 +926,21 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
             
             train_noise_loss_sum, train_noise_loss_count = 0, 0
             idx = 0
-            for i, (pos_samples_1, pos_samples_2, labels) in tqdm(enumerate(train_noise_data_loader_simclr), total=len(train_noise_data_loader_simclr), desc="Training images"):
+            for i, batch_s_idx in tqdm(enumerate(shuffle_idx), total=len(shuffle_idx), desc="Training images"):
+
+                # manually construct the batch of images
+                pos_samples_1 = []
+                pos_samples_2 = []
+                labels = []
+                for s_idx in batch_s_idx:
+                    pos_1, pos_2, label = train_dataset[s_idx]
+                    pos_samples_1.append(pos_1)
+                    pos_samples_2.append(pos_2)
+                    labels.append(label)
+                pos_samples_1 = torch.stack(pos_samples_1)
+                pos_samples_2 = torch.stack(pos_samples_2)
+                labels = torch.tensor(labels)
+
                 pos_samples_1, pos_samples_2, labels, model = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device), model.to(device)
 
                 # Add Sample-wise Noise to each sample
@@ -967,6 +987,70 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
                 noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255
                 # print("noise_ave_value", noise_ave_value)
 
+            if args.attack_type == 'min-min' and not args.load_model and args.perturb_first:
+                # Train Batch for min-min noise
+                end_of_iteration = "END_OF_ITERATION"
+                for j in range(0, args.train_step):
+                    try:
+                    # if True:
+                        next_item = next(batch_idx_iter, end_of_iteration)
+                        if next_item != end_of_iteration:
+                            pos_samples_1 = []
+                            pos_samples_2 = []
+                            labels = []
+                            for s_idx in next_item:
+                                pos_1, pos_2, label = train_dataset[s_idx]
+                                pos_samples_1.append(pos_1)
+                                pos_samples_2.append(pos_2)
+                                labels.append(label)
+                            pos_samples_1 = torch.stack(pos_samples_1)
+                            pos_samples_2 = torch.stack(pos_samples_2)
+                            labels = torch.tensor(labels)
+                        else:
+                            condition = False
+                            del batch_idx_iter
+                            break
+                    except:
+                        # data_iter = iter(data_loader['train_dataset'])
+                        # (pos_1, pos_2, labels) = next(data_iter)
+                        raise('train loader iteration problem')
+
+                    pos_samples_1, pos_samples_2, labels = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device)
+                    # Add Sample-wise Noise to each sample
+                    train_pos_1 = []
+                    train_pos_2 = []
+                    for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
+                        sample_noise = random_noise[label.item()]
+                        c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
+                        mask = np.zeros((c, h, w), np.float32)
+                        x1, x2, y1, y2 = mask_cord_list[label.item()]
+                        if type(sample_noise) is np.ndarray:
+                            mask[:, x1: x2, y1: y2] = sample_noise
+                        else:
+                            mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+                        # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+                        sample_noise = torch.from_numpy(mask).to(device)
+                        # images[i] = images[i] + sample_noise
+                        train_pos_1.append(pos_samples_1[i]+sample_noise)
+                        train_pos_2.append(pos_samples_2[i]+sample_noise)
+
+                    model.train()
+                    for param in model.parameters():
+                        param.requires_grad = True
+                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    # batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    # for debug
+                    # print("batch_train_loss: ", batch_train_loss / float(batch_size_count))
+                    # debug_loss = train_simclr_noise_return_loss_tensor(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature)
+                    # print("debug_loss: ", debug_loss.item())
+                    # input()
+                    sum_train_loss += batch_train_loss
+                    sum_train_batch_size += batch_size_count
+                    sum_numerator += numerator
+                    sum_numerator_count += 1
+                    sum_denominator += denominator
+                    sum_denominator_count += 1
+
         # Here we save some samples in image.
         if epoch_idx % 10 == 0 and not args.no_save:
         # if True:
@@ -996,9 +1080,6 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
 
         results['numerator'].append(numerator)
         results['denominator'].append(denominator)
-
-        print("results['numerator']", results['numerator'])
-        print("results['denominator']", results['denominator'])
 
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
@@ -1269,6 +1350,8 @@ def main():
         train_noise_data.replace_random_noise_class(random_noise_class)
     if args.shuffle_train_perturb_data:
         train_noise_data.replace_targets_with_id()
+    if args.perturb_type == 'samplewise_myshuffle':
+        train_data.replace_targets_with_id()
     train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=args.shuffle_train_perturb_data, num_workers=2, pin_memory=True)
     # test data don't have to change the target. by renjie3
     memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True, class_4=args.class_4)
@@ -1329,8 +1412,11 @@ def main():
         if args.perturb_type == 'samplewise':
             noise, save_name_pre = sample_wise_perturbation(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
 
+        elif args.perturb_type == 'samplewise_myshuffle':
+            noise, save_name_pre = sample_wise_perturbation_myshuffle(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data, train_data)
+
         elif args.perturb_type == 'clean_train':
-            noise, save_name_pre = clean_train(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data)
+            noise, save_name_pre = clean_train(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data, )
             
         elif args.perturb_type == 'classwise':
             # noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)

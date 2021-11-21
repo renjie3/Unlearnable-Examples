@@ -59,6 +59,50 @@ train_diff_transform3 = nn.Sequential(
     Kaug.RandomHorizontalFlip(p=0.5),
 )
 
+def get_pairs_of_imgs(idx, clean_train_dataset, noise, samplewise = False):
+    clean_img = clean_train_dataset.data[idx]
+    clean_img = transforms.functional.to_tensor(clean_img)
+    if samplewise:
+        unlearnable_img = torch.clamp(clean_img + noise[idx], 0, 1)
+
+        x = noise[idx]
+    else:
+        unlearnable_img = torch.clamp(clean_img + noise[clean_train_dataset.targets[idx]], 0, 1)
+
+        x = noise[clean_train_dataset.targets[idx]]
+    x_min = torch.min(x)
+    x_max = torch.max(x)
+    noise_norm = (x - x_min) / (x_max - x_min)
+    noise_norm = torch.clamp(noise_norm, 0, 1)
+
+    return [clean_img, noise_norm, unlearnable_img]
+
+def save_img_group(clean_train_dataset, noise, img_path, samplewise = False):
+    fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+    selected_idx = [random.randint(0, 1023) for _ in range(9)]
+    img_grid = []
+    for idx in selected_idx:
+        img_grid += get_pairs_of_imgs(idx, clean_train_dataset, noise, samplewise)
+
+    img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=9, pad_value=255)
+    npimg = img_grid_tensor.cpu().numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.savefig(img_path)
+
+def save_img_group_by_index(clean_train_dataset, noise, img_path, selected_idx, samplewise = False):
+    fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+    if len(selected_idx) != 9:
+        raise("Please use 9 indexes")
+    # selected_idx = [random.randint(0, 1023) for _ in range(9)]
+    img_grid = []
+    for idx in selected_idx:
+        img_grid += get_pairs_of_imgs(idx, clean_train_dataset, noise, samplewise)
+
+    img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=9, pad_value=255)
+    npimg = img_grid_tensor.cpu().numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.savefig(img_path)
+
 def patch_noise_extend_to_img(noise, image_size=[32, 32, 3], patch_location='center'):
     h, w, c = image_size[0], image_size[1], image_size[2]
     mask = np.zeros((h, w, c), np.float32)
@@ -392,8 +436,11 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
+
+        self.class_4 = class_4
+        self.samplewise_perturb = samplewise_perturb
 
         if class_4:
             sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
@@ -422,20 +469,22 @@ class TransferCIFAR10Pair(CIFAR10):
     # random_noise_class = np.load('noise_class_label.npy')
         # self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
         # self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
-        self.data = self.data.astype(np.float32)
-        for idx in range(len(self.data)):
-            if not samplewise_perturb:
-                if org_label_flag:
-                    noise = self.noise_255[self.targets[idx]]
+        
+        if not flag_save_img_group:
+            self.data = self.data.astype(np.float32)
+            for idx in range(len(self.data)):
+                if not samplewise_perturb:
+                    if org_label_flag:
+                        noise = self.noise_255[self.targets[idx]]
+                    else:
+                        noise = self.noise_255[self.random_noise_class[idx]]
                 else:
-                    noise = self.noise_255[self.random_noise_class[idx]]
-            else:
-                noise = self.noise_255[idx]
-                # print("check it goes samplewise.")
-            noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
-            self.data[idx] = self.data[idx] + noise
-            self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
-        self.data = self.data.astype(np.uint8)
+                    noise = self.noise_255[idx]
+                    # print("check it goes samplewise.")
+                noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+                self.data[idx] = self.data[idx] + noise
+                self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+            self.data = self.data.astype(np.uint8)
 
 
     def __getitem__(self, index):
@@ -485,6 +534,58 @@ class TransferCIFAR10Pair(CIFAR10):
 
         self.data = self.data.astype(np.uint8)
 
+    def similarity_between_perturbation(self):
+        if self.class_4:
+            class_num = 4
+        else:
+            class_num = 10
+
+        np_targets = np.array(self.targets)
+        mean_one_class = []
+        for i in range(class_num):
+            one_class_index = np.where(np_targets == i)[0]
+            noise_one_class = self.noise_255[one_class_index]
+            mean_one_class.append(noise_one_class.mean(axis=0))
+            for j in range(len(one_class_index) // 9):
+                save_img_group_by_index(self, self.perturb_tensor, "./visualization/test.png", one_class_index[j*9:(j+1)*9], self.samplewise_perturb)
+            # img1 = one_class_index[0]
+            # img2 = one_class_index[1]
+            # hist = {'0':0, '10':0, '20':0, '30':0, '40':0, '50':0, '60':0, }
+            # diff = np.absolute(noise_one_class[0] - noise_one_class[1])
+            # for diff_i in range(diff.shape[0]):
+            #     for diff_j in range(diff.shape[1]):
+            #         for diff_k in range(diff.shape[2]):
+            #             if diff[diff_i, diff_j, diff_k] < 10:
+            #                 hist['0'] += 1
+            #                 continue
+            #             if diff[diff_i, diff_j, diff_k] < 20:
+            #                 hist['10'] += 1
+            #                 continue
+            #             if diff[diff_i, diff_j, diff_k] < 30:
+            #                 hist['20'] += 1
+            #                 continue
+            #             if diff[diff_i, diff_j, diff_k] < 40:
+            #                 hist['30'] += 1
+            #                 continue
+            #             if diff[diff_i, diff_j, diff_k] < 50:
+            #                 hist['40'] += 1
+            #                 continue
+            #             if diff[diff_i, diff_j, diff_k] < 60:
+            #                 hist['50'] += 1
+            #                 continue
+            #             if diff[diff_i, diff_j, diff_k] < 70:
+            #                 hist['60'] += 1
+            #                 continue
+            # print(hist)
+                input()
+        # for i in range(class_num):
+        #     one_class_index = np.where(np_targets == i)[0]
+        #     noise_one_class = self.noise_255[one_class_index]
+        #     for j in range(len(noise_one_class)):
+        #         print(np.absolute(mean_one_class[3] - noise_one_class[j]).mean())
+        #         # print(noise_one_class[j])
+        #         input()
+            
 
 # class TransferFloatCIFAR10Pair(CIFAR10):
 #     """CIFAR10 Dataset.
@@ -571,31 +672,6 @@ class TransferCIFAR10Pair(CIFAR10):
 #             raise('Making data unlearnable failed. Because the length is not consistent.')
 
 #         self.data = self.data.astype(np.uint8)
-    
-def get_pairs_of_imgs(idx, clean_train_dataset, noise):
-    clean_img = clean_train_dataset.data[idx]
-    clean_img = transforms.functional.to_tensor(clean_img)
-    unlearnable_img = torch.clamp(clean_img + noise[clean_train_dataset.targets[idx]], 0, 1)
-
-    x = noise[clean_train_dataset.targets[idx]]
-    x_min = torch.min(x)
-    x_max = torch.max(x)
-    noise_norm = (x - x_min) / (x_max - x_min)
-    noise_norm = torch.clamp(noise_norm, 0, 1)
-
-    return [clean_img, noise_norm, unlearnable_img]
-
-def save_img_group(clean_train_dataset, noise, img_path):
-    fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
-    selected_idx = [random.randint(0, 1023) for _ in range(9)]
-    img_grid = []
-    for idx in selected_idx:
-        img_grid += get_pairs_of_imgs(idx, clean_train_dataset, noise)
-
-    img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=9, pad_value=255)
-    npimg = img_grid_tensor.cpu().numpy()
-    plt.imshow(np.transpose(npimg, (1, 2, 0)))
-    plt.savefig(img_path)
 
 def plot_loss(file_prename):
     pd_reader = pd.read_csv(file_prename+".csv")

@@ -162,6 +162,86 @@ def plot_distribution(net, test_data_visualization, samplewise_noise, pre_load_n
         ax.yaxis.set_major_formatter(NullFormatter())
         plt.savefig('./results/{}_noisedata_orglabel.png'.format(pre_load_name))
 
+def plot_distribution_2D(net, test_data_visualization, samplewise_noise, pre_load_name):
+    net.eval()
+    c = 10
+    out_bank = []
+    with torch.no_grad():
+        test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
+        # generate feature bank
+        for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting on org images'):
+            feature, out = net(data.cuda(non_blocking=True))
+            out_bank.append(out)
+        # [D, N]
+        out_bank = torch.cat(out_bank, dim=0).t().contiguous()
+        # [N]
+        feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=out_bank.device)
+        out_plot = out_bank.cpu().numpy().transpose()[:1000]
+        labels_color = feature_labels.cpu().numpy()[:1000]
+        fig = plt.figure(figsize=(8, 8))
+        ax = fig.add_subplot(1, 1, 1)
+        plt.title("clean data with original label")
+        plt.scatter(out_plot[:, 0], out_plot[:, 1], s=10, c=labels_color, cmap=plt.cm.Spectral)
+        ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+        ax.yaxis.set_major_formatter(NullFormatter())
+        plt.savefig('./results/{}_cleandata_orglabel.png'.format(pre_load_name))
+        plt.close()
+
+        color_list = ['r', 'g', 'b', 'y']
+
+        fig = plt.figure(figsize=(8, 8))
+        for i in range(4):
+            ax = fig.add_subplot(2, 2, i+1)
+            plt.title("clean data with class {} original label".format(i))
+            one_class_index = np.where(labels_color == i)
+            # print(one_class_index[0].shape)
+            # print(type(one_class_index[0]))
+            plt.scatter(out_plot[one_class_index[0], 0], out_plot[one_class_index[0], 1], s=1, c=color_list[i], cmap=plt.cm.Spectral)
+            plt.xlim((-1.2, 1.2))
+            plt.ylim((-1.2, 1.2))
+            ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+            ax.yaxis.set_major_formatter(NullFormatter())
+        plt.savefig('./results/{}_one_class_cleandata_orglabel.png'.format(pre_load_name))
+        plt.close()
+
+        if samplewise_noise != None: 
+
+            test_data_visualization.add_samplewise_noise_test_visualization(samplewise_noise)
+
+            test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
+            # generate feature bank
+            perturbed_out_bank = []
+            for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting on perturbed images'):
+                feature, out = net(data.cuda(non_blocking=True))
+                perturbed_out_bank.append(out)
+            # [D, N]
+            perturbed_out_bank = torch.cat(perturbed_out_bank, dim=0).t().contiguous()
+            # [N]
+            # feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=feature_bank.device)
+            perturbed_out_plot = perturbed_out_bank.cpu().numpy().transpose()[:1000]
+            # labels_tsne_color = feature_labels.cpu().numpy()[:1000]
+            fig = plt.figure(figsize=(8, 8))
+            ax = fig.add_subplot(1, 1, 1)
+            plt.title("noise data with original label")
+            plt.scatter(perturbed_out_plot[:, 0], perturbed_out_plot[:, 1], s=10, c=labels_color, cmap=plt.cm.Spectral)
+            ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+            ax.yaxis.set_major_formatter(NullFormatter())
+            plt.savefig('./results/{}_noisedata_orglabel.png'.format(pre_load_name))
+            plt.close()
+            fig = plt.figure(figsize=(8, 8))
+            for i in range(4):
+                ax = fig.add_subplot(2, 2, i+1)
+                plt.title("noise data with class {} original label".format(i))
+                one_class_index = np.where(labels_color == i)
+                # print(labels_color.shape)
+                plt.scatter(perturbed_out_plot[one_class_index[0], 0], perturbed_out_plot[one_class_index[0], 1], s=1, c=color_list[i], cmap=plt.cm.Spectral)
+                plt.xlim((-1.2, 1.2))
+                plt.ylim((-1.2, 1.2))
+                ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+                ax.yaxis.set_major_formatter(NullFormatter())
+            plt.savefig('./results/{}_one_class_noisedata_orglabel.png'.format(pre_load_name))
+            plt.close()
+
 def train(starting_epoch, model, optimizer, scheduler, criterion, trainer, evaluator, ENV, data_loader):
     # ssl does not use this
     for epoch in range(starting_epoch, config.epochs):
@@ -606,12 +686,12 @@ def main():
     # load pre-trained model parameters here by renjie3.
     # unlearnable_20211011011237_0.5_512_150
     # unlearnable_36176425_20211102011903_0.5_512_1000_statistics
-    pre_load_name = "unlearnable_cleantrain_105483054_1_20211116165927_0.5_512_1000"
+    pre_load_name = "unlearnable_samplewise_107559015_2_20211120210627_0.5_512_1000"
     pretrained_model_path = "./results/{}_model.pth".format(pre_load_name)
     model.load_state_dict(torch.load(pretrained_model_path))
     perturbation_budget = 16
     # # load noise here:
-    pretrained_samplewise_noise = torch.load("./results/unlearnable_samplewise_105461910_2_20211116200103_0.5_512_1000_checkpoint_perturbation.pt")
+    pretrained_samplewise_noise = torch.load("./results/unlearnable_samplewise_107559015_2_20211120210627_0.5_512_1000perturbation.pt")
     # random_noise_class_path = 'noise_class_label_test.npy'
 
     # train_data = utils.TransferCIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=False)
@@ -667,7 +747,7 @@ def main():
             # pretrained_classwise_noise = None
             # test_visualization
             # test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise, pre_load_name+"retrain", True)
-            plot_distribution(model, test_data_visualization, pretrained_samplewise_noise, pre_load_name+"_feature")
+            plot_distribution_2D(model, test_data_visualization, pretrained_samplewise_noise, pre_load_name+"_feature")
             # test_ssl_visualization(model, train_data, None, None, pre_load_name)
 
         # torch.save(noise, os.path.join(args.exp_name, save_name_pre+'_perturbation.pt'))

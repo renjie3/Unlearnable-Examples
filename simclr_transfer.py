@@ -13,6 +13,7 @@ parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
 parser.add_argument('--pre_load_name', default='', type=str, help='The backbone of encoder')
 parser.add_argument('--samplewise', action='store_true', default=False)
 parser.add_argument('--orglabel', action='store_true', default=False)
+parser.add_argument('--save_img_group', action='store_true', default=False)
 
 # args parse
 args = parser.parse_args()
@@ -401,7 +402,7 @@ if __name__ == '__main__':
     # train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True)
     # train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True,
     #                           drop_last=True)
-
+    # unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation
 
     if args.pre_load_name == '':
         raise("Use pre_load_name.")
@@ -422,7 +423,8 @@ if __name__ == '__main__':
         save_name_pre += '_orglabel'
     print(save_name_pre)
 
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel)
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group)
+    train_data.similarity_between_perturbation()
     # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
     # load noise here:
     # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
