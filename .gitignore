@@ -7,3 +7,10 @@ test_exp/
 pretrained_checkpoints/
 exp_results.json
 plots/
+data/
+fix_checkpoint/
+my_experiments/
+results/
+results_1109_bakup/
+path/to/your/experiment/folder/perturbation.pt
+path/to/your/experiment/folder/resnet18/poison_targets.npy
