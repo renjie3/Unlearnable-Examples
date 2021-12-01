@@ -14,6 +14,7 @@ parser.add_argument('--pre_load_name', default='', type=str, help='The backbone 
 parser.add_argument('--samplewise', action='store_true', default=False)
 parser.add_argument('--orglabel', action='store_true', default=False)
 parser.add_argument('--save_img_group', action='store_true', default=False)
+parser.add_argument('--perturb_rate', default=1.0, type=float, help='perturbation_rate')
 
 # args parse
 args = parser.parse_args()
@@ -345,10 +346,9 @@ def test_ssl_visualization(net, test_data_visualization, random_noise_class_test
             plt.savefig('./visualization/noisedata_noiselabel_org{}.png'.format(i))
             plt.close()
 
-
     return 
 
-# test for one epoch, use weighted knn to find the most similar images' label to assign the test image
+# for simclrpy, removed some positional parameters, will use global variables to replace them.
 def test_ssl_for_simclrpy(net, memory_data_loader, test_data_loader):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
@@ -423,8 +423,9 @@ if __name__ == '__main__':
         save_name_pre += '_orglabel'
     print(save_name_pre)
 
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group)
-    train_data.similarity_between_perturbation()
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate)
+    if args.save_img_group:
+        train_data.save_noise_img()
     # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
     # load noise here:
     # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))

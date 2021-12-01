@@ -1693,3 +1693,60 @@ samplewise_myshuffle 10 20 shuffle_step
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --feature_dim 2 --job_id 107559015_1
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --feature_dim 2 --job_id 107559015_2
 ---------------------------------------------------------------
+Sun Nov 21 19:29:54 EST 2021
+Sun Nov 21 19:29:54 EST 2021
+107636987
+107636983
+perturb subset
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.3 --job_id 107636987_1
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.9 --job_id 107636983_1
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.2 --job_id 107636987_2
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.8 --job_id 107636983_2
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.1 --job_id 107636987_3
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.7 --job_id 107636983_3
+---------------------------------------------------------------
+---------------------------------------------------------------
+Sun Nov 21 19:29:54 EST 2021
+107636986
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.6 --job_id 107636986_1
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.5 --job_id 107636986_2
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.4 --job_id 107636986_3
+---------------------------------------------------------------
+Sun Nov 21 19:36:03 EST 2021
+107636997
+transfer resnet50
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet50 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --job_id 107636997_1
+---------------------------------------------------------------
+Mon Nov 22 02:10:49 EST 2021
+107637926
+transfer resnet50
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet50 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --job_id 107637926_1
+---------------------------------------------------------------
+Mon Nov 22 10:23:20 EST 2021
+107671424
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.3 --job_id 107671424_1
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.2 --job_id 107671424_2
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.1 --job_id 107671424_3
+---------------------------------------------------------------
+Mon Nov 22 14:15:56 EST 2021
+107671427
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.6 --job_id 107671427_1
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.5 --job_id 107671427_2
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.4 --job_id 107671427_3
+---------------------------------------------------------------
+Mon Nov 22 15:49:34 EST 2021
+107671428
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.9 --job_id 107671428_1
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.8 --job_id 107671428_2
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation --samplewise --perturb_rate 0.7 --job_id 107671428_3
+---------------------------------------------------------------
+Tue Nov 23 10:04:57 EST 2021
+107748089
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107351014_1_20211117185722_0.5_512_1000perturbation --samplewise --job_id 107748089_1
+---------------------------------------------------------------

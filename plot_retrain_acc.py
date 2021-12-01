@@ -8,9 +8,10 @@ import numpy as np
 # print(pd_reader)
 
 x_value = np.array([8, 16, 32])
+x_value2 = np.array([8])
 # loss = pd_reader.values[:,1]
 # acc = pd_reader.values[:,2]
-acc_name = ['nosuffle_bilevel_samplewise', 'suffle_bilevel_samplewise', 'without_training', 'no suffle simclr']
+acc_name = ['nosuffle_bilevel_samplewise', 'suffle_bilevel_samplewise', 'without_training', 'no suffle simclr', 'nosuffle_bilevel_samplewise_eot', ]
 color = ['r-', 'g-', 'b-', 'y-', 'c-', 'm-', 'tab:orange', 'tab:purple']
 # file_prename_base = "./results/differentiable_20211102231654_0.5_200_512_statistics"
 # pd_reader = pd.read_csv(file_prename_base+".csv")
@@ -23,16 +24,17 @@ acc.append(np.array([71.775, 68.85, 59.25]))
 acc.append(np.array([78.65, 78.6, 78.5]))
 acc.append(np.array([44.02 for _ in range(3)]))
 acc.append(np.array([77.95 for _ in range(3)]))
+acc.append(np.array([63.6]))
 
 fig, ax=plt.subplots(1,1,figsize=(9,6))
 # ax1 = ax.twinx()
 
-for i in range(len(acc)):
+for i in range(4):
     _ = ax.plot(x_value, acc[i], color[i], label = acc_name[i])
-
+_ = ax.plot(x_value2, acc[4], 'o', label = acc_name[4])
 # p3 = ax.plot(x_value2, acc2, color[1], label = acc_name[1])
 
-ax.legend()
+ax.legend(loc='upper right')
 # p3 = ax1.plot(epoch,acc, 'b-', label = 'test_acc')
 # p3 = ax1.plot(epoch,acc1, 'y-', label = 'test_acc1')
 # ax1.legend()

@@ -436,7 +436,7 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
 
         self.class_4 = class_4
@@ -471,8 +471,11 @@ class TransferCIFAR10Pair(CIFAR10):
         # self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         
         if not flag_save_img_group:
+            perturb_rate_index = np.random.choice(len(self.targets), int(len(self.targets) * perturb_rate), replace=False)
             self.data = self.data.astype(np.float32)
             for idx in range(len(self.data)):
+                if idx not in perturb_rate_index:
+                    continue
                 if not samplewise_perturb:
                     if org_label_flag:
                         noise = self.noise_255[self.targets[idx]]
@@ -534,7 +537,7 @@ class TransferCIFAR10Pair(CIFAR10):
 
         self.data = self.data.astype(np.uint8)
 
-    def similarity_between_perturbation(self):
+    def save_noise_img(self):
         if self.class_4:
             class_num = 4
         else:
@@ -548,6 +551,7 @@ class TransferCIFAR10Pair(CIFAR10):
             mean_one_class.append(noise_one_class.mean(axis=0))
             for j in range(len(one_class_index) // 9):
                 save_img_group_by_index(self, self.perturb_tensor, "./visualization/test.png", one_class_index[j*9:(j+1)*9], self.samplewise_perturb)
+                input()
             # img1 = one_class_index[0]
             # img2 = one_class_index[1]
             # hist = {'0':0, '10':0, '20':0, '30':0, '40':0, '50':0, '60':0, }
@@ -577,7 +581,7 @@ class TransferCIFAR10Pair(CIFAR10):
             #                 hist['60'] += 1
             #                 continue
             # print(hist)
-                input()
+                # input()
         # for i in range(class_num):
         #     one_class_index = np.where(np_targets == i)[0]
         #     noise_one_class = self.noise_255[one_class_index]

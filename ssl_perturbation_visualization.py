@@ -686,12 +686,12 @@ def main():
     # load pre-trained model parameters here by renjie3.
     # unlearnable_20211011011237_0.5_512_150
     # unlearnable_36176425_20211102011903_0.5_512_1000_statistics
-    pre_load_name = "unlearnable_samplewise_107559015_2_20211120210627_0.5_512_1000"
+    pre_load_name = "unlearnable_samplewise_104763711_20211115145540_0.5_512_1000"
     pretrained_model_path = "./results/{}_model.pth".format(pre_load_name)
     model.load_state_dict(torch.load(pretrained_model_path))
     perturbation_budget = 16
     # # load noise here:
-    pretrained_samplewise_noise = torch.load("./results/unlearnable_samplewise_107559015_2_20211120210627_0.5_512_1000perturbation.pt")
+    pretrained_samplewise_noise = torch.load("./results/unlearnable_samplewise_104763711_20211115145540_0.5_512_1000perturbation.pt")
     # random_noise_class_path = 'noise_class_label_test.npy'
 
     # train_data = utils.TransferCIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=False)
@@ -747,7 +747,7 @@ def main():
             # pretrained_classwise_noise = None
             # test_visualization
             # test_ssl_visualization(model, test_data_visualization, random_noise_class_test, pretrained_classwise_noise, pre_load_name+"retrain", True)
-            plot_distribution_2D(model, test_data_visualization, pretrained_samplewise_noise, pre_load_name+"_feature")
+            plot_distribution(model, test_data_visualization, pretrained_samplewise_noise, pre_load_name+"_feature")
             # test_ssl_visualization(model, train_data, None, None, pre_load_name)
 
         # torch.save(noise, os.path.join(args.exp_name, save_name_pre+'_perturbation.pt'))
