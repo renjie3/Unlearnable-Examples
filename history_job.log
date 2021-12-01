@@ -2258,3 +2258,8 @@ Tue Nov 23 10:03:08 EST 2021
 perturb subset
 python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107351014_1_20211117185722_0.5_512_1000perturbation --samplewise
 ---------------------------------------------------------------
+Wed Dec  1 17:13:48 EST 2021
+108399224
+perturb subset
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107351014_1_20211117185722_0.5_512_1000perturbation --samplewise
+---------------------------------------------------------------
