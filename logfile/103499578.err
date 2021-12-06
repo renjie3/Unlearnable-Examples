@@ -1,1 +1,0 @@
-  0%|          | 0/97 [00:00<?, ?it/s]Train Epoch: [1/1000] Loss: 6.9414:   0%|          | 0/97 [00:03<?, ?it/s]Train Epoch: [1/1000] Loss: 6.9414:   1%|          | 1/97 [00:03<06:04,  3.80s/it]slurmstepd: error: *** JOB 103499578 ON lac-286 CANCELLED AT 2021-11-06T20:51:09 ***

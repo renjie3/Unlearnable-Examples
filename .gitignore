@@ -16,3 +16,9 @@ path/
 my_experiments/
 logfile/
 demo/
+plot_process/
+images/
+data/
+feature_space_images/
+visualization/
+core*

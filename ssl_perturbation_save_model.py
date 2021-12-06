@@ -51,6 +51,11 @@ parser.add_argument('--shuffle_train_perturb_data', action='store_true', default
 parser.add_argument('--not_shuffle_train_data', action='store_true', default=False)
 parser.add_argument('--shuffle_step', default=5, type=int, help='Reshuffle the idx every n steps.')
 parser.add_argument('--perturb_first', action='store_true', default=False)
+parser.add_argument('--num_den_sheduler', default=[0], nargs='+', type=int, help='numerator denomerator alternately')
+parser.add_argument('--plot_process', action='store_true', default=False)
+parser.add_argument('--plot_process_mode', default='pair', type=str, choices=['pair', 'augmentation', 'center'], help='What samples to plot')
+parser.add_argument('--plot_process_feature', default='out', type=str, choices=['feature', 'out'], help='What to plot? Feature or out?')
+parser.add_argument('--mix', default='no', type=str, choices=['no', 'all_mnist', 'train_mnist', 'test_mnist', 'train_mnist_10_128', 'all_mnist_10_128', 'all_mnist_18_128', 'train_mnist_18_128'], help='Add new features to data')
 args = parser.parse_args()
 
 
@@ -82,7 +87,7 @@ from model import Model
 import pandas as pd
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor
+from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor, train_simclr_target_task
 import random
 import matplotlib.pyplot as plt
 import matplotlib
@@ -1111,21 +1116,8 @@ def sample_wise_perturbation_myshuffle(noise_generator, trainer, evaluator, mode
         return random_noise, save_name_pre
 
 
-def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img):
-    # datasets_generator = dataset.DatasetGenerator(train_batch_size=args.train_batch_size,
-    #                                               eval_batch_size=args.eval_batch_size,
-    #                                               train_data_type=args.train_data_type,
-    #                                               train_data_path=args.train_data_path,
-    #                                               test_data_type=args.test_data_type,
-    #                                               test_data_path=args.test_data_path,
-    #                                               num_of_workers=args.num_of_workers,
-    #                                               seed=args.seed, no_train_augments=True)
+def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img, plot_input_data_loader):
 
-    # if args.train_data_type == 'ImageNetMini' and args.perturb_type == 'samplewise':
-    #     data_loader = datasets_generator._split_validation_set(0.2, train_shuffle=False, train_drop_last=False)
-    #     data_loader['train_dataset'] = data_loader['train_subset']
-    # else:
-    #     data_loader = datasets_generator.getDataLoader(train_shuffle=False, train_drop_last=False)
     mask_cord_list = []
     idx = 0
     for pos_samples_1, pos_samples_2, labels in train_loader_simclr:
@@ -1148,6 +1140,57 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
     best_loss = 10000000
     best_loss_acc = 0
     # data_iter = iter(data_loader['train_dataset'])
+    
+    feature1_bank, feature2_bank, feature_center_bank, out1_bank, out2_bank, out_center_bank = [], [], [], [], [], []
+    one_iter_for_plot_input = iter(plot_input_data_loader)
+    plot_input_1, plot_input_2, plot_labels = next(one_iter_for_plot_input)
+    if args.plot_process_mode == 'pair':
+        plot_labels = plot_labels[:300:10].to(device).cpu().numpy()
+        plot_input_1 = plot_input_1[:300:10, :].to(device)
+        plot_input_2 = plot_input_2[:300:10, :].to(device)
+        center_input = plot_input_1
+        plot_input_1 = train_diff_transform(plot_input_1)
+        plot_input_2 = train_diff_transform(plot_input_2)
+        plot_idx_color = None
+        sample_num = 30
+    elif args.plot_process_mode == 'augmentation':
+        plot_labels = plot_labels[:50:10].to(device)
+        plot_input_1 = plot_input_1[:50:10, :].to(device)
+        plot_input_2 = plot_input_2[:50:10, :].to(device)
+        augment_samples_1 = []
+        augment_samples_2 = []
+        augment_labels = []
+        augment_idx_color = []
+        center_input = plot_input_1
+        center_labels = plot_labels
+        print("center label: ", center_labels)
+        idx_color = torch.tensor([0,1,2,3,4]).to(device)
+        for i in range(6):
+            augment_samples_1.append(train_diff_transform(plot_input_1))
+            augment_samples_2.append(train_diff_transform(plot_input_2))
+            augment_labels.append(plot_labels)
+            augment_idx_color.append(idx_color)
+        augment_labels.append(plot_labels)
+        augment_idx_color.append(idx_color)
+        plot_input_1 = torch.cat(augment_samples_1, dim=0).contiguous()
+        plot_input_2 = torch.cat(augment_samples_2, dim=0).contiguous()
+        plot_labels = torch.cat(augment_labels, dim=0).contiguous().cpu().numpy()
+        plot_idx_color = torch.cat(augment_idx_color, dim=0).contiguous().cpu().numpy()
+        print(plot_input_1.shape)
+        print(plot_input_2.shape)
+        print(plot_labels.shape)
+        sample_num = 30
+    elif args.plot_process_mode == 'center':
+        plot_labels = plot_labels[:60].to(device).cpu().numpy()
+        all_the_input = plot_input_1[:60, :].to(device)
+        plot_input_1 = all_the_input[:20, :].to(device)
+        plot_input_2 = all_the_input[20:40, :].to(device)
+        center_input = all_the_input[40:60, :].to(device)
+        plot_idx_color = None
+        print(plot_input_1.shape)
+        print(plot_input_2.shape)
+        print(plot_labels.shape)
+        sample_num = 20
 
     # logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
     for epoch_idx in range(1, epochs+1):
@@ -1157,6 +1200,19 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
         sum_train_loss, sum_train_batch_size = 0, 0
         sum_numerator, sum_numerator_count = 0, 0
         sum_denominator, sum_denominator_count = 0, 0
+        
+        if args.plot_process:
+            model.eval()
+            feature_1, out_1 = model(plot_input_1)
+            feature_2, out_2 = model(plot_input_2)
+            feature_center, out_center = model(center_input)
+            feature1_bank.append(feature_1.cpu().detach().numpy())
+            feature2_bank.append(feature_2.cpu().detach().numpy())
+            feature_center_bank.append(feature_center.cpu().detach().numpy())
+            out1_bank.append(out_1.cpu().detach().numpy())
+            out2_bank.append(out_2.cpu().detach().numpy())
+            out_center_bank.append(out_center.cpu().detach().numpy())
+        
         while condition:
             if args.attack_type == 'min-min' and not args.load_model:
                 # Train Batch for min-min noise
@@ -1177,35 +1233,24 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
                         raise('train loader iteration problem')
 
                     pos_samples_1, pos_samples_2, labels = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device)
-                    # Add Sample-wise Noise to each sample
-                    # train_pos_1 = []
-                    # train_pos_2 = []
-                    # for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
-                    #     sample_noise = random_noise[train_idx]
-                    #     c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
-                    #     mask = np.zeros((c, h, w), np.float32)
-                    #     x1, x2, y1, y2 = mask_cord_list[train_idx]
-                    #     if type(sample_noise) is np.ndarray:
-                    #         mask[:, x1: x2, y1: y2] = sample_noise
-                    #     else:
-                    #         mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
-                    #     # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
-                    #     sample_noise = torch.from_numpy(mask).to(device)
-                    #     # images[i] = images[i] + sample_noise
-                    #     train_pos_1.append(pos_samples_1[i]+sample_noise)
-                    #     train_pos_2.append(pos_samples_2[i]+sample_noise)
-                    #     train_idx += 1
 
                     model.train()
                     for param in model.parameters():
                         param.requires_grad = True
-                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
-                    # batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
-                    # for debug
-                    # print("batch_train_loss: ", batch_train_loss / float(batch_size_count))
-                    # debug_loss = train_simclr_noise_return_loss_tensor(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature)
-                    # print("debug_loss: ", debug_loss.item())
-                    # input()
+                    if len(args.num_den_sheduler) == 1:
+                        if args.min_min_attack_fn in ["pos/neg", "pos", "neg"]:
+                            batch_train_loss, batch_size_count, numerator, denominator = train_simclr_target_task(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform, target_task=args.min_min_attack_fn)
+                        else:
+                            batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    elif len(args.num_den_sheduler) == 2:
+                        num_den_sheduler_fn = []
+                        while len(num_den_sheduler_fn) <= epochs + 2:
+                            num_den_sheduler_fn += ['pos' for i in range(args.num_den_sheduler[0])]
+                            num_den_sheduler_fn += ['neg' for i in range(args.num_den_sheduler[1])]
+                        batch_train_loss, batch_size_count, numerator, denominator = train_simclr_target_task(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform, target_task=num_den_sheduler_fn[epoch_idx])
+                    else:
+                        raise("Wrong num_den_sheduler")
+
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
                     sum_numerator += numerator
@@ -1213,6 +1258,21 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
                     sum_denominator += denominator
                     sum_denominator_count += 1
 
+        # Here we plot the process
+        if epoch_idx <= 100:
+            if epoch_idx % 10 == 0 and args.plot_process:
+                if args.plot_process_feature == 'out':
+                    utils.plot_process(out1_bank, out2_bank, out_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, args.plot_process_mode, plot_idx_color, 10)
+                elif args.plot_process_feature == 'feature':
+                    utils.plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, args.plot_process_mode, plot_idx_color, 10)
+                feature1_bank, feature2_bank, feature_center_bank, out1_bank, out2_bank, out_center_bank = [], [], [], [], [], []
+        else:
+            if epoch_idx % 50 == 0 and args.plot_process:
+                if args.plot_process_feature == 'out':
+                    utils.plot_process(out1_bank, out2_bank, out_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, args.plot_process_mode, plot_idx_color, 50)
+                elif args.plot_process_feature == 'feature':
+                    utils.plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, args.plot_process_mode, plot_idx_color, 50)
+                feature1_bank, feature2_bank, feature_center_bank, out1_bank, out2_bank, out_center_bank = [], [], [], [], [], []
 
         # Here we save some samples in image.
         if epoch_idx % 10 == 0 and not args.no_save:
@@ -1340,12 +1400,12 @@ def main():
         random_noise_class = np.load('noise_class_label_1024_4class.npy')
     else:
         random_noise_class = np.load('noise_class_label.npy')
-    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform)
+    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform, mix=args.mix)
     if not args.org_label_noise and args.perturb_type == 'classwise':
         # we have to change the target randomly to give the noise a label
         train_data.replace_random_noise_class(random_noise_class)
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=flag_shuffle_train_data, num_workers=2, pin_memory=True, drop_last=True)
-    train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform)
+    train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform, mix=args.mix)
     if not args.org_label_noise and args.perturb_type == 'classwise':
         train_noise_data.replace_random_noise_class(random_noise_class)
     if args.shuffle_train_perturb_data:
@@ -1354,10 +1414,13 @@ def main():
         train_data.replace_targets_with_id()
     train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=args.shuffle_train_perturb_data, num_workers=2, pin_memory=True)
     # test data don't have to change the target. by renjie3
-    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True, class_4=args.class_4)
+    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.test_transform, download=True, class_4=args.class_4, mix=args.mix)
     memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
     test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.test_transform, download=True, class_4=args.class_4)
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
+    
+    plot_input_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform)
+    plot_input_data_loader = DataLoader(plot_input_data, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True, drop_last=True)
 
     noise_generator = toolbox.PerturbationTool(epsilon=args.epsilon,
                                                num_steps=args.num_steps,
@@ -1416,7 +1479,7 @@ def main():
             noise, save_name_pre = sample_wise_perturbation_myshuffle(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data, train_data)
 
         elif args.perturb_type == 'clean_train':
-            noise, save_name_pre = clean_train(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data, )
+            noise, save_name_pre = clean_train(noise_generator, None, None, model, None, optimizer, None, random_noise, ENV, train_loader, train_noise_data_loader, batch_size, temperature, memory_loader, test_loader, k, train_data, plot_input_data_loader)
             
         elif args.perturb_type == 'classwise':
             # noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)

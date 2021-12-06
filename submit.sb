@@ -7,10 +7,10 @@
 #SBATCH --mem-per-cpu=8G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
 #SBATCH --job-name SimCLR      # you can give your job a name for easier identification (same as -J)
 #SBATCH --gres=gpu:v100:1
-#SBATCH --time=2:00:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --time=5:00:00             # limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --cpus-per-task=6           # number of CPUs (or cores) per task (same as -c)
-#SBATCH -o /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
-#SBATCH -e /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
+#SBATCH -o /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
+#SBATCH -e /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
 
 ########## Command Lines for Job Running ##########
 
@@ -25,9 +25,9 @@ conda activate simclr
 MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
-JOB_INFO="perturb subset"
-MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --class_4 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_107351014_1_20211117185722_0.5_512_1000perturbation --samplewise --job_id ${SLURM_JOB_ID}_1"
-MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
+JOB_INFO="clean"
+MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --mix train_mnist_18_128 --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --mix all_mnist_18_128 --job_id ${SLURM_JOB_ID}_2"
 MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 
 #print the information of a job into one file

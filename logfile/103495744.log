@@ -1,2 +1,0 @@
-Retrain SimCLR with perturbation from supervised using larger steps and larger parameters
-python3 perturbation.py --config_path configs/cifar10 --exp_name my_experiments/class_wise_cifar10_random_assign_8_10_1.6 --version resnet18 --train_data_type CIFAR10 --noise_shape 10 3 32 32 --epsilon 8 --num_steps 10 --step_size 1.6 --attack_type min-min --perturb_type classwise --universal_train_target train_dataset --universal_stop_error 0.1 --use_subset --job_id 103495744

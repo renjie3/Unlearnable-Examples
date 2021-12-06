@@ -94,6 +94,61 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
 
     return total_loss * pos_1.shape[0], pos_1.shape[0], pos_sim.mean().item(), sim_matrix.sum(dim=-1).mean().item()
 
+def train_simclr_target_task(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, target_task="pos/neg"):
+    # train a batch
+    # print("pos_1.shape: ", pos_1.shape)
+    # print("pos_2.shape: ", pos_2.shape)
+    net.train()
+    total_loss, total_num = 0.0, 0
+    # for pos_1, pos_2, target in train_bar:
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+    if not noise_after_transform:
+        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    feature_1, out_1 = net(pos_1)
+    feature_2, out_2 = net(pos_2)
+    
+    # [2*B, D]
+    out = torch.cat([out_1, out_2], dim=0)
+    # [2*B, 2*B]
+    sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+    # [[0,I], [I,0]] mask to remove positive pairs in denominator
+    pos_den_mask1 = torch.cat([torch.zeros((pos_1.shape[0], pos_1.shape[0]), device=sim_matrix.device), torch.eye(pos_1.shape[0], device=sim_matrix.device)], dim=0)
+    pos_den_mask2 = torch.cat([torch.eye(pos_1.shape[0], device=sim_matrix.device), torch.zeros((pos_1.shape[0], pos_1.shape[0]), device=sim_matrix.device)], dim=0)
+    pos_den_mask = torch.cat([pos_den_mask1, pos_den_mask2], dim=1)
+    mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device) - pos_den_mask).bool() # here it didn't remove the similarity between positive samples. We changed it into remove that.
+    # [2*B, 2*B-1]
+    sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
+
+    # print(out_1.shape) torch.Size([512, 128])
+    # print(out_2.shape) torch.Size([512, 128])
+
+    # compute loss
+    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+    # [2*B]
+    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+
+    if target_task == "pos/neg":
+        loss = (- torch.log(pos_sim / (sim_matrix.sum(dim=-1)))).mean()
+    elif target_task == "pos":
+        loss = (- torch.log(pos_sim)).mean()
+    elif target_task == "neg":
+        loss = (- torch.log(1 / sim_matrix.sum(dim=-1))).mean()
+    numerator = pos_sim.mean().item()
+    denominator = sim_matrix.sum(dim=-1).mean().item()
+
+    train_optimizer.zero_grad()
+    loss.backward()
+    train_optimizer.step()
+
+    # total_num += batch_size
+    total_loss = loss.item()
+    # # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
+    # print(pos_sim.shape)
+    # print(sim_matrix.sum(dim=-1).shape)
+    # input()
+    
+    return total_loss * pos_1.shape[0], pos_1.shape[0], numerator, denominator
+
 def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False):
     net.eval()
     total_loss, total_num = 0.0, 0

@@ -1,7 +1,0 @@
-usage: simclr_transfer.py [-h] [--feature_dim FEATURE_DIM]
-                          [--temperature TEMPERATURE] [--k K]
-                          [--batch_size BATCH_SIZE] [--epochs EPOCHS]
-                          [--perturbation_budget PERTURBATION_BUDGET]
-                          [--arch ARCH] [--local_dev] [--class_4]
-                          [--pre_load_name PRE_LOAD_NAME]
-simclr_transfer.py: error: unrecognized arguments: --job_id 103408226

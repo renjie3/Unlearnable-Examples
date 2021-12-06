@@ -16,6 +16,12 @@ import os
 import pickle
 from typing import Any, Callable, Optional, Tuple
 import pandas as pd
+import imageio
+
+from sklearn import manifold, datasets
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.ticker import NullFormatter
+import math
 
 if torch.cuda.is_available():
     device = torch.device('cuda')
@@ -205,11 +211,27 @@ class CIFAR10Pair(CIFAR10):
         download: bool = False,
         class_4: bool = True,
         train_noise_after_transform: bool = True,
+        mix: str = 'no', 
     ) -> None:
 
         super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
         if class_4:
-            sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+            if mix == 'no':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
+            elif mix =='all_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed.pkl")
+            elif mix =='train_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_train.pkl")
+            elif mix =='all_mnist_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_10_budget128.pkl")
+            elif mix =='train_mnist_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_train_10_budget128.pkl")
+            elif mix =='all_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_18_budget128.pkl")
+            elif mix =='train_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_train_18_budget128.pkl")
+            else:
+                raise("Wrong args.mix!")
             with open(sampled_filepath, "rb") as f:
                 sampled_data = pickle.load(f)
             if train:
@@ -701,3 +723,111 @@ def plot_loss(file_prename):
     ax1.set_ylabel('acc')
     plt.title('Training loss on generating model and clean test acc')
     plt.savefig(file_prename + ".png")
+    
+def plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, plot_process_mode, plot_idx_color, save_gap_epoch):
+    step_list = [epoch_idx-save_gap_epoch + i for i in range(save_gap_epoch)]
+    print(step_list)
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+    feature_bank = feature1_bank + feature2_bank + feature_center_bank
+    pair_num = feature1_bank[0].shape[0] * len(feature1_bank)
+    print(pair_num)
+    print(feature_center_bank[0])
+    feature_bank = np.concatenate(feature_bank, axis=0)
+    print(feature_bank.shape)
+    feature_tsne_input = feature_bank
+    plot_labels_colar = plot_labels
+    if plot_process_mode == 'augmentation':
+        func_plot_idx_color = plot_idx_color
+    feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+    print(np.max(feature_tsne_input))
+    print(np.min(feature_tsne_input))
+    coord_min = math.floor(np.min(feature_tsne_output) / 25) * 25
+    coord_max = math.ceil(np.max(feature_tsne_output) / 25) * 25
+    print(coord_min, coord_max)
+    print(np.min(feature_tsne_output))
+    print(np.max(feature_tsne_output))
+    gif_images = []
+    for i in range(len(step_list)):
+        fig = plt.figure(figsize=(8, 8))
+        ax = fig.add_subplot(1, 1, 1)
+        plt.title("step {}".format(step_list[i]))
+        if plot_process_mode == 'pair':
+            x_pos_1 = feature_tsne_output[i*sample_num:(i+1)*sample_num, 0]
+            y_pos_1 = feature_tsne_output[i*sample_num:(i+1)*sample_num, 1]
+            plt.scatter(x_pos_1, y_pos_1, s=10, marker='x', c=plot_labels_colar, cmap=plt.cm.Spectral)
+            x_pos_2 = feature_tsne_output[(i*sample_num+pair_num) : ((i+1)*sample_num+pair_num), 0]
+            y_pos_2 = feature_tsne_output[(i*sample_num+pair_num) : ((i+1)*sample_num+pair_num), 1]
+            plt.scatter(x_pos_2, y_pos_2, s=10, marker='v', c=plot_labels_colar, cmap=plt.cm.Spectral)
+            x_pos_center = feature_tsne_output[(i*sample_num+pair_num*2) : ((i+1)*sample_num+pair_num*2), 0]
+            y_pos_center = feature_tsne_output[(i*sample_num+pair_num*2) : ((i+1)*sample_num+pair_num*2), 1]
+            plt.scatter(x_pos_center, y_pos_center, s=30, c=plot_labels_colar, cmap=plt.cm.Spectral)
+            for idx in range(sample_num):
+                ax.annotate(idx,(x_pos_1[idx],y_pos_1[idx]), fontsize=6)
+                ax.annotate(idx,(x_pos_2[idx],y_pos_2[idx]), fontsize=6)
+                ax.annotate(idx,(x_pos_center[idx],y_pos_center[idx]), fontsize=6)
+        elif plot_process_mode == 'augmentation':
+            x_pos_1 = feature_tsne_output[i*sample_num:(i+1)*sample_num, 0]
+            y_pos_1 = feature_tsne_output[i*sample_num:(i+1)*sample_num, 1]
+            plt.scatter(x_pos_1, y_pos_1, s=10, marker='v', c=plot_labels_colar[:sample_num], cmap='rainbow')
+            x_pos_2 = feature_tsne_output[(i*sample_num+pair_num) : ((i+1)*sample_num+pair_num), 0]
+            y_pos_2 = feature_tsne_output[(i*sample_num+pair_num) : ((i+1)*sample_num+pair_num), 1]
+            plt.scatter(x_pos_2, y_pos_2, s=10, marker='v', c=plot_labels_colar[:sample_num], cmap='rainbow')
+            x_pos_center = feature_tsne_output[(i*5+pair_num*2) : ((i+1)*5+pair_num*2), 0]
+            y_pos_center = feature_tsne_output[(i*5+pair_num*2) : ((i+1)*5+pair_num*2), 1]
+            plt.scatter(x_pos_center, y_pos_center, s=30, c=plot_labels_colar[sample_num:], cmap='rainbow')
+        elif plot_process_mode == 'center':
+            x_pos_1 = feature_tsne_output[i*sample_num:(i+1)*sample_num, 0]
+            y_pos_1 = feature_tsne_output[i*sample_num:(i+1)*sample_num, 1]
+            plt.scatter(x_pos_1, y_pos_1, s=10, c=plot_labels_colar[:sample_num], cmap=plt.cm.Spectral)
+            x_pos_2 = feature_tsne_output[(i*sample_num+pair_num) : ((i+1)*sample_num+pair_num), 0]
+            y_pos_2 = feature_tsne_output[(i*sample_num+pair_num) : ((i+1)*sample_num+pair_num), 1]
+            plt.scatter(x_pos_2, y_pos_2, s=10, c=plot_labels_colar[sample_num:sample_num*2], cmap=plt.cm.Spectral)
+            x_pos_center = feature_tsne_output[(i*sample_num+pair_num*2) : ((i+1)*sample_num+pair_num*2), 0]
+            y_pos_center = feature_tsne_output[(i*sample_num+pair_num*2) : ((i+1)*sample_num+pair_num*2), 1]
+            plt.scatter(x_pos_center, y_pos_center, s=10, c=plot_labels_colar[sample_num*2:], cmap=plt.cm.Spectral)
+            for idx in range(sample_num):
+                ax.annotate(idx,(x_pos_1[idx],y_pos_1[idx]), fontsize=6)
+                ax.annotate(idx+sample_num,(x_pos_2[idx],y_pos_2[idx]), fontsize=6)
+                ax.annotate(idx+sample_num*2,(x_pos_center[idx],y_pos_center[idx]), fontsize=6)
+        # ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+        # ax.yaxis.set_major_formatter(NullFormatter())
+        my_ticks = [i for i in range(coord_min, coord_max, 25)]
+        plt.xticks(my_ticks)
+        plt.yticks(my_ticks)
+        plt.xlim((coord_min, coord_max))
+        plt.ylim((coord_min, coord_max))
+        if not os.path.exists('./plot_process/{}'.format(save_name_pre)):
+            os.mkdir('./plot_process/{}'.format(save_name_pre))
+        plt.savefig('./plot_process/{}/step_{}.png'.format(save_name_pre, step_list[i]))
+        plt.close()
+        gif_images.append(imageio.imread('./plot_process/{}/step_{}.png'.format(save_name_pre, step_list[i])))   # 读取图片
+    
+    imageio.mimsave('./plot_process/{}/all_{}_step_{}.gif'.format(save_name_pre, save_name_pre, step_list[i]), gif_images, fps=5)   # 转化为gif动画
+    
+    for i in range(len(step_list)):
+        if i < 10:
+            continue
+        if os.path.exists('./plot_process/{}/step_{}.png'.format(save_name_pre, step_list[i])):
+            os.remove('./plot_process/{}/step_{}.png'.format(save_name_pre, step_list[i]))
+    
+        # test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)
+        # # generate feature bank
+        # for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting on org images'):
+        #     feature, out = net(data.cuda(non_blocking=True))
+        #     feature_bank.append(feature)
+        # # [D, N]
+        # feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
+    
+        #     feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
+        # # [N]
+        # feature_labels = torch.tensor(test_data_visualization_loader.dataset.targets, device=feature_bank.device)
+        # feature_tsne_input = feature_bank.cpu().numpy().transpose()[:1000]
+        # labels_tsne_color = feature_labels.cpu().numpy()[:1000]
+        # feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+        # fig = plt.figure(figsize=(8, 8))
+        # ax = fig.add_subplot(1, 1, 1)
+        # plt.title("clean data with original label")
+        # plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
+        # ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+        # ax.yaxis.set_major_formatter(NullFormatter())
+        # plt.savefig('./results/{}_cleandata_orglabel.png'.format(pre_load_name))
