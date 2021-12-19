@@ -13,7 +13,7 @@ from tqdm import tqdm
 
 import utils
 from model import Model
-from utils import train_diff_transform, train_diff_transform2
+from utils import train_diff_transform, train_diff_transform2, train_diff_transform_resize48, train_diff_transform_resize64, train_diff_transform_resize28, train_diff_transform_ReCrop_Hflip, train_diff_transform_ReCrop_Hflip_Bri, train_diff_transform_ReCrop_Hflip_Con, train_diff_transform_ReCrop_Hflip_Sat, train_diff_transform_ReCrop_Hflip_Hue
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -56,7 +56,7 @@ def train(net, data_loader, train_optimizer):
 
     return total_loss / total_num
 
-def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False):
+def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr"):
     # train a batch
     # print("pos_1.shape: ", pos_1.shape)
     # print("pos_2.shape: ", pos_2.shape)
@@ -65,7 +65,29 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
     # for pos_1, pos_2, target in train_bar:
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
     if not noise_after_transform:
-        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+        if mix in ['concat_samplewise_train_mnist_18_128', 'concat_samplewise_all_mnist_18_128']:
+            pos_1, pos_2 = train_diff_transform_resize48(pos_1), train_diff_transform_resize48(pos_2)
+        elif mix in ['concat4_samplewise_train_mnist_18_128', 'concat4_samplewise_all_mnist_18_128']:
+            pos_1, pos_2 = train_diff_transform_resize64(pos_1), train_diff_transform_resize64(pos_2)
+        elif mix in ['mnist']:
+            pos_1, pos_2 = train_diff_transform_resize28(pos_1), train_diff_transform_resize28(pos_2)
+        else:
+            if augmentation == 'simclr':
+                pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+            elif augmentation == 'ReCrop_Hflip':
+                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip(pos_1), train_diff_transform_ReCrop_Hflip(pos_2)
+            elif augmentation == 'ReCrop_Hflip_Bri':
+                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Bri(pos_1), train_diff_transform_ReCrop_Hflip_Bri(pos_2)
+            elif augmentation == 'ReCrop_Hflip_Con':
+                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Con(pos_1), train_diff_transform_ReCrop_Hflip_Con(pos_2)
+            elif augmentation == 'ReCrop_Hflip_Sat':
+                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Sat(pos_1), train_diff_transform_ReCrop_Hflip_Sat(pos_2)
+            elif augmentation == 'ReCrop_Hflip_Hue':
+                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Hue(pos_1), train_diff_transform_ReCrop_Hflip_Hue(pos_2)
+            else:
+                raise("Wrong augmentation.")
+        # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    # print(pos_1.shape)
     feature_1, out_1 = net(pos_1)
     feature_2, out_2 = net(pos_2)
     # [2*B, D]

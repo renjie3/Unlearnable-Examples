@@ -7,8 +7,14 @@ import matplotlib.pyplot as plt
 import torch
 from PIL import Image, ImageOps
 import os
+import argparse
 
-# mix mnist at center to use mnist as feature
+parser = argparse.ArgumentParser(description='ClasswiseNoise')
+parser.add_argument('--train', action='store_true', default=False)
+parser.add_argument('--center', action='store_true', default=False)
+args = parser.parse_args()
+
+# mix mnist at corner to ignore mnist as feature
 
 train_data = datasets.MNIST(root='data', train=True, transform=utils.ToTensor_transform, download=True)
 # train_data = datasets.CIFAR10(root='data', train=True, transform=utils.ToTensor_transform, download=True)
@@ -45,6 +51,7 @@ img_path = 'visualization/test.png'
 #     input()
 
 idx_dict = {0:0, 3:1, 7:2, 8:3}
+mnist_single_idx_dict = {0:31, 3:1, 7:6, 8:38}
 
 train_mnist_img_list = [[] for _ in range(4)]
 train_padding_img = [[] for _ in range(4)]
@@ -57,7 +64,7 @@ for i in range(len(train_data.data)):
             
             last_i = i
 
-print("last_im,", last_i)
+print("last_i:", last_i)
 test_mnist_img_list = [[] for _ in range(4)]
 test_padding_img = [[] for _ in range(4)]
 for i in range(last_i, len(train_data.data)):
@@ -66,40 +73,58 @@ for i in range(last_i, len(train_data.data)):
         idx = idx_dict[target]
         if len(test_mnist_img_list[idx]) < 1000:
             test_mnist_img_list[idx].append(np.stack([train_data.data[i].cpu().numpy() for _ in range(3)], axis=2))
+
         
-# check_img_list = []
-# check_img_list.append(np.stack([train_data.data[31].cpu().numpy() for _ in range(3)], axis=2))
-# check_img_list.append(np.stack([train_data.data[1].cpu().numpy() for _ in range(3)], axis=2))
-# check_img_list.append(np.stack([train_data.data[6].cpu().numpy() for _ in range(3)], axis=2))
-# check_img_list.append(np.stack([train_data.data[38].cpu().numpy() for _ in range(3)], axis=2))
-
-# for i in range(4):
-#     print(i)
-#     Image.fromarray(check_img_list[i], mode='RGB').save(img_path, quality=90)
-#     input()
     
+# single_img_list.append(np.stack([train_data.data[31].cpu().numpy() for _ in range(3)], axis=2))
+# single_img_list.append(np.stack([train_data.data[1].cpu().numpy() for _ in range(3)], axis=2))
+# single_img_list.append(np.stack([train_data.data[6].cpu().numpy() for _ in range(3)], axis=2))
+# single_img_list.append(np.stack([train_data.data[38].cpu().numpy() for _ in range(3)], axis=2))
 
-padding_size = 7
-mnist_size = 32 - padding_size*2
+# padding_size = 7
+mnist_size = 10
 multi_budget = 16
+padding_center_size = (32 - mnist_size) // 2
 
 print(len(train_mnist_img_list[0]))
 print(len(test_mnist_img_list[0]))
 
+padding = [[32 - mnist_size, 0, 0, 32 - mnist_size], 
+           [32 - mnist_size, 32 - mnist_size, 0, 0],
+           [0, 32 - mnist_size, 32 - mnist_size, 0],
+           [0, 0, 32 - mnist_size, 32 - mnist_size]]
+
+print((*(padding[0])))
+
 for i in range(4):
-    for single_img in train_mnist_img_list[i]:
+    for j in range(len(train_mnist_img_list[i])):
+        single_img = train_mnist_img_list[i][j]
         pil_img = Image.fromarray(single_img, mode='RGB').resize((mnist_size, mnist_size))# .save(img_path, quality=90)
-        pil_img = ImageOps.expand(pil_img, border=(padding_size,padding_size,padding_size,padding_size), fill=0)#.save(img_path, quality=90)##left,top,right,bottom
+        if not args.center:
+            padding_corner = (padding[j%4][0], padding[j%4][1], padding[j%4][2], padding[j%4][3])
+            pil_img = ImageOps.expand(pil_img, border=padding_corner, fill=0)#.save(img_path, quality=90)##left,top,right,bottom
+        else:
+            pil_img = ImageOps.expand(pil_img, border=(padding_center_size, padding_center_size, padding_center_size, padding_center_size), fill=0)#.save(img_path, quality=90)##left,top,right,bottom
+        # pil_img.save(img_path, quality=90)
+        # input()
         pil_img = np.asarray(pil_img) / float(255) * 8
         # print(np.max(pil_img))
         train_padding_img[i].append(pil_img)
         
+        
     # print(len(train_padding_img[i]))
 
 for i in range(4):
-    for single_img in test_mnist_img_list[i]:
+    for j in range(len(test_mnist_img_list[i])):
+        single_img = test_mnist_img_list[i][j]
         pil_img = Image.fromarray(single_img, mode='RGB').resize((mnist_size, mnist_size))# .save(img_path, quality=90)
-        pil_img = ImageOps.expand(pil_img, border=(padding_size,padding_size,padding_size,padding_size), fill=0)#.save(img_path, quality=90)##left,top,right,bottom
+        if not args.center:
+            padding_corner = (padding[j%4][0], padding[j%4][1], padding[j%4][2], padding[j%4][3])
+            pil_img = ImageOps.expand(pil_img, border=padding_corner, fill=0)#.save(img_path, quality=90)##left,top,right,bottom
+        else:
+            pil_img = ImageOps.expand(pil_img, border=(padding_center_size, padding_center_size, padding_center_size, padding_center_size), fill=0)#.save(img_path, quality=90)##left,top,right,bottom
+        # pil_img.save(img_path, quality=90)
+        # input()
         pil_img = np.asarray(pil_img) / float(255) * 8
         # print(np.max(pil_img))
         test_padding_img[i].append(pil_img)
@@ -145,7 +170,8 @@ train_data = train_data.astype(np.uint8)
 test_data = test_data.astype(np.uint8)
 
 sampled_data["train_data"] = train_data
-sampled_data["test_data"] = test_data
+if not args.train:
+    sampled_data["test_data"] = test_data
 
 
 # for i in range(100):
@@ -156,6 +182,15 @@ sampled_data["test_data"] = test_data
 #     # print(np.max(pil_img))
 #     input()
 
-file_path = './data/sampled_cifar10/cifar10_1024_4class_mnist_mixed_samplewise_all_{}_budget{}.pkl'.format(mnist_size, multi_budget*8)
+if args.center:
+    if args.train:
+        file_path = './data/sampled_cifar10/cifar10_1024_4class_mnist_mixed_samplewise_center_train_{}_budget{}.pkl'.format(mnist_size, multi_budget*8)
+    else:
+        file_path = './data/sampled_cifar10/cifar10_1024_4class_mnist_mixed_samplewise_center_all_{}_budget{}.pkl'.format(mnist_size, multi_budget*8)
+else:
+    if args.train:
+        file_path = './data/sampled_cifar10/cifar10_1024_4class_mnist_mixed_samplewise_corner_train_{}_budget{}.pkl'.format(mnist_size, multi_budget*8)
+    else:
+        file_path = './data/sampled_cifar10/cifar10_1024_4class_mnist_mixed_samplewise_corner_all_{}_budget{}.pkl'.format(mnist_size, multi_budget*8)
 with open(file_path, "wb") as f:
     entry = pickle.dump(sampled_data, f)

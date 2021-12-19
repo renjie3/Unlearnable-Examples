@@ -53,6 +53,61 @@ train_diff_transform = nn.Sequential(
     Kaug.RandomGrayscale(p=0.2)
 )
 
+train_diff_transform_resize48 = nn.Sequential(
+    Kaug.RandomResizedCrop([48,48]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform_resize64 = nn.Sequential(
+    Kaug.RandomResizedCrop([64,64]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform_resize28 = nn.Sequential(
+    Kaug.RandomResizedCrop([28,28]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform_ReCrop_Hflip = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    # Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+train_diff_transform_ReCrop_Hflip_Bri = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform_ReCrop_Hflip_Con = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(contrast=0.4, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform_ReCrop_Hflip_Sat = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(saturation=0.4, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+
+train_diff_transform_ReCrop_Hflip_Hue = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(hue=0.1, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
+
 train_diff_transform2 = nn.Sequential(
     Kaug.RandomResizedCrop([32,32]),
     # Kaug.RandomHorizontalFlip(p=0.5),
@@ -212,6 +267,7 @@ class CIFAR10Pair(CIFAR10):
         class_4: bool = True,
         train_noise_after_transform: bool = True,
         mix: str = 'no', 
+        gray: bool = False, 
     ) -> None:
 
         super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
@@ -230,6 +286,64 @@ class CIFAR10Pair(CIFAR10):
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_18_budget128.pkl")
             elif mix =='train_mnist_18_128':
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_train_18_budget128.pkl")
+            elif mix =='samplewise_all_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_all_18_budget128.pkl")
+            elif mix =='samplewise_train_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_train_18_budget128.pkl")
+            elif mix =='concat_samplewise_all_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_concat_all_16_budget224.pkl")
+            elif mix =='concat_samplewise_train_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_concat_train_16_budget224.pkl")
+            elif mix =='concat4_samplewise_all_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_concat4_all_16_budget224.pkl")
+            elif mix =='concat4_samplewise_train_mnist_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_concat4_train_16_budget224.pkl")
+            elif mix =='samplewise_all_center_8_64':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_all_8_budget64.pkl")
+            elif mix =='samplewise_train_center_8_64':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_train_8_budget64.pkl")
+            elif mix =='samplewise_all_corner_8_64':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_all_8_budget64.pkl")
+            elif mix =='samplewise_train_corner_8_64':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_train_8_budget64.pkl")
+            elif mix =='samplewise_all_center_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_all_10_budget128.pkl")
+            elif mix =='samplewise_train_center_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_train_10_budget128.pkl")
+            elif mix =='samplewise_all_corner_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_all_10_budget128.pkl")
+            elif mix =='samplewise_train_corner_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_train_10_budget128.pkl")
+            elif mix =='all_center_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_center_all_10_budget128.pkl")
+            elif mix =='train_center_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_center_train_10_budget128.pkl")
+            elif mix =='all_corner_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_corner_all_10_budget128.pkl")
+            elif mix =='train_corner_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_corner_train_10_budget128.pkl")
+            elif mix =='all_single_corner_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_single_corner_all_10_budget128.pkl")
+            elif mix =='train_single_corner_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_single_corner_train_10_budget128.pkl")
+            elif mix =='samplewise_train_corner_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_train_18_budget128.pkl")
+            elif mix =='samplewise_all_corner_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_all_18_budget128.pkl")
+            elif mix =='samplewise_train_center_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_train_18_budget128.pkl")
+            elif mix =='samplewise_all_center_18_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_all_18_budget128.pkl")
+            elif mix =='samplewise_train_corner_32_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_train_32_budget128.pkl")
+            elif mix =='samplewise_all_corner_32_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_corner_all_32_budget128.pkl")
+            elif mix =='samplewise_train_center_32_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_train_32_budget128.pkl")
+            elif mix =='samplewise_all_center_32_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_all_32_budget128.pkl")
+            elif mix =='mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist.pkl") 
             else:
                 raise("Wrong args.mix!")
             with open(sampled_filepath, "rb") as f:
@@ -240,6 +354,64 @@ class CIFAR10Pair(CIFAR10):
             else:
                 self.data = sampled_data["test_data"]
                 self.targets = sampled_data["test_targets"]
+        if gray != 'no':
+            if gray == 'gray':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_gray.pkl")
+            elif gray == 'red':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_red.pkl")
+            elif gray == 'gray_mnist':
+                # input(gray)
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_gray_mnist.pkl")
+            elif gray == 'gray_random_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_gray_random_mnist.pkl")
+            elif gray == 'grayshift_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift_mnist.pkl")
+            elif gray == 'colorshift_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_colorshift_mnist.pkl")
+            elif gray == 'grayshift_font_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift_font_mnist.pkl")
+            elif gray == 'grayshift2_font_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift2_font_mnist.pkl")
+            elif gray == 'grayshiftsmall_font_singledigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift_font_singledigit_mnist.pkl")
+            elif gray == 'grayshiftsmall_font_randomdigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift_font_randomdigit_mnist.pkl")
+            elif gray == 'grayshiftlarge_font_singledigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftlarge_font_singledigit_mnist.pkl")
+            elif gray == 'grayshiftlarge_font_randomdigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftlarge_font_randomdigit_mnist.pkl")
+            elif gray == 'grayshiftsmall_whole_singledigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftsmall_whole_singledigit_mnist.pkl")
+            elif gray == 'grayshiftsmall_whole_randomdigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftsmall_whole_randomdigit_mnist.pkl")
+            elif gray == 'grayshiftlarge_whole_singledigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftlarge_whole_singledigit_mnist.pkl")
+            elif gray == 'grayshiftlarge_whole_randomdigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftlarge_whole_randomdigit_mnist.pkl")
+            elif gray == 'grayshift256levels_font_single_inclassdigit_mnist':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift256levels_font_single_inclassdigit_mnist.pkl")
+            elif gray == 'grayshift256levels_font_2_inclassdigit_mnist_merge':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift256levels_font_2_inclassdigit_mnist_merge.pkl")
+            elif gray == 'grayshiftlarge_font_randomdigit_mnist_mnisttargets':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftlarge_font_randomdigit_mnist_mnisttargets.pkl")
+            with open(sampled_filepath, "rb") as f:
+                sampled_data = pickle.load(f)
+            if train:
+                self.data = sampled_data["train_data"]
+                if gray == 'grayshiftlarge_font_randomdigit_mnist_mnisttargets':
+                    self.targets = []
+                    for i in range(len(sampled_data["train_targets"])):
+                        self.targets.append(torch.tensor([sampled_data["train_targets"][i], sampled_data["train_targets_mnist"][i]]))
+                else:
+                    self.targets = sampled_data["train_targets"]
+            else:
+                self.data = sampled_data["test_data"]
+                if gray == 'grayshiftlarge_font_randomdigit_mnist_mnisttargets':
+                    self.targets = []
+                    for i in range(len(sampled_data["test_targets"])):
+                        self.targets.append(torch.tensor([sampled_data["test_targets"][i], sampled_data["test_targets_mnist"][i]]))
+                else:
+                    self.targets = sampled_data["test_targets"]
         self.train_noise_after_transform = train_noise_after_transform
 
     def __getitem__(self, index):
@@ -726,26 +898,26 @@ def plot_loss(file_prename):
     
 def plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, plot_process_mode, plot_idx_color, save_gap_epoch):
     step_list = [epoch_idx-save_gap_epoch + i for i in range(save_gap_epoch)]
-    print(step_list)
+    # print(step_list)
     tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
     feature_bank = feature1_bank + feature2_bank + feature_center_bank
     pair_num = feature1_bank[0].shape[0] * len(feature1_bank)
-    print(pair_num)
-    print(feature_center_bank[0])
+    # print(pair_num)
+    # print(feature_center_bank[0])
     feature_bank = np.concatenate(feature_bank, axis=0)
-    print(feature_bank.shape)
+    # print(feature_bank.shape)
     feature_tsne_input = feature_bank
     plot_labels_colar = plot_labels
     if plot_process_mode == 'augmentation':
         func_plot_idx_color = plot_idx_color
     feature_tsne_output = tsne.fit_transform(feature_tsne_input)
-    print(np.max(feature_tsne_input))
-    print(np.min(feature_tsne_input))
+    # print(np.max(feature_tsne_input))
+    # print(np.min(feature_tsne_input))
     coord_min = math.floor(np.min(feature_tsne_output) / 25) * 25
     coord_max = math.ceil(np.max(feature_tsne_output) / 25) * 25
-    print(coord_min, coord_max)
-    print(np.min(feature_tsne_output))
-    print(np.max(feature_tsne_output))
+    # print(coord_min, coord_max)
+    # print(np.min(feature_tsne_output))
+    # print(np.max(feature_tsne_output))
     gif_images = []
     for i in range(len(step_list)):
         fig = plt.figure(figsize=(8, 8))
@@ -831,3 +1003,98 @@ def plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels,
         # ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         # ax.yaxis.set_major_formatter(NullFormatter())
         # plt.savefig('./results/{}_cleandata_orglabel.png'.format(pre_load_name))
+        
+def plot_be(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, sample_num, plot_be_mode, gray_test, augmentation, mnist_labels):
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+    
+    feature_bank = []
+    if feature1_bank != None:
+        feature_bank += feature1_bank
+    if feature2_bank != None:
+        feature_bank += feature2_bank
+    if feature_center_bank != None:
+        feature_bank += feature_center_bank
+
+    feature_bank = np.concatenate(feature_bank, axis=0)
+    
+    feature_tsne_input = feature_bank
+    plot_labels_colar = plot_labels
+    feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+    
+    coord_min = math.floor(np.min(feature_tsne_output) / 1) * 1
+    coord_max = math.ceil(np.max(feature_tsne_output) / 1) * 1
+    # coord_max = np.max(feature_tsne_output)
+    # coord_min = np.min(feature_tsne_output)
+    # normal_feature_tsne_output = (feature_tsne_output - coord_min) / (coord_max - coord_min)
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    marker = ['o', 'x', 'v', 'd']
+    color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan']
+    plt.title("{} {} \n max:{} min:{}".format(plot_be_mode, gray_test, coord_max, coord_min))
+    if plot_be_mode == 'ave_augmentation':
+        # x_pos_1 = feature_tsne_output[:sample_num, 0]
+        # y_pos_1 = feature_tsne_output[:sample_num, 1]
+        # # aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='o', c=plot_labels_colar, cmap='rainbow')
+        # x_pos_2 = feature_tsne_output[sample_num:2*sample_num, 0]
+        # y_pos_2 = feature_tsne_output[sample_num:2*sample_num, 1]
+        # # aug2 = plt.scatter(x_pos_2, y_pos_2, s=15, marker='v', c=plot_labels_colar, cmap='rainbow')
+        # x_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 0]
+        # y_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 1]
+        x_pos_center = feature_tsne_output[:sample_num, 0]
+        y_pos_center = feature_tsne_output[:sample_num, 1]
+        for i in range(sample_num):
+            org1 = plt.scatter(x_pos_center[i], y_pos_center[i], s=15, marker=marker[plot_labels_colar[i]], c=color_map[mnist_labels[i]], cmap='rainbow') # , edgecolors="black"
+        # x_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 0]
+        # y_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 1]
+        # for i in range(sample_num):
+        #     org2 = plt.scatter(x_pos_center2[i], y_pos_center2[i], s=15, marker=marker[plot_labels_colar[i]], c=color_map[mnist_labels[i]], cmap=plt.cm.Spectral)
+        # for idx in range(sample_num):
+        #     ax.annotate(idx,(x_pos_1[idx],y_pos_1[idx]), fontsize=6)
+        #     ax.annotate(idx,(x_pos_2[idx],y_pos_2[idx]), fontsize=6)
+        #     ax.annotate(idx,(x_pos_center[idx],y_pos_center[idx]), fontsize=6)
+        #     ax.annotate(idx,(x_pos_center2[idx],y_pos_center2[idx]), fontsize=6)
+        # ax.legend((aug1, aug2, org1, org2), ('aug', 'aug2', 'org1', 'org2'), loc=2)
+    # ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+    # ax.yaxis.set_major_formatter(NullFormatter())
+    # my_ticks = [i for i in range(coord_min, coord_max)]
+    # plt.xticks(my_ticks)
+    # plt.yticks(my_ticks)
+    plt.xlim((coord_min, coord_max))
+    plt.ylim((coord_min, coord_max))
+    if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
+        os.mkdir('./plot_be/{}'.format(save_name_pre))
+    plt.savefig('./plot_be/{}/{}_{}_{}_{}.png'.format(save_name_pre, plot_be_mode, gray_test, augmentation, save_name_pre))
+    plt.close()
+    
+    # fig = plt.figure(figsize=(8, 8))
+    # ax = fig.add_subplot(1, 1, 1)
+    # plt.title("{} {} \n max:{} min:{}".format(plot_be_mode, gray_test, coord_max, coord_min))
+    # if plot_be_mode == 'ave_augmentation':
+    #     x_pos_1 = feature_tsne_output[:sample_num, 0]
+    #     y_pos_1 = feature_tsne_output[:sample_num, 1]
+    #     # aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='v', c=plot_labels_colar, cmap=plt.cm.Spectral)
+    #     x_pos_2 = feature_tsne_output[sample_num:2*sample_num, 0]
+    #     y_pos_2 = feature_tsne_output[sample_num:2*sample_num, 1]
+    #     # aug2 = plt.scatter(x_pos_2, y_pos_2, s=15, marker='v', c=plot_labels_colar, cmap='rainbow')
+    #     x_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 0]
+    #     y_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 1]
+    #     # org1 = plt.scatter(x_pos_center, y_pos_center, s=15, c=plot_labels_colar, cmap=plt.cm.Spectral)
+    #     x_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 0]
+    #     y_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 1]
+    #     org2 = plt.scatter(x_pos_center2, y_pos_center2, s=15, c=plot_labels_colar, cmap='rainbow')
+    #     for idx in range(sample_num):
+    #         # ax.annotate(idx,(x_pos_1[idx],y_pos_1[idx]), fontsize=6)
+    #         # ax.annotate(idx,(x_pos_2[idx],y_pos_2[idx]), fontsize=6)
+    #         # ax.annotate(idx,(x_pos_center[idx],y_pos_center[idx]), fontsize=6)
+    #         ax.annotate(idx,(x_pos_center2[idx],y_pos_center2[idx]), fontsize=6)
+    # # my_ticks = [i for i in range(coord_min, coord_max)]
+    # # plt.xticks(my_ticks)
+    # # plt.yticks(my_ticks)
+    # plt.xlim((coord_min, coord_max))
+    # plt.ylim((coord_min, coord_max))
+    # if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
+    #     os.mkdir('./plot_be/{}'.format(save_name_pre))
+    # plt.savefig('./plot_be/{}/{}_{}_{}2.png'.format(save_name_pre, plot_be_mode, gray_test, save_name_pre))
+    # plt.close()
+        

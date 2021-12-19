@@ -1,0 +1,4 @@
+MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type plot_be --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train gray --gray_test grayshiftlarge_font_randomdigit_mnist_mnisttargets --augmentation ReCrop_Hflip_Bri --load_model --load_model_path unlearnable_cleantrain_42027807_1_20211215172833_0.5_512_1000_final_model --load_model_path2 unlearnable_cleantrain_42027807_2_20211215172833_0.5_512_1000_final_model --local_dev 2 --no_save"
+
+echo $MY_CMD
+$MY_CMD
