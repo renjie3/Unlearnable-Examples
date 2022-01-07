@@ -5,14 +5,22 @@ import torchvision
 import torch
 import matplotlib.pyplot as plt
 import kornia
+import utils
+
+import argparse
+parser = argparse.ArgumentParser(description='ClasswiseNoise')
+parser.add_argument('--augmentation_prob', default=[0, 0, 0, 0], nargs='+', type=float, help='get augmentation by probility')
+args = parser.parse_args()
 
 transform = nn.Sequential(
    # K.RandomAffine(360),
    K.ColorJitter(0.4)
 )
 
+transform = utils.train_diff_transform_prob(*args.augmentation_prob)
+
 for i in range(1000):
-   x_rgb: torch.tensor = torchvision.io.read_image('./test.png')  # CxHxW / torch.uint8
+   x_rgb: torch.tensor = torchvision.io.read_image('./dog_rgb.png')  # CxHxW / torch.uint8
 
    x_rgb = x_rgb.unsqueeze(0).float() / 255.0  # BxCxHxW
    x_rgb = transform(x_rgb)

@@ -56,13 +56,30 @@ def train(net, data_loader, train_optimizer):
 
     return total_loss / total_num
 
-def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr"):
+def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0]):
     # train a batch
     # print("pos_1.shape: ", pos_1.shape)
     # print("pos_2.shape: ", pos_2.shape)
     net.train()
     total_loss, total_num = 0.0, 0
     # for pos_1, pos_2, target in train_bar:
+    transform_func = {'simclr': train_diff_transform, 
+                      'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
+                      'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
+                      'ReCrop_Hflip_Con': utils.train_diff_transform_ReCrop_Hflip_Con,
+                      'ReCrop_Hflip_Sat': utils.train_diff_transform_ReCrop_Hflip_Sat,
+                      'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
+                      'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
+                      'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
+                      }
+    if np.sum(augmentation_prob) == 0:
+        if augmentation in transform_func:
+            my_transform_func = transform_func[augmentation]
+        else:
+            raise("Wrong augmentation.")
+    else:
+        my_transform_func = utils.train_diff_transform_prob(*augmentation_prob)
+        
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
     if not noise_after_transform:
         if mix in ['concat_samplewise_train_mnist_18_128', 'concat_samplewise_all_mnist_18_128']:
@@ -72,20 +89,7 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
         elif mix in ['mnist']:
             pos_1, pos_2 = train_diff_transform_resize28(pos_1), train_diff_transform_resize28(pos_2)
         else:
-            if augmentation == 'simclr':
-                pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
-            elif augmentation == 'ReCrop_Hflip':
-                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip(pos_1), train_diff_transform_ReCrop_Hflip(pos_2)
-            elif augmentation == 'ReCrop_Hflip_Bri':
-                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Bri(pos_1), train_diff_transform_ReCrop_Hflip_Bri(pos_2)
-            elif augmentation == 'ReCrop_Hflip_Con':
-                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Con(pos_1), train_diff_transform_ReCrop_Hflip_Con(pos_2)
-            elif augmentation == 'ReCrop_Hflip_Sat':
-                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Sat(pos_1), train_diff_transform_ReCrop_Hflip_Sat(pos_2)
-            elif augmentation == 'ReCrop_Hflip_Hue':
-                pos_1, pos_2 = train_diff_transform_ReCrop_Hflip_Hue(pos_1), train_diff_transform_ReCrop_Hflip_Hue(pos_2)
-            else:
-                raise("Wrong augmentation.")
+            pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
         # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     # print(pos_1.shape)
     feature_1, out_1 = net(pos_1)
@@ -115,6 +119,64 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
     # input()
 
     return total_loss * pos_1.shape[0], pos_1.shape[0], pos_sim.mean().item(), sim_matrix.sum(dim=-1).mean().item()
+
+def train_simclr_softmax(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0]):
+    # train a batch
+    # print("pos_1.shape: ", pos_1.shape)
+    # print("pos_2.shape: ", pos_2.shape)
+    net.train()
+    total_loss, total_num = 0.0, 0
+    # for pos_1, pos_2, target in train_bar:
+    transform_func = {'simclr': train_diff_transform, 
+                      'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
+                      'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
+                      'ReCrop_Hflip_Con': utils.train_diff_transform_ReCrop_Hflip_Con,
+                      'ReCrop_Hflip_Sat': utils.train_diff_transform_ReCrop_Hflip_Sat,
+                      'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
+                      'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
+                      'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
+                      }
+    if np.sum(augmentation_prob) == 0:
+        if augmentation in transform_func:
+            my_transform_func = transform_func[augmentation]
+        else:
+            raise("Wrong augmentation.")
+    else:
+        my_transform_func = utils.train_diff_transform_prob(*augmentation_prob)
+        
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+    if not noise_after_transform:
+        if mix in ['concat_samplewise_train_mnist_18_128', 'concat_samplewise_all_mnist_18_128']:
+            pos_1, pos_2 = train_diff_transform_resize48(pos_1), train_diff_transform_resize48(pos_2)
+        elif mix in ['concat4_samplewise_train_mnist_18_128', 'concat4_samplewise_all_mnist_18_128']:
+            pos_1, pos_2 = train_diff_transform_resize64(pos_1), train_diff_transform_resize64(pos_2)
+        elif mix in ['mnist']:
+            pos_1, pos_2 = train_diff_transform_resize28(pos_1), train_diff_transform_resize28(pos_2)
+        else:
+            pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
+        # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    # print(pos_1.shape)
+    feature_1, logits_1, out_1 = net(pos_1)
+    feature_2, logits_2, out_2 = net(pos_2)
+    
+    # [2*B, D]
+    logits = torch.cat([logits_1, logits_2], dim=0)
+    criterion = torch.nn.CrossEntropyLoss().to(feature_1.device)
+    targets = torch.cat([torch.arange(pos_1.shape[0]), torch.arange(pos_1.shape[0])], dim = 0).to(feature_1.device)
+    
+    loss = criterion(logits, targets)
+    train_optimizer.zero_grad()
+    loss.backward()
+    train_optimizer.step()
+
+    # total_num += batch_size
+    total_loss = loss.item()
+    # # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
+    # print(pos_sim.shape)
+    # print(sim_matrix.sum(dim=-1).shape)
+    # input()
+
+    return total_loss * pos_1.shape[0], pos_1.shape[0]
 
 def train_simclr_target_task(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, target_task="pos/neg"):
     # train a batch
@@ -180,6 +242,35 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     #     pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     # else:
     #     pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
+    if not noise_after_transform:
+        os_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    feature_1, out_1 = net(pos_1)
+    feature_2, out_2 = net(pos_2)
+
+    # [2*B, D]
+    out = torch.cat([out_1, out_2], dim=0)
+    # [2*B, 2*B]
+    sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+    mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
+    # [2*B, 2*B-1]
+    sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
+
+    # compute loss
+    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+    # [2*B]
+    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+    loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    # train_optimizer.zero_grad()
+    # perturb.retain_grad()
+    # loss.backward()
+
+    return loss
+
+def train_simclr_noise_return_loss_tensor_model_free(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False):
+    net.eval()
+    total_loss, total_num = 0.0, 0
+    
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
     if not noise_after_transform:
         os_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     feature_1, out_1 = net(pos_1)
@@ -396,6 +487,51 @@ def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, e
         for data, _, target in test_bar:
             data, target = data.cuda(non_blocking=True), target.cuda(non_blocking=True)
             feature, out = net(data)
+
+            total_num += data.size(0)
+            # compute cos similarity between each feature vector and feature bank ---> [B, N]
+            sim_matrix = torch.mm(feature, feature_bank)
+            # [B, K]
+            sim_weight, sim_indices = sim_matrix.topk(k=k, dim=-1)
+            # [B, K]
+            sim_labels = torch.gather(feature_labels.expand(data.size(0), -1), dim=-1, index=sim_indices)
+            sim_weight = (sim_weight / temperature).exp()
+
+            # counts for each class
+            one_hot_label = torch.zeros(data.size(0) * k, c, device=sim_labels.device)
+            # [B*K, C]
+            one_hot_label = one_hot_label.scatter(dim=-1, index=sim_labels.view(-1, 1), value=1.0)
+            # weighted score ---> [B, C]
+            pred_scores = torch.sum(one_hot_label.view(data.size(0), -1, c) * sim_weight.unsqueeze(dim=-1), dim=1)
+
+            pred_labels = pred_scores.argsort(dim=-1, descending=True)
+            total_top1 += torch.sum((pred_labels[:, :1] == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            total_top5 += torch.sum((pred_labels[:, :5] == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            test_bar.set_description('Test Epoch: [{}/{}] Acc@1:{:.2f}% Acc@5:{:.2f}%'
+                                     .format(epoch, epochs, total_top1 / total_num * 100, total_top5 / total_num * 100))
+
+    return total_top1 / total_num * 100, total_top5 / total_num * 100
+
+def test_ssl_softmax(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
+    net.eval()
+    total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
+    c = 10
+    with torch.no_grad():
+        # generate feature bank
+        for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):
+            feature, logits, out = net(data.cuda(non_blocking=True))
+            feature_bank.append(feature)
+            # print("data.shape:", data.shape)
+            # print("feature.shape:", feature.shape)
+        # [D, N]
+        feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
+        # [N]
+        feature_labels = torch.tensor(memory_data_loader.dataset.targets, device=feature_bank.device)
+        # loop test data to predict the label by weighted knn search
+        test_bar = tqdm(test_data_loader)
+        for data, _, target in test_bar:
+            data, target = data.cuda(non_blocking=True), target.cuda(non_blocking=True)
+            feature, logits, out = net(data)
 
             total_num += data.size(0)
             # compute cos similarity between each feature vector and feature bank ---> [B, N]

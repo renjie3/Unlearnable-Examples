@@ -305,6 +305,51 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
     
+    
+    def min_min_attack_simclr_return_loss_tensor_model_free(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", noise_after_transform=False):
+    # after verified that using perturb as variable to train is working 
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+            opt = torch.optim.SGD([perturb], lr=1e-3)
+            opt.zero_grad()
+            model.zero_grad()
+            # perturb.retain_grad()
+            # loss.backward()
+            if target_task == "non_eot":
+                loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug)
+            elif target_task in ["pos", "neg"]:
+                loss = train_simclr_noise_return_loss_tensor_target_task(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, target_task)
+            else:
+                raise("Wrong target_task")
+            perturb.retain_grad()
+            loss.backward()
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * perturb.grad.data.sign() * (-1)
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            eta = (eta1 + eta2) / 2
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img1 = pos_samples_1.data + perturb
+            perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+            perturb_img2 = pos_samples_2.data + perturb
+            perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+            print("min_min_attack_simclr_return_loss_tensor:", loss.item())
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+    
     def min_min_attack_simclr_return_loss_tensor_model_group(self, pos_samples_1, pos_samples_2, labels, model_group, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", step_size_schedule=8.0 / 255.0):
     # after verified that using perturb as variable to train is working 
         if random_noise is None:
@@ -414,6 +459,59 @@ class PerturbationTool():
         # print(">0:", np.sum(eta.cpu().numpy() > 0))
         # print("<0:", np.sum(eta.cpu().numpy() < 0))
         # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+    
+    def min_min_attack_simclr_return_loss_tensor_eot_v1_model_free(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", ):
+    # v1 means it can repeat min_min_attack many times serially and average the results.
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+        eot_size = 30
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+
+            eot_grad = torch.zeros(perturb.shape, dtype=torch.float).to(device)
+            eot_loss = 0
+
+            for i_eot in range(eot_size):
+                perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+                perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+                opt = torch.optim.SGD([perturb], lr=1e-3)
+                opt.zero_grad()
+                model.zero_grad()
+                if target_task == "eot_v1":
+                    loss = train_simclr_noise_return_loss_tensor_model_free(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug)
+                elif target_task == "eot_v1_pos":
+                    loss = train_simclr_noise_return_loss_tensor_target_task_model_free(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, "pos")
+                elif target_task == "eot_v1_neg":
+                    loss = train_simclr_noise_return_loss_tensor_target_task_model_free(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, "pos")
+                else:
+                    raise("Wrong target_task")
+                perturb.retain_grad()
+                loss.backward()
+                eot_grad += perturb.grad.data
+                eot_loss += loss.item()
+            
+            eot_loss /= eot_size
+            eot_grad /= eot_size
+
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * eot_grad.sign() * (-1)
+            sign_print = perturb.grad.data.sign() * (-1)
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            eta = (eta1 + eta2) / 2
+            perturb = Variable(eta, requires_grad=True)
+            print("min_min_attack_simclr_return_loss_tensor_eot_v1:", eot_loss)
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
