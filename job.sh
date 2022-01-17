@@ -10,17 +10,27 @@ MYCPU="6"
 # JOB_INFO="noise_ave_value"
 # MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4"
 
-JOB_INFO="clean"
-MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train_softmax --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --class_4_train_size 128"
+# 0.0 0.5 0.8 0.2
+# 1.0 0.0 0.8 0.2
 
-MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --class_4_train_size 128"
+# 1.0 0.5 0.0 0.2
+# 1.0 0.5 0.8 0.0
 
-MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --class_4_train_size 128"
+# 1.0 0.5 0.8 0.2
+
+JOB_INFO="train gray negative the same"
+MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 0 --theory_normalize"
+
+MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 1 --theory_normalize"
+
+MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 2 --theory_normalize"
 
 # MYCOMMEND2="No_commend2"
-MYCOMMEND3="No_commend3"
+# MYCOMMEND3="No_commend3"
 
 # 'no', 'all_mnist', 'train_mnist', 'test_mnist', 'train_mnist_10_128', 'all_mnist_10_128', 'all_mnist_18_128', 'train_mnist_18_128', 'samplewise_all_mnist_18_128', 'samplewise_train_mnist_18_128', 'concat_samplewise_train_mnist_18_128', 'concat_samplewise_all_mnist_18_128', 'concat4_samplewise_train_mnist_18_128', 'concat4_samplewise_all_mnist_18_128', 'mnist'
+
+# python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2
 
 # JOB_INFO="Retrain SimCLR to test the transferability."
 # MYCOMMEND="python -u simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --class_4 --pre_load_name random_noise32_perturbation"

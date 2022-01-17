@@ -92,8 +92,14 @@ train_diff_transform_ReCrop_Bri = nn.Sequential(
     Kaug.ColorJitter(0.4, p=0.8),
     # Kaug.RandomGrayscale(p=0.2)
 )
+train_diff_transform_Bri = nn.Sequential(
+    # Kaug.RandomResizedCrop([32,32]),
+    # Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
 train_diff_transform_Hflip_Bri = nn.Sequential(
-    Kaug.RandomResizedCrop([32,32]),
+    # Kaug.RandomResizedCrop([32,32]),
     Kaug.RandomHorizontalFlip(p=0.5),
     Kaug.ColorJitter(0.4, p=0.8),
     # Kaug.RandomGrayscale(p=0.2)
@@ -139,6 +145,16 @@ def train_diff_transform_prob(p_recrop=0.0, p_hflip=0.0, p_cj=0.0, p_gray=0.0):
             Kaug.RandomHorizontalFlip(p=p_hflip),
             Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=p_cj),
             Kaug.RandomGrayscale(p=p_gray)
+        )
+    
+def train_diff_transform_prob2(p_recrop=0.0, p_hflip=0.0, p_cj=0.0, p_gray=0.0, p_rot=0.0):
+    # simclr: 1.0 0.5 0.8 0.2
+    return nn.Sequential(
+            Kaug.RandomResizedCrop([32,32], p=p_recrop),
+            Kaug.RandomHorizontalFlip(p=p_hflip),
+            Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=p_cj),
+            Kaug.RandomGrayscale(p=p_gray),
+            Kaug.RandomRotation(360, p=p_rot),
         )
 
 def get_pairs_of_imgs(idx, clean_train_dataset, noise, samplewise = False):
@@ -274,6 +290,45 @@ class SampledCIFAR10(CIFAR10):
                 self.data = sampled_data["test_data"]
                 self.targets = sampled_data["test_targets"]
 
+class SimulatePair(CIFAR10):
+    """CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        data_name = 'data1'
+    ) -> None:
+
+        super(SimulatePair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        
+        sampled_filepath = os.path.join(root, "theory_data", "{}.pkl".format(data_name))
+        with open(sampled_filepath, "rb") as f:
+            sampled_data = pickle.load(f)
+        if train:
+            self.data = sampled_data["train_data"]
+            self.targets = sampled_data["train_targets"]
+        else:
+            self.data = sampled_data["test_data"]
+            self.targets = sampled_data["test_targets"]
+
+    def __getitem__(self, index):
+        data, target = self.data[index], self.targets[index]
+
+        if self.transform is not None:
+            pos_1 = self.transform(data)
+            pos_2 = self.transform(data)
+
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        return pos_1, pos_2, target
+
+
 class CIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
@@ -293,12 +348,15 @@ class CIFAR10Pair(CIFAR10):
     ) -> None:
 
         super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        self.train = train
         if class_4:
             if mix == 'no':
                 if class_4_train_size == 1024:
                     sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
                 else:
                     sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_{}_4class.pkl".format(class_4_train_size))
+            elif mix =='cifar10_1024_4class_easy50':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_easy50.pkl")
             elif mix =='all_mnist':
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed.pkl")
             elif mix =='train_mnist':
@@ -369,6 +427,14 @@ class CIFAR10Pair(CIFAR10):
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_samplewise_center_all_32_budget128.pkl")
             elif mix =='mnist':
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist.pkl") 
+            elif mix =='random_samplewise_center_all_18_budget128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_random_samplewise_center_all_18_budget128.pkl")
+            elif mix =='random_samplewise_center_all_10_64':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_random_samplewise_center_all_10_budget64.pkl")
+            elif mix =='random_samplewise_center_all_10_80':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_random_samplewise_center_all_10_budget80.pkl")
+            elif mix =='random_samplewise_center_all_10_128':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_mnist_mixed_random_samplewise_center_all_10_budget128.pkl")
             else:
                 raise("Wrong args.mix!")
             with open(sampled_filepath, "rb") as f:
@@ -419,8 +485,42 @@ class CIFAR10Pair(CIFAR10):
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshift256levels_font_2_inclassdigit_mnist_merge.pkl")
             elif gray == 'grayshiftlarge_font_randomdigit_mnist_mnisttargets':
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class_grayshiftlarge_font_randomdigit_mnist_mnisttargets.pkl")
+            elif gray == 'mnist_train_4gray':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_4gray.pkl")
+            elif gray == 'mnist_train_gray':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_gray.pkl")
+            elif gray == 'mnist_4class_center':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_4class_center.pkl")
+            elif gray == 'mnist_4position':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_4position.pkl")
+            elif gray == 'mnist_4class_4batch_position':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_4class_4batch_position.pkl")
+            elif gray == 'mnist_4class_center_4gray':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_4class_center_4gray.pkl")
+            elif gray == 'mnist_train_4class_4batch_4_grayposit':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_4class_4batch_4_grayposit.pkl")
+            elif gray == 'mnist_train_2digit':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit.pkl")
+            elif gray == 'mnist_train_2digit_test0145':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test0145.pkl")
+            elif gray == 'mnist_train_2digit_test2367':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test2367.pkl")
+            elif gray == 'mnist_train_2digit_batch0145':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_batch0145.pkl")
+            elif gray == 'mnist_train_2digit_batch2367':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_batch2367.pkl")
+            elif gray == 'mnist_train_2digit_batch1837':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_batch1837.pkl")
+            elif gray == 'mnist_train_2digit_batch2459':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_batch2459.pkl")
+            elif gray == 'mnist_train_2digit_test1837':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test1837.pkl")
+            elif gray == 'mnist_train_2digit_test2459':
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test2459.pkl")
             elif 'freq' in gray:
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "{}.pkl".format(gray))
+            else:
+                raise("wrong gray!")
             with open(sampled_filepath, "rb") as f:
                 sampled_data = pickle.load(f)
             if train:
@@ -446,9 +546,13 @@ class CIFAR10Pair(CIFAR10):
         img = Image.fromarray(img)
 
         if self.transform is not None:
-            if self.train_noise_after_transform:
-                pos_1 = train_transform(img)
-                pos_2 = train_transform(img)
+            if self.train:
+                if self.train_noise_after_transform:
+                    pos_1 = train_transform(img)
+                    pos_2 = train_transform(img)
+                else:
+                    pos_1 = self.transform(img)
+                    pos_2 = self.transform(img)
             else:
                 pos_1 = self.transform(img)
                 pos_2 = self.transform(img)
@@ -1031,13 +1135,13 @@ def plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels,
         # ax.yaxis.set_major_formatter(NullFormatter())
         # plt.savefig('./results/{}_cleandata_orglabel.png'.format(pre_load_name))
         
-def plot_be(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, sample_num, plot_be_mode, gray_test, augmentation, mnist_labels):
+def plot_be(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, sample_num, plot_be_mode, gray_test, augmentation, mnist_labels, augmentation_prob):
     tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
     
     feature_bank = []
     if feature1_bank != None:
         feature_bank += feature1_bank
-    if feature2_bank != None:
+    if len(feature2_bank[0]) != 0:
         feature_bank += feature2_bank
     if feature_center_bank != None:
         feature_bank += feature_center_bank
@@ -1059,15 +1163,19 @@ def plot_be(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save
     marker = ['o', 'x', 'v', 'd']
     color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan']
     plt.title("{} {} \n max:{} min:{}".format(plot_be_mode, gray_test, coord_max, coord_min))
-    if plot_be_mode == 'ave_augmentation':
+    if plot_be_mode == 'ave_augmentation' or plot_be_mode == 'single_augmentation':
         x_pos_1 = feature_tsne_output[:sample_num, 0]
         y_pos_1 = feature_tsne_output[:sample_num, 1]
-        aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='x', c=plot_labels_colar, cmap='rainbow')
+        aug1 = plt.scatter(x_pos_1, y_pos_1, s=25, marker='x', c=plot_labels_colar, cmap='rainbow')
         # x_pos_2 = feature_tsne_output[sample_num:2*sample_num, 0]
         # y_pos_2 = feature_tsne_output[sample_num:2*sample_num, 1]
         # aug2 = plt.scatter(x_pos_2, y_pos_2, s=15, marker='v', c=plot_labels_colar, cmap='rainbow')
-        x_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 0]
-        y_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 1]
+        if len(feature2_bank[0]) != 0:
+            x_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 0]
+            y_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 1]
+        else:
+            x_pos_center = feature_tsne_output[sample_num:2*sample_num, 0]
+            y_pos_center = feature_tsne_output[sample_num:2*sample_num, 1]
         org1 = plt.scatter(x_pos_center, y_pos_center, s=15, marker='o', c=plot_labels_colar, cmap='rainbow')
         # x_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 0]
         # y_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 1]
@@ -1095,38 +1203,40 @@ def plot_be(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save
     plt.ylim((coord_min, coord_max))
     if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
         os.mkdir('./plot_be/{}'.format(save_name_pre))
-    plt.savefig('./plot_be/{}/{}_{}_{}_{}.png'.format(save_name_pre, plot_be_mode, gray_test, augmentation, save_name_pre))
+    plt.savefig('./plot_be/{}/{}_{}_{}#{}#{}#{}_{}_{}.png'.format(save_name_pre, plot_be_mode, gray_test, *augmentation_prob, augmentation, save_name_pre))
     plt.close()
     
-    fig = plt.figure(figsize=(8, 8))
-    ax = fig.add_subplot(1, 1, 1)
-    marker = ['o', 'x', 'v', 'd']
-    color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan']
-    plt.title("{} {} \n max:{} min:{}".format(plot_be_mode, gray_test, coord_max, coord_min))
-    if plot_be_mode == 'ave_augmentation':
-        # x_pos_1 = feature_tsne_output[:sample_num, 0]
-        # y_pos_1 = feature_tsne_output[:sample_num, 1]
-        # aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='x', c=plot_labels_colar, cmap='rainbow')
-        x_pos_2 = feature_tsne_output[sample_num:2*sample_num, 0]
-        y_pos_2 = feature_tsne_output[sample_num:2*sample_num, 1]
-        aug2 = plt.scatter(x_pos_2, y_pos_2, s=15, marker='x', c=plot_labels_colar, cmap='rainbow')
-        # x_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 0]
-        # y_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 1]
-        # org1 = plt.scatter(x_pos_center, y_pos_center, s=15, marker='o', c=plot_labels_colar, cmap=plt.cm.Spectral)
-        x_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 0]
-        y_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 1]
-        org2 = plt.scatter(x_pos_center2, y_pos_center2, s=15, marker='o', c=plot_labels_colar, cmap='rainbow')
-    # ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
-    # ax.yaxis.set_major_formatter(NullFormatter())
-    # my_ticks = [i for i in range(coord_min, coord_max)]
-    # plt.xticks(my_ticks)
-    # plt.yticks(my_ticks)
-    plt.xlim((coord_min, coord_max))
-    plt.ylim((coord_min, coord_max))
-    if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
-        os.mkdir('./plot_be/{}'.format(save_name_pre))
-    plt.savefig('./plot_be/{}/{}_{}_{}_{}2.png'.format(save_name_pre, plot_be_mode, gray_test, augmentation, save_name_pre))
-    plt.close()
+    if len(feature2_bank[0]) != 0:
+    
+        fig = plt.figure(figsize=(8, 8))
+        ax = fig.add_subplot(1, 1, 1)
+        marker = ['o', 'x', 'v', 'd']
+        color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan']
+        plt.title("{} {} \n max:{} min:{}".format(plot_be_mode, gray_test, coord_max, coord_min))
+        if plot_be_mode == 'ave_augmentation':
+            # x_pos_1 = feature_tsne_output[:sample_num, 0]
+            # y_pos_1 = feature_tsne_output[:sample_num, 1]
+            # aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='x', c=plot_labels_colar, cmap='rainbow')
+            x_pos_2 = feature_tsne_output[sample_num:2*sample_num, 0]
+            y_pos_2 = feature_tsne_output[sample_num:2*sample_num, 1]
+            aug2 = plt.scatter(x_pos_2, y_pos_2, s=15, marker='x', c=plot_labels_colar, cmap='rainbow')
+            # x_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 0]
+            # y_pos_center = feature_tsne_output[2*sample_num:3*sample_num, 1]
+            # org1 = plt.scatter(x_pos_center, y_pos_center, s=15, marker='o', c=plot_labels_colar, cmap=plt.cm.Spectral)
+            x_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 0]
+            y_pos_center2 = feature_tsne_output[3*sample_num:4*sample_num, 1]
+            org2 = plt.scatter(x_pos_center2, y_pos_center2, s=15, marker='o', c=plot_labels_colar, cmap='rainbow')
+        # ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+        # ax.yaxis.set_major_formatter(NullFormatter())
+        # my_ticks = [i for i in range(coord_min, coord_max)]
+        # plt.xticks(my_ticks)
+        # plt.yticks(my_ticks)
+        plt.xlim((coord_min, coord_max))
+        plt.ylim((coord_min, coord_max))
+        if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
+            os.mkdir('./plot_be/{}'.format(save_name_pre))
+        plt.savefig('./plot_be/{}/{}_{}_{}#{}#{}#{}_{}_{}2.png'.format(save_name_pre, plot_be_mode, gray_test, *augmentation_prob, augmentation, save_name_pre))
+        plt.close()
     
     # fig = plt.figure(figsize=(8, 8))
     # ax = fig.add_subplot(1, 1, 1)

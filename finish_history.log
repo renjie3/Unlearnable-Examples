@@ -1957,3 +1957,426 @@ clean
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train_softmax --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --class_4_train_size 128 --job_id 43104732_1
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --class_4_train_size 128 --job_id 43104732_2
 ---------------------------------------------------------------
+Sat Jan  8 15:47:51 EST 2022
+43450902
+looc
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet50 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type looc --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --augmentation_prob 0.8 0.5 1.0 0.0 --arch resnet50 --job_id 43450902_1
+---------------------------------------------------------------
+Sat Jan  8 20:56:32 EST 2022
+43459545
+looc
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type multiple_independent_cl --epochs 1000 --min_min_attack_fn non_eot --batch_size 512 --strong_aug --class_4 --augmentation simclr --augmentation_prob 0.8 0.5 1.0 0.0 --arch resnet18 --job_id 43459545_1
+---------------------------------------------------------------
+Sat Jan  8 22:19:55 EST 2022
+43459516
+looc
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet50 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type looc --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --augmentation simclr --augmentation_prob 0.8 0.5 1.0 0.0 --arch resnet50 --job_id 43459516_1
+---------------------------------------------------------------
+Tue Jan 11 12:40:23 EST 2022
+43554165
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --job_id 43554165_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --job_id 43554165_2
+---------------------------------------------------------------
+Tue Jan 11 13:58:48 EST 2022
+43556970
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --job_id 43556970_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --job_id 43556970_2
+---------------------------------------------------------------
+Tue Jan 11 14:05:59 EST 2022
+43557131
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --job_id 43557131_1
+---------------------------------------------------------------
+Wed Jan 12 00:30:35 EST 2022
+43590175
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --job_id 43590175_1
+---------------------------------------------------------------
+Wed Jan 12 12:40:16 EST 2022
+43611013
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train_newneg --epochs 1000 --min_min_attack_fn non_eot --batch_size 512 --strong_aug --class_4 --augmentation simclr --job_id 43611013_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 512 --augmentation ReCrop_Hflip --job_id 43611013_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 512 --augmentation ReCrop_Hflip --job_id 43611013_3
+---------------------------------------------------------------
+Wed Jan 12 15:00:38 EST 2022
+43617467
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center --gray_test mnist_4position --batch_size 512 --augmentation Hflip_Bri --job_id 43617467_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 512 --augmentation Hflip_Bri --job_id 43617467_2
+---------------------------------------------------------------
+Wed Jan 12 15:01:47 EST 2022
+43617447
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center --gray_test mnist_4position --batch_size 512 --augmentation ReCrop_Hflip --job_id 43617447_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 512 --augmentation ReCrop_Hflip --job_id 43617447_2
+---------------------------------------------------------------
+Wed Jan 12 17:15:02 EST 2022
+43629098
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_4batch_position --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43629098_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center_4gray --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43629098_2
+---------------------------------------------------------------
+Wed Jan 12 17:53:37 EST 2022
+43629234
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_4batch_position --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43629234_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43629234_2
+---------------------------------------------------------------
+Wed Jan 12 18:01:45 EST 2022
+43631004
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43631004_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43631004_2
+---------------------------------------------------------------
+Wed Jan 12 18:25:10 EST 2022
+43630996
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43630996_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43630996_2
+---------------------------------------------------------------
+Wed Jan 12 22:12:47 EST 2022
+43652794
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit --gray_test mnist_train_2digit_test1 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43652794_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit --gray_test mnist_train_2digit_test2 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43652794_2
+---------------------------------------------------------------
+Wed Jan 12 22:57:36 EST 2022
+43655146
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch0145 --gray_test mnist_train_2digit_test0145 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655146_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch0145 --gray_test mnist_train_2digit_test2367 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655146_2
+---------------------------------------------------------------
+Wed Jan 12 23:03:24 EST 2022
+43655154
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2367 --gray_test mnist_train_2digit_test0145 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655154_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2367 --gray_test mnist_train_2digit_test2367 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655154_2
+---------------------------------------------------------------
+Wed Jan 12 23:28:24 EST 2022
+43655692
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2459 --gray_test mnist_train_2digit_test2459 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655692_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2459 --gray_test mnist_train_2digit_test1837 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655692_2
+---------------------------------------------------------------
+Wed Jan 12 23:33:14 EST 2022
+43655834
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch1837 --gray_test mnist_train_2digit_test2459 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655834_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch1837 --gray_test mnist_train_2digit_test1837 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43655834_2
+---------------------------------------------------------------
+Thu Jan 13 11:31:37 EST 2022
+43684872
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43684872_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43684872_2
+---------------------------------------------------------------
+Thu Jan 13 11:33:02 EST 2022
+43684873
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43684873_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43684873_2
+
+
+---------------------------------------------------------------
+Thu Jan 13 11:47:49 EST 2022
+43685237
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2459 --gray_test mnist_train_2digit_test2459 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685237_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch1837 --gray_test mnist_train_2digit_test2459 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685237_2
+---------------------------------------------------------------
+Thu Jan 13 11:48:06 EST 2022
+43685244
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2459 --gray_test mnist_train_2digit_test2459 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685244_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch1837 --gray_test mnist_train_2digit_test2459 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685244_2
+---------------------------------------------------------------
+Thu Jan 13 11:48:49 EST 2022
+43685006
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2367 --gray_test mnist_train_2digit_test0145 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685006_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch0145 --gray_test mnist_train_2digit_test0145 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685006_2
+---------------------------------------------------------------
+Thu Jan 13 11:49:09 EST 2022
+43685050
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2367 --gray_test mnist_train_2digit_test2367 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685050_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch0145 --gray_test mnist_train_2digit_test2367 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685050_2
+---------------------------------------------------------------
+Thu Jan 13 11:49:53 EST 2022
+43685300
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2459 --gray_test mnist_train_2digit_test1837 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685300_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch1837 --gray_test mnist_train_2digit_test1837 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685300_2
+---------------------------------------------------------------
+Thu Jan 13 11:50:05 EST 2022
+43685058
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2367 --gray_test mnist_train_2digit_test2367 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685058_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch0145 --gray_test mnist_train_2digit_test2367 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685058_2
+---------------------------------------------------------------
+Thu Jan 13 11:50:39 EST 2022
+43684996
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2367 --gray_test mnist_train_2digit_test0145 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43684996_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch0145 --gray_test mnist_train_2digit_test0145 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43684996_2
+---------------------------------------------------------------
+Thu Jan 13 11:51:44 EST 2022
+43685284
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch2459 --gray_test mnist_train_2digit_test1837 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685284_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 1 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit_batch1837 --gray_test mnist_train_2digit_test1837 --batch_size 1024 --batchsize_2digit 256 --not_shuffle_train_data --job_id 43685284_2
+---------------------------------------------------------------
+Thu Jan 13 12:07:36 EST 2022
+43684876
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43684876_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43684876_2
+---------------------------------------------------------------
+Thu Jan 13 12:08:56 EST 2022
+43684875
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43684875_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43684875_2
+---------------------------------------------------------------
+Thu Jan 13 13:31:15 EST 2022
+43691063
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43691063_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43691063_2
+---------------------------------------------------------------
+Thu Jan 13 13:32:28 EST 2022
+43691060
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43691060_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43691060_2
+---------------------------------------------------------------
+Thu Jan 13 13:33:15 EST 2022
+43691055
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43691055_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43691055_2
+---------------------------------------------------------------
+Thu Jan 13 14:12:20 EST 2022
+43691068
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43691068_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43691068_2
+---------------------------------------------------------------
+Thu Jan 13 14:13:21 EST 2022
+43691070
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43691070_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43691070_2
+---------------------------------------------------------------
+Thu Jan 13 14:13:40 EST 2022
+43691069
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43691069_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43691069_2
+---------------------------------------------------------------
+Thu Jan 13 17:42:23 EST 2022
+43699444
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation Bri --job_id 43699444_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --job_id 43699444_2
+---------------------------------------------------------------
+Sat Jan 15 00:45:37 EST 2022
+43810779
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix random_samplewise_train_center_18_128 --job_id 43810779_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix random_samplewise_train_center_18_128 --job_id 43810779_2
+---------------------------------------------------------------
+Sat Jan 15 00:45:59 EST 2022
+43810780
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix random_samplewise_train_center_18_128 --job_id 43810780_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix random_samplewise_train_center_18_128 --job_id 43810780_2
+---------------------------------------------------------------
+Sat Jan 15 00:46:16 EST 2022
+43810781
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.2 --mix random_samplewise_train_center_18_128 --job_id 43810781_1
+---------------------------------------------------------------
+Sat Jan 15 01:17:00 EST 2022
+43809527
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix samplewise_train_center_18_128 --job_id 43809527_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix samplewise_train_center_18_128 --job_id 43809527_2
+---------------------------------------------------------------
+Sat Jan 15 01:18:30 EST 2022
+43809532
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix samplewise_train_center_18_128 --job_id 43809532_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix samplewise_train_center_18_128 --job_id 43809532_2
+---------------------------------------------------------------
+Sat Jan 15 01:20:21 EST 2022
+43809528
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix samplewise_train_center_18_128 --job_id 43809528_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix samplewise_train_center_18_128 --job_id 43809528_2
+---------------------------------------------------------------
+Sat Jan 15 01:20:35 EST 2022
+43809529
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix samplewise_train_center_18_128 --job_id 43809529_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix samplewise_train_center_18_128 --job_id 43809529_2
+---------------------------------------------------------------
+Sat Jan 15 01:26:18 EST 2022
+43810884
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.2 --mix random_samplewise_center_all_18_budget128 --job_id 43810884_1
+---------------------------------------------------------------
+Sat Jan 15 01:36:59 EST 2022
+43810886
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix random_samplewise_center_all_18_budget128 --job_id 43810886_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix random_samplewise_center_all_18_budget128 --job_id 43810886_2
+---------------------------------------------------------------
+Sat Jan 15 01:37:05 EST 2022
+43810887
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix random_samplewise_center_all_18_budget128 --job_id 43810887_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix random_samplewise_center_all_18_budget128 --job_id 43810887_2
+---------------------------------------------------------------
+Sat Jan 15 11:12:06 EST 2022
+43865520
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix samplewise_center_all_10_budget128 --job_id 43865520_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix samplewise_center_all_10_budget128 --job_id 43865520_2
+---------------------------------------------------------------
+Sat Jan 15 11:12:31 EST 2022
+43865559
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix samplewise_center_all_10_budget128 --job_id 43865559_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix samplewise_center_all_10_budget128 --job_id 43865559_2
+---------------------------------------------------------------
+Sat Jan 15 11:52:09 EST 2022
+43865752
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.2 --mix samplewise_all_center_10_128 --job_id 43865752_1
+---------------------------------------------------------------
+Sat Jan 15 11:57:56 EST 2022
+43865748
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix samplewise_all_center_10_128 --job_id 43865748_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix samplewise_all_center_10_128 --job_id 43865748_2
+---------------------------------------------------------------
+Sat Jan 15 11:59:22 EST 2022
+43867730
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.2 --mix random_samplewise_center_all_10_64 --job_id 43867730_1
+---------------------------------------------------------------
+Sat Jan 15 12:01:58 EST 2022
+43867738
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.2 --mix random_samplewise_center_all_10_128 --job_id 43867738_1
+---------------------------------------------------------------
+Sat Jan 15 12:02:55 EST 2022
+43865751
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix samplewise_all_center_10_128 --job_id 43865751_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix samplewise_all_center_10_128 --job_id 43865751_2
+---------------------------------------------------------------
+Sat Jan 15 12:03:16 EST 2022
+43867737
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.2 --mix random_samplewise_center_all_10_80 --job_id 43867737_1
+---------------------------------------------------------------
+Sat Jan 15 12:11:32 EST 2022
+43867741
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix random_samplewise_center_all_10_128 --job_id 43867741_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix random_samplewise_center_all_10_128 --job_id 43867741_2
+---------------------------------------------------------------
+Sat Jan 15 12:11:37 EST 2022
+43867732
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix random_samplewise_center_all_10_64 --job_id 43867732_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix random_samplewise_center_all_10_64 --job_id 43867732_2
+---------------------------------------------------------------
+Sat Jan 15 12:12:26 EST 2022
+43867731
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix random_samplewise_center_all_10_64 --job_id 43867731_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix random_samplewise_center_all_10_64 --job_id 43867731_2
+---------------------------------------------------------------
+Sat Jan 15 12:12:26 EST 2022
+43867733
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 0.0 0.5 0.8 0.2 --mix random_samplewise_center_all_10_80 --job_id 43867733_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.0 0.8 0.2 --mix random_samplewise_center_all_10_80 --job_id 43867733_2
+---------------------------------------------------------------
+Sat Jan 15 12:13:07 EST 2022
+43867740
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix random_samplewise_center_all_10_128 --job_id 43867740_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix random_samplewise_center_all_10_128 --job_id 43867740_2
+---------------------------------------------------------------
+Sat Jan 15 12:15:02 EST 2022
+43867736
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.0 0.2 --mix random_samplewise_center_all_10_80 --job_id 43867736_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --augmentation ReCrop_Hflip --augmentation_prob 1.0 0.5 0.8 0.0 --mix random_samplewise_center_all_10_80 --job_id 43867736_2
+---------------------------------------------------------------
+Sun Jan 16 17:12:28 EST 2022
+Sun Jan 16 17:12:28 EST 2022
+Sun Jan 16 17:12:28 EST 2022
+43990120
+43990118
+Sun Jan 16 17:12:28 EST 2022
+train gray negative the same
+train gray negative the same
+43990119
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 6 --theory_normalize --local_dev 2 --no_save --job_id 43990120_1
+train gray negative the same
+43990121
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 0 --theory_normalize --local_dev 2 --no_save --job_id 43990118_1
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 3 --theory_normalize --local_dev 2 --no_save --job_id 43990119_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 1 --theory_normalize --local_dev 2 --no_save --job_id 43990118_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 7 --theory_normalize --local_dev 2 --no_save --job_id 43990120_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 9 --theory_normalize --local_dev 2 --no_save --job_id 43990121_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 8 --theory_normalize --local_dev 2 --no_save --job_id 43990120_3
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 4 --theory_normalize --local_dev 2 --no_save --job_id 43990119_2
+---------------------------------------------------------------
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 2 --theory_normalize --local_dev 2 --no_save --job_id 43990118_3
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 5 --theory_normalize --local_dev 2 --no_save --job_id 43990119_3
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+Sun Jan 16 17:37:36 EST 2022
+43990135
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 9 --theory_normalize --job_id 43990135_1
+---------------------------------------------------------------
+Sun Jan 16 17:37:46 EST 2022
+43990133
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 3 --theory_normalize --job_id 43990133_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 4 --theory_normalize --job_id 43990133_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 5 --theory_normalize --job_id 43990133_3
+---------------------------------------------------------------
+Sun Jan 16 17:37:49 EST 2022
+43990134
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 6 --theory_normalize --job_id 43990134_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 7 --theory_normalize --job_id 43990134_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 8 --theory_normalize --job_id 43990134_3
+---------------------------------------------------------------
+Sun Jan 16 17:38:02 EST 2022
+43990132
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 0 --theory_normalize --job_id 43990132_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 1 --theory_normalize --job_id 43990132_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_knn4 --theory_test_data hierarchical_test_knn4 --random_drop_feature_num 2 --theory_normalize --job_id 43990132_3
+---------------------------------------------------------------
+Sun Jan 16 22:26:14 EST 2022
+44003039
+train gray negative the same
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 0 --theory_normalize --job_id 44003039_1
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 1 --theory_normalize --job_id 44003039_2
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 2 --theory_normalize --job_id 44003039_3
+---------------------------------------------------------------

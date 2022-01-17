@@ -27,11 +27,20 @@ if args.mnist_targets:
     class_num = 10 
     
 for k in range(class_num):
-    for i in range(len(train_data)):
+    i = 0
+    while i < len(train_data):
         if train_targets[i] == k:
             imageio.imwrite(img_path, train_data[i])
-            if input(train_targets[i]) == 'n':
+            print(i)
+            c = input(train_targets[i])
+            if c == 'n':
                 break
+            elif c == '':
+                pass
+            else:
+                i = int(c)
+                
+        i += 1
             
             
 train_data = data['test_data']
@@ -40,11 +49,21 @@ if args.mnist_targets:
 else:
     train_targets = data['test_targets']
 img_path = './test.png'
+print("test_targets:", np.max(train_targets))
+print("test_targets:", len(train_targets))
 
 for k in range(class_num):
-    for i in range(len(train_data)):
+    i = 0
+    while i < len(train_data):
         if train_targets[i] == k:
             imageio.imwrite(img_path, train_data[i])
-            if input(train_targets[i]) == 'n':
+            print(i)
+            c = input(train_targets[i])
+            if c == 'n':
                 break
+            elif c == '':
+                pass
+            else:
+                i = int(c)
+        i += 1
         

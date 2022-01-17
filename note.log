@@ -1,0 +1,12 @@
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 [986/1976]
+ta_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg -
+-train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_4batch_position --gray_test mnist_4po
+sition --batch_size 256 --not_shuffle_train_data --augmentation Bri --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_da
+ta_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg -
+-train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_center_4gray --gray_test mnist_4posit
+ion --batch_size 256 --not_shuffle_train_data --augmentation ReCrop_Hflip --local_dev 2 --no_save
+
+以上两个指令确实能看出来，关于位置是有问题的
+43629234 以上实验结果的sid

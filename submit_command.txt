@@ -129,7 +129,7 @@ python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_na
 
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --plot_process --plot_process_mode augmentation --plot_process_feature feature
 
-python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train red --gray_test red --augmentation ReCrop_Hflip --local_dev 2 --no_save
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --local_dev 2 --no_save
 
 unlearnable_cleantrain_42027807_1_20211215172833_0.5_512_1000_final_model # ReCrop_Hflip_Bri
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train gray --gray_test grayshift_mnist --augmentation ReCrop_Hflip_Bri --load_model --load_model_path unlearnable_cleantrain_42027807_1_20211215172833_0.5_512_1000_final_model --just_test --local_dev 2 --no_save
@@ -140,3 +140,129 @@ python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_na
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type test_find_positive_pair --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --load_model --load_model_path unlearnable_cleantrain_41459622_2_20211203162721_0.5_512_1000_final_model --local_dev 2 --no_save
 
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train_softmax --epochs 1000 --min_min_attack_fn non_eot --batch_size 4096 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --class_4_train_size 4096 --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --batch_size 512 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet50 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type looc --epochs 1000 --min_min_attack_fn non_eot --batch_size 128 --strong_aug --class_4 --not_shuffle_train_data --augmentation simclr --augmentation_prob 0.8 0.5 1.0 0.0 --arch resnet50 --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type multiple_independent_cl --epochs 1000 --min_min_attack_fn non_eot --batch_size 512 --strong_aug --class_4 --augmentation simclr --augmentation_prob 0.8 0.5 1.0 0.0 --arch resnet18 --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4gray --gray_test grayshiftlarge_font_randomdigit_mnist --batch_size 256 --augmentation ReCrop_Hflip --local_dev 2 --no_save
+
+# unlearnable_cleantrain_43557131_1_20220111124039_0.5_256_1000_statistics
+# unlearnable_cleantrain_43556970_1_20220111122328_0.5_256_1000_statistics
+# unlearnable_cleantrain_43556970_2_20220111122328_0.5_256_1000_statistics
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type clean_train_newneg --epochs 1000 --min_min_attack_fn non_eot --batch_size 512 --strong_aug --class_4 --augmentation simclr --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_4class_4batch_position --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --local_dev 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_newneg --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_4class_4batch_4_grayposit --gray_test mnist_4position --batch_size 256 --not_shuffle_train_data --augmentation Bri --local 2 --no_save
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train_2digit --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train mnist_train_2digit --gray_test mnist_train_2digit --batch_size 1025 --batchsize_2digit 256 --not_shuffle_train_data --local 2 --no_save
+
+mnist_train_2digit
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type plot_be --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train no --gray_test no --augmentation ReCrop_Hflip_Bri --augmentation_prob 0.0 0.5 0.8 0.2 --load_model --load_model_path unlearnable_cleantrain_42873264_1_20211228104252_0.5_512_1000_final_model --local_dev 2 --no_save
+
+unlearnable_cleantrain_42873264_1_20211228104252_0.5_512_1000_statistics
+unlearnable_cleantrain_42873264_2_20211228104252_0.5_512_1000_statistics
+unlearnable_cleantrain_42873265_1_20211228104344_0.5_512_1000_statistics
+unlearnable_cleantrain_42873264_2_20211228104252_0.5_512_1000_statistics
+hierarchical_test_knn
+
+MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type just_test --plot_be_mode single_augmentation --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --augmentation ReCrop_Hflip_Bri --augmentation_prob 0.0 0.5 0.8 0.2 --load_model --load_model_path unlearnable_cleantrain_42873264_1_20211228104252_0.5_512_1000_final_model --not_shuffle_train_data --mix cifar10_1024_4class_easy50 --local_dev 2 --no_save"
+
+echo $MY_CMD
+echo ${MY_CMD}>>local_history.log
+$MY_CMD
+
+# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type just_test --plot_be_mode single_augmentation --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --augmentation ReCrop_Hflip_Bri --augmentation_prob 1.0 0.5 0.0 0.2 --load_model --load_model_path unlearnable_cleantrain_42873265_1_20211228104344_0.5_512_1000_final_model --not_shuffle_train_data --mix no --local_dev 2 --no_save"
+
+# echo $MY_CMD
+# echo ${MY_CMD}>>local_history.log
+# $MY_CMD
+
+# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type just_test --plot_be_mode single_augmentation --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --augmentation ReCrop_Hflip_Bri --augmentation_prob 1.0 0.5 0.8 0.0 --load_model --load_model_path unlearnable_cleantrain_42873265_2_20211228104344_0.5_512_1000_final_model --not_shuffle_train_data --mix no --local_dev 2 --no_save"
+
+# echo $MY_CMD
+# echo ${MY_CMD}>>local_history.log
+# $MY_CMD
+
+# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type just_test --plot_be_mode single_augmentation --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --augmentation ReCrop_Hflip_Bri --augmentation_prob 1.0 0.0 0.8 0.2 --load_model --load_model_path unlearnable_cleantrain_42873264_2_20211228104252_0.5_512_1000_final_model --not_shuffle_train_data --mix no --local_dev 2 --no_save"
+
+# echo $MY_CMD
+# echo ${MY_CMD}>>local_history.log
+# $MY_CMD
+
+# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type just_test --plot_be_mode single_augmentation --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --augmentation ReCrop_Hflip_Bri --augmentation_prob 1.0 0.5 0.8 0.2 --load_model --load_model_path unlearnable_cleantrain_41459622_2_20211203162721_0.5_512_1000_final_model --not_shuffle_train_data --mix no --local_dev 2 --no_save"
+
+# echo $MY_CMD
+# echo ${MY_CMD}>>local_history.log
+# $MY_CMD
+
+# random_samplewise_mnist
+# random_samplewise_center_all_18_budget128
+# unlearnable_cleantrain_43810886_1_20220115005203_0
+# unlearnable_cleantrain_43810887_1_20220115005214_0
+# unlearnable_cleantrain_43810887_2_20220115005214_0
+# unlearnable_cleantrain_43810886_2_20220115005203_0
+# unlearnable_cleantrain_43810884_1_20220115005150_0
+
+# samplewise_mnist
+# samplewise_all_center_18_128
+# unlearnable_cleantrain_43809527_1_20220115003409_0
+# unlearnable_cleantrain_43809528_1_20220115003402_0
+# unlearnable_cleantrain_43809528_2_20220115003402_0
+# unlearnable_cleantrain_43809527_2_20220115003409_0
+# unlearnable_cleantrain_41798562_2_20211210195041_0
+
+# for i in {4..28..4}
+# do
+    
+#     MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train gray --gray_test freq_cifar10_1024_4class_gray_low_${i} --augmentation ReCrop_Hflip_Bri --load_model --load_model_path unlearnable_cleantrain_42483880_2_20211221153535_0.5_512_1000_final_model --just_test --local_dev 2 --no_save"
+
+#     # echo $MY_CMD
+#     # echo ${MY_CMD}>>local_history.log
+#     $MY_CMD
+# done
+
+# python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type test_find_positive_pair --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --augmentation ReCrop_Hflip --batch_size 256 --gray_train mnist_train_4gray --gray_test mnist_train_4gray --load_model --load_model_path unlearnable_cleantrain_43557131_1_20220111124039_0.5_256_1000_final_model --local_dev 2 --no_save
+
+# unlearnable_cleantrain_42483880_1_20211221153535_0.5_512_1000_final_model
+# unlearnable_cleantrain_41406147_1_20211203004142_0.5_512_1000_statistics pos
+# unlearnable_cleantrain_41459622_2_20211203162721_0.5_512_1000_final_model normal
+# unlearnable_cleantrain_41406143_1_20211203004141_0.5_512_1000_statistics pos/neg
+# unlearnable_cleantrain_42873264_1_20211228104252_0.5_512_1000_final_model --augmentation_prob 0.0 0.5 0.8 0.2
+# unlearnable_cleantrain_42873264_2_20211228104252_0.5_512_1000_final_model --augmentation_prob 1.0 0.0 0.8 0.2
+# unlearnable_cleantrain_42873265_1_20211228104344_0.5_512_1000_final_model --augmentation_prob 1.0 0.5 0.0 0.2
+# unlearnable_cleantrain_42873265_2_20211228104344_0.5_512_1000_final_model --augmentation_prob 1.0 0.5 0.8 0.0
+
+# grayshiftlarge_font_randomdigit_mnist grayshift_mnist grayshift_font_mnist mnist_train_4gray mnist_4position
+# unlearnable_cleantrain_43556970_1_20220111122328_0.5_256_1000_statistics mnist_train_4gray
+# unlearnable_cleantrain_43556970_2_20220111122328_0.5_256_1000_statistics CIFAR10 gray
+# unlearnable_cleantrain_43557131_1_20220111124039_0.5_256_1000_statistics not_shuffle_train
+
+# unlearnable_cleantrain_42873264_1_20211228104252_0.5_512_1000_statistics
+# unlearnable_cleantrain_42873264_2_20211228104252_0.5_512_1000_statistics
+# unlearnable_cleantrain_42873265_1_20211228104344_0.5_512_1000_statistics
+# unlearnable_cleantrain_42873265_2_20211228104344_0.5_512_1000_statistics
+
+# random_samplewise_mnist
+# unlearnable_cleantrain_43810886_1_20220115005203_0
+# unlearnable_cleantrain_43810887_1_20220115005214_0
+# unlearnable_cleantrain_43810887_2_20220115005214_0
+# unlearnable_cleantrain_43810886_2_20220115005203_0
+# unlearnable_cleantrain_43810884_1_20220115005150_0
+
+# samplewise_mnist
+# unlearnable_cleantrain_43809527_1_20220115003409_0
+# unlearnable_cleantrain_43809528_1_20220115003402_0
+# unlearnable_cleantrain_43809528_2_20220115003402_0
+# unlearnable_cleantrain_43809527_2_20220115003409_0
+# unlearnable_cleantrain_41798562_2_20211210195041_0
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 2 2 2 2 0 --theory_normalize --local 2 --no_save
