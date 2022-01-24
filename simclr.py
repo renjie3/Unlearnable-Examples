@@ -282,7 +282,7 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
         else:
             pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
         # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
-    # print(pos_1.shape)
+    # input(pos_1.shape)
     feature_1, out_1 = net(pos_1)
     feature_2, out_2 = net(pos_2)
     # [2*B, D]
@@ -318,7 +318,7 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
 
     return total_loss * pos_1.shape[0], pos_1.shape[0], torch.log(pos_sim.mean()).item() / 2, torch.log(sim_weight.mean()).item() / 2
 
-def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperature, random_drop_feature_num):
+def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperature, random_drop_feature_num, gaussian_aug_std=0.05, thoery_schedule_dim=90, theory_aug_by_order=False):
     net.train()
     total_loss, total_num = 0.0, 0
         
@@ -326,20 +326,36 @@ def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperat
     
     drop_mask1 = []
     drop_mask2 = []
-    level = 5
-    level_dim = 20
-    s_feature_dim = 10
-    ids = np.arange(0, s_feature_dim)
-    random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[0]]
-    drop_mask1.append(random_frop_feature)
-    random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[0]]
-    drop_mask2.append(random_frop_feature)
-    for i in range(1, level):
-        ids = np.arange(s_feature_dim+(i-1)*level_dim, s_feature_dim+i*level_dim)
-        random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
-        drop_mask1.append(random_frop_feature)
-        random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
-        drop_mask2.append(random_frop_feature)
+    level = len(random_drop_feature_num)
+    if thoery_schedule_dim == 90:
+        level_dim = [0, 10, 30, 50, 70, 90]
+    elif thoery_schedule_dim == 150:
+        level_dim = [0, 10, 30, 60, 100, 150]
+    elif thoery_schedule_dim == 20:
+        level_dim = [0, 10, 20]
+    elif thoery_schedule_dim == 10:
+        level_dim = [0, 10]
+    elif thoery_schedule_dim == 50:
+        level_dim = [0, 10, 20, 30, 40, 50]
+    else:
+        raise("Wrong thoery_schedule_dim!")
+    gaussian_schedule = [1, 1, 1, 1, 1]
+    # s_feature_dim = 10
+    if theory_aug_by_order:
+        # input('check here')
+        for i in range(0, level):
+            ids = np.arange(level_dim[i], level_dim[i+1])
+            drop_feature = ids[:random_drop_feature_num[i]]
+            drop_mask1.append(drop_feature)
+            drop_feature = ids[:random_drop_feature_num[i]]
+            drop_mask2.append(drop_feature)
+    else:
+        for i in range(0, level):
+            ids = np.arange(level_dim[i], level_dim[i+1])
+            random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
+            drop_mask1.append(random_frop_feature)
+            random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
+            drop_mask2.append(random_frop_feature)
     # input(drop_mask1)
     drop_mask1 = np.concatenate(drop_mask1, axis=0)
     drop_mask2 = np.concatenate(drop_mask2, axis=0)
@@ -351,8 +367,21 @@ def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperat
         aug2[drop_feat] = 0.0
     aug1 = torch.tensor(aug1).cuda(non_blocking=True)
     aug2 = torch.tensor(aug2).cuda(non_blocking=True)
+    # input(drop_mask1)
     pos_1 = (pos_1 * aug1).float()
     pos_2 = (pos_2 * aug2).float()
+    if gaussian_aug_std != 0:
+        gaussian_aug1 = []
+        gaussian_aug2 = []
+        for i in range(0, level):
+            mean = torch.tensor([0 for _ in range(level_dim[i+1] - level_dim[i])]).float()
+            std = torch.tensor([gaussian_aug_std * gaussian_schedule[i] for _ in range(level_dim[i+1] - level_dim[i])]).float()
+            gaussian_aug1.append(torch.normal(mean, std).cuda(non_blocking=True))
+            gaussian_aug2.append(torch.normal(mean, std).cuda(non_blocking=True))
+        gaussian_aug1 = torch.cat(gaussian_aug1, dim=0)
+        gaussian_aug2 = torch.cat(gaussian_aug2, dim=0)
+        pos_1 += gaussian_aug1
+        pos_2 += gaussian_aug2
 
     out_1 = net(pos_1)
     out_2 = net(pos_2)
@@ -873,7 +902,7 @@ def train_simclr_noise_return_loss_tensor_eot(net, pos_1, pos_2, train_optimizer
 #     return total_loss / pos_1.shape[0]
 
 # test for one epoch, use weighted knn to find the most similar images' label to assign the test image
-def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs, c=10):
+def test_ssl_theory(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs, c=10):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
     # c = 10
@@ -917,16 +946,65 @@ def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, e
             test_bar.set_description('Test Epoch: [{}/{}] Acc@1:{:.2f}% Acc@5:{:.2f}%'
                                      .format(epoch, epochs, total_top1 / total_num * 100, total_top5 / total_num * 100))
 
-    return total_top1 / total_num * 100, total_top5 / total_num * 100
+    return total_top1 / total_num * 100, total_top5 / total_num * 100, feature_bank.t().contiguous(), feature_labels
 
-def test_intra_inter_sim(net, memory_data_loader, test_data_loader, k, temperature, epochs, distance=False):
+# test for one epoch, use weighted knn to find the most similar images' label to assign the test image
+def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
     c = 10
     with torch.no_grad():
         # generate feature bank
-        for data, _, target in tqdm(test_data_loader, desc='Feature extracting'):
+        for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):
             feature, out = net(data.cuda(non_blocking=True))
+            feature_bank.append(feature)
+            # print("data.shape:", data.shape)
+            # print("feature.shape:", feature.shape)
+        # [D, N]
+        feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
+        # [N]
+        feature_labels = torch.tensor(memory_data_loader.dataset.targets, device=feature_bank.device)
+        # loop test data to predict the label by weighted knn search
+        test_bar = tqdm(test_data_loader)
+        for data, _, target in test_bar:
+            data, target = data.cuda(non_blocking=True), target.cuda(non_blocking=True)
+            feature, out = net(data)
+
+            total_num += data.size(0)
+            # compute cos similarity between each feature vector and feature bank ---> [B, N]
+            sim_matrix = torch.mm(feature, feature_bank)
+            # [B, K]
+            sim_weight, sim_indices = sim_matrix.topk(k=k, dim=-1)
+            # [B, K]
+            sim_labels = torch.gather(feature_labels.expand(data.size(0), -1), dim=-1, index=sim_indices)
+            sim_weight = (sim_weight / temperature).exp()
+
+            # counts for each class
+            one_hot_label = torch.zeros(data.size(0) * k, c, device=sim_labels.device)
+            # [B*K, C]
+            one_hot_label = one_hot_label.scatter(dim=-1, index=sim_labels.view(-1, 1), value=1.0)
+            # weighted score ---> [B, C]
+            pred_scores = torch.sum(one_hot_label.view(data.size(0), -1, c) * sim_weight.unsqueeze(dim=-1), dim=1)
+
+            pred_labels = pred_scores.argsort(dim=-1, descending=True)
+            total_top1 += torch.sum((pred_labels[:, :1] == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            total_top5 += torch.sum((pred_labels[:, :5] == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            test_bar.set_description('Test Epoch: [{}/{}] Acc@1:{:.2f}% Acc@5:{:.2f}%'
+                                     .format(epoch, epochs, total_top1 / total_num * 100, total_top5 / total_num * 100))
+
+    return total_top1 / total_num * 100, total_top5 / total_num * 100
+
+def test_intra_inter_sim(net, memory_data_loader, test_data_loader, k, temperature, epochs, distance=False, c=10, theory_model=False):
+    net.eval()
+    total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
+    # c = 10
+    with torch.no_grad():
+        # generate feature bank
+        for data, _, target in tqdm(test_data_loader, desc='Feature extracting'):
+            if theory_model:
+                feature = net(data.cuda(non_blocking=True)[:,0,:,0])
+            else:
+                feature, out = net(data.cuda(non_blocking=True))
             feature_bank.append(feature)
             # print("data.shape:", data.shape)
             # print("feature.shape:", feature.shape)
@@ -1044,6 +1122,104 @@ def test_instance_sim(net, memory_data_loader, test_data_loader, k, temperature,
         easy_weight_50, easy_50 = posiness.topk(k=50, dim=0)
         print(easy_weight_50)
         input(easy_50)
+
+    return total_top1 / total_num * 100, total_top5 / total_num * 100
+
+
+def test_instance_sim_thoery(net, memory_data_loader, test_data_loader, k, temperature, random_drop_feature_num, thoery_schedule_dim=90):
+    net.eval()
+    total_top1, total_top5, total_num, feature_bank1 = 0.0, 0.0, 0, []
+    feature_bank1, feature_bank2, feature_bank, sim_list = [], [], [], []
+    c = 10
+        
+    with torch.no_grad():
+        
+        feature_bank = []
+        posiness = []
+        for i in range(3):
+            data_iter = iter(test_data_loader)
+            end_of_iteration = "END_OF_ITERATION"
+            total_top1, total_top5, total_num = 0.0, 0.0, 0.0
+            feature_bank1, feature_bank2, = [], []
+
+            for pos_samples_1, pos_samples_2, labels in tqdm(test_data_loader, desc='Feature extracting'):
+
+                pos_samples_1, pos_samples_2, labels = pos_samples_1.cuda(non_blocking=True)[:,0,:,0], pos_samples_2.cuda(non_blocking=True)[:,0,:,0], labels.cuda(non_blocking=True)
+                target = torch.arange(0, pos_samples_1.shape[0]).cuda(non_blocking=True)
+
+                net.eval()
+                # pos_samples_1 = my_transform_func(pos_samples_1)
+                # pos_samples_2 = my_transform_func(pos_samples_2)
+
+                pos_1 = pos_samples_1
+                pos_2 = pos_samples_2
+
+                drop_mask1 = []
+                drop_mask2 = []
+                level = 5
+                if thoery_schedule_dim == 90:
+                    level_dim = [0, 10, 30, 50, 70, 90]
+                elif thoery_schedule_dim == 150:
+                    level_dim = [0, 10, 30, 60, 100, 150]
+                else:
+                    raise("Wrong thoery_schedule_dim!")
+                gaussian_schedule = [10, 4, 2, 1, 0.5]
+                # s_feature_dim = 10
+                for i in range(0, level):
+                    ids = np.arange(level_dim[i], level_dim[i+1])
+                    random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
+                    drop_mask1.append(random_frop_feature)
+                    random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
+                    drop_mask2.append(random_frop_feature)
+                # input(drop_mask1)
+                drop_mask1 = np.concatenate(drop_mask1, axis=0)
+                drop_mask2 = np.concatenate(drop_mask2, axis=0)
+                aug1 = np.ones(pos_1.shape[1])
+                for drop_feat in drop_mask1:
+                    aug1[drop_feat] = 0.0
+                aug2 = np.ones(pos_2.shape[1])
+                for drop_feat in drop_mask2:
+                    aug2[drop_feat] = 0.0
+                aug1 = torch.tensor(aug1).cuda(non_blocking=True)
+                aug2 = torch.tensor(aug2).cuda(non_blocking=True)
+                # input(drop_mask1)
+                pos_1 = (pos_1 * aug1).float()
+                pos_2 = (pos_2 * aug2).float()
+
+                feature1 = net(pos_1)
+                feature2 = net(pos_2)
+                feature_bank1.append(feature1)
+                feature_bank2.append(feature2)
+                
+            feature1 = torch.cat(feature_bank1, dim=0).contiguous()
+            feature2 = torch.cat(feature_bank2, dim=0).contiguous()
+    
+            target = torch.arange(0, feature1.shape[0]).cuda(non_blocking=True)
+            
+            # compute cos similarity between each two groups of augmented samples ---> [B, B]
+            sim_matrix = torch.mm(feature1, feature2.t())
+            pos_sim = torch.sum(feature1 * feature2, dim=-1)
+            
+            mask2 = (torch.ones_like(sim_matrix) - torch.eye(feature1.shape[0], device=sim_matrix.device)).bool()
+            # [B, B-1]
+            neg_sim_matrix2 = sim_matrix.masked_select(mask2).view(feature1.shape[0], -1)
+            sim_weight, sim_indices = neg_sim_matrix2.topk(k=1, dim=-1)
+            posiness.append(pos_sim - sim_weight.squeeze(1))
+            
+            sim_indice_1 = sim_matrix.argsort(dim=0, descending=True) #[B, B]
+            sim_indice_2 = sim_matrix.argsort(dim=1, descending=True) #[B, B]
+            # print(sim_indice_1[0, :30])
+            # print(sim_indice_2[:30, 0])
+
+            total_top1 += torch.sum((sim_indice_1[:1, :].t() == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            total_top1 += torch.sum((sim_indice_2[:, :1] == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            total_top5 += torch.sum((sim_indice_1[:5, :].t() == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            total_top5 += torch.sum((sim_indice_2[:, :5] == target.unsqueeze(dim=-1)).any(dim=-1).float()).item()
+            total_num += feature1.shape[0] * 2
+        
+        # print(total_top1 / total_num * 100, total_top5 / total_num * 100, )
+        posiness = torch.stack(posiness, dim = 1).mean(dim=1)
+        easy_weight_50, easy_50 = posiness.topk(k=50, dim=0)
 
     return total_top1 / total_num * 100, total_top5 / total_num * 100
 

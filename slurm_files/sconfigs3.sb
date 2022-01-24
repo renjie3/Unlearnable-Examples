@@ -40,15 +40,20 @@ date >>${MY_ROOT_PATH}finish_history.log
 echo $SLURM_JOB_ID >>${MY_ROOT_PATH}finish_history.log
 echo $JOB_INFO >>${MY_ROOT_PATH}finish_history.log
 echo $MYCOMMEND >>${MY_ROOT_PATH}finish_history.log
+cat ./results_save_name_pre/${SLURM_JOB_ID}_1.txt >>${MY_ROOT_PATH}finish_history.log
+echo -e "\n" >>${MY_ROOT_PATH}finish_history.log
 if [[ "$MYCOMMEND2" != *"No_commend2"* ]]
 then
     echo $MYCOMMEND2 >>${MY_ROOT_PATH}finish_history.log
+    cat ./results_save_name_pre/${SLURM_JOB_ID}_2.txt >>${MY_ROOT_PATH}finish_history.log
+    echo -e "\n" >>${MY_ROOT_PATH}finish_history.log
 fi
 if [[ "$MYCOMMEND3" != *"No_commend3"* ]]
 then
     echo $MYCOMMEND3 >>${MY_ROOT_PATH}finish_history.log
+    cat ./results_save_name_pre/${SLURM_JOB_ID}_3.txt >>${MY_ROOT_PATH}finish_history.log
 fi
-echo "---------------------------------------------------------------" >>${MY_ROOT_PATH}finish_history.log
+echo -e "\n---------------------------------------------------------------" >>${MY_ROOT_PATH}finish_history.log
 
 scontrol show job $SLURM_JOB_ID     ### write job information to SLURM output file.
 ### js -j $SLURM_JOB_ID   ### write resource usage to SLURM output file (powertools command).

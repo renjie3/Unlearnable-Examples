@@ -169,11 +169,12 @@ class MICL(nn.Module):
 #             return feature
 
 class TheoryModel(nn.Module):
-    def __init__(self, train_mode='theory_model', normalize=False):
+    def __init__(self, train_mode='theory_model', normalize=False, thoery_schedule_dim=90):
         super(TheoryModel, self).__init__()
         self.normalize = normalize
         # encoder
-        self.f = nn.Sequential(nn.Linear(90, 128, bias=False), nn.BatchNorm1d(128),nn.ReLU(inplace=True), nn.Linear(128, 16, bias=True))
+        self.f = nn.Sequential(nn.Linear(thoery_schedule_dim, 128, bias=False), nn.BatchNorm1d(128),nn.ReLU(inplace=True), nn.Linear(128, 16, bias=True))
+        # self.f = nn.Linear(thoery_schedule_dim, 16, bias=True)
 
     def forward(self, x):
         feature = self.f(x)

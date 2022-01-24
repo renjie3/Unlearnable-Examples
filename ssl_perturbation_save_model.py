@@ -75,6 +75,12 @@ parser.add_argument('--theory_normalize', action='store_true', default=False)
 parser.add_argument('--theory_train_data', default='hierarchical_knn4', type=str, help='What theory data to use')
 parser.add_argument('--theory_test_data', default='hierarchical_test_knn4', type=str, help='What theory data to use')
 parser.add_argument('--random_drop_feature_num', default=[0, 0, 0, 0, 0], nargs='+', type=int, help='the number of randomly dropped features')
+parser.add_argument('--gaussian_aug_std', default=0.05, type=float, help='Std of 0-mean gaussian augmentation.')
+parser.add_argument('--thoery_schedule_dim', default=90, type=int, help='the dimenssion of schedule')
+parser.add_argument('--just_test_temp_save_file', default='temp', type=str, help='just_test_temp_save_file')
+parser.add_argument('--save_name_pre_temp_save_file', default='temp', type=str, help='save_name_pre_temp_save_file')
+parser.add_argument('--theory_aug_by_order', action='store_true', default=False)
+parser.add_argument('--just_test_plot', action='store_true', default=False)
 args = parser.parse_args()
 
 
@@ -106,7 +112,7 @@ from model import Model, LooC, TheoryModel, MICL
 import pandas as pd
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor, train_simclr_target_task, train_simclr_softmax, test_ssl_softmax, train_align, train_looc, train_micl, train_simclr_newneg, train_simclr_2digit, test_intra_inter_sim, test_instance_sim, train_simclr_theory
+from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor, train_simclr_target_task, train_simclr_softmax, test_ssl_softmax, train_align, train_looc, train_micl, train_simclr_newneg, train_simclr_2digit, test_intra_inter_sim, test_instance_sim, train_simclr_theory, test_ssl_theory, test_instance_sim_thoery
 import random
 import matplotlib.pyplot as plt
 import matplotlib
@@ -1278,7 +1284,7 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
     print("The whole epochs are {}".format(epochs))
     results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_loss': [], "best_loss_acc": [], "numerator": [], "denominator": []}
     if args.job_id == '':
-        save_name_pre = 'unlearnable_theory_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
+        save_name_pre = 'unlearnable_theory_local_{}_{}_{}_{}'.format(args.load_model_path, temperature, batch_size, epochs)
     else:
         save_name_pre = 'unlearnable_theory_{}_{}_{}_{}_{}'.format(args.job_id, datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
     if not os.path.exists('results'):
@@ -1287,7 +1293,7 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
     best_loss_acc = 0
     # data_iter = iter(data_loader['train_dataset'])
 
-    c = int(args.theory_test_data.replace("hierarchical_test_knn", '').replace("hierarchical_period_test_knn", '').replace("hierarchical_period_dim20_test_knn", '').replace("hierarchical_period_dim150_test_knn", ''))
+    c = int(args.theory_test_data.split('knn')[1])
 
     # logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
     for epoch_idx in range(1, epochs+1):
@@ -1307,7 +1313,7 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
                 model.train()
                 for param in model.parameters():
                     param.requires_grad = True
-                batch_train_loss, batch_size_count, numerator, denominator = train_simclr_theory(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, random_drop_feature_num=args.random_drop_feature_num)
+                batch_train_loss, batch_size_count, numerator, denominator = train_simclr_theory(model, pos_samples_1, pos_samples_2, optimizer, batch_size, temperature, random_drop_feature_num=args.random_drop_feature_num, gaussian_aug_std=args.gaussian_aug_std, thoery_schedule_dim=args.thoery_schedule_dim, theory_aug_by_order=args.theory_aug_by_order)
 
                 sum_train_loss += batch_train_loss
                 sum_train_batch_size += batch_size_count
@@ -1320,7 +1326,26 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
         # print(sum_train_loss)
         # print(model.f.weight.data.cpu().numpy())
         
-        test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs, c)
+        test_acc_1, test_acc_5, feature_bank, label_bank = test_ssl_theory(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs, c)
+        # intra_sim, inter_sim = test_intra_inter_sim(model, memory_loader, train_loader_simclr, k, temperature, epochs, distance=False)
+        if args.just_test and not args.just_test_plot:
+            intra_dis, inter_dis = test_intra_inter_sim(model, memory_loader, train_loader_simclr, k, temperature, epochs, distance=True, c=c, theory_model=True)
+            # print(intra_sim / inter_sim)
+            print(intra_dis / inter_dis)
+            print("intra_dis:", intra_dis)
+            print("inter_dis:", inter_dis)
+            acc_top1, acc_top5 = test_instance_sim_thoery(model, memory_loader, train_loader_simclr, k, temperature, random_drop_feature_num=args.random_drop_feature_num, thoery_schedule_dim=args.thoery_schedule_dim)
+            print(acc_top1, acc_top5)
+            f = open("results_just_test/{}.txt".format(args.just_test_temp_save_file), "a")
+            f.write("{}\t{}\t{}\t{}\t{}".format(intra_dis, inter_dis, intra_dis / inter_dis, acc_top1, acc_top5))
+            f.close()
+            utils.plot_be_thoery(feature_bank, label_bank, save_name_pre, c)
+        if args.just_test_plot:
+            if args.load_model_path == 'unlearnable_theory_44448140_3_20220123202831_0.5_512_1000_final_model':
+                utils.plot_be_thoery_orgfeature(feature_bank, label_bank * 0, save_name_pre, c)
+            else:
+                utils.plot_be_thoery(feature_bank, label_bank * 0, save_name_pre, c)
+
         # test_acc_1, test_acc_5 = 0, 0
         if not args.just_test:
             train_loss = sum_train_loss / float(sum_train_batch_size)
@@ -1541,8 +1566,8 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
             results['numerator'].append(numerator)
             results['denominator'].append(denominator)
             
-            print("numerator: ", numerator)
-            print("denominator: ", denominator)
+            # print("numerator: ", numerator)
+            # print("denominator: ", denominator)
 
             if train_loss < best_loss:
                 best_loss = train_loss
@@ -2548,7 +2573,7 @@ def main():
         model = LooC(feature_dim, arch=args.arch, train_mode=args.perturb_type).cuda()
         optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     elif args.perturb_type == 'theory_model':
-        model = TheoryModel(normalize=args.theory_normalize).cuda()
+        model = TheoryModel(normalize=args.theory_normalize, thoery_schedule_dim=args.thoery_schedule_dim).cuda()
         optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     elif args.perturb_type == 'multiple_independent_cl':
         model = MICL(feature_dim, arch=args.arch, train_mode=args.perturb_type).cuda()
@@ -2662,6 +2687,9 @@ def main():
                 # logger.info(noise)
                 logger.info(noise.shape)
                 logger.info('Noise saved at %s' % 'results/{}perturbation.pt'.format(save_name_pre))
+            f = open("results_save_name_pre/{}.txt".format(args.job_id), "a")
+            f.write("{}".format(save_name_pre))
+            f.close()
         else:
             raise('Not implemented yet')
     return

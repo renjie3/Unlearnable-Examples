@@ -14,26 +14,11 @@ parser.add_argument('--shuffle', action='store_true', default=False)
 parser.add_argument('--test', action='store_true', default=False)
 parser.add_argument('--level_dim', default=20, type=int, help='level_dim')
 parser.add_argument('--save', action='store_true', default=False)
+parser.add_argument('--std_list', action='store_true', default=False)
+parser.add_argument('--reverse_order', action='store_true', default=False)
+parser.add_argument('--equal_cluster', default=0, type=int, help='equal_cluster')
+parser.add_argument('--bias', action='store_true', default=False)
 args = parser.parse_args()
-
-# n_distri = 256
-# comb_factory = []
-# comb = []
-# comb_length = []
-# for i in range(1, 6):
-#     comb.append(list(combinations(range(10), i)))
-#     comb_length.append(len(comb[i-1]))
-# n_comb = np.sum(comb_length)
-# SUM = 0
-# for i in range(len(comb)-1):
-#     comb_length[i] = int(comb_length[i] / n_comb * n_distri)
-#     SUM += comb_length[i]
-# comb_length[4] = n_distri - SUM
-
-# for i in range(len(comb)):
-#     sampled = random.sample(comb[i], comb_length[i])
-#     comb_factory.append(sampled)
-#     print(sampled)
 
 level_list = []
 test_level_list = []
@@ -50,8 +35,26 @@ level_list.append(axis)
 test_axis = np.random.multivariate_normal(mean=mean, cov=init_conv, size=n_sample)
 test_level_list.append(test_axis)
 
-n_distri_list = [256, 64, 16, 4]
-d_distri_list = [11, 7, 5, 3]
+if args.equal_cluster != 0:
+    n_distri_list = [args.equal_cluster for _ in range(4)]
+    if args.equal_cluster == 256:
+        d_distri_list = [11, 11, 11, 11]
+    elif args.equal_cluster == 64:
+        d_distri_list = [7, 7, 7, 7]
+    elif args.equal_cluster == 16:
+        d_distri_list = [5, 5, 5, 5]
+    elif args.equal_cluster == 4:
+        d_distri_list = [3, 3, 3, 3]
+
+else:
+    n_distri_list = [256, 64, 16, 4]
+    d_distri_list = [11, 7, 5, 3]
+if args.reverse_order:
+    std_list = [3, 1, 0.5, 0.3]
+    s_std_list = [0.003, 0.001, 0.0005, 0.0003]
+else:
+    std_list = [0.3, 0.5, 1, 3]
+    s_std_list = [0.0003, 0.0005, 0.001, 0.003]
 if args.level_dim == 150:
     level_dim_list = [20, 30, 40, 50]
 elif args.level_dim == 20:
@@ -60,6 +63,8 @@ for i_distri in range(len(n_distri_list)):
     level_dim = level_dim_list[i_distri]
     n_distri = n_distri_list[i_distri]
     d_distri = d_distri_list[i_distri]
+    std = std_list[i_distri]
+    s_std = s_std_list[i_distri]
     comb_factory = []
     level_sample = []
     test_level_sample = []
@@ -68,35 +73,34 @@ for i_distri in range(len(n_distri_list)):
     #     n_distri = n_distri_list[i]
     if n_distri == 256:
         for i in range(0, 6):
-            comb_factory += list(combinations(range(d_distri-1), i))
+            comb_factory += list(combinations(range(10), i))
         comb_factory = random.sample(comb_factory, n_distri)
     else:
         for i in range(0, d_distri):
             comb_factory += list(combinations(range(d_distri-1), i))
+        if args.equal_cluster != 0:
+            comb_factory = random.sample(comb_factory, len(comb_factory))
+            
         # comb_factory = list(combinations(range(d_distri-1), d_distri-1))
         # comb_factory = np.array(comb_factory)
         # input(len(comb_factory))
 
     # print(len(comb_factory))
+    # print(len(comb_factory))
 
     for idx, comb in enumerate(comb_factory):
 
         mean = np.array([0 for _ in range(level_dim)])
-        init_conv = [10]
-        init_conv += [0.01 for _ in range(level_dim-1)]
+        init_conv = [std]
+        # input(std)
+        init_conv += [s_std for _ in range(level_dim-1)]
         init_conv = np.diag(init_conv)
 
         a = [1.0]
         a += [0.0 for _ in range(level_dim-1)]
         a = np.array(a)
         b = []
-        # if n_distri == 256:
-        #     for i in range(10):
-        #         if i in comb:
-        #             b.append(-1.0)
-        #         else:
-        #             b.append(1.0)
-        # else:
+        
         while len(b) < level_dim:
             b.append(1.0)
             if len(b) >= level_dim:
@@ -111,6 +115,8 @@ for i_distri in range(len(n_distri_list)):
         # if n_distri == 4:
         #     input(b)
         b = np.array(b)
+        if args.bias:
+            mean = b * 1.5
         a = np.expand_dims(a, 1)
         b = np.expand_dims(b, 1)
 
@@ -136,6 +142,7 @@ for i_distri in range(len(n_distri_list)):
         train_targets = train_targets[random_idx]
         train_targets_list.append(train_targets)
     level_list.append(level_sample)
+    # print(level_sample.shape)
     test_level_sample = np.concatenate(test_level_sample, axis=0)
     if args.shuffle:
         random_idx = np.random.permutation(n_sample)
@@ -181,7 +188,7 @@ for i_distri in range(len(n_distri_list)):
     sampled["test_targets"] = test_targets
 
     if args.test:
-        test_str = '_test'
+        test_str = '_test{}'.format(i_distri+1)
     else:
         test_str = ''
 
@@ -190,16 +197,35 @@ for i_distri in range(len(n_distri_list)):
     else:
         shuffle_str = ''
 
+    if args.std_list:
+        if args.reverse_order:
+            order_str = '_reverse'
+        else:
+            order_str = '_obverse'
+    else:
+        order_str = ''
+    
+    if args.equal_cluster != 0:
+        equal_cluster_str = '_eqcluster{}'.format(args.equal_cluster)
+    else:
+        equal_cluster_str = ''
+
+    if args.bias:
+        bias_str = ''
+    else:
+        bias_str = '_unbias'
+
     if args.save:
-        file_path = './data/theory_data/hierarchical_period_dim{}{}{}_knn{}.pkl'.format(args.level_dim, shuffle_str, test_str, n_distri)
+        file_path = './data/theory_data/hierarchical_period_dim{}{}{}{}{}{}_knn{}.pkl'.format(args.level_dim, shuffle_str, order_str, equal_cluster_str, bias_str, test_str, n_distri)
         print(file_path)
         with open(file_path, "wb") as f:
             entry = pickle.dump(sampled, f)
     else:
         print("not args.save")
 
-    
-    # for i in range(9):
+    # axis = data[16 * 16:16 * 17, :, 0, 0]
+    # axis = data[:, :, 0, 0]
+    # for i in range(90):
     #     plt.figure(figsize=(8,8))
     #     plt.scatter(axis[:,i], axis[:,i+1], c='r', marker='x')
     #     plt.scatter(axis[:,i+1], axis[:,i+2], c='b', marker='x')

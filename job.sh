@@ -18,12 +18,12 @@ MYCPU="6"
 
 # 1.0 0.5 0.8 0.2
 
-JOB_INFO="train gray negative the same"
-MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 0 --theory_normalize"
+JOB_INFO="theory"
+MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 8 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --theory_aug_by_order"
 
-MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 1 --theory_normalize"
+MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 9 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --theory_aug_by_order"
 
-MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_knn4 --theory_test_data hierarchical_period_test_knn4 --random_drop_feature_num 2 --theory_normalize"
+MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 10 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --theory_aug_by_order"
 
 # MYCOMMEND2="No_commend2"
 # MYCOMMEND3="No_commend3"

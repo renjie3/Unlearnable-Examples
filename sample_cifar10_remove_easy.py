@@ -13,15 +13,19 @@ with open(file_path, "rb") as f:
     entry = pickle.load(f)
 
 sampled_data = entry["train_data"]
+sampled_targets = entry["train_targets"]
 new_data = []
+new_label = []
 for i in range(len(sampled_data)):
     if i in easy_50:
         continue
     else:
         new_data.append(sampled_data[i])
+        new_label.append(sampled_targets[i])
 new_data = np.stack(new_data, axis=0)
 print(new_data.shape)
 entry["train_data"] = new_data
+entry["train_targets"] = new_label
 
 file_path = './data/sampled_cifar10/cifar10_1024_4class_easy50.pkl'
 with open(file_path, "wb") as f:

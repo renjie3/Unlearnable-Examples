@@ -1268,4 +1268,62 @@ def plot_be(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save
     #     os.mkdir('./plot_be/{}'.format(save_name_pre))
     # plt.savefig('./plot_be/{}/{}_{}_{}2.png'.format(save_name_pre, plot_be_mode, gray_test, save_name_pre))
     # plt.close()
+
+def plot_be_thoery(feature_bank, plot_labels, save_name_pre, c):
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+
+    # feature_bank = np.concatenate(feature_bank, axis=0)
+    
+    feature_tsne_input = feature_bank.cpu().numpy()
+    plot_labels_colar = plot_labels.cpu().numpy()
+    feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+    
+    coord_min = math.floor(np.min(feature_tsne_output) / 1) * 1
+    coord_max = math.ceil(np.max(feature_tsne_output) / 1) * 1
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    marker = ['o', 'x', 'v', 'd']
+    color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan', 'sage', 'coral', 'gold', 'plum', 'sienna', 'teal']
+    plt.title("\n max:{} min:{}".format(coord_max, coord_min))
+
+    x_pos_1 = feature_tsne_output[:, 0]
+    y_pos_1 = feature_tsne_output[:, 1]
+    aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='o', c=plot_labels_colar, cmap='tab20')
+
+    plt.xlim((coord_min, coord_max))
+    plt.ylim((coord_min, coord_max))
+    if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
+        os.mkdir('./plot_be/{}'.format(save_name_pre))
+    plt.savefig('./plot_be/{}/{}_{}.png'.format(save_name_pre, c, save_name_pre))
+    plt.close()
+
+def plot_be_thoery_orgfeature(feature_bank, plot_labels, save_name_pre, c):
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+
+    # feature_bank = np.concatenate(feature_bank, axis=0)
+    
+    feature_tsne_input = feature_bank.cpu().numpy()
+    plot_labels_colar = plot_labels.cpu().numpy()
+    feature_tsne_output = feature_tsne_input[:, :2]
+    
+    coord_min = math.floor(np.min(feature_tsne_output) / 1) * 1
+    coord_max = math.ceil(np.max(feature_tsne_output) / 1) * 1
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    marker = ['o', 'x', 'v', 'd']
+    color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan', 'sage', 'coral', 'gold', 'plum', 'sienna', 'teal']
+    plt.title("\n max:{} min:{}".format(coord_max, coord_min))
+
+    x_pos_1 = feature_tsne_output[:, 0]
+    y_pos_1 = feature_tsne_output[:, 1]
+    aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='o', c=plot_labels_colar, cmap='tab20')
+
+    plt.xlim((coord_min, coord_max))
+    plt.ylim((coord_min, coord_max))
+    if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
+        os.mkdir('./plot_be/{}'.format(save_name_pre))
+    plt.savefig('./plot_be/{}/{}_{}.png'.format(save_name_pre, c, save_name_pre))
+    plt.close()
         
