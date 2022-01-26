@@ -16,8 +16,9 @@ parser.add_argument('--choose_digit', default='normal', type=str, choices=['norm
 parser.add_argument('--shift_size', default='small', type=str, choices=['no', 'small', 'large', '256levels'], help='how to choose digit')
 parser.add_argument('--area', default='font', type=str, choices=['font', 'whole'], help='how to choose digit')
 parser.add_argument('--mnist_targets', action='store_true', default=False)
+parser.add_argument('--digit_group1', default='0123', type=str)
+parser.add_argument('--digit_group2', default='4567', type=str)
 args = parser.parse_args()
-
 # mix mnist at center to use mnist as feature
 
 train_data = datasets.MNIST(root='data', train=False, transform=utils.ToTensor_transform, download=True)
@@ -27,10 +28,21 @@ test_data = datasets.MNIST(root='data', train=True, transform=utils.ToTensor_tra
 
 # mnist_class = {0:0,1:1,4:2,5:3}
 # mnist_class2 = {2:0,3:1,6:2,7:3}
-mnist_class = {2:0,3:1,6:2,7:3}
-mnist_class2 = {0:0,1:1,4:2,5:3}
+# mnist_class = {2:0,3:1,6:2,7:3}
+# mnist_class2 = {0:0,1:1,4:2,5:3}
 # mnist_class = {1:0, 8:1, 3:2, 7:3}
 # mnist_class2 = {2:0, 4:1, 5:2, 9:3}
+digit_group1 = args.digit_group1
+digit_group2 = args.digit_group2
+mnist_class = dict()
+mnist_class2 = dict()
+
+for i in range(4):
+    digit = int(digit_group1[i])
+    mnist_class[digit] = i
+    digit = int(digit_group2[i])
+    mnist_class2[digit] = i
+
 train_mnist = train_data.data.cpu().numpy()
 train_targets_mnist = train_data.targets.cpu().numpy()
 test_mnist = test_data.data.cpu().numpy()
@@ -130,7 +142,7 @@ sampled["test_targets"] = test_targets
 #     sampled["train_targets_mnist"] = sampled_target_mnist
 #     sampled["test_targets_mnist"] = sampled_target_mnist_test
 
-file_path = './data/sampled_cifar10/mnist_train_2digit_test2367.pkl'
+file_path = './data/sampled_cifar10/mnist_train_2digit_test{}.pkl'.format(args.digit_group1)
 with open(file_path, "wb") as f:
     entry = pickle.dump(sampled, f)
 

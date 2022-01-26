@@ -333,6 +333,8 @@ def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperat
         level_dim = [0, 10, 30, 60, 100, 150]
     elif thoery_schedule_dim == 20:
         level_dim = [0, 10, 20]
+    elif thoery_schedule_dim == 30:
+        level_dim = [0, 10, 20, 30]
     elif thoery_schedule_dim == 10:
         level_dim = [0, 10]
     elif thoery_schedule_dim == 50:

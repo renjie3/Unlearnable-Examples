@@ -1342,9 +1342,11 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
             utils.plot_be_thoery(feature_bank, label_bank, save_name_pre, c)
         if args.just_test_plot:
             if args.load_model_path == 'unlearnable_theory_44448140_3_20220123202831_0.5_512_1000_final_model':
-                utils.plot_be_thoery_orgfeature(feature_bank, label_bank * 0, save_name_pre, c)
+                utils.plot_be_thoery_orgfeature(feature_bank, label_bank, save_name_pre, c)
             else:
-                utils.plot_be_thoery(feature_bank, label_bank * 0, save_name_pre, c)
+                # print(c)
+                # input()
+                utils.plot_be_thoery(feature_bank, label_bank, save_name_pre, c)
 
         # test_acc_1, test_acc_5 = 0, 0
         if not args.just_test:
@@ -1834,7 +1836,7 @@ def clean_train_2digit(noise_generator, trainer, evaluator, model, criterion, op
         sum_numerator, sum_numerator_count = 0, 0
         sum_denominator, sum_denominator_count = 0, 0
         
-        if args.attack_type == 'min-min' and not args.load_model:
+        if args.attack_type == 'min-min' and not args.load_model and not args.just_test:
             # Train Batch for min-min noise
             end_of_iteration = "END_OF_ITERATION"
             for j in range(0, args.train_step):
@@ -1899,6 +1901,9 @@ def clean_train_2digit(noise_generator, trainer, evaluator, model, criterion, op
                 torch.save(random_noise, 'results/{}_checkpoint_perturbation.pt'.format(save_name_pre))
                 print("model saved at " + save_name_pre)
         else:
+            f = open("results_just_test/{}.txt".format(args.load_model_path), "w")
+            f.write("{}\n".format(test_acc_1))
+            f.close()
             break
 
     if not args.no_save and not args.just_test:

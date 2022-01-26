@@ -9,6 +9,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import matplotlib
+from matplotlib.colors import ListedColormap
 
 import kornia.augmentation as Kaug
 import torch.nn as nn
@@ -517,6 +518,8 @@ class CIFAR10Pair(CIFAR10):
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test1837.pkl")
             elif gray == 'mnist_train_2digit_test2459':
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test2459.pkl")
+            elif 'mnist_train_2digit' in gray:
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "{}.pkl".format(gray))
             elif 'freq' in gray:
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "{}.pkl".format(gray))
             else:
@@ -1289,7 +1292,20 @@ def plot_be_thoery(feature_bank, plot_labels, save_name_pre, c):
 
     x_pos_1 = feature_tsne_output[:, 0]
     y_pos_1 = feature_tsne_output[:, 1]
-    aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='o', c=plot_labels_colar, cmap='tab20')
+    cm = plt.cm.get_cmap('gist_rainbow')
+    z = np.arange(c)
+    # print(z)
+    my_cmap = cm(z)
+    # print(type(plot_labels_colar))
+    my_cmap = ListedColormap(my_cmap)
+    # print(np.max(plot_labels_colar))
+    # print(np.min(plot_labels_colar))
+    # input()
+
+    # with open('./plot_labels_colar.pkl', "wb") as f:
+    #     pickle.dump(plot_labels_colar, f)
+
+    aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='o', c=plot_labels_colar, cmap=cm)
 
     plt.xlim((coord_min, coord_max))
     plt.ylim((coord_min, coord_max))

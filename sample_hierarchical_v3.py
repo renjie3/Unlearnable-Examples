@@ -60,12 +60,12 @@ else:
 #     s_std_list = [0.0003, 0.0005, 0.001, 0.003]
 # std_list = [0.01, 0.03, 0.1, 0.3]
 std_list = [0.1, 0.1, 0.1, 0.1]
-# if args.level_dim == 150:
-#     level_dim_list = [20, 30, 40, 50]
-# elif args.level_dim == 20:
-#     level_dim_list = [20, 20, 20, 20]
-# elif args.level_dim == 50:
-level_dim_list = [10, 10, 10, 10]
+if args.level_dim == 150:
+    level_dim_list = [20, 30, 40, 50]
+elif args.level_dim == 20:
+    level_dim_list = [20, 20, 20, 20]
+elif args.level_dim == 50:
+    level_dim_list = [10, 10, 10, 10]
 for i_distri in range(4):
     level_dim = level_dim_list[i_distri]
     n_distri = n_distri_list[i_distri]

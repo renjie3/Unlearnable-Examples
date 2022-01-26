@@ -1,0 +1,720 @@
+batch mnist_train_2digit_test0247
+81.18489583333334
+inst mnist_train_2digit_test1369
+90.88541666666666
+batch mnist_train_2digit_test0247
+89.2578125
+inst mnist_train_2digit_test1369
+89.71354166666666
+batch mnist_train_2digit_test0247
+86.71875
+inst mnist_train_2digit_test1369
+92.51302083333334
+batch mnist_train_2digit_test1369
+79.23177083333334
+inst mnist_train_2digit_test0247
+95.24739583333334
+batch mnist_train_2digit_test1369
+95.37760416666666
+inst mnist_train_2digit_test0247
+90.625
+batch mnist_train_2digit_test1369
+89.0625
+inst mnist_train_2digit_test0247
+93.09895833333334
+batch mnist_train_2digit_test2489
+86.06770833333334
+inst mnist_train_2digit_test0367
+93.09895833333334
+batch mnist_train_2digit_test2489
+87.76041666666666
+inst mnist_train_2digit_test0367
+89.19270833333334
+batch mnist_train_2digit_test2489
+80.46875
+inst mnist_train_2digit_test0367
+93.29427083333334
+batch mnist_train_2digit_test0367
+93.22916666666666
+inst mnist_train_2digit_test2489
+88.21614583333334
+batch mnist_train_2digit_test0367
+87.17447916666666
+inst mnist_train_2digit_test2489
+88.60677083333334
+batch mnist_train_2digit_test0367
+91.47135416666666
+inst mnist_train_2digit_test2489
+90.4296875
+batch mnist_train_2digit_test0568
+82.35677083333334
+inst mnist_train_2digit_test1279
+94.79166666666666
+batch mnist_train_2digit_test0568
+84.83072916666666
+inst mnist_train_2digit_test1279
+95.3125
+batch mnist_train_2digit_test0568
+85.9375
+inst mnist_train_2digit_test1279
+94.07552083333334
+batch mnist_train_2digit_test3569
+88.60677083333334
+inst mnist_train_2digit_test1278
+94.98697916666666
+batch mnist_train_2digit_test3569
+85.87239583333334
+inst mnist_train_2digit_test1278
+95.703125
+batch mnist_train_2digit_test3569
+85.87239583333334
+inst mnist_train_2digit_test1278
+95.703125
+batch mnist_train_2digit_test1279
+92.25260416666666
+inst mnist_train_2digit_test0568
+92.12239583333334
+batch mnist_train_2digit_test1279
+90.36458333333334
+inst mnist_train_2digit_test0568
+92.12239583333334
+batch mnist_train_2digit_test1279
+88.28125
+inst mnist_train_2digit_test0568
+94.66145833333334
+batch mnist_train_2digit_test1278
+90.234375
+inst mnist_train_2digit_test3569
+90.234375
+batch mnist_train_2digit_test1278
+91.66666666666666
+inst mnist_train_2digit_test3569
+92.578125
+batch mnist_train_2digit_test1278
+90.88541666666666
+inst mnist_train_2digit_test3569
+89.6484375
+batch mnist_train_2digit_test1248
+78.25520833333334
+inst mnist_train_2digit_test3579
+93.03385416666666
+batch mnist_train_2digit_test1248
+92.96875
+inst mnist_train_2digit_test3579
+88.28125
+batch mnist_train_2digit_test1248
+78.25520833333334
+inst mnist_train_2digit_test3579
+93.03385416666666
+batch mnist_train_2digit_test0789
+86.39322916666666
+inst mnist_train_2digit_test1356
+97.33072916666666
+batch mnist_train_2digit_test0789
+82.29166666666666
+inst mnist_train_2digit_test1356
+98.2421875
+batch mnist_train_2digit_test0789
+87.04427083333334
+inst mnist_train_2digit_test1356
+98.2421875
+batch mnist_train_2digit_test1356
+80.40364583333334
+inst mnist_train_2digit_test0789
+86.1328125
+batch mnist_train_2digit_test1356
+73.76302083333334
+inst mnist_train_2digit_test0789
+83.07291666666666
+batch mnist_train_2digit_test1356
+78.64583333333334
+inst mnist_train_2digit_test0789
+85.7421875
+batch mnist_train_2digit_test3579
+87.109375
+inst mnist_train_2digit_test1248
+86.1328125
+batch mnist_train_2digit_test3579
+84.04947916666666
+inst mnist_train_2digit_test1248
+90.55989583333334
+batch mnist_train_2digit_test3579
+80.98958333333334
+inst mnist_train_2digit_test1248
+86.00260416666666
+batch mnist_train_2digit_test3459
+84.04947916666666
+inst mnist_train_2digit_test0126
+95.05208333333334
+batch mnist_train_2digit_test3459
+84.50520833333334
+inst mnist_train_2digit_test0126
+91.92708333333334
+batch mnist_train_2digit_test3459
+86.39322916666666
+inst mnist_train_2digit_test0126
+94.27083333333334
+batch mnist_train_2digit_test0126
+92.12239583333334
+inst mnist_train_2digit_test3459
+88.4765625
+batch mnist_train_2digit_test0126
+92.7734375
+inst mnist_train_2digit_test3459
+90.10416666666666
+batch mnist_train_2digit_test0126
+90.36458333333334
+inst mnist_train_2digit_test3459
+91.92708333333334
+batch mnist_train_2digit_test2789
+71.22395833333334
+inst mnist_train_2digit_test1356
+98.4375
+batch mnist_train_2digit_test2789
+81.11979166666666
+inst mnist_train_2digit_test1356
+96.02864583333334
+batch mnist_train_2digit_test2789
+77.01822916666666
+inst mnist_train_2digit_test1356
+97.33072916666666
+batch mnist_train_2digit_test1356
+85.9375
+inst mnist_train_2digit_test2789
+82.6171875
+batch mnist_train_2digit_test1356
+79.4921875
+inst mnist_train_2digit_test2789
+82.6171875
+batch mnist_train_2digit_test1356
+81.51041666666666
+inst mnist_train_2digit_test2789
+85.67708333333334
+batch mnist_train_2digit_test2456
+86.19791666666666
+inst mnist_train_2digit_test0189
+92.31770833333334
+batch mnist_train_2digit_test2456
+88.54166666666666
+inst mnist_train_2digit_test0189
+87.5
+batch mnist_train_2digit_test2456
+86.84895833333334
+inst mnist_train_2digit_test0189
+84.70052083333334
+batch mnist_train_2digit_test0189
+87.76041666666666
+inst mnist_train_2digit_test2456
+91.40625
+batch mnist_train_2digit_test0189
+89.6484375
+inst mnist_train_2digit_test2456
+94.20572916666666
+batch mnist_train_2digit_test0189
+86.9140625
+inst mnist_train_2digit_test2456
+87.76041666666666
+batch mnist_train_2digit_test2679
+83.07291666666666
+inst mnist_train_2digit_test0148
+91.47135416666666
+batch mnist_train_2digit_test2679
+83.7890625
+inst mnist_train_2digit_test0148
+91.47135416666666
+batch mnist_train_2digit_test2679
+85.67708333333334
+inst mnist_train_2digit_test0148
+91.796875
+batch mnist_train_2digit_test0148
+89.19270833333334
+inst mnist_train_2digit_test2679
+93.5546875
+batch mnist_train_2digit_test0148
+91.6015625
+inst mnist_train_2digit_test2679
+94.3359375
+batch mnist_train_2digit_test0148
+91.08072916666666
+inst mnist_train_2digit_test2679
+92.83854166666666
+batch mnist_train_2digit_test1239
+89.71354166666666
+inst mnist_train_2digit_test0467
+94.140625
+batch mnist_train_2digit_test1239
+87.5
+inst mnist_train_2digit_test0467
+92.83854166666666
+batch mnist_train_2digit_test1239
+91.73177083333334
+inst mnist_train_2digit_test0467
+92.83854166666666
+batch mnist_train_2digit_test0467
+96.2890625
+inst mnist_train_2digit_test1239
+93.29427083333334
+batch mnist_train_2digit_test0467
+92.7734375
+inst mnist_train_2digit_test1239
+97.91666666666666
+batch mnist_train_2digit_test0467
+90.29947916666666
+inst mnist_train_2digit_test1239
+91.73177083333334
+batch mnist_train_2digit_test5679
+82.68229166666666
+inst mnist_train_2digit_test1234
+95.3125
+batch mnist_train_2digit_test5679
+80.01302083333334
+inst mnist_train_2digit_test1234
+96.875
+batch mnist_train_2digit_test5679
+88.73697916666666
+inst mnist_train_2digit_test1234
+96.74479166666666
+batch mnist_train_2digit_test1234
+89.0625
+inst mnist_train_2digit_test5679
+97.98177083333334
+batch mnist_train_2digit_test1234
+87.109375
+inst mnist_train_2digit_test5679
+96.15885416666666
+batch mnist_train_2digit_test1234
+83.91927083333334
+inst mnist_train_2digit_test5679
+97.13541666666666
+batch mnist_train_2digit_test1359
+72.39583333333334
+inst mnist_train_2digit_test0468
+90.55989583333334
+batch mnist_train_2digit_test1359
+79.296875
+inst mnist_train_2digit_test0468
+85.22135416666666
+batch mnist_train_2digit_test1359
+76.62760416666666
+inst mnist_train_2digit_test0468
+90.36458333333334
+batch mnist_train_2digit_test0468
+87.82552083333334
+inst mnist_train_2digit_test1359
+95.8984375
+batch mnist_train_2digit_test0468
+87.43489583333334
+inst mnist_train_2digit_test1359
+95.57291666666666
+batch mnist_train_2digit_test0468
+89.0625
+inst mnist_train_2digit_test1359
+96.2890625
+batch mnist_train_2digit_test2578
+86.65364583333334
+inst mnist_train_2digit_test1346
+90.16927083333334
+batch mnist_train_2digit_test2578
+85.22135416666666
+inst mnist_train_2digit_test1346
+94.01041666666666
+batch mnist_train_2digit_test2578
+81.51041666666666
+inst mnist_train_2digit_test1346
+93.48958333333334
+batch mnist_train_2digit_test2467
+88.41145833333334
+inst mnist_train_2digit_test0389
+92.1875
+batch mnist_train_2digit_test2467
+90.36458333333334
+inst mnist_train_2digit_test0389
+94.20572916666666
+batch mnist_train_2digit_test2467
+88.41145833333334
+inst mnist_train_2digit_test0389
+92.1875
+batch mnist_train_2digit_test1346
+88.0859375
+inst mnist_train_2digit_test2578
+88.99739583333334
+batch mnist_train_2digit_test1346
+96.35416666666666
+inst mnist_train_2digit_test2578
+90.69010416666666
+batch mnist_train_2digit_test1346
+89.453125
+inst mnist_train_2digit_test2578
+94.85677083333334
+batch mnist_train_2digit_test0389
+86.1328125
+inst mnist_train_2digit_test2467
+89.84375
+batch mnist_train_2digit_test0389
+79.62239583333334
+inst mnist_train_2digit_test2467
+91.6015625
+batch mnist_train_2digit_test0389
+77.9296875
+inst mnist_train_2digit_test2467
+90.88541666666666
+batch mnist_train_2digit_test1578
+82.94270833333334
+inst mnist_train_2digit_test0469
+83.65885416666666
+batch mnist_train_2digit_test1578
+88.28125
+inst mnist_train_2digit_test0469
+85.3515625
+batch mnist_train_2digit_test1578
+86.78385416666666
+inst mnist_train_2digit_test0469
+89.58333333333334
+batch mnist_train_2digit_test0469
+92.83854166666666
+inst mnist_train_2digit_test1578
+89.90885416666666
+batch mnist_train_2digit_test0469
+85.7421875
+inst mnist_train_2digit_test1578
+82.421875
+batch mnist_train_2digit_test0469
+84.5703125
+inst mnist_train_2digit_test1578
+82.16145833333334
+batch mnist_train_2digit_test1237
+87.890625
+inst mnist_train_2digit_test4568
+95.37760416666666
+batch mnist_train_2digit_test1237
+85.7421875
+inst mnist_train_2digit_test4568
+93.09895833333334
+batch mnist_train_2digit_test1237
+83.0078125
+inst mnist_train_2digit_test4568
+92.3828125
+batch mnist_train_2digit_test4568
+83.0078125
+inst mnist_train_2digit_test1237
+94.140625
+batch mnist_train_2digit_test4568
+85.9375
+inst mnist_train_2digit_test1237
+97.33072916666666
+batch mnist_train_2digit_test4568
+81.8359375
+inst mnist_train_2digit_test1237
+97.265625
+batch mnist_train_2digit_test4789
+83.984375
+inst mnist_train_2digit_test0126
+95.3125
+batch mnist_train_2digit_test4789
+82.2265625
+inst mnist_train_2digit_test0126
+91.86197916666666
+batch mnist_train_2digit_test4789
+86.58854166666666
+inst mnist_train_2digit_test0126
+88.21614583333334
+batch mnist_train_2digit_test0126
+89.97395833333334
+inst mnist_train_2digit_test4789
+94.66145833333334
+batch mnist_train_2digit_test0126
+92.05729166666666
+inst mnist_train_2digit_test4789
+94.79166666666666
+batch mnist_train_2digit_test0126
+91.08072916666666
+inst mnist_train_2digit_test4789
+90.36458333333334
+batch mnist_train_2digit_test1279
+91.14583333333334
+inst mnist_train_2digit_test0568
+91.34114583333334
+batch mnist_train_2digit_test1279
+86.78385416666666
+inst mnist_train_2digit_test0568
+94.20572916666666
+batch mnist_train_2digit_test1279
+89.77864583333334
+inst mnist_train_2digit_test0568
+92.578125
+batch mnist_train_2digit_test0568
+80.01302083333334
+inst mnist_train_2digit_test1279
+95.57291666666666
+batch mnist_train_2digit_test0568
+83.33333333333334
+inst mnist_train_2digit_test1279
+95.1171875
+batch mnist_train_2digit_test0568
+85.28645833333334
+inst mnist_train_2digit_test1279
+93.9453125
+batch mnist_train_2digit_test0478
+87.6953125
+inst mnist_train_2digit_test1239
+96.6796875
+batch mnist_train_2digit_test0478
+87.109375
+inst mnist_train_2digit_test1239
+95.1171875
+batch mnist_train_2digit_test0478
+88.34635416666666
+inst mnist_train_2digit_test1239
+97.59114583333334
+batch mnist_train_2digit_test1239
+76.30208333333334
+inst mnist_train_2digit_test0478
+96.74479166666666
+batch mnist_train_2digit_test1239
+84.11458333333334
+inst mnist_train_2digit_test0478
+96.80989583333334
+batch mnist_train_2digit_test1239
+82.35677083333334
+inst mnist_train_2digit_test0478
+96.15885416666666
+batch mnist_train_2digit_test1348
+80.53385416666666
+inst mnist_train_2digit_test0256
+97.00520833333334
+batch mnist_train_2digit_test1348
+83.7890625
+inst mnist_train_2digit_test0256
+96.6796875
+batch mnist_train_2digit_test1348
+87.04427083333334
+inst mnist_train_2digit_test0256
+97.00520833333334
+batch mnist_train_2digit_test0256
+83.85416666666666
+inst mnist_train_2digit_test1348
+79.94791666666666
+batch mnist_train_2digit_test0256
+87.04427083333334
+inst mnist_train_2digit_test1348
+87.76041666666666
+batch mnist_train_2digit_test0256
+84.89583333333334
+inst mnist_train_2digit_test1348
+83.52864583333334
+batch mnist_train_2digit_test0239
+85.87239583333334
+inst mnist_train_2digit_test1478
+93.9453125
+batch mnist_train_2digit_test0239
+85.3515625
+inst mnist_train_2digit_test1478
+95.24739583333334
+batch mnist_train_2digit_test0239
+86.328125
+inst mnist_train_2digit_test1478
+96.35416666666666
+batch mnist_train_2digit_test1478
+85.41666666666666
+inst mnist_train_2digit_test0239
+97.59114583333334
+batch mnist_train_2digit_test1478
+89.12760416666666
+inst mnist_train_2digit_test0239
+97.0703125
+batch mnist_train_2digit_test1478
+75.1953125
+inst mnist_train_2digit_test0239
+94.85677083333334
+batch mnist_train_2digit_test1269
+85.09114583333334
+inst mnist_train_2digit_test0348
+90.69010416666666
+batch mnist_train_2digit_test1269
+87.890625
+inst mnist_train_2digit_test0348
+92.7734375
+batch mnist_train_2digit_test1269
+85.09114583333334
+inst mnist_train_2digit_test0348
+90.69010416666666
+batch mnist_train_2digit_test0238
+86.00260416666666
+inst mnist_train_2digit_test1567
+99.15364583333334
+batch mnist_train_2digit_test0238
+82.421875
+inst mnist_train_2digit_test1567
+98.2421875
+batch mnist_train_2digit_test0238
+86.58854166666666
+inst mnist_train_2digit_test1567
+98.6328125
+batch mnist_train_2digit_test1567
+88.73697916666666
+inst mnist_train_2digit_test0238
+92.31770833333334
+batch mnist_train_2digit_test1567
+88.15104166666666
+inst mnist_train_2digit_test0238
+94.98697916666666
+batch mnist_train_2digit_test1567
+88.93229166666666
+inst mnist_train_2digit_test0238
+92.1875
+batch mnist_train_2digit_test0348
+82.35677083333334
+inst mnist_train_2digit_test1269
+93.03385416666666
+batch mnist_train_2digit_test0348
+88.15104166666666
+inst mnist_train_2digit_test1269
+92.90364583333334
+batch mnist_train_2digit_test0348
+80.6640625
+inst mnist_train_2digit_test1269
+90.16927083333334
+batch mnist_train_2digit_test2368
+89.453125
+inst mnist_train_2digit_test0145
+92.44791666666666
+batch mnist_train_2digit_test2368
+88.4765625
+inst mnist_train_2digit_test0145
+88.93229166666666
+batch mnist_train_2digit_test2368
+87.6953125
+inst mnist_train_2digit_test0145
+88.41145833333334
+batch mnist_train_2digit_test0145
+87.76041666666666
+inst mnist_train_2digit_test2368
+96.02864583333334
+batch mnist_train_2digit_test0145
+87.23958333333334
+inst mnist_train_2digit_test2368
+94.7265625
+batch mnist_train_2digit_test0145
+87.3046875
+inst mnist_train_2digit_test2368
+95.83333333333334
+batch mnist_train_2digit_test4689
+80.98958333333334
+inst mnist_train_2digit_test1357
+92.7734375
+batch mnist_train_2digit_test4689
+83.85416666666666
+inst mnist_train_2digit_test1357
+94.53125
+batch mnist_train_2digit_test4689
+78.25520833333334
+inst mnist_train_2digit_test1357
+93.22916666666666
+batch mnist_train_2digit_test1357
+77.40885416666666
+inst mnist_train_2digit_test4689
+80.72916666666666
+batch mnist_train_2digit_test1357
+84.70052083333334
+inst mnist_train_2digit_test4689
+97.13541666666666
+batch mnist_train_2digit_test1357
+85.67708333333334
+inst mnist_train_2digit_test4689
+96.41927083333334
+batch mnist_train_2digit_test3568
+75.06510416666666
+inst mnist_train_2digit_test0124
+87.95572916666666
+batch mnist_train_2digit_test3568
+86.39322916666666
+inst mnist_train_2digit_test0124
+89.12760416666666
+batch mnist_train_2digit_test3568
+79.6875
+inst mnist_train_2digit_test0124
+92.83854166666666
+batch mnist_train_2digit_test0124
+90.95052083333334
+inst mnist_train_2digit_test3568
+75.13020833333334
+batch mnist_train_2digit_test0124
+92.64322916666666
+inst mnist_train_2digit_test3568
+95.24739583333334
+batch mnist_train_2digit_test0124
+91.2109375
+inst mnist_train_2digit_test3568
+77.60416666666666
+batch mnist_train_2digit_test2345
+85.80729166666666
+inst mnist_train_2digit_test0179
+96.02864583333334
+batch mnist_train_2digit_test2345
+83.91927083333334
+inst mnist_train_2digit_test0179
+96.35416666666666
+batch mnist_train_2digit_test2345
+80.92447916666666
+inst mnist_train_2digit_test0179
+95.8984375
+batch mnist_train_2digit_test0179
+82.35677083333334
+inst mnist_train_2digit_test2345
+87.5
+batch mnist_train_2digit_test0179
+87.890625
+inst mnist_train_2digit_test2345
+91.14583333333334
+batch mnist_train_2digit_test0179
+84.63541666666666
+inst mnist_train_2digit_test2345
+92.7734375
+batch mnist_train_2digit_test1467
+85.87239583333334
+inst mnist_train_2digit_test0389
+93.5546875
+batch mnist_train_2digit_test1467
+88.02083333333334
+inst mnist_train_2digit_test0389
+94.01041666666666
+batch mnist_train_2digit_test1467
+87.3046875
+inst mnist_train_2digit_test0389
+93.359375
+batch mnist_train_2digit_test4689
+88.60677083333334
+inst mnist_train_2digit_test0157
+81.0546875
+batch mnist_train_2digit_test4689
+88.15104166666666
+inst mnist_train_2digit_test0157
+84.1796875
+batch mnist_train_2digit_test4689
+88.15104166666666
+inst mnist_train_2digit_test0157
+84.1796875
+batch mnist_train_2digit_test0389
+82.421875
+inst mnist_train_2digit_test1467
+94.140625
+batch mnist_train_2digit_test0389
+84.1796875
+inst mnist_train_2digit_test1467
+96.875
+batch mnist_train_2digit_test0389
+81.51041666666666
+inst mnist_train_2digit_test1467
+94.98697916666666
+batch mnist_train_2digit_test0157
+92.70833333333334
+inst mnist_train_2digit_test4689
+81.8359375
+batch mnist_train_2digit_test0157
+89.38802083333334
+inst mnist_train_2digit_test4689
+88.54166666666666
+batch mnist_train_2digit_test0157
+91.9921875
+inst mnist_train_2digit_test4689
+85.67708333333334
