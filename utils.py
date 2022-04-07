@@ -105,6 +105,12 @@ train_diff_transform_Hflip_Bri = nn.Sequential(
     Kaug.ColorJitter(0.4, p=0.8),
     # Kaug.RandomGrayscale(p=0.2)
 )
+train_diff_transform_Tri = nn.Sequential(
+    Kaug.RandomResizedCrop([32,32]),
+    # Kaug.RandomHorizontalFlip(p=0.5),
+    Kaug.ColorJitter(0.4, 0.4, 0.4, 0.0, p=0.8),
+    # Kaug.RandomGrayscale(p=0.2)
+)
 
 train_diff_transform_ReCrop_Hflip_Con = nn.Sequential(
     Kaug.RandomResizedCrop([32,32]),
@@ -519,6 +525,8 @@ class CIFAR10Pair(CIFAR10):
             elif gray == 'mnist_train_2digit_test2459':
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "mnist_train_2digit_test2459.pkl")
             elif 'mnist_train_2digit' in gray:
+                sampled_filepath = os.path.join(root, "sampled_cifar10", "{}.pkl".format(gray))
+            elif 'cifar10' in gray and 'tri' in gray:
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "{}.pkl".format(gray))
             elif 'freq' in gray:
                 sampled_filepath = os.path.join(root, "sampled_cifar10", "{}.pkl".format(gray))

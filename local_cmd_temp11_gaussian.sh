@@ -1,13 +1,28 @@
-models=(unlearnable_theory_44712192_1_20220125153350_0.5_512_1000_final_model unlearnable_theory_44712192_2_20220125153350_0.5_512_1000_final_model unlearnable_theory_44712192_3_20220125153350_0.5_512_1000_final_model unlearnable_theory_44712200_1_20220125153819_0.5_512_1000_final_model unlearnable_theory_44712200_2_20220125153819_0.5_512_1000_final_model unlearnable_theory_44712200_3_20220125153819_0.5_512_1000_final_model unlearnable_theory_44712202_1_20220125153758_0.5_512_1000_final_model unlearnable_theory_44712202_2_20220125153758_0.5_512_1000_final_model unlearnable_theory_44712202_3_20220125153758_0.5_512_1000_final_model unlearnable_theory_44712203_1_20220125153819_0.5_512_1000_final_model unlearnable_theory_44712203_2_20220125153819_0.5_512_1000_final_model)
+models=(unlearnable_theory_45105282_1_20220204165703_0.5_512_1000_final_model unlearnable_theory_45105282_2_20220204165703_0.5_512_1000_final_model unlearnable_theory_45105282_3_20220204165703_0.5_512_1000_final_model unlearnable_theory_45105343_1_20220204165717_0.5_512_1000_final_model unlearnable_theory_45105343_2_20220204165717_0.5_512_1000_final_model unlearnable_theory_45105343_3_20220204165717_0.5_512_1000_final_model unlearnable_theory_45105352_1_20220204165749_0.5_512_1000_final_model unlearnable_theory_45105352_2_20220204165749_0.5_512_1000_final_model unlearnable_theory_45105352_3_20220204165749_0.5_512_1000_final_model unlearnable_theory_45105393_1_20220204165839_0.5_512_1000_final_model unlearnable_theory_45105393_2_20220204165838_0.5_512_1000_final_model unlearnable_theory_45105393_3_20220204165838_0.5_512_1000_final_model unlearnable_theory_45105401_1_20220204165833_0.5_512_1000_final_model unlearnable_theory_45105401_2_20220204165833_0.5_512_1000_final_model unlearnable_theory_45105401_3_20220204165833_0.5_512_1000_final_model unlearnable_theory_45105423_1_20220204165856_0.5_512_1000_final_model unlearnable_theory_45105423_2_20220204165857_0.5_512_1000_final_model unlearnable_theory_45105423_3_20220204165857_0.5_512_1000_final_model unlearnable_theory_45105519_1_20220204170050_0.5_512_1000_final_model unlearnable_theory_45105519_2_20220204170050_0.5_512_1000_final_model unlearnable_theory_45105519_3_20220204170042_0.5_512_1000_final_model unlearnable_theory_45105622_1_20220204170048_0.5_512_1000_final_model unlearnable_theory_45105622_2_20220204170046_0.5_512_1000_final_model unlearnable_theory_45105622_3_20220204170046_0.5_512_1000_final_model unlearnable_theory_45105648_1_20220204170052_0.5_512_1000_final_model unlearnable_theory_45105648_2_20220204170052_0.5_512_1000_final_model unlearnable_theory_45105648_3_20220204170052_0.5_512_1000_final_model unlearnable_theory_45105663_1_20220204170052_0.5_512_1000_final_model unlearnable_theory_45105663_2_20220204170053_0.5_512_1000_final_model unlearnable_theory_45105663_3_20220204170053_0.5_512_1000_final_model unlearnable_theory_45105794_1_20220204170055_0.5_512_1000_final_model unlearnable_theory_45105794_2_20220204170054_0.5_512_1000_final_model unlearnable_theory_45105794_3_20220204170055_0.5_512_1000_final_model unlearnable_theory_45105824_1_20220204170139_0.5_512_1000_final_model unlearnable_theory_45105824_2_20220204170144_0.5_512_1000_final_model unlearnable_theory_45105824_3_20220204170144_0.5_512_1000_final_model unlearnable_theory_45105825_1_20220204170709_0.5_512_1000_final_model unlearnable_theory_45105825_2_20220204170703_0.5_512_1000_final_model unlearnable_theory_45105825_3_20220204170706_0.5_512_1000_final_model)
 train_datas=(hierarchical32_16_period_dim30_shuffle_diffmean_knn32 hierarchical32_16_period_dim30_shuffle_diffmean_knn16)
 test_datas=(hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 hierarchical32_16_period_dim30_shuffle_diffmean_test2_knn16)
 # test_datas=(hierarchical_period_dim20_test_knn256 hierarchical_period_dim20_test_knn64 hierarchical_period_dim20_test_knn16 hierarchical_period_dim20_test_knn4)
+aug_level1=(1 1 1 1 1 1 2 2 2 3 3 3)
+aug_level2=(0 1 2 3 4 5 1 2 3 1 3 5)
+gaussian_paras=(0.005 0.01 0.02 0.03 0.05 0.07 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.6 0.75 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.5 2.75 3.0 3.25 3.5 3.75 4.0 4.25 4.5 4.75 5.0 5.5 6.0 6.5 7.0)
 
 for((i=0;i<1;i++));
 do
-    for((j=0;j<11;j++));
+    for((j=0;j<39;j++));
     do
-        MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num $j 0 0 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --just_test --test_cluster_dim_range 10 20 --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
+        MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num 0 1 1 --gaussian_aug_std ${gaussian_paras[${j}]} --theory_normalize --thoery_schedule_dim 30 --just_test --test_cluster_dim_range 0 10 --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
+
+        echo $MY_CMD
+        # echo ${MY_CMD}>>local_history.log
+        $MY_CMD
+    done
+done
+
+for((i=0;i<1;i++));
+do
+    for((j=0;j<39;j++));
+    do
+        MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num 0 1 1 --gaussian_aug_std ${gaussian_paras[${j}]} --theory_normalize --thoery_schedule_dim 30 --just_test --test_cluster_dim_range 10 20 --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
 
         echo $MY_CMD
         # echo ${MY_CMD}>>local_history.log
@@ -17,9 +32,9 @@ done
 
 for((i=1;i<2;i++));
 do
-    for((j=0;j<11;j++));
+    for((j=0;j<39;j++));
     do
-        MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num $j 0 0 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --just_test --test_cluster_dim_range 20 30 --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
+        MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num 0 1 1 --gaussian_aug_std ${gaussian_paras[${j}]} --theory_normalize --thoery_schedule_dim 30 --just_test --test_cluster_dim_range 20 30 --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
 
         echo $MY_CMD
         # echo ${MY_CMD}>>local_history.log

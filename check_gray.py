@@ -22,7 +22,7 @@ else:
     train_targets = data['train_targets']
 img_path = './test.png'
 
-class_num = 4
+class_num = np.max(data["train_targets"]) + 1
 if args.mnist_targets:
     class_num = 10 
     

@@ -1,19 +1,19 @@
-models=(unlearnable_theory_44712142_1_20220125152151_0.5_512_1000_final_model unlearnable_theory_44712142_2_20220125152151_0.5_512_1000_final_model unlearnable_theory_44712142_3_20220125152151_0.5_512_1000_final_model unlearnable_theory_44712159_1_20220125152504_0.5_512_1000_final_model unlearnable_theory_44712159_2_20220125152504_0.5_512_1000_final_model unlearnable_theory_44712159_3_20220125152504_0.5_512_1000_final_model unlearnable_theory_44712169_1_20220125152504_0.5_512_1000_final_model unlearnable_theory_44712169_2_20220125152504_0.5_512_1000_final_model unlearnable_theory_44712169_3_20220125152504_0.5_512_1000_final_model unlearnable_theory_44712170_1_20220125152512_0.5_512_1000_final_model unlearnable_theory_44712170_2_20220125152512_0.5_512_1000_final_model)
-train_datas=(hierarchical64_16_period_dim30_shuffle_diffmean_knn64 hierarchical64_16_period_dim30_shuffle_diffmean_knn16)
-test_datas=(hierarchical64_16_period_dim30_shuffle_diffmean_test1_knn64 hierarchical64_16_period_dim30_shuffle_diffmean_test2_knn16)
-# test_datas=(hierarchical_period_dim20_test_knn256 hierarchical_period_dim20_test_knn64 hierarchical_period_dim20_test_knn16 hierarchical_period_dim20_test_knn4)
+# models=(unlearnable_theory_44928179_1_20220201121552_0.5_512_1000_final_model unlearnable_theory_44928179_2_20220201121552_0.5_512_1000_final_model unlearnable_theory_44928179_3_20220201121552_0.5_512_1000_final_model unlearnable_theory_44928180_1_20220201121551_0.5_512_1000_final_model unlearnable_theory_44928180_2_20220201121551_0.5_512_1000_final_model unlearnable_theory_44928180_3_20220201121551_0.5_512_1000_final_model unlearnable_theory_44928181_1_20220201121552_0.5_512_1000_final_model unlearnable_theory_44928181_2_20220201121552_0.5_512_1000_final_model unlearnable_theory_44928181_3_20220201121552_0.5_512_1000_final_model unlearnable_theory_44928182_1_20220201121602_0.5_512_1000_final_model unlearnable_theory_44928182_2_20220201121602_0.5_512_1000_final_model)
+# train_datas=(hierarchical_period_dim10_knn4096)
+# test_datas=(hierarchical_period_dim10_knn4096)
+# # test_datas=(hierarchical_period_dim20_test_knn256 hierarchical_period_dim20_test_knn64 hierarchical_period_dim20_test_knn16 hierarchical_period_dim20_test_knn4)
 
-for((i=0;i<2;i++));
-do
-    for((j=0;j<11;j++));
-    do
-        MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num $j 0 0 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --just_test --just_test_plot --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
+# for((i=0;i<1;i++));
+# do
+#     for((j=0;j<11;j++));
+#     do
+#         MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data ${train_datas[${i}]} --theory_test_data ${test_datas[${i}]} --random_drop_feature_num $j --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --just_test --just_test_plot --load_model --load_model_path ${models[${j}]} --local 2 --no_save"
 
-        echo $MY_CMD
-        # echo ${MY_CMD}>>local_history.log
-        $MY_CMD
-    done
-done
+#         echo $MY_CMD
+#         # echo ${MY_CMD}>>local_history.log
+#         $MY_CMD
+#     done
+# done
 
 # unlearnable_theory_44485939_1_20220124103417_0.5_512_1000
 # unlearnable_theory_44485939_2_20220124103417_0.5_512_1000
@@ -49,11 +49,11 @@ done
 # unlearnable_theory_44030020_2_20220117210918_0.5_512_1000_statistics 5 5 5 5 5
 
 
-# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_diffmean_test1_knn64 --random_drop_feature_num 0 0 0 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --local 2 --no_save"
+MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 20000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 100 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train cifar10_20000_triobject --gray_test cifar10_20000_triobject --augmentation Tri --load_model --just_test --load_model_path unlearnable_cleantrain_44877462_1_20220130171609_0.5_512_1000_final_model --local 2 --no_save"
 
-# echo $MY_CMD
-# echo ${MY_CMD}>>local_history.log
-# $MY_CMD
+echo $MY_CMD
+echo ${MY_CMD}>>local_history.log
+$MY_CMD
 
 # MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim20_knn4 --theory_test_data hierarchical_period_dim20_test_knn4 --random_drop_feature_num 5 5 1 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 90 --just_test --load_model --load_model_path unlearnable_theory_44030018_2_20220117210846_0.5_512_1000_final_model --local 2 --no_save"
 
@@ -98,7 +98,7 @@ done
 
 # rm -f ./results_just_test/${TEMP_SAVE_FILE}.txt
 
-# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim20_eqstd1_diffmean_knn256 --theory_test_data hierarchical_period_dim20_eqstd1_diffmean_test1_knn256 --random_drop_feature_num 5 5 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 20 --local 2 --no_save"
+# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 9 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --local 2 --no_save"
 
 # echo $MY_CMD
 # echo ${MY_CMD}>>local_history.log
@@ -214,15 +214,11 @@ done
 # unlearnable_cleantrain_43809527_2_20220115003409_0
 # unlearnable_cleantrain_41798562_2_20211210195041_0
 
-# for i in {4..28..4}
-# do
-    
-#     MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train gray --gray_test freq_cifar10_1024_4class_gray_low_${i} --augmentation ReCrop_Hflip_Bri --load_model --load_model_path unlearnable_cleantrain_42483880_2_20211221153535_0.5_512_1000_final_model --just_test --local_dev 2 --no_save"
+# MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 20000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 100 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train cifar10_20000_triobject --gray_test cifar10_20000_triobject --augmentation Tri --local_dev 2 --no_save"
 
-#     # echo $MY_CMD
-#     # echo ${MY_CMD}>>local_history.log
-#     $MY_CMD
-# done
+# echo $MY_CMD
+# echo ${MY_CMD}>>local_history.log
+# $MY_CMD
 
 # python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type test_find_positive_pair --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data --augmentation ReCrop_Hflip --batch_size 256 --gray_train mnist_train_4gray --gray_test mnist_train_4gray --load_model --load_model_path unlearnable_cleantrain_43557131_1_20220111124039_0.5_256_1000_final_model --local_dev 2 --no_save
 

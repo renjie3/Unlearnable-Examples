@@ -18,7 +18,7 @@ parser.add_argument('--std_list', action='store_true', default=False)
 parser.add_argument('--reverse_order', action='store_true', default=False)
 parser.add_argument('--equal_cluster', default=0, type=int, help='equal_cluster')
 parser.add_argument('--bias', action='store_true', default=False)
-parser.add_argument('--bias_scalor', default=[1.5, 1.5], nargs='+', type=float, help='the number of randomly dropped features')
+parser.add_argument('--bias_scalor', default=[2, 1.5], nargs='+', type=float, help='the number of randomly dropped features')
 parser.add_argument('--feature_length', default=30, type=int, help='feature_length')
 parser.add_argument('--std', default=1, type=float, help='feature_length')
 args = parser.parse_args()
@@ -53,7 +53,7 @@ if args.equal_cluster != 0:
         d_distri_list = [3, 3, 3, 3]
 
 else:
-    n_distri_list = [16, 4]
+    n_distri_list = [64, 16]
     d_distri_list = [10, 10]
 # if args.reverse_order:
 #     std_list = [3, 1, 0.5, 0.3]
@@ -62,7 +62,7 @@ else:
 #     std_list = [0.3, 0.5, 1, 3]
 #     s_std_list = [0.0003, 0.0005, 0.001, 0.003]
 # std_list = [0.01, 0.03, 0.1, 0.3]
-std_list = [0.1, 0.1]
+std_list = [0.03, 0.1]
 if args.level_dim == 150:
     level_dim_list = [20, 30]
 elif args.level_dim == 30:
@@ -191,12 +191,9 @@ for i_distri in range(2):
         shuffle_str = ''
 
     if args.std_list:
-        if args.reverse_order:
-            order_str = '_reverse'
-        else:
-            order_str = '_obverse'
+        std_list_str = "_std{}#{}".format(*std_list)
     else:
-        order_str = ''
+        std_list_str = ''
     
     if args.equal_cluster != 0:
         equal_cluster_str = '_eqcluster{}'.format(args.equal_cluster)
@@ -216,42 +213,42 @@ for i_distri in range(2):
         bias_scalor_str = ''
 
     if args.save:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, n_distri)
         print(file_path)
         with open(file_path, "wb") as f:
             entry = pickle.dump(sampled, f)
     else:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, n_distri)
         print(file_path)
         print("not args.save")
 
     if args.save:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, n_distri)
         print(file_path)
         with open(file_path, "wb") as f:
             entry = pickle.dump(memory_sampled, f)
     else:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, n_distri)
         print(file_path)
         print("not args.save")
 
     if args.save:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, i_distri + 1, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, i_distri + 1, n_distri)
         print(file_path)
         with open(file_path, "wb") as f:
             entry = pickle.dump(sampled, f)
     else:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, i_distri + 1, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, i_distri + 1, n_distri)
         print(file_path)
         print("not args.save")
 
     if args.save:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, i_distri + 1, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, i_distri + 1, n_distri)
         print(file_path)
         with open(file_path, "wb") as f:
             entry = pickle.dump(sampled, f)
     else:
-        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, bias_scalor_str, i_distri + 1, n_distri)
+        file_path = './data/theory_data/hierarchical{}_{}_period_dim{}{}{}{}{}_test{}_knn{}.pkl'.format(*n_distri_list, args.feature_length, shuffle_str, equal_cluster_str, std_list_str, bias_scalor_str, i_distri + 1, n_distri)
         print(file_path)
         print("not args.save")
 

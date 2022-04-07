@@ -21,7 +21,7 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import NullFormatter
-from sklearn import manifold, datasets
+from sklearn import manifold, datasets, metrics
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
@@ -262,6 +262,7 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
                       'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
                       'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
                       'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
+                      'Tri': utils.train_diff_transform_Tri, 
                       }
     if np.sum(augmentation_prob) == 0:
         if augmentation in transform_func:
@@ -341,7 +342,7 @@ def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperat
         level_dim = [0, 10, 20, 30, 40, 50]
     else:
         raise("Wrong thoery_schedule_dim!")
-    gaussian_schedule = [1, 1, 1, 1, 1]
+    gaussian_schedule = [1, 0, 0, 0, 0]
     # s_feature_dim = 10
     if theory_aug_by_order:
         # input('check here')
@@ -378,12 +379,39 @@ def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperat
         for i in range(0, level):
             mean = torch.tensor([0 for _ in range(level_dim[i+1] - level_dim[i])]).float()
             std = torch.tensor([gaussian_aug_std * gaussian_schedule[i] for _ in range(level_dim[i+1] - level_dim[i])]).float()
-            gaussian_aug1.append(torch.normal(mean, std).cuda(non_blocking=True))
-            gaussian_aug2.append(torch.normal(mean, std).cuda(non_blocking=True))
-        gaussian_aug1 = torch.cat(gaussian_aug1, dim=0)
-        gaussian_aug2 = torch.cat(gaussian_aug2, dim=0)
+            aug_batch1 = []
+            aug_batch2 = []
+            for _ in range(pos_1.shape[0]):
+                aug_batch1.append(torch.normal(mean, std).cuda(non_blocking=True))
+                aug_batch2.append(torch.normal(mean, std).cuda(non_blocking=True))
+            gaussian_aug1.append(torch.stack(aug_batch1, dim=0))
+            gaussian_aug2.append(torch.stack(aug_batch2, dim=0))
+            # gaussian_aug1.append(torch.normal(mean, std).cuda(non_blocking=True))
+            # gaussian_aug2.append(torch.normal(mean, std).cuda(non_blocking=True))
+            # print(torch.normal(mean, std).cuda(non_blocking=True).shape)
+            # print(gaussian_aug1)
+            # input(gaussian_aug2)
+        gaussian_aug1 = torch.cat(gaussian_aug1, dim=1)
+        gaussian_aug2 = torch.cat(gaussian_aug2, dim=1)
         pos_1 += gaussian_aug1
         pos_2 += gaussian_aug2
+
+        # for i in range(0, level):
+        #     mean = torch.tensor([0 for _ in range(level_dim[i+1] - level_dim[i])]).float()
+        #     std = torch.tensor([gaussian_aug_std * gaussian_schedule[i] for _ in range(level_dim[i+1] - level_dim[i])]).float()
+        #     aug_batch1 = []
+        #     aug_batch2 = []
+        #     gaussian_aug1.append(torch.normal(mean, std).cuda(non_blocking=True))
+        #     gaussian_aug2.append(torch.normal(mean, std).cuda(non_blocking=True))
+        #     # print(torch.normal(mean, std).cuda(non_blocking=True).shape)
+        # gaussian_aug1 = torch.cat(gaussian_aug1, dim=0)
+        # gaussian_aug2 = torch.cat(gaussian_aug2, dim=0)
+        # pos_1 += gaussian_aug1
+        # pos_2 += gaussian_aug2
+
+        # test_aug = torch.tensor([0 for _ in range(10)] + [1 for _ in range(20)]).cuda(non_blocking=True)
+        # pos_1 *= test_aug
+        # pos_2 *= test_aug
 
     out_1 = net(pos_1)
     out_2 = net(pos_2)
@@ -966,6 +994,9 @@ def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, e
         feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
         # [N]
         feature_labels = torch.tensor(memory_data_loader.dataset.targets, device=feature_bank.device)
+        print("test_ssl output DBindex: ")
+        print(metrics.davies_bouldin_score(feature_bank.t().contiguous().cpu().numpy(), feature_labels.cpu().numpy()))
+        c = np.max(memory_data_loader.dataset.targets) + 1
         # loop test data to predict the label by weighted knn search
         test_bar = tqdm(test_data_loader)
         for data, _, target in test_bar:
@@ -1047,6 +1078,153 @@ def test_intra_inter_sim(net, memory_data_loader, test_data_loader, k, temperatu
             inter_sim = inter_sim.masked_select(mask).view(c, -1).mean().item()
 
     return intra_sim, inter_sim
+
+def test_cluster(net, memory_data_loader, test_data_loader, dim_range, random_drop_feature_num, gaussian_aug_std, theory_aug_by_order=False, thoery_schedule_dim=30, flag_output_cluster=False, theory_model=False, instance_level=False):
+    # dim_range = np.arange(a, b)
+    feature_labels = test_data_loader.dataset.targets
+    if instance_level:
+        feature_labels = np.arange(0, feature_labels.shape[0])
+    return_values = {}
+    if flag_output_cluster:
+        net.eval()
+        feature_bank = []
+        label_bank = []
+        # c = 10
+        with torch.no_grad():
+            # generate feature bank
+            for data, _, target in tqdm(test_data_loader, desc='Feature extracting'):
+                data = data.cuda(non_blocking=True)[:,0,:,0]
+                if thoery_schedule_dim == 90:
+                    level_dim = [0, 10, 30, 50, 70, 90]
+                elif thoery_schedule_dim == 150:
+                    level_dim = [0, 10, 30, 60, 100, 150]
+                elif thoery_schedule_dim == 20:
+                    level_dim = [0, 10, 20]
+                elif thoery_schedule_dim == 30:
+                    level_dim = [0, 10, 20, 30]
+                elif thoery_schedule_dim == 10:
+                    level_dim = [0, 10]
+                elif thoery_schedule_dim == 50:
+                    level_dim = [0, 10, 20, 30, 40, 50]
+                else:
+                    raise("Wrong thoery_schedule_dim!")
+                level = len(level_dim) - 1
+                gaussian_schedule = [1, 0, 0, 0, 0]
+                drop_mask = []
+                if theory_aug_by_order:
+                    # input('check here')
+                    for i in range(0, level):
+                        ids = np.arange(level_dim[i], level_dim[i+1])
+                        drop_feature = ids[:random_drop_feature_num[i]]
+                        drop_mask.append(drop_feature)
+                else:
+                    for i in range(0, level):
+                        ids = np.arange(level_dim[i], level_dim[i+1])
+                        random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
+                        drop_mask.append(random_frop_feature)
+                # input(drop_mask1)
+                drop_mask = np.concatenate(drop_mask, axis=0)
+
+                aug = np.ones(data.shape[1])
+                for drop_feat in drop_mask:
+                    aug[drop_feat] = 0.0
+                # print(np.sum(aug))
+                aug_bank = data * torch.tensor(aug).cuda(non_blocking=True)
+                if gaussian_aug_std != 0:
+                    gaussian_aug = []
+                    for i in range(0, level):
+                        mean = np.array([0 for _ in range(level_dim[i+1] - level_dim[i])])
+                        std = np.diag([gaussian_aug_std * gaussian_schedule[i] for _ in range(level_dim[i+1] - level_dim[i])])
+                        aug_noise = np.random.multivariate_normal(mean=mean, cov=std, size=data.shape[0])
+                        gaussian_aug.append(aug_noise)
+                    gaussian_aug = np.concatenate(gaussian_aug, axis=1)
+                    gaussian_aug = torch.tensor(gaussian_aug).cuda(non_blocking=True)
+                    aug_bank += gaussian_aug
+                    # gaussian_aug.repeat()
+
+                label_bank.append(target.cuda(non_blocking=True))
+                if theory_model:
+                    feature = net(aug_bank.float())
+                # else:
+                #     feature, out = net(data.cuda(non_blocking=True))
+                feature_bank.append(feature)
+            label_bank = torch.cat(label_bank, dim=0).contiguous()
+            feature_bank = torch.cat(feature_bank, dim=0).contiguous()
+        feature_bank = feature_bank.cpu().numpy()
+        label_bank = label_bank.cpu().numpy()
+        output_DBindex = metrics.davies_bouldin_score(feature_bank, label_bank)
+        return_values["output_DBindex"] = output_DBindex
+
+    if theory_model:
+        input_bank = test_data_loader.dataset.data[:, :, 0, 0]
+        if thoery_schedule_dim == 90:
+            level_dim = [0, 10, 30, 50, 70, 90]
+        elif thoery_schedule_dim == 150:
+            level_dim = [0, 10, 30, 60, 100, 150]
+        elif thoery_schedule_dim == 20:
+            level_dim = [0, 10, 20]
+        elif thoery_schedule_dim == 30:
+            level_dim = [0, 10, 20, 30]
+        elif thoery_schedule_dim == 10:
+            level_dim = [0, 10]
+        elif thoery_schedule_dim == 50:
+            level_dim = [0, 10, 20, 30, 40, 50]
+        else:
+            raise("Wrong thoery_schedule_dim!")
+        level = len(level_dim) - 1
+        average_aug_number = 5
+        input_DBindex_list = []
+        all_dim_input_DBindex_list = []
+        gaussian_schedule = [1, 0, 0, 0, 0]
+        dup_aug_bank_list = []
+        dug_labels = []
+        for _ in range(average_aug_number):
+            # s_feature_dim = 10
+            drop_mask = []
+            if theory_aug_by_order:
+                # input('check here')
+                for i in range(0, level):
+                    ids = np.arange(level_dim[i], level_dim[i+1])
+                    drop_feature = ids[:random_drop_feature_num[i]]
+                    drop_mask.append(drop_feature)
+            else:
+                for i in range(0, level):
+                    ids = np.arange(level_dim[i], level_dim[i+1])
+                    random_frop_feature = np.random.permutation(ids)[:random_drop_feature_num[i]]
+                    drop_mask.append(random_frop_feature)
+            # input(drop_mask1)
+            drop_mask = np.concatenate(drop_mask, axis=0)
+
+            aug = np.ones(input_bank.shape[1])
+            for drop_feat in drop_mask:
+                aug[drop_feat] = 0.0
+            # print(np.sum(aug))
+            aug_bank = input_bank * aug
+            if gaussian_aug_std != 0:
+                gaussian_aug = []
+                for i in range(0, level):
+                    mean = np.array([0 for _ in range(level_dim[i+1] - level_dim[i])])
+                    std = np.diag([gaussian_aug_std * gaussian_schedule[i] for _ in range(level_dim[i+1] - level_dim[i])])
+                    aug_noise = np.random.multivariate_normal(mean=mean, cov=std, size=input_bank.shape[0])
+                    gaussian_aug.append(aug_noise)
+                gaussian_aug = np.concatenate(gaussian_aug, axis=1)
+                # gaussian_aug = torch.tensor(gaussian_aug).cuda(non_blocking=True).repeat([data.shape[0], 1])
+                aug_bank += gaussian_aug
+            dup_aug_bank_list.append(aug_bank)
+            dug_labels.append(feature_labels)
+            if not instance_level:
+                input_DBindex = metrics.davies_bouldin_score(aug_bank[:, dim_range], feature_labels)
+                all_dim_input_DBindex = metrics.davies_bouldin_score(aug_bank, feature_labels)
+                input_DBindex_list.append(input_DBindex)
+                all_dim_input_DBindex_list.append(all_dim_input_DBindex)
+        dup_aug_bank = np.concatenate(dup_aug_bank_list, axis=0)
+        dug_labels = np.concatenate(dug_labels, axis=0)
+        if not instance_level:
+            return_values["input_DBindex"] = np.mean(input_DBindex_list)
+        return_values["dup_aug_DBindex"] = metrics.davies_bouldin_score(dup_aug_bank[:, dim_range], dug_labels)
+        return_values["all_dim_dup_aug_DBindex"] = metrics.davies_bouldin_score(dup_aug_bank, dug_labels)
+
+    return return_values
 
 def test_instance_sim(net, memory_data_loader, test_data_loader, k, temperature, epochs, augmentation, augmentation_prob):
     net.eval()
@@ -1163,8 +1341,17 @@ def test_instance_sim_thoery(net, memory_data_loader, test_data_loader, k, tempe
                     level_dim = [0, 10, 30, 50, 70, 90]
                 elif thoery_schedule_dim == 150:
                     level_dim = [0, 10, 30, 60, 100, 150]
+                elif thoery_schedule_dim == 20:
+                    level_dim = [0, 10, 20]
+                elif thoery_schedule_dim == 30:
+                    level_dim = [0, 10, 20, 30]
+                elif thoery_schedule_dim == 10:
+                    level_dim = [0, 10]
+                elif thoery_schedule_dim == 50:
+                    level_dim = [0, 10, 20, 30, 40, 50]
                 else:
                     raise("Wrong thoery_schedule_dim!")
+                level = len(level_dim) - 1
                 gaussian_schedule = [10, 4, 2, 1, 0.5]
                 # s_feature_dim = 10
                 for i in range(0, level):

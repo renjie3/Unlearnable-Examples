@@ -23,3 +23,5 @@ feature_space_images/
 visualization/
 core*
 plot_be/
+results_save_name_pre/
+results_just_test/

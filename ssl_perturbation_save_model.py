@@ -81,6 +81,8 @@ parser.add_argument('--just_test_temp_save_file', default='temp', type=str, help
 parser.add_argument('--save_name_pre_temp_save_file', default='temp', type=str, help='save_name_pre_temp_save_file')
 parser.add_argument('--theory_aug_by_order', action='store_true', default=False)
 parser.add_argument('--just_test_plot', action='store_true', default=False)
+parser.add_argument('--save_random', action='store_true', default=False)
+parser.add_argument('--test_cluster_dim_range', default=[0, 10], nargs='+', type=int, help='the dimenssion range of test data')
 args = parser.parse_args()
 
 
@@ -112,7 +114,7 @@ from model import Model, LooC, TheoryModel, MICL
 import pandas as pd
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor, train_simclr_target_task, train_simclr_softmax, test_ssl_softmax, train_align, train_looc, train_micl, train_simclr_newneg, train_simclr_2digit, test_intra_inter_sim, test_instance_sim, train_simclr_theory, test_ssl_theory, test_instance_sim_thoery
+from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor, train_simclr_target_task, train_simclr_softmax, test_ssl_softmax, train_align, train_looc, train_micl, train_simclr_newneg, train_simclr_2digit, test_intra_inter_sim, test_instance_sim, train_simclr_theory, test_ssl_theory, test_instance_sim_thoery, test_cluster
 import random
 import matplotlib.pyplot as plt
 import matplotlib
@@ -1336,10 +1338,26 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
             print("inter_dis:", inter_dis)
             acc_top1, acc_top5 = test_instance_sim_thoery(model, memory_loader, train_loader_simclr, k, temperature, random_drop_feature_num=args.random_drop_feature_num, thoery_schedule_dim=args.thoery_schedule_dim)
             print(acc_top1, acc_top5)
-            f = open("results_just_test/{}.txt".format(args.just_test_temp_save_file), "a")
-            f.write("{}\t{}\t{}\t{}\t{}".format(intra_dis, inter_dis, intra_dis / inter_dis, acc_top1, acc_top5))
+            # test_cluster(net, memory_data_loader, test_data_loader, dim_range, flag_output_cluster=False, theory_model=False)
+            dim_range = np.arange(args.test_cluster_dim_range[0], args.test_cluster_dim_range[1])
+            if args.test_cluster_dim_range[0] == 0 and args.test_cluster_dim_range[1] == 10:
+                instance_level_info = True
+            else:
+                instance_level_info = False
+            flag_output_cluster=True
+            DBindex = test_cluster(model, memory_loader, train_loader_simclr, dim_range=dim_range, random_drop_feature_num=args.random_drop_feature_num, gaussian_aug_std=args.gaussian_aug_std, theory_aug_by_order=False, thoery_schedule_dim=args.thoery_schedule_dim, flag_output_cluster=flag_output_cluster, theory_model=True, instance_level=instance_level_info)
+            print(DBindex)
+            f = open("results_just_test/{}.txt".format("gaussian"), "a")
+            if instance_level_info:
+                f.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(intra_dis, inter_dis, intra_dis / inter_dis, acc_top1, acc_top5, test_acc_1, test_acc_5, DBindex["dup_aug_DBindex"], DBindex["all_dim_dup_aug_DBindex"]))
+            else:
+                if flag_output_cluster:
+                    f.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(intra_dis, inter_dis, intra_dis / inter_dis, acc_top1, acc_top5, test_acc_1, test_acc_5, DBindex["dup_aug_DBindex"], DBindex["input_DBindex"], DBindex["all_dim_dup_aug_DBindex"], DBindex["output_DBindex"]))
+                else:
+                    f.write("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(intra_dis, inter_dis, intra_dis / inter_dis, acc_top1, acc_top5, test_acc_1, test_acc_5, DBindex["dup_aug_DBindex"], DBindex["input_DBindex"], DBindex["all_dim_dup_aug_DBindex"]))
             f.close()
-            utils.plot_be_thoery(feature_bank, label_bank, save_name_pre, c)
+            # utils.plot_be_thoery(feature_bank, label_bank, save_name_pre, c)
+            
         if args.just_test_plot:
             if args.load_model_path == 'unlearnable_theory_44448140_3_20220123202831_0.5_512_1000_final_model':
                 utils.plot_be_thoery_orgfeature(feature_bank, label_bank, save_name_pre, c)
@@ -1381,6 +1399,10 @@ def theory_model(noise_generator, trainer, evaluator, model, criterion, optimize
     if not args.no_save and not args.just_test:
         torch.save(model.state_dict(), 'results/{}_final_model.pth'.format(save_name_pre))
         utils.plot_loss('./results/{}_statistics'.format(save_name_pre))
+
+    if args.save_random:
+        torch.save(model.state_dict(), 'results/{}_random_final_model.pth'.format(save_name_pre))
+        # utils.plot_loss('./results/{}_statistics'.format(save_name_pre))
 
     return random_noise, save_name_pre
 
@@ -1546,14 +1568,14 @@ def clean_train(noise_generator, trainer, evaluator, model, criterion, optimizer
                     utils.plot_process(feature1_bank, feature2_bank, feature_center_bank, plot_labels, save_name_pre, epoch_idx, sample_num, args.plot_process_mode, plot_idx_color, 50)
                 feature1_bank, feature2_bank, feature_center_bank, out1_bank, out2_bank, out_center_bank = [], [], [], [], [], []
 
-        # Here we save some samples in image.
-        if epoch_idx % 10 == 0 and not args.no_save:
-        # if True:
-            if not os.path.exists('./images/'+save_name_pre):
-                os.mkdir('./images/'+save_name_pre)
-            images = []
-            for group_idx in range(save_image_num):
-                utils.save_img_group(train_data_for_save_img, random_noise, './images/{}/{}.png'.format(save_name_pre, group_idx))
+        # # Here we save some samples in image.
+        # if epoch_idx % 10 == 0 and not args.no_save:
+        # # if True:
+        #     if not os.path.exists('./images/'+save_name_pre):
+        #         os.mkdir('./images/'+save_name_pre)
+        #     images = []
+        #     for group_idx in range(save_image_num):
+        #         utils.save_img_group(train_data_for_save_img, random_noise, './images/{}/{}.png'.format(save_name_pre, group_idx))
         
         
         test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
@@ -2600,9 +2622,10 @@ def main():
         load_model_path = './results/{}.pth'.format(args.load_model_path)
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints)
+        # input(load_model_path)
         # ENV = checkpoint['ENV']
         # trainer.global_step = ENV['global_step']
-        # logger.info("File %s loaded!" % (load_model_path))
+        logger.info("File %s loaded!" % (load_model_path))
 
     # training loop
     # results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}

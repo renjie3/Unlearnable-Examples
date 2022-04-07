@@ -5234,3 +5234,535 @@ unlearnable_theory_44718003_2_20220125195731_0.5_512_1000
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 8 5 5 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44718003_3
 unlearnable_theory_44718003_3_20220125195731_0.5_512_1000
 ---------------------------------------------------------------
+Wed Jan 26 16:00:55 EST 2022
+44739025
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739025_1
+unlearnable_theory_44739025_1_20220126154841_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 1 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739025_2
+unlearnable_theory_44739025_2_20220126154841_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 2 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739025_3
+unlearnable_theory_44739025_3_20220126154841_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 16:15:31 EST 2022
+44739056
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 3 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739056_1
+unlearnable_theory_44739056_1_20220126160111_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 4 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739056_2
+unlearnable_theory_44739056_2_20220126160111_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 5 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739056_3
+unlearnable_theory_44739056_3_20220126160111_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 16:29:10 EST 2022
+44739088
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 6 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739088_1
+unlearnable_theory_44739088_1_20220126161549_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 7 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739088_2
+unlearnable_theory_44739088_2_20220126161549_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 8 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739088_3
+unlearnable_theory_44739088_3_20220126161549_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 16:43:00 EST 2022
+44739089
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 9 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739089_1
+unlearnable_theory_44739089_1_20220126162927_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn32 --random_drop_feature_num 10 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739089_2
+unlearnable_theory_44739089_2_20220126162927_0.5_512_1000
+
+
+---------------------------------------------------------------
+Wed Jan 26 16:56:40 EST 2022
+44739672
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739672_1
+unlearnable_theory_44739672_1_20220126164320_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 1 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739672_2
+unlearnable_theory_44739672_2_20220126164320_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 2 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739672_3
+unlearnable_theory_44739672_3_20220126164320_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 17:11:38 EST 2022
+44739673
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 3 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739673_1
+unlearnable_theory_44739673_1_20220126165657_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 4 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739673_2
+unlearnable_theory_44739673_2_20220126165657_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 5 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739673_3
+unlearnable_theory_44739673_3_20220126165657_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 17:26:22 EST 2022
+44739687
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 6 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739687_1
+unlearnable_theory_44739687_1_20220126171154_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 7 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739687_2
+unlearnable_theory_44739687_2_20220126171155_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 8 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739687_3
+unlearnable_theory_44739687_3_20220126171155_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 17:26:29 EST 2022
+44739688
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 9 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739688_1
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_knn64 --theory_test_data hierarchical64_16_period_dim30_shuffle_std0.03#0.1_diffmean_test1_knn64 --random_drop_feature_num 10 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44739688_2
+
+
+
+---------------------------------------------------------------
+Wed Jan 26 21:34:30 EST 2022
+44756401
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 1 0 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756401_1
+unlearnable_theory_44756401_1_20220126212301_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 1 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756401_2
+unlearnable_theory_44756401_2_20220126212300_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 1 2 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756401_3
+unlearnable_theory_44756401_3_20220126212300_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 21:39:07 EST 2022
+44756417
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 1 3 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756417_1
+unlearnable_theory_44756417_1_20220126212828_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 1 4 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756417_2
+unlearnable_theory_44756417_2_20220126212828_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 1 5 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756417_3
+unlearnable_theory_44756417_3_20220126212828_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 21:48:18 EST 2022
+44756421
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 2 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756421_1
+unlearnable_theory_44756421_1_20220126213639_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 2 2 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756421_2
+unlearnable_theory_44756421_2_20220126213639_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 2 3 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756421_3
+unlearnable_theory_44756421_3_20220126213639_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 21:50:14 EST 2022
+44756422
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 3 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756422_1
+unlearnable_theory_44756422_1_20220126213921_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 3 3 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756422_2
+unlearnable_theory_44756422_2_20220126213921_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 3 5 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44756422_3
+unlearnable_theory_44756422_3_20220126213921_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 22:59:48 EST 2022
+44764244
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 3 6 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44764244_1
+unlearnable_theory_44764244_1_20220126224916_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 3 7 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44764244_2
+unlearnable_theory_44764244_2_20220126224916_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 3 8 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44764244_3
+unlearnable_theory_44764244_3_20220126224916_0.5_512_1000
+---------------------------------------------------------------
+Wed Jan 26 23:00:21 EST 2022
+44764460
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 2 4 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44764460_1
+unlearnable_theory_44764460_1_20220126224951_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 2 5 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44764460_2
+unlearnable_theory_44764460_2_20220126224951_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 5 2 6 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 30 --job_id 44764460_3
+unlearnable_theory_44764460_3_20220126224951_0.5_512_1000
+---------------------------------------------------------------
+Sun Jan 30 17:55:59 EST 2022
+44877747
+cifar10 trifeature
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 20000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 100 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train cifar10_20000_tobject_rotation --gray_test cifar10_20000_tobject_rotation --augmentation Tri --job_id 44877747_1
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 20000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 100 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train cifar10_20000_tobject_color --gray_test cifar10_20000_tobject_color --augmentation Tri --job_id 44877747_2
+
+
+
+---------------------------------------------------------------
+Sun Jan 30 22:11:32 EST 2022
+44877462
+cifar10 trifeature
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 20000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 100 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train cifar10_20000_triobject --gray_test cifar10_20000_triobject --augmentation Tri --job_id 44877462_1
+unlearnable_cleantrain_44877462_1_20220130171609_0.5_512_1000
+
+
+---------------------------------------------------------------
+Tue Feb  1 12:31:04 EST 2022
+44928182
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 9 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928182_1
+unlearnable_theory_44928182_1_20220201121602_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 10 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928182_2
+unlearnable_theory_44928182_2_20220201121602_0.5_512_1000
+
+
+---------------------------------------------------------------
+Tue Feb  1 12:31:45 EST 2022
+44928181
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 6 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928181_1
+unlearnable_theory_44928181_1_20220201121552_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 7 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928181_2
+unlearnable_theory_44928181_2_20220201121552_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 8 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928181_3
+unlearnable_theory_44928181_3_20220201121552_0.5_512_1000
+---------------------------------------------------------------
+Tue Feb  1 12:31:54 EST 2022
+44928180
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 3 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928180_1
+unlearnable_theory_44928180_1_20220201121551_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 4 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928180_2
+unlearnable_theory_44928180_2_20220201121551_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 5 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928180_3
+unlearnable_theory_44928180_3_20220201121551_0.5_512_1000
+---------------------------------------------------------------
+Tue Feb  1 12:31:59 EST 2022
+44928179
+theory
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 0 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928179_1
+unlearnable_theory_44928179_1_20220201121552_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 1 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928179_2
+unlearnable_theory_44928179_2_20220201121552_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical_period_dim10_knn4096 --theory_test_data hierarchical_period_dim10_knn4096 --random_drop_feature_num 2 --gaussian_aug_std 0 --theory_normalize --thoery_schedule_dim 10 --job_id 44928179_3
+unlearnable_theory_44928179_3_20220201121552_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:49:47 EST 2022
+45076922
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.3 --theory_normalize --thoery_schedule_dim 30 --job_id 45076922_1
+unlearnable_theory_45076922_1_20220204093805_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.7 --theory_normalize --thoery_schedule_dim 30 --job_id 45076922_2
+unlearnable_theory_45076922_2_20220204093805_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.8 --theory_normalize --thoery_schedule_dim 30 --job_id 45076922_3
+unlearnable_theory_45076922_3_20220204093805_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:49:57 EST 2022
+45076896
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.1 --theory_normalize --thoery_schedule_dim 30 --job_id 45076896_1
+unlearnable_theory_45076896_1_20220204093743_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.05 --theory_normalize --thoery_schedule_dim 30 --job_id 45076896_2
+unlearnable_theory_45076896_2_20220204093742_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.02 --theory_normalize --thoery_schedule_dim 30 --job_id 45076896_3
+unlearnable_theory_45076896_3_20220204093742_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:50:20 EST 2022
+45076900
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.01 --theory_normalize --thoery_schedule_dim 30 --job_id 45076900_1
+unlearnable_theory_45076900_1_20220204093756_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.005 --theory_normalize --thoery_schedule_dim 30 --job_id 45076900_2
+unlearnable_theory_45076900_2_20220204093757_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.002 --theory_normalize --thoery_schedule_dim 30 --job_id 45076900_3
+unlearnable_theory_45076900_3_20220204093756_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:50:20 EST 2022
+45076737
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1 --theory_normalize --thoery_schedule_dim 30 --job_id 45076737_1
+unlearnable_theory_45076737_1_20220204093743_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45076737_2
+unlearnable_theory_45076737_2_20220204093743_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.2 --theory_normalize --thoery_schedule_dim 30 --job_id 45076737_3
+unlearnable_theory_45076737_3_20220204093742_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:50:50 EST 2022
+45076934
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2 --theory_normalize --thoery_schedule_dim 30 --job_id 45076934_1
+unlearnable_theory_45076934_1_20220204093904_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45076934_2
+unlearnable_theory_45076934_2_20220204093904_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45076934_3
+unlearnable_theory_45076934_3_20220204093904_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:51:42 EST 2022
+45076932
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.2 --theory_normalize --thoery_schedule_dim 30 --job_id 45076932_1
+unlearnable_theory_45076932_1_20220204093904_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45076932_2
+unlearnable_theory_45076932_2_20220204093904_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.7 --theory_normalize --thoery_schedule_dim 30 --job_id 45076932_3
+unlearnable_theory_45076932_3_20220204093903_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 09:52:19 EST 2022
+45076935
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45076935_1
+unlearnable_theory_45076935_1_20220204094037_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3 --theory_normalize --thoery_schedule_dim 30 --job_id 45076935_2
+unlearnable_theory_45076935_2_20220204094037_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45076935_3
+unlearnable_theory_45076935_3_20220204094037_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 16:22:03 EST 2022
+45103232
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103232_1
+unlearnable_theory_45103232_1_20220204161049_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45103232_2
+unlearnable_theory_45103232_2_20220204161049_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4 --theory_normalize --thoery_schedule_dim 30 --job_id 45103232_3
+unlearnable_theory_45103232_3_20220204161049_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 16:22:31 EST 2022
+45103235
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103235_1
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 5.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45103235_2
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 5.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103235_3
+
+---------------------------------------------------------------
+Fri Feb  4 16:22:44 EST 2022
+45103234
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45103234_1
+unlearnable_theory_45103234_1_20220204161049_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103234_2
+unlearnable_theory_45103234_2_20220204161049_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45103234_3
+unlearnable_theory_45103234_3_20220204161049_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 16:22:54 EST 2022
+45103237
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 6 --theory_normalize --thoery_schedule_dim 30 --job_id 45103237_1
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 6.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103237_2
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 7 --theory_normalize --thoery_schedule_dim 30 --job_id 45103237_3
+
+---------------------------------------------------------------
+Fri Feb  4 16:23:02 EST 2022
+45103239
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 7.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103239_1
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 8 --theory_normalize --thoery_schedule_dim 30 --job_id 45103239_2
+
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 8.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45103239_3
+
+---------------------------------------------------------------
+Fri Feb  4 17:16:58 EST 2022
+45105352
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.1 --theory_normalize --thoery_schedule_dim 30 --job_id 45105352_1
+unlearnable_theory_45105352_1_20220204165749_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.15 --theory_normalize --thoery_schedule_dim 30 --job_id 45105352_2
+unlearnable_theory_45105352_2_20220204165749_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.2 --theory_normalize --thoery_schedule_dim 30 --job_id 45105352_3
+unlearnable_theory_45105352_3_20220204165749_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:17:03 EST 2022
+45105282
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.005 --theory_normalize --thoery_schedule_dim 30 --job_id 45105282_1
+unlearnable_theory_45105282_1_20220204165703_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.01 --theory_normalize --thoery_schedule_dim 30 --job_id 45105282_2
+unlearnable_theory_45105282_2_20220204165703_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.02 --theory_normalize --thoery_schedule_dim 30 --job_id 45105282_3
+unlearnable_theory_45105282_3_20220204165703_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:17:58 EST 2022
+45105343
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.03 --theory_normalize --thoery_schedule_dim 30 --job_id 45105343_1
+unlearnable_theory_45105343_1_20220204165717_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.05 --theory_normalize --thoery_schedule_dim 30 --job_id 45105343_2
+unlearnable_theory_45105343_2_20220204165717_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.07 --theory_normalize --thoery_schedule_dim 30 --job_id 45105343_3
+unlearnable_theory_45105343_3_20220204165717_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:33:28 EST 2022
+45105393
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45105393_1
+unlearnable_theory_45105393_1_20220204165839_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.3 --theory_normalize --thoery_schedule_dim 30 --job_id 45105393_2
+unlearnable_theory_45105393_2_20220204165838_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.35 --theory_normalize --thoery_schedule_dim 30 --job_id 45105393_3
+unlearnable_theory_45105393_3_20220204165838_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:34:20 EST 2022
+45105401
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.4 --theory_normalize --thoery_schedule_dim 30 --job_id 45105401_1
+unlearnable_theory_45105401_1_20220204165833_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.45 --theory_normalize --thoery_schedule_dim 30 --job_id 45105401_2
+unlearnable_theory_45105401_2_20220204165833_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105401_3
+unlearnable_theory_45105401_3_20220204165833_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:35:15 EST 2022
+45105663
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45105663_1
+unlearnable_theory_45105663_1_20220204170052_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105663_2
+unlearnable_theory_45105663_2_20220204170053_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45105663_3
+unlearnable_theory_45105663_3_20220204170053_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:35:18 EST 2022
+45105423
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.6 --theory_normalize --thoery_schedule_dim 30 --job_id 45105423_1
+unlearnable_theory_45105423_1_20220204165856_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 0.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45105423_2
+unlearnable_theory_45105423_2_20220204165857_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1 --theory_normalize --thoery_schedule_dim 30 --job_id 45105423_3
+unlearnable_theory_45105423_3_20220204165857_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:35:32 EST 2022
+45105622
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.8 --theory_normalize --thoery_schedule_dim 30 --job_id 45105622_1
+unlearnable_theory_45105622_1_20220204170048_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2 --theory_normalize --thoery_schedule_dim 30 --job_id 45105622_2
+unlearnable_theory_45105622_2_20220204170046_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2.2 --theory_normalize --thoery_schedule_dim 30 --job_id 45105622_3
+unlearnable_theory_45105622_3_20220204170046_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:36:16 EST 2022
+45105648
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105648_1
+unlearnable_theory_45105648_1_20220204170052_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 2.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45105648_2
+unlearnable_theory_45105648_2_20220204170052_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 3 --theory_normalize --thoery_schedule_dim 30 --job_id 45105648_3
+unlearnable_theory_45105648_3_20220204170052_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:36:42 EST 2022
+45105794
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4 --theory_normalize --thoery_schedule_dim 30 --job_id 45105794_1
+unlearnable_theory_45105794_1_20220204170055_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4.25 --theory_normalize --thoery_schedule_dim 30 --job_id 45105794_2
+unlearnable_theory_45105794_2_20220204170054_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105794_3
+unlearnable_theory_45105794_3_20220204170055_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:37:34 EST 2022
+45105824
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 4.75 --theory_normalize --thoery_schedule_dim 30 --job_id 45105824_1
+unlearnable_theory_45105824_1_20220204170139_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105824_2
+unlearnable_theory_45105824_2_20220204170144_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 5.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105824_3
+unlearnable_theory_45105824_3_20220204170144_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:38:57 EST 2022
+45105519
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.2 --theory_normalize --thoery_schedule_dim 30 --job_id 45105519_1
+unlearnable_theory_45105519_1_20220204170050_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.4 --theory_normalize --thoery_schedule_dim 30 --job_id 45105519_2
+unlearnable_theory_45105519_2_20220204170050_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 1.6 --theory_normalize --thoery_schedule_dim 30 --job_id 45105519_3
+unlearnable_theory_45105519_3_20220204170042_0.5_512_1000
+---------------------------------------------------------------
+Fri Feb  4 17:43:26 EST 2022
+45105825
+gaussian_aug_std
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 6 --theory_normalize --thoery_schedule_dim 30 --job_id 45105825_1
+unlearnable_theory_45105825_1_20220204170709_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 6.5 --theory_normalize --thoery_schedule_dim 30 --job_id 45105825_2
+unlearnable_theory_45105825_2_20220204170703_0.5_512_1000
+
+python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 7 --theory_normalize --thoery_schedule_dim 30 --job_id 45105825_3
+unlearnable_theory_45105825_3_20220204170706_0.5_512_1000
+---------------------------------------------------------------
