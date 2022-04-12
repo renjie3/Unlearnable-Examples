@@ -33,6 +33,15 @@ ToTensor_transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 
+train_transform_no_totensor = transforms.Compose([
+    transforms.RandomResizedCrop(32),
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
+    transforms.RandomGrayscale(p=0.2),
+    # transforms.ToTensor(),
+    # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+    ])
+
 train_transform = transforms.Compose([
     transforms.RandomResizedCrop(32),
     transforms.RandomHorizontalFlip(p=0.5),
@@ -352,6 +361,7 @@ class CIFAR10Pair(CIFAR10):
         mix: str = 'no', 
         gray: str = 'no', 
         class_4_train_size = 1024,
+        kmeans_index = -1
     ) -> None:
 
         super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
@@ -550,6 +560,24 @@ class CIFAR10Pair(CIFAR10):
                         self.targets.append(torch.tensor([sampled_data["test_targets"][i], sampled_data["test_targets_mnist"][i]]))
                 else:
                     self.targets = sampled_data["test_targets"]
+
+        if kmeans_index >= 0:
+            if class_4:
+                kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+            else:
+                kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                # input('check')
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index]
+
+            self.targets = kmeans_labels
+            
+            # print(kmeans_labels)
+            # print(type(kmeans_labels))
+            # input()
+
+        # input('check1')
+        
         self.train_noise_after_transform = train_noise_after_transform
 
     def __getitem__(self, index):
@@ -586,9 +614,15 @@ class CIFAR10Pair(CIFAR10):
             raise('Replacing data noise class failed. Because the length is not consistent.')
 
     def replace_targets_with_id(self):
+        idx_label = []
         for i in range(len(self.targets)):
             # print(self.targets[i], random_noise_class[i])
-            self.targets[i] = i
+            idx_label.append(i)
+
+        gt_label = np.array(self.targets)
+        idx_label = np.array(idx_label)
+        self.targets = np.stack([idx_label, gt_label], axis=1)
+        
 
     def add_noise_test_visualization(self, random_noise_class_test, noise):
         # print(noise.shape)

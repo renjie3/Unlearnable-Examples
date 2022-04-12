@@ -1,8 +1,10 @@
 import numpy as np
 import torch
 from torch.autograd import Variable
-from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_return_loss_tensor, train_simclr_noise_return_loss_tensor_eot, train_simclr_noise_return_loss_tensor_target_task
+from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_return_loss_tensor, train_simclr_noise_return_loss_tensor_eot, train_simclr_noise_return_loss_tensor_target_task, train_simclr_noise_return_loss_tensor_full_gpu, get_dbindex_loss, train_simclr_noise_return_loss_tensor_no_eval
 from utils import train_diff_transform, train_diff_transform2
+
+import time
 
 if torch.cuda.is_available():
     device = torch.device('cuda')
@@ -249,7 +251,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", noise_after_transform=False):
+    def min_min_attack_simclr_return_loss_tensor(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, target_task="non_eot", noise_after_transform=False, split_transform=False, pytorch_aug=False):
     # after verified that using perturb as variable to train is working 
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -264,10 +266,13 @@ class PerturbationTool():
             opt = torch.optim.SGD([perturb], lr=1e-3)
             opt.zero_grad()
             model.zero_grad()
+
+            # model(perturb_img1)
+            # print('check3')
             # perturb.retain_grad()
             # loss.backward()
             if target_task == "non_eot":
-                loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug)
+                loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, split_transform=split_transform, pytorch_aug=pytorch_aug)
             else:
                 loss = train_simclr_noise_return_loss_tensor_target_task(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, target_task)
             perturb.retain_grad()
@@ -400,20 +405,23 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True):
+    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
 
         perturb = Variable(random_noise, requires_grad=True)
-        eot_size = 30
 
         eta = random_noise
         train_loss_batch_sum, train_loss_batch_count = 0, 0
         for _ in range(self.num_steps):
 
+            start = time.time()
+
             eot_grad = torch.zeros(perturb.shape, dtype=torch.float).to(device)
             eot_loss = 0
+
+            # perturb_org = torch.clamp(pos_samples_1.data + perturb, 0, 1)
 
             for i_eot in range(eot_size):
                 perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
@@ -421,9 +429,20 @@ class PerturbationTool():
                 opt = torch.optim.SGD([perturb], lr=1e-3)
                 opt.zero_grad()
                 model.zero_grad()
-                loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug)
+
+                if dbindex_weight != 0:
+                    dbindex_loss = get_dbindex_loss(model, perturb_img1, labels, [4], True, True)
+                else:
+                    dbindex_loss = 0
+
+                if one_gpu_eot_times == 1:
+                    simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug)
+                    loss = dbindex_loss * dbindex_weight + simclr_loss
+                else:
+                    loss = train_simclr_noise_return_loss_tensor_full_gpu(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, gpu_times=one_gpu_eot_times, cross_eot=cross_eot)
                 perturb.retain_grad()
                 loss.backward()
+                
                 eot_grad += perturb.grad.data
                 eot_loss += loss.item()
             
@@ -453,6 +472,90 @@ class PerturbationTool():
             # perturb_img2 = pos_samples_2.data + perturb
             # perturb_img2 = torch.clamp(perturb_img2, 0, 1)
             print("min_min_attack_simclr_return_loss_tensor_eot_v1:", eot_loss)
+
+            end = time.time()
+
+            print("time: ", end - start)
+        # print("eta all")
+        # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+        # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+        # print(">0:", np.sum(eta.cpu().numpy() > 0))
+        # print("<0:", np.sum(eta.cpu().numpy() < 0))
+        # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+        return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+
+    def min_min_attack_simclr_return_loss_tensor_eot_v1_no_eval(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0):
+    # v1 means it can repeat min_min_attack many times serially and average the results.
+        if random_noise is None:
+            random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+        perturb = Variable(random_noise, requires_grad=True)
+
+        eta = random_noise
+        train_loss_batch_sum, train_loss_batch_count = 0, 0
+        for _ in range(self.num_steps):
+
+            start = time.time()
+
+            eot_grad = torch.zeros(perturb.shape, dtype=torch.float).to(device)
+            eot_loss = 0
+
+            # perturb_org = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+
+            for i_eot in range(eot_size):
+                perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+                perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+                opt = torch.optim.SGD([perturb], lr=1e-3)
+                opt.zero_grad()
+                model.zero_grad()
+
+                if dbindex_weight != 0:
+                    dbindex_loss = get_dbindex_loss(model, perturb_img1, labels, [10], True, True)
+                else:
+                    dbindex_loss = 0
+
+                if one_gpu_eot_times == 1:
+                    simclr_loss = train_simclr_noise_return_loss_tensor_no_eval(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug)
+                    loss = dbindex_loss * dbindex_weight + simclr_loss
+                else:
+                    loss = train_simclr_noise_return_loss_tensor_full_gpu(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, gpu_times=one_gpu_eot_times, cross_eot=cross_eot)
+                perturb.retain_grad()
+                loss.backward()
+                
+                eot_grad += perturb.grad.data
+                eot_loss += loss.item()
+            
+            eot_loss /= eot_size
+            eot_grad /= eot_size
+
+            train_loss_batch = loss.item()/float(perturb.shape[0])
+            train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+            train_loss_batch_count += perturb.shape[0]
+
+            eta_step = self.step_size * eot_grad.sign() * (-1)
+            sign_print = perturb.grad.data.sign() * (-1)
+            # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+            # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+            # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+            perturb_img1 = perturb_img1.data + eta_step
+            eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+            perturb_img2 = perturb_img2.data + eta_step
+            eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+            # diff_eta = eta1 - eta2
+            # print(diff_eta.cpu().numpy())
+            eta = (eta1 + eta2) / 2
+            # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+            perturb = Variable(eta, requires_grad=True)
+            # perturb_img1 = pos_samples_1.data + perturb
+            # perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+            # perturb_img2 = pos_samples_2.data + perturb
+            # perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+            print("min_min_attack_simclr_return_loss_tensor_eot_v1:", eot_loss)
+
+            end = time.time()
+
+            print("time: ", end - start)
         # print("eta all")
         # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
         # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))

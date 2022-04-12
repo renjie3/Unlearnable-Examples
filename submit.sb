@@ -6,11 +6,11 @@
 #SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --mem-per-cpu=8G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
 #SBATCH --job-name SimCLR      # you can give your job a name for easier identification (same as -J)
-#SBATCH --gres=gpu:v100:1
-#SBATCH --time=2:00:00             # limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
-#SBATCH -o /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
-#SBATCH -e /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
+#SBATCH --time=3:50:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --cpus-per-task=10           # number of CPUs (or cores) per task (same as -c)
+#SBATCH --gres=gpu:v100s:4
+#SBATCH -o /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
+#SBATCH -e /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
 
 ########## Command Lines for Job Running ##########
 
@@ -25,10 +25,10 @@ conda activate simclr
 MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
-JOB_INFO="gaussian_aug_std"
-MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 6 --theory_normalize --thoery_schedule_dim 30 --job_id ${SLURM_JOB_ID}_1"
-MYCOMMEND2="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 6.5 --theory_normalize --thoery_schedule_dim 30 --job_id ${SLURM_JOB_ID}_2"
-MYCOMMEND3="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --perturb_type theory_model --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --gray_train no --gray_test no --theory_train_data hierarchical32_16_period_dim30_shuffle_diffmean_knn32 --theory_test_data hierarchical32_16_period_dim30_shuffle_diffmean_test1_knn32 --random_drop_feature_num 0 1 1 --gaussian_aug_std 7 --theory_normalize --thoery_schedule_dim 30 --job_id ${SLURM_JOB_ID}_3"
+JOB_INFO="samplewise perturbation"
+MYCOMMEND="python3 -u -m torch.distributed.launch --nproc_per_node=4 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 5 --pytorch_aug --batch_size 1024 --num_workers 8 --gpu_num 4 --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
+MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 
 #print the information of a job into one file
 date >>${MY_ROOT_PATH}submit_history.log

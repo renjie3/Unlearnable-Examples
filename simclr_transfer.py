@@ -15,6 +15,7 @@ parser.add_argument('--samplewise', action='store_true', default=False)
 parser.add_argument('--orglabel', action='store_true', default=False)
 parser.add_argument('--save_img_group', action='store_true', default=False)
 parser.add_argument('--perturb_rate', default=1.0, type=float, help='perturbation_rate')
+parser.add_argument('--no_save', action='store_true', default=False)
 
 # args parse
 args = parser.parse_args()
@@ -34,7 +35,7 @@ from tqdm import tqdm
 
 import utils
 from model import Model
-from utils import train_diff_transform
+from utils import train_diff_transform, train_transform_no_totensor
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -49,7 +50,7 @@ def train(net, data_loader, train_optimizer):
     total_loss, total_num, train_bar = 0.0, 0, tqdm(data_loader)
     for pos_1, pos_2, target in train_bar:
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-        pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+        pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
         feature_1, out_1 = net(pos_1)
         feature_2, out_2 = net(pos_2)
         # [2*B, D]
@@ -465,10 +466,12 @@ if __name__ == '__main__':
         if test_acc_1 > best_acc:
             best_acc = test_acc_1
             best_acc_loss = train_loss
-            torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
+            if not args.no_save:
+                torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
         results['best_acc'].append(best_acc)
         results['best_acc_loss'].append(best_acc_loss)
 
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch + 1))
-        data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
+        if not args.no_save:
+            data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')

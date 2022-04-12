@@ -13,7 +13,7 @@ from tqdm import tqdm
 
 import utils
 from model import Model
-from utils import train_diff_transform, train_diff_transform2, train_diff_transform_resize48, train_diff_transform_resize64, train_diff_transform_resize28, train_diff_transform_ReCrop_Hflip, train_diff_transform_ReCrop_Hflip_Bri, train_diff_transform_ReCrop_Hflip_Con, train_diff_transform_ReCrop_Hflip_Sat, train_diff_transform_ReCrop_Hflip_Hue
+from utils import train_diff_transform, train_diff_transform2, train_diff_transform_resize48, train_diff_transform_resize64, train_diff_transform_resize28, train_diff_transform_ReCrop_Hflip, train_diff_transform_ReCrop_Hflip_Bri, train_diff_transform_ReCrop_Hflip_Con, train_diff_transform_ReCrop_Hflip_Sat, train_diff_transform_ReCrop_Hflip_Hue, train_transform_no_totensor
 
 import kornia.augmentation as Kaug
 import torch.nn as nn
@@ -22,6 +22,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import NullFormatter
 from sklearn import manifold, datasets, metrics
+
+import time
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
@@ -698,17 +700,127 @@ def train_simclr_target_task(net, pos_1, pos_2, train_optimizer, batch_size, tem
     
     return total_loss * pos_1.shape[0], pos_1.shape[0], numerator, denominator
 
-def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False):
+def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbindex):
+
+    time0 = time.time()
+
+    feature, out = net(x)
+    if use_out_dbindex:
+        sample = out.double()
+    else:
+        sample = feature.double()
+
+    time1 = time.time()
+    print("time1: {}".format(time1 - time0))
+
+    loss = 0
+    n_clueter_num = len(num_clusters)
+    for num_cluster_idx in range(len(num_clusters)):
+        if n_clueter_num == 1:
+            cluster_label = labels[:]
+        else:
+            cluster_label = labels[:, num_cluster_idx]
+        # cluster_label = cluster_label.repeat((repeat_num, ))
+
+        class_center = []
+        class_center_wholeset = []
+        intra_class_dis = []
+        c = torch.max(cluster_label) + 1
+        time2 = time.time()
+        print("time2: {}".format(time2 - time1))
+        for i in range(c):
+            print(i)
+            idx_i = torch.where(cluster_label == i)[0]
+            class_i = sample[idx_i, :]
+
+            # class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
+
+            # if idx_i.shape[0] == 0:
+            #     continue
+            # class_center.append(class_i_center)
+
+            # point_dis_to_center = torch.sqrt(torch.sum((class_i-class_i_center)**2, dim = 1))
+
+            # intra_class_dis.append(torch.mean(point_dis_to_center))
+        time3 = time.time()
+        print("time3: {}".format(time3 - time2))
+        if len(class_center) <= 1:
+            continue
+        class_center = torch.stack(class_center, dim=0)
+        # input('no')
+
+        time4 = time.time()
+        print("time4: {}".format(time4 - time3))
+
+        c = len(intra_class_dis)
+        
+        class_dis = torch.cdist(class_center, class_center, p=2) # TODO: this can be done for only one time in the whole set
+
+        mask = (torch.ones_like(class_dis) - torch.eye(class_dis.shape[0], device=class_dis.device)).bool()
+        class_dis = class_dis.masked_select(mask).view(class_dis.shape[0], -1)
+
+        intra_class_dis = torch.tensor(intra_class_dis).unsqueeze(1).repeat((1, c)).cuda()
+        trans_intra_class_dis = torch.transpose(intra_class_dis, 0, 1)
+        intra_class_dis_pair_sum = intra_class_dis + trans_intra_class_dis
+        intra_class_dis_pair_sum = intra_class_dis_pair_sum.masked_select(mask).view(intra_class_dis_pair_sum.shape[0], -1)
+
+        time5 = time.time()
+        print("time5: {}".format(time5 - time4))
+
+        if use_mean_dbindex:
+            cluster_DB_loss = (intra_class_dis_pair_sum / class_dis).mean()
+        else:
+            cluster_DB_loss = torch.max(intra_class_dis_pair_sum / class_dis, dim=1)[0].mean()
+
+        time6 = time.time()
+        print("time6: {}".format(time6 - time5))
+
+        loss += cluster_DB_loss
+
+    input('time done')
+
+    return loss
+
+def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None):
     net.eval()
     total_loss, total_num = 0.0, 0
     
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-    # if flag_strong_aug:
-    #     pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
-    # else:
-    #     pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
+
+    # feature_1, out_1 = net(pos_1)
+    # feature_2, out_2 = net(pos_2)
+    # print('check0 1')
+    
     if not noise_after_transform:
-        os_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+        if split_transform:
+            pass
+            pos_1_list = torch.split(pos_1, batch_size // 16, dim=0)
+            pos_2_list = torch.split(pos_2, batch_size // 16, dim=0)
+            new_pos_1_list, new_pos_2_list = [], []
+            for sub_pos_1 in pos_1_list:
+                # print(sub_pos_1.shape)
+                if pytorch_aug:
+                    new_pos_1_list.append(train_transform_no_totensor(sub_pos_1))
+                else:
+                    new_pos_1_list.append(train_diff_transform(sub_pos_1))
+            for sub_pos_2 in pos_2_list:
+                # print(sub_pos_2.shape)
+                if pytorch_aug:
+                    new_pos_2_list.append(train_transform_no_totensor(sub_pos_2))
+                else:
+                    new_pos_2_list.append(train_diff_transform(sub_pos_2))
+            pos_1 = torch.cat(new_pos_1_list, dim=0)
+            pos_2 = torch.cat(new_pos_2_list, dim=0)
+        else:
+            if pytorch_aug:
+                # input('check pytorch_aug')
+                pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
+            else:
+                pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+
+    # feature_1, out_1 = net(pos_1)
+    # print('check0 2')
+
     feature_1, out_1 = net(pos_1)
     feature_2, out_2 = net(pos_2)
 
@@ -725,11 +837,149 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     # [2*B]
     pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
     loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    
     # train_optimizer.zero_grad()
     # perturb.retain_grad()
     # loss.backward()
 
     return loss
+
+def train_simclr_noise_return_loss_tensor_no_eval(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None):
+    # net.eval()
+    total_loss, total_num = 0.0, 0
+    
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+
+    # feature_1, out_1 = net(pos_1)
+    # feature_2, out_2 = net(pos_2)
+    # print('check0 1')
+    
+    if not noise_after_transform:
+        if split_transform:
+            pass
+            pos_1_list = torch.split(pos_1, batch_size // 16, dim=0)
+            pos_2_list = torch.split(pos_2, batch_size // 16, dim=0)
+            new_pos_1_list, new_pos_2_list = [], []
+            for sub_pos_1 in pos_1_list:
+                # print(sub_pos_1.shape)
+                if pytorch_aug:
+                    new_pos_1_list.append(train_transform_no_totensor(sub_pos_1))
+                else:
+                    new_pos_1_list.append(train_diff_transform(sub_pos_1))
+            for sub_pos_2 in pos_2_list:
+                # print(sub_pos_2.shape)
+                if pytorch_aug:
+                    new_pos_2_list.append(train_transform_no_totensor(sub_pos_2))
+                else:
+                    new_pos_2_list.append(train_diff_transform(sub_pos_2))
+            pos_1 = torch.cat(new_pos_1_list, dim=0)
+            pos_2 = torch.cat(new_pos_2_list, dim=0)
+        else:
+            if pytorch_aug:
+                # input('check pytorch_aug')
+                pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
+            else:
+                pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+
+    # feature_1, out_1 = net(pos_1)
+    # print('check0 2')
+
+    feature_1, out_1 = net(pos_1)
+    feature_2, out_2 = net(pos_2)
+
+    # [2*B, D]
+    out = torch.cat([out_1, out_2], dim=0)
+    # [2*B, 2*B]
+    sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+    mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
+    # [2*B, 2*B-1]
+    sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
+
+    # compute loss
+    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+    # [2*B]
+    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+    loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    
+    # train_optimizer.zero_grad()
+    # perturb.retain_grad()
+    # loss.backward()
+
+    return loss
+
+def train_simclr_noise_return_loss_tensor_full_gpu(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug, noise_after_transform, gpu_times, cross_eot):
+    net.eval()
+    total_loss, total_num = 0.0, 0
+    
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+    # if flag_strong_aug:
+    #     pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+    # else:
+    #     pos_1, pos_2 = train_diff_transform2(pos_1), train_diff_transform2(pos_2)
+    if not noise_after_transform:
+        pos_1_list = []
+        pos_2_list = []
+        for _ in range(gpu_times):
+            pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+            pos_1_list.append(pos_1)
+            pos_2_list.append(pos_2)
+        pos_1 = torch.cat(pos_1_list, dim=0)
+        pos_2 = torch.cat(pos_2_list, dim=0)
+    
+    feature_1, out_1 = net(pos_1)
+    feature_2, out_2 = net(pos_2)
+
+    out_1_list = torch.split(out_1, batch_size, dim=0)
+    out_2_list = torch.split(out_2, batch_size, dim=0)
+
+    total_loss = 0
+    count_loss = 0
+
+    if cross_eot:
+
+        for out_1 in out_1_list:
+            for out_2 in out_2_list:
+                # [2*B, D]
+                out = torch.cat([out_1, out_2], dim=0)
+                # [2*B, 2*B]
+                sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+                mask = (torch.ones_like(sim_matrix) - torch.eye(sim_matrix.shape[0], device=sim_matrix.device)).bool()
+                # [2*B, 2*B-1]
+                sim_matrix = sim_matrix.masked_select(mask).view(sim_matrix.shape[0], -1)
+
+                # compute loss
+                pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+                # [2*B]
+                pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+                loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+
+                total_loss += loss
+                count_loss += 1
+
+    else:
+
+        for out_1, out_2 in zip(out_1_list, out_2_list):
+
+            # [2*B, D]
+            out = torch.cat([out_1, out_2], dim=0)
+            # [2*B, 2*B]
+            sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+            mask = (torch.ones_like(sim_matrix) - torch.eye(sim_matrix.shape[0], device=sim_matrix.device)).bool()
+            # [2*B, 2*B-1]
+            sim_matrix = sim_matrix.masked_select(mask).view(sim_matrix.shape[0], -1)
+
+            # compute loss
+            pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+            # [2*B]
+            pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+            loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+
+            total_loss += loss
+            count_loss += 1
+
+    total_loss /= count_loss
+
+    return total_loss
 
 def train_simclr_noise_return_loss_tensor_model_free(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False):
     net.eval()

@@ -49,7 +49,11 @@
 # unlearnable_theory_44030020_2_20220117210918_0.5_512_1000_statistics 5 5 5 5 5
 
 
-MY_CMD="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 20000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type clean_train --train_step 100 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --shuffle_train_perturb_data --gray_train cifar10_20000_triobject --gray_test cifar10_20000_triobject --augmentation Tri --load_model --just_test --load_model_path unlearnable_cleantrain_44877462_1_20220130171609_0.5_512_1000_final_model --local 2 --no_save"
+# MY_CMD="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --pytorch_aug --not_shuffle_train_data --noise_after_transform --dbindex_weight 0.3 --local 0 --no_save"
+
+MY_CMD="python3 -u -m torch.distributed.launch --nproc_per_node=2 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --pytorch_aug --not_shuffle_train_data --noise_after_transform --gpu_num 2 --dbindex_weight 0.3 --local 0,1 --no_save"
+
+# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51029072_1_20220409111426_0.5_512_1000_checkpoint_perturbation_epoch_3 --samplewise --local 1"
 
 echo $MY_CMD
 echo ${MY_CMD}>>local_history.log
