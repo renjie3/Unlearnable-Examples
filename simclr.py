@@ -321,6 +321,88 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
 
     return total_loss * pos_1.shape[0], pos_1.shape[0], torch.log(pos_sim.mean()).item() / 2, torch.log(sim_weight.mean()).item() / 2
 
+def train_simclr_dbindex(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], dbindex_weight=0, pytorch_aug=False, simclr_weight=1, labels=None):
+    # train a batch
+    # print("pos_1.shape: ", pos_1.shape)
+    # print("pos_2.shape: ", pos_2.shape)
+    net.train()
+    total_loss, total_num = 0.0, 0
+    # for pos_1, pos_2, target in train_bar:
+    transform_func = {'simclr': train_diff_transform, 
+                      'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
+                      'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
+                      'ReCrop_Hflip_Con': utils.train_diff_transform_ReCrop_Hflip_Con,
+                      'ReCrop_Hflip_Sat': utils.train_diff_transform_ReCrop_Hflip_Sat,
+                      'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
+                      'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
+                      'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
+                      'Tri': utils.train_diff_transform_Tri, 
+                      }
+    if np.sum(augmentation_prob) == 0:
+        if augmentation in transform_func:
+            my_transform_func = transform_func[augmentation]
+        else:
+            raise("Wrong augmentation.")
+    else:
+        my_transform_func = utils.train_diff_transform_prob(*augmentation_prob)
+        
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+
+    if dbindex_weight != 0:
+        dbindex_loss = get_dbindex_loss(net, pos_1, labels, [10], True, True)
+    else:
+        dbindex_loss = 0
+
+    if simclr_weight != 0:
+        if not noise_after_transform:
+            pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
+            # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+        # input(pos_1.shape)
+
+        feature_1, out_1 = net(pos_1)
+        feature_2, out_2 = net(pos_2)
+        # [2*B, D]
+        out = torch.cat([out_1, out_2], dim=0)
+        # [2*B, 2*B]
+        sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
+        mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
+        pos_den_mask1 = torch.cat([torch.zeros((pos_1.shape[0], pos_1.shape[0]), device=sim_matrix.device), torch.eye(pos_1.shape[0], device=sim_matrix.device)], dim=0)
+        pos_den_mask2 = torch.cat([torch.eye(pos_1.shape[0], device=sim_matrix.device), torch.zeros((pos_1.shape[0], pos_1.shape[0]), device=sim_matrix.device)], dim=0)
+        pos_den_mask = torch.cat([pos_den_mask1, pos_den_mask2], dim=1)
+        mask2 = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device) - pos_den_mask).bool()
+        # [2*B, 2*B-1]
+        neg_sim_matrix2 = sim_matrix.masked_select(mask2).view(2 * pos_1.shape[0], -1)
+        sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
+        
+        sim_weight, sim_indices = neg_sim_matrix2.topk(k=10, dim=-1)
+
+        # compute loss
+        pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+        # [2*B]
+        pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+        
+        simclr_loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    else:
+        simclr_loss = 0
+    
+    loss = simclr_loss * simclr_weight + dbindex_loss * dbindex_weight
+
+    train_optimizer.zero_grad()
+    loss.backward()
+    train_optimizer.step()
+
+    # total_num += batch_size
+    total_loss = loss.item()
+    # # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
+    # print(pos_sim.shape)
+    # print(sim_matrix.sum(dim=-1).shape)
+    # input()
+
+    if simclr_weight != 0:
+        return total_loss * pos_1.shape[0], pos_1.shape[0], torch.log(pos_sim.mean()).item() / 2, torch.log(sim_weight.mean()).item() / 2
+    else:
+        return total_loss * pos_1.shape[0], pos_1.shape[0], 0, 0
+
 def train_simclr_theory(net, pos_1, pos_2, train_optimizer, batch_size, temperature, random_drop_feature_num, gaussian_aug_std=0.05, thoery_schedule_dim=90, theory_aug_by_order=False):
     net.train()
     total_loss, total_num = 0.0, 0
@@ -711,15 +793,12 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
         sample = feature.double()
 
     time1 = time.time()
-    print("time1: {}".format(time1 - time0))
+    # print("time1: {}".format(time1 - time0))
 
     loss = 0
     n_clueter_num = len(num_clusters)
     for num_cluster_idx in range(len(num_clusters)):
-        if n_clueter_num == 1:
-            cluster_label = labels[:]
-        else:
-            cluster_label = labels[:, num_cluster_idx]
+        cluster_label = labels[:, 1 + num_cluster_idx]
         # cluster_label = cluster_label.repeat((repeat_num, ))
 
         class_center = []
@@ -727,30 +806,30 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
         intra_class_dis = []
         c = torch.max(cluster_label) + 1
         time2 = time.time()
-        print("time2: {}".format(time2 - time1))
+        # print("time2: {}".format(time2 - time1))
         for i in range(c):
-            print(i)
+            # print(i)
             idx_i = torch.where(cluster_label == i)[0]
             class_i = sample[idx_i, :]
 
-            # class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
+            class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
 
-            # if idx_i.shape[0] == 0:
-            #     continue
-            # class_center.append(class_i_center)
+            if idx_i.shape[0] == 0:
+                continue
+            class_center.append(class_i_center)
 
-            # point_dis_to_center = torch.sqrt(torch.sum((class_i-class_i_center)**2, dim = 1))
+            point_dis_to_center = torch.sqrt(torch.sum((class_i-class_i_center)**2, dim = 1))
 
-            # intra_class_dis.append(torch.mean(point_dis_to_center))
+            intra_class_dis.append(torch.mean(point_dis_to_center))
         time3 = time.time()
-        print("time3: {}".format(time3 - time2))
+        # print("time3: {}".format(time3 - time2))
         if len(class_center) <= 1:
             continue
         class_center = torch.stack(class_center, dim=0)
         # input('no')
 
         time4 = time.time()
-        print("time4: {}".format(time4 - time3))
+        # print("time4: {}".format(time4 - time3))
 
         c = len(intra_class_dis)
         
@@ -765,7 +844,7 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
         intra_class_dis_pair_sum = intra_class_dis_pair_sum.masked_select(mask).view(intra_class_dis_pair_sum.shape[0], -1)
 
         time5 = time.time()
-        print("time5: {}".format(time5 - time4))
+        # print("time5: {}".format(time5 - time4))
 
         if use_mean_dbindex:
             cluster_DB_loss = (intra_class_dis_pair_sum / class_dis).mean()
@@ -773,11 +852,11 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
             cluster_DB_loss = torch.max(intra_class_dis_pair_sum / class_dis, dim=1)[0].mean()
 
         time6 = time.time()
-        print("time6: {}".format(time6 - time5))
+        # print("time6: {}".format(time6 - time5))
 
         loss += cluster_DB_loss
 
-    input('time done')
+    # input('time done')
 
     return loss
 
@@ -900,6 +979,65 @@ def train_simclr_noise_return_loss_tensor_no_eval(net, pos_1, pos_2, train_optim
     # [2*B]
     pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
     loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    
+    # train_optimizer.zero_grad()
+    # perturb.retain_grad()
+    # loss.backward()
+
+    return loss
+
+def train_simclr_noise_return_loss_tensor_no_eval_pos_only(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None):
+    # net.eval()
+    total_loss, total_num = 0.0, 0
+    
+    pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+
+    # feature_1, out_1 = net(pos_1)
+    # feature_2, out_2 = net(pos_2)
+    # print('check0 1')
+    
+    if not noise_after_transform:
+        if split_transform:
+            pass
+            pos_1_list = torch.split(pos_1, batch_size // 16, dim=0)
+            pos_2_list = torch.split(pos_2, batch_size // 16, dim=0)
+            new_pos_1_list, new_pos_2_list = [], []
+            for sub_pos_1 in pos_1_list:
+                # print(sub_pos_1.shape)
+                if pytorch_aug:
+                    new_pos_1_list.append(train_transform_no_totensor(sub_pos_1))
+                else:
+                    new_pos_1_list.append(train_diff_transform(sub_pos_1))
+            for sub_pos_2 in pos_2_list:
+                # print(sub_pos_2.shape)
+                if pytorch_aug:
+                    new_pos_2_list.append(train_transform_no_totensor(sub_pos_2))
+                else:
+                    new_pos_2_list.append(train_diff_transform(sub_pos_2))
+            pos_1 = torch.cat(new_pos_1_list, dim=0)
+            pos_2 = torch.cat(new_pos_2_list, dim=0)
+        else:
+            if pytorch_aug:
+                # input('check pytorch_aug')
+                pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
+            else:
+                pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+
+    # feature_1, out_1 = net(pos_1)
+    # print('check0 2')
+
+    feature_1, out_1 = net(pos_1)
+    feature_2, out_2 = net(pos_2)
+
+    # [2*B, D]
+    out = torch.cat([out_1, out_2], dim=0)
+    # [2*B, 2*B]
+
+    # compute loss
+    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+    # [2*B]
+    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
+    loss = (- torch.log(pos_sim / 2)).mean()
     
     # train_optimizer.zero_grad()
     # perturb.retain_grad()

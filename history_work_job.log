@@ -32,3 +32,16 @@ python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_na
 107535314
 samplewise_myshuffle 500 1000 shuffle_step
 python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 32 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4 --not_shuffle_train_data
+
+51257955
+用orgsample 只算dbindex进而生成的noise，看上去有点效果，但是它并没有考虑到transform，这样也可以吗？
+
+51260064 说明只训练dbindex_loss没啥用
+
+51310928 check shuffle 到底有没有影响（local run 同样的指令，前几个epoch看上去确实好像没影响，loss下降的也很快）
+
+51166952 可以作为baseline
+51203782 BPDA
+
+51185289 4_class baseline
+51030219 4_class baseline max_stage

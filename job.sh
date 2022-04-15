@@ -5,8 +5,8 @@ MY_JOB_ROOT_PATH=`pwd`
 cd $MY_JOB_ROOT_PATH
 
 MYTIME="3:50:00"
-MYCPU="10"
-MYGRES="gpu:v100s:4"
+MYCPU="5"
+MYGRES="gpu:v100:1"
 
 # JOB_INFO="noise_ave_value"
 # MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4"
@@ -22,7 +22,7 @@ MYGRES="gpu:v100s:4"
 # unlearnable_samplewise_51030219_1_20220409114042_0.5_512_1000_checkpoint_perturbation
 
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python3 -u -m torch.distributed.launch --nproc_per_node=4 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 5 --pytorch_aug --batch_size 1024 --num_workers 8 --gpu_num 4"
+MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_50951206_1_20220407225649_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise"
 
 MYCOMMEND2="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_dbindex --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --class_4 --strong_aug --not_shuffle_train_data --eot_size 10 --dbindex_weight 0.3 --kmeans_index 0"
 

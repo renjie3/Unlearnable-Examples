@@ -247,27 +247,6 @@ def universal_perturbation_eval(noise_generator, random_noise, data_loader, mode
 
 
 def universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV, train_loader_simclr, train_noise_data_loader_simclr, batch_size, temperature, memory_loader, test_loader, k, train_data_for_save_img):
-    # Class-Wise perturbation
-    # Generate Data loader
-
-    # # training loop
-    # results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': []}
-    # save_name_pre = 'unlearnable_{}_{}_{}_{}_{}'.format(feature_dim, temperature, k, batch_size, epochs)
-    # if not os.path.exists('results'):
-    #     os.mkdir('results')
-    # best_acc = 0.0
-    # for epoch in range(1, epochs + 1):
-    #     train_loss = train_simclr(model, train_loader, optimizer)
-    #     results['train_loss'].append(train_loss)
-    #     test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader)
-    #     results['test_acc@1'].append(test_acc_1)
-    #     results['test_acc@5'].append(test_acc_5)
-    #     # save statistics
-    #     data_frame = pd.DataFrame(data=results, index=range(1, epoch + 1))
-    #     data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
-    #     if test_acc_1 > best_acc:
-    #         best_acc = test_acc_1
-    #         torch.save(model.state_dict(), 'results/{}_model.pth'.format(save_name_pre))
 
     condition = True
     # data_iter = iter(data_loader['train_dataset'])
@@ -359,52 +338,35 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                 if args.attack_type == 'min-min':
                     if args.min_min_attack_fn == "eot_v1":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug)
-                    elif args.min_min_attack_fn == "eot_v2":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v2(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug)
-                    elif args.min_min_attack_fn == "eot_v3":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v3(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug)
                     elif args.min_min_attack_fn == "non_eot":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform)
-                    elif args.min_min_attack_fn in ["pos/neg", "pos", "neg"]:
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, target_task=args.min_min_attack_fn)
-                    # train_noise_loss_sum += train_noise_loss * pos_samples_1.shape[0]
-                    # train_noise_loss_count += pos_samples_1.shape[0]
-                    # perturb_img, eta = noise_generator.min_min_attack_simclr(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature)
-                # elif args.attack_type == 'min-max':
-                #     perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
                 else:
                     raise('Invalid attack')
 
                 # print("eta: {}".format(np.mean(np.absolute(eta.mean(dim=0).to('cpu').numpy())) * 255))
                 class_noise_eta = collections.defaultdict(list)
                 for i in range(len(eta)):
-                    x1, x2, y1, y2 = mask_cord_list[i]
-                    delta = eta[i][:, x1: x2, y1: y2]
+                    # x1, x2, y1, y2 = mask_cord_list[i]
+                    delta = eta[i]
                     class_noise_eta[labels[i].item()].append(delta.detach().cpu())
 
                 for key in class_noise_eta:
                     delta = torch.stack(class_noise_eta[key]).mean(dim=0) - random_noise[key]#. For delta, we didn't use absolute before mean
-                    # print("org_class_noise_eta[key]: {}".format(np.mean(np.absolute(torch.stack(class_noise_eta[key]).to('cpu').numpy())) * 255))
-                    # print("org_random_noise[key]: {}".format(np.mean(np.absolute(random_noise[key].to('cpu').numpy())) * 255))
                     class_noise = random_noise[key]
                     class_noise += delta
-                    # print("check delta before clamp: {}".format(np.mean(np.absolute(delta.to('cpu').numpy())) * 255))
-                    # print("check random_noise before clamp: {}".format(np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255))
                     random_noise[key] = torch.clamp(class_noise, -args.epsilon, args.epsilon) # important.
-                    # print("check random_noise: {}".format(np.mean(np.absolute(random_noise[key].to('cpu').numpy())) * 255))
-                # print("check all random_noise after clamp: {}".format(np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255))
                 noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255
                 # input()
             # print(train_noise_loss_sum / float(train_noise_loss_count))
             
         # Here we save some samples in image.
-        if epoch_idx % 10 == 0 and not args.no_save:
-        # if True:
-            if not os.path.exists('./images/'+save_name_pre):
-                os.mkdir('./images/'+save_name_pre)
-            images = []
-            for group_idx in range(save_image_num):
-                utils.save_img_group(train_data_for_save_img, random_noise, './images/{}/{}.png'.format(save_name_pre, group_idx))
+        # if epoch_idx % 10 == 0 and not args.no_save:
+        # # if True:
+        #     if not os.path.exists('./images/'+save_name_pre):
+        #         os.mkdir('./images/'+save_name_pre)
+        #     images = []
+        #     for group_idx in range(save_image_num):
+        #         utils.save_img_group(train_data_for_save_img, random_noise, './images/{}/{}.png'.format(save_name_pre, group_idx))
 
             # # Eval termination conditions
             # loss_avg, error_rate = universal_perturbation_eval(noise_generator, random_noise, data_loader, model, eval_target=args.universal_train_target)
@@ -652,25 +614,14 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 else:
                     raise('Invalid attack')
 
-                eta_list = [torch.zeros_like(eta) for _ in range(args.gpu_num)]
-                torch.distributed.all_gather(eta_list, eta)
+                for delta, label in zip(eta, labels):
+                    # x1, x2, y1, y2 = mask_cord_list[label.item()]
+                    # delta = delta[:, x1: x2, y1: y2]
+                    if torch.is_tensor(random_noise):
+                        random_noise[label[0].item()] = delta.detach().cpu().clone()
+                    else:
+                        random_noise[label[0].item()] = delta.detach().cpu().numpy()
 
-                labels_list = [torch.zeros_like(labels) for _ in range(args.gpu_num)]
-                torch.distributed.all_gather(labels_list, labels)
-
-                for _eta, _labels in zip(eta_list, labels_list):
-                    for delta, label in zip(_eta, _labels):
-                        # x1, x2, y1, y2 = mask_cord_list[label.item()]
-                        # delta = delta[:, x1: x2, y1: y2]
-                        if torch.is_tensor(random_noise):
-                            random_noise[label[0].item()] = delta.detach().cpu().clone()
-                        else:
-                            random_noise[label[0].item()] = delta.detach().cpu().numpy()
-
-            cuda_random_noise = random_noise.cuda()
-
-            random_noise_list = [torch.zeros_like(cuda_random_noise) for _ in range(args.gpu_num)]
-            torch.distributed.all_gather(random_noise_list, cuda_random_noise)
 
             random_noise = random_noise_list[0].detach().cpu()
 
@@ -725,19 +676,19 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         # print(len(results['best_loss']))
         # print(epoch_idx)
         data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
-        if not args.no_save and args.local_rank == 0:
+        if not args.no_save:
             data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
 
-        if epoch_idx % 3 == 0 and not args.no_save and args.local_rank == 0:
-            torch.save(model.module.state_dict(), 'results/{}_checkpoint_model.pth'.format(save_name_pre))
+        if epoch_idx % 3 == 0 and not args.no_save:
+            torch.save(model.state_dict(), 'results/{}_checkpoint_model.pth'.format(save_name_pre))
             torch.save(random_noise, 'results/{}_checkpoint_perturbation.pt'.format(save_name_pre))
             print("model saved at " + save_name_pre)
 
-    if not args.no_save and args.local_rank == 0:
-        torch.save(model.module.state_dict(), 'results/{}_final_model.pth'.format(save_name_pre))
+    if not args.no_save:
+        torch.save(model.state_dict(), 'results/{}_final_model.pth'.format(save_name_pre))
         utils.plot_loss('./results/{}_statistics'.format(save_name_pre))
 
-        piermaro_checkpoint = {'state_dict': model.module.state_dict(), 'optimizer': optimizer.state_dict(), 'perturbation': random_noise}
+        piermaro_checkpoint = {'state_dict': model.state_dict(), 'optimizer': optimizer.state_dict(), 'perturbation': random_noise}
         torch.save(piermaro_checkpoint, 'results/{}_piermaro_model.pth'.format(save_name_pre))
 
     # Update Random Noise to shape
@@ -1053,8 +1004,6 @@ def main():
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints['state_dict'])
 
-    model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model).cuda()
-    model = DistributedDataParallel(model, device_ids=[args.local_rank], output_device=args.local_rank, find_unused_parameters=True)
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 
     if args.load_model or args.load_piermaro_model:

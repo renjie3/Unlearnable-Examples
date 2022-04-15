@@ -622,7 +622,6 @@ class CIFAR10Pair(CIFAR10):
         gt_label = np.array(self.targets)
         idx_label = np.array(idx_label)
         self.targets = np.stack([idx_label, gt_label], axis=1)
-        
 
     def add_noise_test_visualization(self, random_noise_class_test, noise):
         # print(noise.shape)
@@ -806,7 +805,7 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
 
         self.class_4 = class_4
@@ -839,25 +838,28 @@ class TransferCIFAR10Pair(CIFAR10):
     # random_noise_class = np.load('noise_class_label.npy')
         # self.perturb_tensor = torch.load(perturb_tensor_filepath, map_location=device)
         # self.perturb_tensor = self.perturb_tensor.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
-        
-        if not flag_save_img_group:
-            perturb_rate_index = np.random.choice(len(self.targets), int(len(self.targets) * perturb_rate), replace=False)
-            self.data = self.data.astype(np.float32)
-            for idx in range(len(self.data)):
-                if idx not in perturb_rate_index:
-                    continue
-                if not samplewise_perturb:
-                    if org_label_flag:
-                        noise = self.noise_255[self.targets[idx]]
+
+        if not clean_train:
+            if not flag_save_img_group:
+                perturb_rate_index = np.random.choice(len(self.targets), int(len(self.targets) * perturb_rate), replace=False)
+                self.data = self.data.astype(np.float32)
+                for idx in range(len(self.data)):
+                    if idx not in perturb_rate_index:
+                        continue
+                    if not samplewise_perturb:
+                        if org_label_flag:
+                            noise = self.noise_255[self.targets[idx]]
+                        else:
+                            noise = self.noise_255[self.random_noise_class[idx]]
                     else:
-                        noise = self.noise_255[self.random_noise_class[idx]]
-                else:
-                    noise = self.noise_255[idx]
-                    # print("check it goes samplewise.")
-                noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
-                self.data[idx] = self.data[idx] + noise
-                self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
-            self.data = self.data.astype(np.uint8)
+                        noise = self.noise_255[idx]
+                        # print("check it goes samplewise.")
+                    noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+                    self.data[idx] = self.data[idx] + noise
+                    self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+                self.data = self.data.astype(np.uint8)
+        else:
+            print('it is clean train')
 
 
     def __getitem__(self, index):

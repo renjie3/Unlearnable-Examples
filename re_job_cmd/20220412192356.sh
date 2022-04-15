@@ -1,0 +1,4 @@
+MYCOMMEND="python3 -u -m torch.distributed.launch --nproc_per_node=2 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 1 --epochs 3 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 1 --pytorch_aug --batch_size 512 --dbindex_weight 0.3 --num_workers 8 --gpu_num 2 --class_4 --piermaro_whole_epoch 12 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_51254653_1_20220412194118_0.5_512_3_piermaro_model --piermaro_restart_epoch 9"
+MYCOMMEND2="No_commend2 --load_piermaro_model --load_piermaro_model_path  --piermaro_restart_epoch 3"
+MYCOMMEND3="No_commend3 --load_piermaro_model --load_piermaro_model_path  --piermaro_restart_epoch 3"
+MYGRES="gpu:v100s:2"
