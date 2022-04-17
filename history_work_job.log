@@ -45,3 +45,10 @@ python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_na
 
 51185289 4_class baseline
 51030219 4_class baseline max_stage
+50951206 4_class baseline
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --class_4 --not_shuffle_train_data --eot_size 10
+51065227 4_class baseline mix_stage
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_mix_stage --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --class_4 --not_shuffle_train_data --eot_size 10
+
+51211592 pytorch_aug baseline 可以通过分布式方式训练，速度比较快
+51211597

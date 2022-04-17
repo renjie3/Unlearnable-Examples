@@ -48,15 +48,22 @@
 # unlearnable_theory_44030020_1_20220117210918_0.5_512_1000_statistics 5 5 5 5 1
 # unlearnable_theory_44030020_2_20220117210918_0.5_512_1000_statistics 5 5 5 5 5
 
+TRAIN_STEP='3'
 
-# MY_CMD="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --pytorch_aug --not_shuffle_train_data --noise_after_transform --dbindex_weight 0.3 --local 0 --no_save"
 
-MY_CMD="python3 -u -m torch.distributed.launch --nproc_per_node=2 ssl_perturbation_v2_ddp_pos.py --epochs 1000 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 3 --batch_size 512 --num_workers 8 --gpu_num 2 --dbindex_weight 0 --simclr_weight 1 --pytorch_aug --class_4 --local 2,3 --no_save"
+# MY_CMD="python3 -u -m torch.distributed.launch --nproc_per_node=3 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 1 --pytorch_aug --batch_size 1024 --num_workers 8 --gpu_num 3 --no_eval --local 0,2,3 --no_save"
+
+# MY_CMD="python3 -u -m torch.distributed.launch --nproc_per_node=4 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 1 --pytorch_aug --batch_size 1024 --num_workers 8 --gpu_num 4 --local 1,2 --no_save"
+
+# MY_CMD="python3 -u -m torch.distributed.launch --nproc_per_node=2 ssl_perturbation_v2_ddp.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --epochs 1000 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 10 --gpu_num 2 --local 1,2 --no_save"
 # use_dbindex_train_model
 
-# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51320047_1_20220414032116_0.5_512_1000_checkpoint_perturbation --samplewise --local 2"
+# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51211592_1_20220412000452_0.5_1024_1000_checkpoint_perturbation --samplewise --local 3"
 
-# MY_CMD="python simclr_transfer_plot.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51320047_1_20220414032116_0.5_512_1000_checkpoint_perturbation --samplewise --load_model --load_model_path unlearnable_samplewise_51320047_1_20220414032116_0.5_512_1000_checkpoint_perturbation_budget1.0_class4_retrain_model_checkpoint_model --class_4 --local 2"
+MY_CMD="python simclr_transfer_plot.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51030219_1_20220409114042_0.5_512_1000_checkpoint_perturbation --samplewise --load_model --load_model_path unlearnable_samplewise_51030219_1_20220409114042_0.5_512_1000_checkpoint_perturbation_budget1.0_class4_retrain_model_checkpoint_model --class_4 --local 2"
+
+# MY_CMD="python simclr_transfer_plot.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51211597_1_20220412000452_0.5_1024_1000_checkpoint_perturbation --samplewise --load_model --load_model_path unlearnable_samplewise_51030219_1_20220409114042_0.5_512_1000_checkpoint_perturbation_budget1.0_class4_retrain_model_model --local 2"
+
 
 echo $MY_CMD
 echo ${MY_CMD}>>local_history.log

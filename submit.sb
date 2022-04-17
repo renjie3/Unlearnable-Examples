@@ -1,16 +1,15 @@
 #!/bin/bash --login
 ########## SBATCH Lines for Resource Request ##########
 
-#SBATCH --account=cmse
 #SBATCH --nodes=1                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
 #SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --mem-per-cpu=8G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
 #SBATCH --job-name SimCLR      # you can give your job a name for easier identification (same as -J)
 #SBATCH --time=3:50:00             # limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --cpus-per-task=5           # number of CPUs (or cores) per task (same as -c)
-#SBATCH --gres=gpu:v100:1
-#SBATCH -o /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
-#SBATCH -e /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
+#SBATCH --gres=gpu:v100s:1
+#SBATCH -o /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
+#SBATCH -e /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
 
 ########## Command Lines for Job Running ##########
 
@@ -26,7 +25,7 @@ MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_50951206_1_20220407225649_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51211597_1_20220412000452_0.5_1024_1000_checkpoint_perturbation --samplewise --job_id ${SLURM_JOB_ID}_1"
 MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
 MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 

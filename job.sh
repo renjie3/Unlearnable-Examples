@@ -6,7 +6,7 @@ cd $MY_JOB_ROOT_PATH
 
 MYTIME="3:50:00"
 MYCPU="5"
-MYGRES="gpu:v100:1"
+MYGRES="gpu:v100s:1"
 
 # JOB_INFO="noise_ave_value"
 # MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4"
@@ -20,9 +20,10 @@ MYGRES="gpu:v100:1"
 # 1.0 0.5 0.8 0.2
 
 # unlearnable_samplewise_51030219_1_20220409114042_0.5_512_1000_checkpoint_perturbation
+# unlearnable_samplewise_51073519_1_20220410221405_0.5_512_1000perturbation
 
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_50951206_1_20220407225649_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise"
+MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51211597_1_20220412000452_0.5_1024_1000_checkpoint_perturbation --samplewise"
 
 MYCOMMEND2="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_dbindex --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --class_4 --strong_aug --not_shuffle_train_data --eot_size 10 --dbindex_weight 0.3 --kmeans_index 0"
 
@@ -32,8 +33,8 @@ MYCOMMEND2="No_commend2"
 MYCOMMEND3="No_commend3"
 
 
-cat ./slurm_files/sconfigs1_cmse.sb > submit.sb
-# cat ./slurm_files/sconfigs1.sb > submit.sb
+# cat ./slurm_files/sconfigs1_cmse.sb > submit.sb
+cat ./slurm_files/sconfigs1.sb > submit.sb
 echo "#SBATCH --time=${MYTIME}             # limit of wall clock time - how long the job will run (same as -t)" >> submit.sb
 echo "#SBATCH --cpus-per-task=${MYCPU}           # number of CPUs (or cores) per task (same as -c)" >> submit.sb
 echo "#SBATCH --gres=${MYGRES}" >> submit.sb

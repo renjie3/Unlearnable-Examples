@@ -95,6 +95,7 @@ parser.add_argument('--num_workers', default=2, type=int, help='num_workers')
 parser.add_argument('--local_rank', type=int, help='local_rank')
 parser.add_argument('--gpu_num', type=int, help='gpu_num')
 parser.add_argument('--use_dbindex_train_model', action='store_true', default=False)
+parser.add_argument('--no_eval', action='store_true', default=False)
 
 parser.add_argument('--load_piermaro_model', action='store_true', default=False)
 parser.add_argument('--load_piermaro_model_path', default='', type=str, help='Path to load model.')
@@ -140,6 +141,8 @@ from thop import profile, clever_format
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 from torch.utils.data.distributed import DistributedSampler
+
+from resnet_big import Model_no_bn
 
 torch.cuda.set_device(args.local_rank)
 torch.distributed.init_process_group(backend="nccl")
@@ -642,7 +645,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 batch_noise = torch.stack(batch_noise).to(device)
                 if args.attack_type == 'min-min':
                     if args.min_min_attack_fn == "eot_v1":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1_no_eval(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=args.dbindex_weight, simclr_weight=args.simclr_weight)
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=args.dbindex_weight, no_eval=args.no_eval)
+                        
                     elif args.min_min_attack_fn == "non_eot":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, split_transform=args.split_transform)
                     else:
@@ -1037,7 +1041,11 @@ def main():
                                             step_size=args.step_size)
 
     # model setup and optimizer config
-    model = ParalellModel(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
+    model = ParalellModel(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size).cuda()
+    # if args.no_bn:
+    #     model = Model_no_bn(name='resnet18', head='mlp', feat_dim=feature_dim)
+    # else:
+    #     model = ParalellModel(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
 
     if args.load_model:
         load_model_path = './results/{}.pth'.format(args.load_model_path)

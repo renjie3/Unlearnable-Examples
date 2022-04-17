@@ -6094,3 +6094,75 @@ python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --pertu
 
 
 ---------------------------------------------------------------
+Fri Apr 15 17:44:10 EDT 2022
+51388168
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51067044_1_20220410163459_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise --job_id 51388168_1
+
+
+
+---------------------------------------------------------------
+Fri Apr 15 17:51:06 EDT 2022
+51388396
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51067045_2_20220410163508_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise --job_id 51388396_1
+
+
+
+---------------------------------------------------------------
+Fri Apr 15 17:51:40 EDT 2022
+51388382
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51067045_1_20220410163508_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise --job_id 51388382_1
+
+
+
+---------------------------------------------------------------
+Fri Apr 15 17:52:15 EDT 2022
+51388190
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51067044_2_20220410163459_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise --job_id 51388190_1
+
+
+
+---------------------------------------------------------------
+Fri Apr 15 18:47:02 EDT 2022
+51388944
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_50951206_1_20220407225649_0.5_512_1000_checkpoint_perturbation --class_4 --samplewise --job_id 51388944_1
+
+
+
+---------------------------------------------------------------
+Fri Apr 15 21:51:09 EDT 2022
+51392969
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51257955_1_20220412203745_0.5_1024_1000_checkpoint_perturbation_epoch_3 --samplewise --clean_train --job_id 51392969_1
+
+
+
+---------------------------------------------------------------
+Sat Apr 16 12:42:47 EDT 2022
+51396718
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --epochs 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 3 --not_shuffle_train_data --batch_size 512 --job_id 51396718_1
+
+
+
+---------------------------------------------------------------
+Sat Apr 16 19:19:41 EDT 2022
+51416754
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51073519_1_20220410221405_0.5_512_1000perturbation --samplewise --class_4 --job_id 51416754_1
+
+
+
+---------------------------------------------------------------
+Sun Apr 17 06:02:16 EDT 2022
+51416744
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51073519_1_20220410221405_0.5_512_1000perturbation --samplewise --class_4 --job_id 51416744_1
+
+
+
+---------------------------------------------------------------

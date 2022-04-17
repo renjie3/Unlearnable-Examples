@@ -18,6 +18,7 @@ parser.add_argument('--perturb_rate', default=1.0, type=float, help='perturbatio
 parser.add_argument('--no_save', action='store_true', default=False)
 parser.add_argument('--clean_train', action='store_true', default=False)
 parser.add_argument('--pytorch_aug', action='store_true', default=False)
+parser.add_argument('--no_bn', action='store_true', default=False)
 
 # args parse
 args = parser.parse_args()
@@ -39,6 +40,10 @@ import utils
 from model import Model
 from utils import train_diff_transform, train_transform_no_totensor
 
+from resnet_big_normal import Model_bn
+from resnet_big import Model_no_bn
+
+
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import NullFormatter
@@ -54,8 +59,6 @@ def train(net, data_loader, train_optimizer):
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
         if args.pytorch_aug:
             pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
-            print(pos_1)
-            input()
         else:
             pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
         feature_1, out_1 = net(pos_1)
@@ -450,6 +453,14 @@ if __name__ == '__main__':
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
+    # if args.no_bn:
+    #     model = Model_no_bn(name='resnet18', head='mlp', feat_dim=feature_dim).cuda()
+    # else:
+    #     model = Model_bn(name='resnet18', head='mlp', feat_dim=feature_dim).cuda()
+
+    # from resnet_big_normal import Model_bn
+    # from resnet_big import Model_no_bn
+
     flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
     flops, params = clever_format([flops, params])
     print('# Model Params: {} FLOPs: {}'.format(params, flops))

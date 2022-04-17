@@ -25,3 +25,8 @@ core*
 plot_be/
 results_save_name_pre/
 results_just_test/
+re_job_cmd/
+piermaro_log/
+piermaro_cmd/
+piermaro/
+FLAG_ROOM/

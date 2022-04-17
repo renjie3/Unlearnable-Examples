@@ -405,7 +405,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0):
+    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -424,6 +424,7 @@ class PerturbationTool():
             # perturb_org = torch.clamp(pos_samples_1.data + perturb, 0, 1)
 
             for i_eot in range(eot_size):
+                time0 = time.time()
                 perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
                 perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
                 opt = torch.optim.SGD([perturb], lr=1e-3)
@@ -435,11 +436,9 @@ class PerturbationTool():
                 else:
                     dbindex_loss = 0
 
-                if one_gpu_eot_times == 1:
-                    simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug)
-                    loss = dbindex_loss * dbindex_weight + simclr_loss
-                else:
-                    loss = train_simclr_noise_return_loss_tensor_full_gpu(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, gpu_times=one_gpu_eot_times, cross_eot=cross_eot)
+                simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval)
+                loss = dbindex_loss * dbindex_weight + simclr_loss
+                
                 perturb.retain_grad()
                 loss.backward()
                 

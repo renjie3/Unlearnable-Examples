@@ -806,6 +806,7 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
         intra_class_dis = []
         c = torch.max(cluster_label) + 1
         time2 = time.time()
+        # print(c)
         # print("time2: {}".format(time2 - time1))
         for i in range(c):
             # print(i)
@@ -860,8 +861,7 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
 
     return loss
 
-def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None):
-    net.eval()
+def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None, single_noise_after_transform=False, no_eval=False):
     total_loss, total_num = 0.0, 0
     
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
@@ -870,9 +870,10 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     # feature_2, out_2 = net(pos_2)
     # print('check0 1')
     
-    if not noise_after_transform:
+    if not noise_after_transform and not single_noise_after_transform:
+
         if split_transform:
-            pass
+            print('check split_transform')
             pos_1_list = torch.split(pos_1, batch_size // 16, dim=0)
             pos_2_list = torch.split(pos_2, batch_size // 16, dim=0)
             new_pos_1_list, new_pos_2_list = [], []
@@ -895,13 +896,21 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
                 # input('check pytorch_aug')
                 pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
             else:
+                # print('chech right aug')
                 pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
 
-    # feature_1, out_1 = net(pos_1)
-    # print('check0 2')
+    if single_noise_after_transform:
+        pos_2 = train_diff_transform(pos_2)
+
+    if not no_eval:
+        net.eval()
+
+    time0 = time.time()
 
     feature_1, out_1 = net(pos_1)
     feature_2, out_2 = net(pos_2)
+
+    time1 = time.time()
 
     # [2*B, D]
     out = torch.cat([out_1, out_2], dim=0)
@@ -920,6 +929,8 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     # train_optimizer.zero_grad()
     # perturb.retain_grad()
     # loss.backward()
+
+    time2 = time.time()
 
     return loss
 

@@ -569,6 +569,7 @@ class CIFAR10Pair(CIFAR10):
                 # input('check')
             with open(kmeans_filepath, "rb") as f:
                 kmeans_labels = pickle.load(f)[kmeans_index]
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
             self.targets = kmeans_labels
             
