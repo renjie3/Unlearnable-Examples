@@ -1,5 +1,19 @@
 import argparse
 
+parser = argparse.ArgumentParser(description='Linear Evaluation')
+parser.add_argument('--model_path', type=str, default='results/128_0.5_200_512_500_model.pth',
+                    help='The pretrained model path')
+parser.add_argument('--batch_size', type=int, default=512, help='Number of images in each mini-batch')
+parser.add_argument('--epochs', type=int, default=100, help='Number of sweeps over the dataset to train')
+parser.add_argument('--job_id', type=str, default='', help='Number of sweeps over the dataset to train')
+parser.add_argument('--local', default='', type=str, help='The gpu number used on developing node.')
+
+args = parser.parse_args()
+
+import os
+if args.local != '':
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.local
+
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -20,7 +34,7 @@ class Net(nn.Module):
         # encoder
         self.f = Model().f
         # classifier
-        self.fc = nn.Linear(2048, num_class, bias=True)
+        self.fc = nn.Linear(512, num_class, bias=True)
         self.load_state_dict(torch.load(pretrained_path, map_location='cpu'), strict=False)
 
     def forward(self, x):
@@ -61,20 +75,13 @@ def train_val(net, data_loader, train_optimizer):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Linear Evaluation')
-    parser.add_argument('--model_path', type=str, default='results/128_0.5_200_512_500_model.pth',
-                        help='The pretrained model path')
-    parser.add_argument('--batch_size', type=int, default=512, help='Number of images in each mini-batch')
-    parser.add_argument('--epochs', type=int, default=100, help='Number of sweeps over the dataset to train')
-
-    args = parser.parse_args()
     model_path, batch_size, epochs = args.model_path, args.batch_size, args.epochs
     train_data = CIFAR10(root='data', train=True, transform=utils.train_transform, download=True)
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=16, pin_memory=True)
     test_data = CIFAR10(root='data', train=False, transform=utils.test_transform, download=True)
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
 
-    model = Net(num_class=len(train_data.classes), pretrained_path=model_path).cuda()
+    model = Net(num_class=len(train_data.classes), pretrained_path='results/{}.pth'.format(model_path)).cuda()
     for param in model.f.parameters():
         param.requires_grad = False
 
@@ -98,7 +105,7 @@ if __name__ == '__main__':
         results['test_acc@5'].append(test_acc_5)
         # save statistics
         data_frame = pd.DataFrame(data=results, index=range(1, epoch + 1))
-        data_frame.to_csv('results/linear_statistics.csv', index_label='epoch')
+        data_frame.to_csv('results/{}_{}_linear_statistics.csv'.format(args.model_path, args.job_id), index_label='epoch')
         if test_acc_1 > best_acc:
             best_acc = test_acc_1
-            torch.save(model.state_dict(), 'results/linear_model.pth')
+            torch.save(model.state_dict(), 'results/{}_{}_linear_model.pth'.format(args.model_path, args.job_id))

@@ -154,3 +154,8 @@ Sun Apr 17 10:59:37 EDT 2022
 cifar10 baseline
 python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 40 --epochs 4 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --not_shuffle_train_data --batch_size 512 --dbindex_weight 0 --split_transform
 ---------------------------------------------------------------
+Sun Apr 17 12:11:30 EDT 2022
+51428880
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 40 --epochs 1 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 50 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 9
+---------------------------------------------------------------

@@ -205,6 +205,8 @@ def test_ssl_visualization(net, test_data_visualization):
         for data, _, target in tqdm(test_data_visualization_loader, desc='Feature extracting'):
             feature, out = net(data.cuda(non_blocking=True))
             feature_bank.append(feature)
+            if len(feature_bank) >= 2:
+                break
         # [D, N]
         feature_bank = torch.cat(feature_bank, dim=0).t().contiguous()
         # [N]
@@ -219,6 +221,50 @@ def test_ssl_visualization(net, test_data_visualization):
         ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         ax.yaxis.set_major_formatter(NullFormatter())
         plt.savefig('./visualization/cleandata_orglabel.png')
+
+    return 
+
+def test_ssl_visualization_noise(perturb, labels):
+    c = 10
+    feature_bank = []
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+    # [D, N]
+    print(perturb.shape)
+    feature_bank = perturb.view(1024, -1)
+    print(feature_bank.shape)
+    # [N]
+    feature_tsne_input = feature_bank.detach().cpu().numpy()[:1024]
+    labels_tsne_color = labels[:1024]
+    feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    plt.title("clean data with original label")
+    plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
+    ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+    ax.yaxis.set_major_formatter(NullFormatter())
+    plt.savefig('./visualization/noise.png')
+
+    return 
+
+def test_ssl_visualization_noise2(net, perturb, labels):
+    net.eval()
+    c = 10
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+    # [D, N]
+    
+    feature_bank, out_bank = net(perturb.cuda())
+
+    # [N]
+    feature_tsne_input = feature_bank.detach().cpu().numpy()[:1024]
+    labels_tsne_color = labels[:1024]
+    feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    plt.title("clean data with original label")
+    plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
+    ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
+    ax.yaxis.set_major_formatter(NullFormatter())
+    plt.savefig('./visualization/noise2.png')
 
     return 
 
@@ -327,13 +373,20 @@ if __name__ == '__main__':
         # unlearnable_cleantrain_41501264_1_20211204151414_0.5_512_1000_final_model
         load_model_path = './results/{}.pth'.format(args.load_model_path)
         checkpoints = torch.load(load_model_path, map_location=device)
-        model.load_state_dict(checkpoints)
+        filter_name_checkpoints = {}
+        for key in checkpoints:
+            filter_name_checkpoints[key.replace('module.', '')] = checkpoints[key]
+        model.load_state_dict(filter_name_checkpoints)
 
 
     epoch=0
     test_acc_1, test_acc_5 = test_ssl_for_simclrpy(model, memory_loader, test_loader)
 
     test_ssl_visualization(model, train_data)
+    # print(type(train_data.perturb_tensor))
+    # print(train_data.perturb_tensor.shape)
+    # test_ssl_visualization_noise2(model, train_data.perturb_tensor, train_data.targets)
+    # perturb_tensor
 
     # training loop
     # results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_acc': [], 'best_acc_loss': []}

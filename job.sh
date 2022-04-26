@@ -23,7 +23,7 @@ MYGRES="gpu:v100s:1"
 # unlearnable_samplewise_51073519_1_20220410221405_0.5_512_1000perturbation
 
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_51211597_1_20220412000452_0.5_1024_1000_checkpoint_perturbation --samplewise"
+MYCOMMEND="python supervised_cifar10.py --pre_load_name unlearnable_samplewise_51508204_1_20220419160917_0.5_512_300_checkpoint_perturbation_epoch27 --samplewise"
 
 MYCOMMEND2="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_dbindex --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --class_4 --strong_aug --not_shuffle_train_data --eot_size 10 --dbindex_weight 0.3 --kmeans_index 0"
 
@@ -33,8 +33,8 @@ MYCOMMEND2="No_commend2"
 MYCOMMEND3="No_commend3"
 
 
-# cat ./slurm_files/sconfigs1_cmse.sb > submit.sb
-cat ./slurm_files/sconfigs1.sb > submit.sb
+cat ./slurm_files/sconfigs1_cmse.sb > submit.sb
+# cat ./slurm_files/sconfigs1.sb > submit.sb
 echo "#SBATCH --time=${MYTIME}             # limit of wall clock time - how long the job will run (same as -t)" >> submit.sb
 echo "#SBATCH --cpus-per-task=${MYCPU}           # number of CPUs (or cores) per task (same as -c)" >> submit.sb
 echo "#SBATCH --gres=${MYGRES}" >> submit.sb

@@ -23,7 +23,16 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import NullFormatter
 from sklearn import manifold, datasets, metrics
 
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import connected_components
+
 import time
+import math
+
+import matplotlib
+from matplotlib.colors import ListedColormap
+
+import faiss
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
@@ -782,9 +791,15 @@ def train_simclr_target_task(net, pos_1, pos_2, train_optimizer, batch_size, tem
     
     return total_loss * pos_1.shape[0], pos_1.shape[0], numerator, denominator
 
-def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbindex):
+def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbindex, dbindex_label_index, x2, use_aug):
 
     time0 = time.time()
+
+    if use_aug:
+        pos_1 = train_diff_transform(x)
+        pos_2 = train_diff_transform(x2)
+        x = torch.cat([pos_1, pos_2], dim=0)
+        labels = torch.cat([labels, labels], dim=0)
 
     feature, out = net(x)
     if use_out_dbindex:
@@ -798,7 +813,7 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
     loss = 0
     n_clueter_num = len(num_clusters)
     for num_cluster_idx in range(len(num_clusters)):
-        cluster_label = labels[:, 1 + num_cluster_idx]
+        cluster_label = labels[:, dbindex_label_index]
         # cluster_label = cluster_label.repeat((repeat_num, ))
 
         class_center = []
@@ -811,12 +826,12 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
         for i in range(c):
             # print(i)
             idx_i = torch.where(cluster_label == i)[0]
+            if idx_i.shape[0] == 0:
+                continue
             class_i = sample[idx_i, :]
 
             class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
 
-            if idx_i.shape[0] == 0:
-                continue
             class_center.append(class_i_center)
 
             point_dis_to_center = torch.sqrt(torch.sum((class_i-class_i_center)**2, dim = 1))
@@ -847,10 +862,21 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
         time5 = time.time()
         # print("time5: {}".format(time5 - time4))
 
+        # cod_x, cod_y = torch.where(class_dis == 0)
+        # for x, y in zip(cod_x, cod_y):
+        #     print(x,y)
+        #     print(class_center[x])
+        #     print(class_center[y])
+        #     print(class_center[x] - class_center[y])
+        #     print((class_center[x] - class_center[y])**2)
+        #     print(torch.sum((class_center[x] - class_center[y])**2))
+        #     print(x,y)
+        #     input()
+
         if use_mean_dbindex:
-            cluster_DB_loss = (intra_class_dis_pair_sum / class_dis).mean()
+            cluster_DB_loss = (intra_class_dis_pair_sum / (class_dis + 0.00001)).mean()
         else:
-            cluster_DB_loss = torch.max(intra_class_dis_pair_sum / class_dis, dim=1)[0].mean()
+            cluster_DB_loss = torch.max(intra_class_dis_pair_sum / (class_dis + 0.00001), dim=1)[0].mean()
 
         time6 = time.time()
         # print("time6: {}".format(time6 - time5))
@@ -861,10 +887,188 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
 
     return loss
 
-def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None, single_noise_after_transform=False, no_eval=False):
+def run_kmeans(x, num_clusters, device, temperature):
+    """
+    Args:
+        x: data to be clustered
+    """
+    
+    print('performing kmeans clustering')
+    results = {'im2cluster':[],'centroids':[],'density':[]}
+    
+    for seed, num_cluster in enumerate(num_clusters):
+        # intialize faiss clustering parameters
+        d = x.shape[1]
+        k = int(num_cluster)
+        clus = faiss.Clustering(d, k)
+        clus.verbose = True
+        clus.niter = 20
+        clus.nredo = 5
+        clus.seed = seed
+        clus.max_points_per_centroid = 1000
+        clus.min_points_per_centroid = 10
+
+        res = faiss.StandardGpuResources()
+        cfg = faiss.GpuIndexFlatConfig()
+        cfg.useFloat16 = False
+        cfg.device = device    
+        index = faiss.GpuIndexFlatL2(res, d, cfg)  
+
+        clus.train(x, index)   
+
+        D, I = index.search(x, 1) # for each sample, find cluster distance and assignments
+        im2cluster = [int(n[0]) for n in I]
+        
+        # get cluster centroids
+        # centroids = faiss.vector_to_array(clus.centroids).reshape(k,d)
+        
+        # sample-to-centroid distances for each cluster 
+        Dcluster = [[] for c in range(k)]          
+        for im,i in enumerate(im2cluster):
+            Dcluster[i].append(D[im][0])
+        
+        # concentration estimation (phi)        
+        density = np.zeros(k)
+        for i,dist in enumerate(Dcluster):
+            if len(dist)>1:
+                d = (np.asarray(dist)**0.5).mean()
+                density[i] = d     
+                
+        # #if cluster only has one point, use the max to estimate its concentration        
+        # dmax = density.max()
+        # for i,dist in enumerate(Dcluster):
+        #     if len(dist)<=1:
+        #         density[i] = dmax
+
+        # density = density.clip(0, np.percentile(density,90)) #clamp extreme values for stability
+        # density = temperature*density/density.mean()  #scale the mean to temperature 
+        
+        # convert to cuda Tensors for broadcast
+        # centroids = torch.Tensor(centroids).cuda()
+        # centroids = nn.functional.normalize(centroids, p=2, dim=1)
+
+        im2cluster = torch.LongTensor(im2cluster).cuda()               
+        density = torch.Tensor(density).cuda()
+        
+        # results['centroids'].append(centroids)
+        # results['density'].append(density)
+        results['im2cluster'].append(im2cluster)    
+        
+    return results
+
+def find_cluster(net, memory_data_loader, random_noise, n_components, label_index=0, use_feature_find_cluster=False):
+
+    time0 = time.time()
+
+    print('Finding clusters')
+
+    feature_bank = []
+    net.eval()
+
+    # plot_num = 2048
+    # n_components = 11
+
+    with torch.no_grad():
+
+        for pos_samples_1, pos_samples_2, labels in memory_data_loader:
+            pos_samples_1, pos_samples_2, labels = pos_samples_1.cuda(), pos_samples_2.cuda(), labels.cuda()
+
+            train_pos_1 = []
+            train_pos_2 = []
+            for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
+                sample_noise = random_noise[label[label_index].item()]
+                if type(sample_noise) is np.ndarray:
+                    mask = sample_noise
+                else:
+                    mask = sample_noise.cpu().numpy()
+                sample_noise = torch.from_numpy(mask).cuda()
+                train_pos_1.append(pos_samples_1[i]+sample_noise)
+                train_pos_2.append(pos_samples_2[i]+sample_noise)
+
+            train_pos_1 = torch.stack(train_pos_1, dim=0)
+            train_pos_2 = torch.stack(train_pos_2, dim=0)
+
+            feature, out = net(train_pos_1)
+            if use_feature_find_cluster:
+                feature_bank.append(feature)
+            else:
+                feature_bank.append(out)
+
+        feature_bank = torch.cat(feature_bank, dim=0) #[:plot_num]
+        # sim_matrix = torch.matmul(feature_bank, feature_bank.t()) - torch.eye(feature_bank.shape[0], device=feature_bank.device)
+
+        # sim_matrix = torch.cdist(feature_bank, feature_bank)
+        # # print(sim_matrix)
+        # # print(sim_matrix.shape)
+
+        # # adj = (sim_matrix > 0.995).detach().cpu().numpy().astype(int) #.long()
+        # adj = (sim_matrix < 0.1).detach().cpu().numpy().astype(int) #.long()
+
+        # print(adj)
+
+        kmeans_result = run_kmeans(feature_bank.detach().cpu().numpy(), [n_components], 0, 0.5)
+
+    # adj = csr_matrix(adj)
+    # n_components, labels = connected_components(csgraph=adj, directed=False, return_labels=True)
+    # print(n_components, labels)
+    # print(type(labels))
+    # print(len(labels))
+    # for i in range(n_components):
+    #     idx = np.where(labels == i)[0]
+    #     print(idx)
+    #     print(len(idx))
+    #     input()
+
+    labels = kmeans_result['im2cluster'][0].detach().cpu().numpy()
+
+    # cm = plt.cm.get_cmap('gist_rainbow', n_components)
+    # # z = np.arange(n_components)
+    # # my_cmap = cm(z)
+    # # my_cmap = ListedColormap(my_cmap)
+    # tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+
+    # feature_tsne_input = feature_bank.detach().cpu().numpy()[:plot_num]
+    # labels_tsne_color = labels[:plot_num]
+
+    # feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+    # coord_min = math.floor(np.min(feature_tsne_output) / 1) * 1
+    # coord_max = math.ceil(np.max(feature_tsne_output) / 1) * 1
+
+    # for i in range(n_components):
+    #     idx = np.where(labels == i)[0]
+
+    #     fig = plt.figure(figsize=(8, 8))
+    #     ax = fig.add_subplot(1, 1, 1)
+    #     plt.title("Find {} clusters.".format(n_components))
+    #     plt.xlim((coord_min, coord_max))
+    #     plt.ylim((coord_min, coord_max))
+    #     plt.scatter(feature_tsne_output[idx, 0], feature_tsne_output[idx, 1], s=10, c=labels_tsne_color[idx], cmap=my_cmap)
+    #     plt.savefig('./visualization/find_cluster.png')
+    #     plt.close()
+    #     input()
+
+    # fig = plt.figure(figsize=(8, 8))
+    # ax = fig.add_subplot(1, 1, 1)
+    # plt.title("Find {} clusters.".format(n_components))
+    # plt.xlim((coord_min, coord_max))
+    # plt.ylim((coord_min, coord_max))
+    # plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=cm)
+    # plt.savefig('./visualization/find_cluster.png')
+    # plt.close()
+
+    # time1 = time.time()
+    # print("finding clusters: {}".format(time1 - time0))
+
+    # input('check time')
+
+    return labels
+
+def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None, single_noise_after_transform=False, no_eval=False, augmentation_prob=None, org_pos1=None, org_pos2=None, clean_weight=0):
     total_loss, total_num = 0.0, 0
     
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
+    if clean_weight != 0 and org_pos1 != None and org_pos2 != None:
+        org_pos1, org_pos2 = org_pos1.cuda(non_blocking=True), org_pos2.cuda(non_blocking=True)
 
     # feature_1, out_1 = net(pos_1)
     # feature_2, out_2 = net(pos_2)
@@ -873,7 +1077,7 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     if not noise_after_transform and not single_noise_after_transform:
 
         if split_transform:
-            print('check split_transform')
+            # print('check split_transform')
             pos_1_list = torch.split(pos_1, batch_size // 16, dim=0)
             pos_2_list = torch.split(pos_2, batch_size // 16, dim=0)
             new_pos_1_list, new_pos_2_list = [], []
@@ -897,7 +1101,19 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
                 pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
             else:
                 # print('chech right aug')
-                pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+                if augmentation_prob == None:
+                    pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+                    if clean_weight != 0 and org_pos1 != None and org_pos2 != None:
+                        org_pos1, org_pos2 = train_diff_transform(org_pos1), train_diff_transform(org_pos2)
+                elif np.sum(augmentation_prob) == 0:
+                    pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
+                    if clean_weight != 0 and org_pos1 != None and org_pos2 != None:
+                        org_pos1, org_pos2 = train_diff_transform(org_pos1), train_diff_transform(org_pos2)
+                else:
+                    my_diff_transform = utils.train_diff_transform_prob(*augmentation_prob)
+                    pos_1, pos_2 = my_diff_transform(pos_1), my_diff_transform(pos_2)
+                    if clean_weight != 0 and org_pos1 != None and org_pos2 != None:
+                        org_pos1, org_pos2 = my_diff_transform(org_pos1), my_diff_transform(org_pos2)
 
     if single_noise_after_transform:
         pos_2 = train_diff_transform(pos_2)
@@ -925,6 +1141,15 @@ def train_simclr_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, ba
     # [2*B]
     pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
     loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+
+    if clean_weight != 0:
+        org_feature_1, org_out_1 = net(org_pos1)
+        org_feature_2, org_out_2 = net(org_pos2)
+        org_out = torch.cat([org_out_1, org_out_2], dim=0)
+        poison_clean_pos_sim = torch.exp(torch.sum(out * org_out, dim=-1) / temperature).mean()
+        loss += clean_weight * poison_clean_pos_sim
+        # print(poison_clean_pos_sim.item())
+        # input('check')
     
     # train_optimizer.zero_grad()
     # perturb.retain_grad()

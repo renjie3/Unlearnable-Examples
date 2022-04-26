@@ -40,6 +40,8 @@ python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_na
 
 51310928 check shuffle 到底有没有影响（local run 同样的指令，前几个epoch看上去确实好像没影响，loss下降的也很快）
 
+
+
 51166952 可以作为baseline
 51203782 BPDA
 
@@ -52,3 +54,12 @@ python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/
 
 51211592 pytorch_aug baseline 可以通过分布式方式训练，速度比较快
 51211597
+
+51435720 之后的pytorch_aug 是直接从 data_loader当中增加的，应该是绝对正确的
+
+51435697
+51508204
+
+
+51964797 clean_data supervised cifar10
+51964801 simclrnoise supervised cifar10

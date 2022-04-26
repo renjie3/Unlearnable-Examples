@@ -8,7 +8,7 @@ DATE_NAME=${1}
 echo $$
 
 WHOLE_EPOCH=40
-SINGLE_EPOCH=4
+SINGLE_EPOCH=1
 REJOB_TIMES=`expr $WHOLE_EPOCH / $SINGLE_EPOCH`
 MYGRES="gpu:v100s:1"
 
@@ -31,7 +31,9 @@ JOB_INFO="cifar10 baseline"
 
 # python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 3 --not_shuffle_train_data --batch_size 512 --dbindex_weight 0 --class_4 --single_noise_after_transform
 
-PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --not_shuffle_train_data --batch_size 512 --dbindex_weight 0 --split_transform"
+# python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 10
+
+PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 12 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 50 --min_min_attack_fn eot_v1 --strong_aug --not_shuffle_train_data --eot_size 9"
 
 PIERMARO_MYCOMMEND2=""
 

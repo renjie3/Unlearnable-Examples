@@ -622,7 +622,14 @@ class CIFAR10Pair(CIFAR10):
 
         gt_label = np.array(self.targets)
         idx_label = np.array(idx_label)
+        # print(gt_label.shape)
+        # print(idx_label.shape)
         self.targets = np.stack([idx_label, gt_label], axis=1)
+
+    def add_kmeans_label(self, kmeans_label):
+
+        self.targets = np.concatenate([self.targets[:, :2], np.expand_dims(kmeans_label, axis=1)], axis=1)
+        print("add_kmeans_label done: ", self.targets.shape)
 
     def add_noise_test_visualization(self, random_noise_class_test, noise):
         # print(noise.shape)
@@ -828,6 +835,7 @@ class TransferCIFAR10Pair(CIFAR10):
             self.noise_255 = self.perturb_tensor.mul(255*perturbation_budget).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         else:
             self.perturb_tensor = None
+            return
 
         if random_noise_class_path != None:
             self.random_noise_class = np.load(random_noise_class_path)
@@ -848,10 +856,11 @@ class TransferCIFAR10Pair(CIFAR10):
                     if idx not in perturb_rate_index:
                         continue
                     if not samplewise_perturb:
-                        if org_label_flag:
-                            noise = self.noise_255[self.targets[idx]]
-                        else:
-                            noise = self.noise_255[self.random_noise_class[idx]]
+                        raise('class_wise still under development')
+                        # if org_label_flag:
+                        #     noise = self.noise_255[self.targets[idx]]
+                        # else:
+                        #     noise = self.noise_255[self.random_noise_class[idx]]
                     else:
                         noise = self.noise_255[idx]
                         # print("check it goes samplewise.")

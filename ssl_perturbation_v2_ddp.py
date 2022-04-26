@@ -1014,26 +1014,26 @@ def main():
     else:
         random_noise_class = np.load('noise_class_label.npy')
 
-    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform, mix=args.mix, gray=args.gray_train, class_4_train_size=args.class_4_train_size, kmeans_index=args.kmeans_index)
+    train_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=False, mix=args.mix, gray=args.gray_train, class_4_train_size=args.class_4_train_size, kmeans_index=args.kmeans_index)
     train_data.replace_targets_with_id()
     if not args.org_label_noise and args.perturb_type == 'classwise':
         # we have to change the target randomly to give the noise a label
         train_data.replace_random_noise_class(random_noise_class)
     train_sampler = DistributedSampler(train_data)
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=flag_shuffle_train_data, num_workers=args.num_workers, pin_memory=True, drop_last=False, sampler=train_sampler)
-    train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform, mix=args.mix, gray=args.gray_train, class_4_train_size=args.class_4_train_size, kmeans_index=args.kmeans_index)
+    train_noise_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=False, mix=args.mix, gray=args.gray_train, class_4_train_size=args.class_4_train_size, kmeans_index=args.kmeans_index)
     if not args.org_label_noise and args.perturb_type == 'classwise':
         train_noise_data.replace_random_noise_class(random_noise_class)
     train_noise_data.replace_targets_with_id()
     train_noise_sampler = DistributedSampler(train_noise_data)
     train_noise_data_loader = DataLoader(train_noise_data, batch_size=batch_size, shuffle=args.shuffle_train_perturb_data, num_workers=args.num_workers, pin_memory=True, sampler=train_noise_sampler)
     # test data don't have to change the target. by renjie3
-    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, mix=args.mix, gray=args.gray_test, train_noise_after_transform=args.noise_after_transform, )
+    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, mix=args.mix, gray=args.gray_test, train_noise_after_transform=False, )
     memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
-    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, mix=args.mix, gray=args.gray_test, train_noise_after_transform=args.noise_after_transform, )
+    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, mix=args.mix, gray=args.gray_test, train_noise_after_transform=False, )
     test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
     
-    plot_input_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=args.noise_after_transform, gray=args.gray_test, class_4_train_size=args.class_4_train_size)
+    plot_input_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=False, gray=args.gray_test, class_4_train_size=args.class_4_train_size)
     plot_input_data_loader = DataLoader(plot_input_data, batch_size=1024, shuffle=True, num_workers=args.num_workers, pin_memory=True)
 
     noise_generator = toolbox.PerturbationTool(epsilon=args.epsilon,

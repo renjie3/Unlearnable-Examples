@@ -405,7 +405,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False):
+    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -432,12 +432,40 @@ class PerturbationTool():
                 model.zero_grad()
 
                 if dbindex_weight != 0:
-                    dbindex_loss = get_dbindex_loss(model, perturb_img1, labels, [4], True, True)
+                    dbindex_loss = get_dbindex_loss(model, perturb_img1, labels, [4], True, True, dbindex_label_index, x2=perturb_img2, use_aug=True)
                 else:
                     dbindex_loss = 0
 
-                simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval)
-                loss = dbindex_loss * dbindex_weight + simclr_loss
+                if noise_dbindex_weight != 0:
+                    perturb1 = torch.clamp(0.5 + perturb, 0, 1)
+                    perturb2 = torch.clamp(0.5 + perturb, 0, 1)
+                    noise_dbindex_loss = get_dbindex_loss(model, perturb1, labels, [4], True, True, dbindex_label_index, x2=perturb2, use_aug=True)
+                else:
+                    noise_dbindex_loss = 0
+
+                if simclr_weight != 0:
+                    if double_perturb:
+                        perturb_img1 = train_diff_transform(perturb_img1)
+                        perturb_img2 = train_diff_transform(perturb_img2)
+                        perturb_img1 = torch.clamp(perturb_img1 + perturb, 0, 1)
+                        perturb_img2 = torch.clamp(perturb_img2 + perturb, 0, 1)
+                        _noise_after_transform = False
+                        # input('check double')
+                    else:
+                        _noise_after_transform = noise_after_transform
+                        
+                    simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=_noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight)
+                else:
+                    simclr_loss = 0
+
+                if noise_simclr_weight != 0:
+                    perturb1 = torch.clamp(0.5 + perturb, 0, 1)
+                    perturb2 = torch.clamp(0.5 + perturb, 0, 1)
+                    noise_simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb1, perturb2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight)
+                else:
+                    noise_simclr_loss = 0
+
+                loss = dbindex_loss * dbindex_weight + simclr_loss * simclr_weight + noise_dbindex_loss * noise_dbindex_weight + noise_simclr_loss * noise_simclr_weight
                 
                 perturb.retain_grad()
                 loss.backward()
