@@ -24,6 +24,8 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import NullFormatter
 import math
 
+from itertools import combinations
+
 if torch.cuda.is_available():
     device = torch.device('cuda')
 else:
@@ -856,7 +858,8 @@ class TransferCIFAR10Pair(CIFAR10):
                     if idx not in perturb_rate_index:
                         continue
                     if not samplewise_perturb:
-                        raise('class_wise still under development')
+                        # raise('class_wise still under development')
+                        noise = self.noise_255[self.targets[idx]]
                         # if org_label_flag:
                         #     noise = self.noise_255[self.targets[idx]]
                         # else:
@@ -1367,6 +1370,150 @@ def plot_be_thoery(feature_bank, plot_labels, save_name_pre, c):
         os.mkdir('./plot_be/{}'.format(save_name_pre))
     plt.savefig('./plot_be/{}/{}_{}.png'.format(save_name_pre, c, save_name_pre))
     plt.close()
+
+# def save_img_group(clean_train_dataset, noise, img_path, samplewise = False):
+#     fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+#     selected_idx = [random.randint(0, 127) for _ in range(9)]
+#     img_grid = []
+#     for idx in selected_idx:
+#         img_grid += get_pairs_of_imgs(idx, clean_train_dataset, noise, samplewise)
+
+#     img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=9, pad_value=255)
+#     npimg = img_grid_tensor.cpu().numpy()
+#     plt.imshow(np.transpose(npimg, (1, 2, 0)))
+#     plt.savefig(img_path)
+
+def linear_separable_perturbation(img_size, patch_num, n_class, single_class_num, conda_data, linear_style):
+
+    d = 3 * patch_num[0] * patch_num[1]
+    m = torch.distributions.multivariate_normal.MultivariateNormal(torch.zeros(d), torch.eye(d))
+    D = []
+
+    shuffle_conbinations1 = list(combinations(range(d//2), d // 4))
+    shuffle_conbinations2 = list(combinations(range(d//2, d), d // 4))
+    shuffle_idx1 = torch.randperm(len(shuffle_conbinations1))
+    shuffle_idx2 = torch.randperm(len(shuffle_conbinations2))
+    corners = []
+    for i in range(n_class):
+        idx1 = shuffle_idx1[i]
+        idx2 = shuffle_idx2[i]
+        corner_idx = list(shuffle_conbinations1[idx1]) + list(shuffle_conbinations2[idx2])
+        corner = torch.zeros(d)
+        corner[corner_idx] = 1
+        corners.append(corner)
+    corners = torch.stack(corners, dim=0)
+    shuffle_idx = torch.randperm(corners.shape[0])
+    corners = corners[shuffle_idx]
+
+    for i in range(n_class):
+        Di = m.sample([single_class_num])
+        A = torch.rand((d,d)) * 2 - 1
+        Di = torch.mm(Di, A)
+        Di = corners[i] + Di*0.04
+        D.append(Di)
+
+    D = torch.cat(D, dim=0)
+    D = D.view(D.shape[0], 3, patch_num[0], patch_num[1])
+    D = D.repeat_interleave(8, dim=2).repeat_interleave(8, dim=3)
+    D -= torch.min(D)
+    D /= torch.max(D)
+    D *= 1.3
+    D = torch.clamp(D, 0, 1)
+    D = D * 16.0 / 255.0 - 8.0 / 255.0
+    D = torch.split(D, D.shape[0] // n_class)
+
+    D_id = []
+    targets = conda_data.targets
+    counter = [0 for _ in range(n_class)]
+
+    for label in targets:
+        class_id = label[1]
+        sample_id_in_class = counter[class_id]
+        D_id.append(D[class_id][sample_id_in_class])
+    D_id = torch.stack(D_id, dim=0)
+
+    if linear_style == 'upper_half_linear':
+        mask_shape = [1, 1, 1, 1,
+        1, 1, 1, 1,
+        0, 0, 0, 0,
+        0, 0, 0, 0] 
+    elif linear_style == 'left_right_linear':
+        mask_shape = [1, 0, 0, 1,
+        1, 0, 0, 1,
+        1, 0, 0, 1,
+        1, 0, 0, 1] 
+
+    rows = []
+    cols = []
+
+    for i in range(patch_num[0]):
+        for j in range(patch_num[1]):
+            _idx = i*4 + j
+            rows.append( torch.ones((D_id.shape[0], D_id.shape[1], D_id.shape[2] // 4, D_id.shape[3] // 4, )) * mask_shape[_idx])
+        cols.append(torch.cat(rows, dim=3))
+        rows = []
+    mask = torch.cat(cols, dim=2)
+
+    D_id = D_id*mask
+
+    # torch.save(D_id, 'results/linear_separable_perturbation_upper_half.pt')
+
+    # print(torch.mean(D), torch.max(D))
+
+    # fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+    # selected_idx = [random.randint(0, D_id.shape[0]) for _ in range(9)]
+    # # selected_idx = [i for i in range(9)]
+    # img_grid = []
+    # for idx in selected_idx:
+    #     img_grid.append(D_id[idx])
+
+    # img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=3, pad_value=255)
+    # npimg = img_grid_tensor.cpu().numpy()
+    # plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    # plt.savefig('./visualization/linear_perturbation.png')
+    # plt.close()
+
+    # fig = plt.figure(figsize=(8, 8), dpi=80, facecolor='w', edgecolor='k')
+    # # selected_idx = [random.randint(0, D.shape[0]) for _ in range(9)]
+    # selected_idx = [i for i in range(9)]
+    # img_grid = []
+    # for idx in selected_idx:
+    #     img_grid.append(D[idx])
+
+    # img_grid_tensor = torchvision.utils.make_grid(torch.stack(img_grid), nrow=3, pad_value=255)
+    # npimg = img_grid_tensor.cpu().numpy()
+    # plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    # plt.savefig('./visualization/linear_perturbation2.png')
+    # plt.close()
+
+    return D_id, 1-mask
+
+def get_linear_constraint_mask(img_size, patch_num, n_class, single_class_num, conda_data,):
+
+    d = 3 * patch_num[0] * patch_num[1]
+    D = []
+
+    shuffle_conbinations1 = list(combinations(range(d//2), d // 4))
+    shuffle_conbinations2 = list(combinations(range(d//2, d), d // 4))
+    shuffle_idx1 = torch.randperm(len(shuffle_conbinations1))
+    shuffle_idx2 = torch.randperm(len(shuffle_conbinations2))
+    corners = []
+    for i in range(n_class):
+        idx1 = shuffle_idx1[i]
+        idx2 = shuffle_idx2[i]
+        corner_idx = list(shuffle_conbinations1[idx1]) + list(shuffle_conbinations2[idx2])
+        corner = torch.zeros(d)
+        corner[corner_idx] = 1
+        corners.append(corner)
+    corners = torch.stack(corners, dim=0)
+    shuffle_idx = torch.randperm(corners.shape[0])
+    corners = corners[shuffle_idx]
+
+    mask = corners[:n_class].view(n_class, 3, patch_num[0], patch_num[1])
+    mask = mask.repeat_interleave(8, dim=2).repeat_interleave(8, dim=3)
+
+    return mask, 1-mask
+
 
 def plot_be_thoery_orgfeature(feature_bank, plot_labels, save_name_pre, c):
     tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)

@@ -26,7 +26,7 @@ MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python supervised_cifar10.py --pre_load_name unlearnable_samplewise_51508204_1_20220419160917_0.5_512_300_checkpoint_perturbation_epoch27 --samplewise --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52083583_1_20220428170342_0.5_512_300_checkpoint_perturbation --samplewise --job_id ${SLURM_JOB_ID}_1"
 MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
 MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 

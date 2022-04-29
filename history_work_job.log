@@ -63,3 +63,6 @@ python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/
 
 51964797 clean_data supervised cifar10
 51964801 simclrnoise supervised cifar10
+51488092 clean cifar10
+
+51611484 用samplewise的训练好的，对cluster 进行kmeans，然后按照kmeans的label进行classwise的结果

@@ -405,7 +405,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False):
+    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8]):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -425,8 +425,19 @@ class PerturbationTool():
 
             for i_eot in range(eot_size):
                 time0 = time.time()
-                perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
-                perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+                if upper_half_linear:
+                    _perturb = perturb * batch_simclr_mask + batch_linear_noise
+                    perturb_img1 = torch.clamp(pos_samples_1.data + _perturb, 0, 1)
+                    perturb_img2 = torch.clamp(pos_samples_2.data + _perturb, 0, 1)
+                elif mask_linear_constraint:
+                    _perturb1 = torch.clamp(perturb, -self.epsilon, -self.epsilon*0.25,) * mask1
+                    _perturb2 = torch.clamp(perturb, self.epsilon*0.25, self.epsilon,) * mask2
+                    _perturb = _perturb1 + _perturb2
+                    perturb_img1 = torch.clamp(pos_samples_1.data + _perturb, 0, 1)
+                    perturb_img2 = torch.clamp(pos_samples_2.data + _perturb, 0, 1)
+                else:
+                    perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+                    perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
                 opt = torch.optim.SGD([perturb], lr=1e-3)
                 opt.zero_grad()
                 model.zero_grad()
@@ -492,6 +503,12 @@ class PerturbationTool():
             # diff_eta = eta1 - eta2
             # print(diff_eta.cpu().numpy())
             eta = (eta1 + eta2) / 2
+            if mask_linear_constraint:
+                if mask_linear_noise_range[0] >= mask_linear_noise_range[1]:
+                    raise('wrong parameter mask_linear_noise_range')
+                _eta1 = torch.clamp(eta, -mask_linear_noise_range[1] / 255.0, -mask_linear_noise_range[0] / 255.0,) * mask1
+                _eta2 = torch.clamp(eta, mask_linear_noise_range[0] / 255.0, mask_linear_noise_range[1] / 255.0,) * mask2
+                eta = _eta1 + _eta2
             # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
             perturb = Variable(eta, requires_grad=True)
             # perturb_img1 = pos_samples_1.data + perturb

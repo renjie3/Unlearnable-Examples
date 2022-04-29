@@ -11,19 +11,13 @@ MYGRES="gpu:v100s:1"
 # JOB_INFO="noise_ave_value"
 # MYCOMMEND="python3 -u ssl_perturbation_save_model.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 4 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type classwise --universal_train_target 'classwise' --train_step 10 --epochs 1000 --min_min_attack_fn non_eot --strong_aug --class_4"
 
-# 0.0 0.5 0.8 0.2
-# 1.0 0.0 0.8 0.2
-
-# 1.0 0.5 0.0 0.2
-# 1.0 0.5 0.8 0.0
-
 # 1.0 0.5 0.8 0.2
 
 # unlearnable_samplewise_51030219_1_20220409114042_0.5_512_1000_checkpoint_perturbation
 # unlearnable_samplewise_51073519_1_20220410221405_0.5_512_1000perturbation
 
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python supervised_cifar10.py --pre_load_name unlearnable_samplewise_51508204_1_20220419160917_0.5_512_300_checkpoint_perturbation_epoch27 --samplewise"
+MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52083583_1_20220428170342_0.5_512_300_checkpoint_perturbation --samplewise"
 
 MYCOMMEND2="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 1024 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise_dbindex --train_step 10 --epochs 1000 --min_min_attack_fn eot_v1 --class_4 --strong_aug --not_shuffle_train_data --eot_size 10 --dbindex_weight 0.3 --kmeans_index 0"
 
