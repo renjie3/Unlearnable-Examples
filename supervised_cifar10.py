@@ -16,6 +16,7 @@ parser.add_argument('--local', default='', type=str, help='The gpu number used o
 parser.add_argument('--clean_train', action='store_true', default=False)
 parser.add_argument('--class_4', action='store_true', default=False)
 parser.add_argument('--samplewise', action='store_true', default=False)
+parser.add_argument('--train_data_type', default='cifar10', type=str, help='the data used to train')
 args = parser.parse_args()
 
 import os
@@ -34,7 +35,7 @@ import torchvision.transforms as transforms
 from supervised_models import *
 # from utils import progress_bar
 from tqdm import tqdm
-from utils import TransferCIFAR10Pair, CIFAR10Pair
+from utils import TransferCIFAR10Pair, CIFAR10Pair, TransferCIFAR100Pair, CIFAR100Pair
 
 from sklearn import metrics
 
@@ -149,10 +150,13 @@ if __name__ == '__main__':
 
     samplewise_perturb = args.samplewise
 
-    if args.class_4:
-        args.num_class = 4
-    else:
-        args.num_class = 10
+    if args.train_data_type == 'cifar10':
+        if args.class_4:
+            args.num_class = 4
+        else:
+            args.num_class = 10
+    elif args.train_data_type == 'cifar100':
+        args.num_class = 100
 
     if args.pre_load_name == '':
         pre_load_name = None
@@ -161,16 +165,22 @@ if __name__ == '__main__':
         pre_load_name = args.pre_load_name
         save_name_pre = pre_load_name + "_supervised_class{}".format(args.num_class)
 
-    trainset = TransferCIFAR10Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=args.class_4, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
-    trainloader = torch.utils.data.DataLoader(
-        trainset, batch_size=128, shuffle=True, num_workers=2)
+    if args.train_data_type == 'cifar10':
+        trainset = TransferCIFAR10Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=args.class_4, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
+        trainloader = torch.utils.data.DataLoader(trainset, batch_size=128, shuffle=True, num_workers=2)
 
-    testset = CIFAR10Pair(root='data', train=False, transform=transform_test, download=True, class_4=args.class_4)
-    testloader = torch.utils.data.DataLoader(
-        testset, batch_size=128, shuffle=False, num_workers=2)
+        testset = CIFAR10Pair(root='data', train=False, transform=transform_test, download=True, class_4=args.class_4)
+        testloader = torch.utils.data.DataLoader(testset, batch_size=128, shuffle=False, num_workers=2)
 
-    classes = ('plane', 'car', 'bird', 'cat', 'deer',
-            'dog', 'frog', 'horse', 'ship', 'truck')
+        classes = ('plane', 'car', 'bird', 'cat', 'deer',
+                'dog', 'frog', 'horse', 'ship', 'truck')
+    elif args.train_data_type == 'cifar100':
+        trainset = TransferCIFAR100Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
+        trainloader = torch.utils.data.DataLoader(trainset, batch_size=128, shuffle=True, num_workers=2)
+
+        testset = CIFAR100Pair(root='data', train=False, transform=transform_test, download=True)
+        testloader = torch.utils.data.DataLoader(testset, batch_size=128, shuffle=False, num_workers=2)
+        
 
     # Model
     print('==> Building model..')

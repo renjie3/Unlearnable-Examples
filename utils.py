@@ -2,7 +2,7 @@ from PIL import Image
 import torch
 import torchvision
 from torchvision import transforms
-from torchvision.datasets import CIFAR10
+from torchvision.datasets import CIFAR10, CIFAR100
 import numpy as np
 # from dataset import patch_noise_extend_to_img
 
@@ -363,7 +363,8 @@ class CIFAR10Pair(CIFAR10):
         mix: str = 'no', 
         gray: str = 'no', 
         class_4_train_size = 1024,
-        kmeans_index = -1
+        kmeans_index = -1,
+        unlearnable_kmeans_label = False
     ) -> None:
 
         super(CIFAR10Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
@@ -567,8 +568,10 @@ class CIFAR10Pair(CIFAR10):
             if class_4:
                 kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
             else:
-                kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
-                # input('check')
+                if not unlearnable_kmeans_label:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                else:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
             with open(kmeans_filepath, "rb") as f:
                 kmeans_labels = pickle.load(f)[kmeans_index]
                 print("kmeans_label_num: ", np.max(kmeans_labels)+1)
@@ -686,6 +689,72 @@ class CIFAR10Pair(CIFAR10):
             raise('Add noise to data failed. Because the length is not consistent.')
 
         self.data = self.data.astype(np.uint8)
+
+
+class CIFAR100Pair(CIFAR100):
+    """CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        train_noise_after_transform: bool = True,
+        kmeans_index = -1,
+        unlearnable_kmeans_label = False
+    ) -> None:
+
+        super(CIFAR100Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        self.train = train
+        if kmeans_index >= 0:
+            raise('kmeans label files are not generated.')
+            # if class_4:
+            #     kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+            # else:
+            #     if not unlearnable_kmeans_label:
+            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+            #     else:
+            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+            # with open(kmeans_filepath, "rb") as f:
+            #     kmeans_labels = pickle.load(f)[kmeans_index]
+            #     print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+            self.targets = kmeans_labels
+        
+        self.train_noise_after_transform = train_noise_after_transform
+
+    def __getitem__(self, index):
+        img, target = self.data[index], self.targets[index]
+        img = Image.fromarray(img)
+
+        if self.transform is not None:
+            pos_1 = self.transform(img)
+            pos_2 = self.transform(img)
+
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        return pos_1, pos_2, target
+
+    def replace_targets_with_id(self):
+        idx_label = []
+        for i in range(len(self.targets)):
+            # print(self.targets[i], random_noise_class[i])
+            idx_label.append(i)
+
+        gt_label = np.array(self.targets)
+        idx_label = np.array(idx_label)
+        # print(gt_label.shape)
+        # print(idx_label.shape)
+        self.targets = np.stack([idx_label, gt_label], axis=1)
+
+    def add_kmeans_label(self, kmeans_label):
+
+        self.targets = np.concatenate([self.targets[:, :2], np.expand_dims(kmeans_label, axis=1)], axis=1)
+        print("add_kmeans_label done: ", self.targets.shape)
 
 
 class SameImgCIFAR10Pair(CIFAR10):
@@ -815,7 +884,7 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False, kmeans_index=-1, unlearnable_kmeans_label=False):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
 
         self.class_4 = class_4
@@ -873,6 +942,21 @@ class TransferCIFAR10Pair(CIFAR10):
                 self.data = self.data.astype(np.uint8)
         else:
             print('it is clean train')
+
+        if kmeans_index >= 0:
+            if class_4:
+                kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+            else:
+                if not unlearnable_kmeans_label:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                else:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index]
+                print(kmeans_filepath)
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+            self.targets = kmeans_labels
 
 
     def __getitem__(self, index):
@@ -936,7 +1020,9 @@ class TransferCIFAR10Pair(CIFAR10):
             mean_one_class.append(noise_one_class.mean(axis=0))
             for j in range(len(one_class_index) // 9):
                 save_img_group_by_index(self, self.perturb_tensor, "./visualization/test.png", one_class_index[j*9:(j+1)*9], self.samplewise_perturb)
-                input()
+                cmd = input()
+                if cmd == 'next':
+                    break
             # img1 = one_class_index[0]
             # img2 = one_class_index[1]
             # hist = {'0':0, '10':0, '20':0, '30':0, '40':0, '50':0, '60':0, }
@@ -974,6 +1060,122 @@ class TransferCIFAR10Pair(CIFAR10):
         #         print(np.absolute(mean_one_class[3] - noise_one_class[j]).mean())
         #         # print(noise_one_class[j])
         #         input()
+
+class TransferCIFAR100Pair(CIFAR100):
+    """CIFAR10 Dataset.
+    """
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False, kmeans_index=-1, unlearnable_kmeans_label=False):
+        super(TransferCIFAR100Pair, self).__init__(root=root, train=train, download=download, transform=transform)
+
+        self.samplewise_perturb = samplewise_perturb
+
+        if perturb_tensor_filepath != None:
+            self.perturb_tensor = torch.load(perturb_tensor_filepath)
+            self.noise_255 = self.perturb_tensor.mul(255*perturbation_budget).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        else:
+            self.perturb_tensor = None
+            return
+
+        if random_noise_class_path != None:
+            self.random_noise_class = np.load(random_noise_class_path)
+        else:
+            self.random_noise_class = None
+        
+        self.perturbation_budget = perturbation_budget
+
+        if not clean_train:
+            if not flag_save_img_group:
+                perturb_rate_index = np.random.choice(len(self.targets), int(len(self.targets) * perturb_rate), replace=False)
+                self.data = self.data.astype(np.float32)
+                for idx in range(len(self.data)):
+                    if idx not in perturb_rate_index:
+                        continue
+                    if not samplewise_perturb:
+                        # raise('class_wise still under development')
+                        noise = self.noise_255[self.targets[idx]]
+                        # if org_label_flag:
+                        #     noise = self.noise_255[self.targets[idx]]
+                        # else:
+                        #     noise = self.noise_255[self.random_noise_class[idx]]
+                    else:
+                        noise = self.noise_255[idx]
+                        # print("check it goes samplewise.")
+                    noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+                    self.data[idx] = self.data[idx] + noise
+                    self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
+                self.data = self.data.astype(np.uint8)
+        else:
+            print('it is clean train')
+
+        if kmeans_index >= 0:
+            raise('kmeans_index needs generated')
+            # if class_4:
+            #     kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+            # else:
+            #     if not unlearnable_kmeans_label:
+            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+            #     else:
+            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+            # with open(kmeans_filepath, "rb") as f:
+            #     kmeans_labels = pickle.load(f)[kmeans_index]
+            #     print(kmeans_filepath)
+            #     print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+            # self.targets = kmeans_labels
+
+
+    def __getitem__(self, index):
+        img, target = self.data[index], self.targets[index]
+        # print(img[0][0])
+        img = Image.fromarray(img)
+        # print("np.shape(img)", np.shape(img))
+
+        if self.transform is not None:
+            # print(self.perturb_tensor[self.random_noise_class[index]][0][0])
+            # print("self.transform(img)", self.transform(img).shape)
+            # pos_1 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
+            # pos_2 = torch.clamp(self.transform(img) + self.perturb_tensor[self.random_noise_class[index]] * self.perturbation_budget, 0, 1)
+            pos_1 = torch.clamp(self.transform(img), 0, 1)
+            pos_2 = torch.clamp(self.transform(img), 0, 1)
+
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        return pos_1, pos_2, target
+    
+    def make_unlearnable(self, random_noise_class, noise):
+
+        noise_255 = noise.mul(255).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        self.data = self.data.astype(np.float32)
+        if len(self.data) == random_noise_class.shape[0]:
+            for i in range(len(self.targets)):
+                # print("data:", self.data[i][0])
+                # print("noise:", noise_255[random_noise_class[i]][0])
+                self.data[i] += noise_255[random_noise_class[i]]
+                # input()
+            print("Making data unlearnable done")
+        else:
+            raise('Making data unlearnable failed. Because the length is not consistent.')
+
+        self.data = self.data.astype(np.uint8)
+
+    def save_noise_img(self):
+        if self.class_4:
+            class_num = 4
+        else:
+            class_num = 10
+
+        np_targets = np.array(self.targets)
+        mean_one_class = []
+        for i in range(class_num):
+            one_class_index = np.where(np_targets == i)[0]
+            noise_one_class = self.noise_255[one_class_index]
+            mean_one_class.append(noise_one_class.mean(axis=0))
+            for j in range(len(one_class_index) // 9):
+                save_img_group_by_index(self, self.perturb_tensor, "./visualization/test.png", one_class_index[j*9:(j+1)*9], self.samplewise_perturb)
+                cmd = input()
+                if cmd == 'next':
+                    break
             
 
 # class TransferFloatCIFAR10Pair(CIFAR10):
@@ -1542,5 +1744,61 @@ def plot_be_thoery_orgfeature(feature_bank, plot_labels, save_name_pre, c):
     if not os.path.exists('./plot_be/{}'.format(save_name_pre)):
         os.mkdir('./plot_be/{}'.format(save_name_pre))
     plt.savefig('./plot_be/{}/{}_{}.png'.format(save_name_pre, c, save_name_pre))
+    plt.close()
+
+def train_supervised_batch(g_net, pos_1, targets, supervised_criterion, supervised_optimizer, supervised_transform_train):
+    
+    supervised_optimizer.zero_grad()
+    inputs = supervised_transform_train(pos_1)
+    feature, outputs = g_net(inputs)
+    loss = supervised_criterion(outputs, targets)
+    loss.backward()
+    supervised_optimizer.step()
+
+    return loss.item()
+
+def plot_feature(feature_bank, GT_label, save_name_pre):
+
+    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+
+    labels = GT_label
+    if torch.is_tensor(feature_bank):
+        feature_tsne_input = feature_bank.detach().cpu().numpy()
+    else:
+        feature_tsne_input = feature_bank
+    if torch.is_tensor(labels):
+        plot_labels_colar = labels.detach().cpu().numpy()
+    else:
+        plot_labels_colar = labels
+    c = np.max(plot_labels_colar) + 1
+
+    print(c)
+    feature_tsne_output = tsne.fit_transform(feature_tsne_input)
+        
+    coord_min = math.floor(np.min(feature_tsne_output) / 1) * 1
+    coord_max = math.ceil(np.max(feature_tsne_output) / 1) * 1
+
+    cm = plt.cm.get_cmap('gist_rainbow', c)
+
+    marker = ['o', 'x', 'v', 'd']
+    color_map = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'chartreuse', 'cyan', 'sage', 'coral', 'gold', 'plum', 'sienna', 'teal']
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    plt.title("\n max:{} min:{}".format(coord_max, coord_min))
+
+    x_pos_1 = feature_tsne_output[:, 0]
+    y_pos_1 = feature_tsne_output[:, 1]
+    # plot_labels_colar = labels.detach().cpu().numpy()
+
+    # linewidths
+
+    aug1 = plt.scatter(x_pos_1, y_pos_1, s=15, marker='o', c=plot_labels_colar, cmap=cm)
+
+    plt.xlim((coord_min, coord_max))
+    plt.ylim((coord_min, coord_max))
+    if not os.path.exists('./plot_feature/{}'.format(save_name_pre)):
+        os.mkdir('./plot_feature/{}'.format(save_name_pre))
+    plt.savefig('./plot_feature/{}/{}_{}.png'.format(save_name_pre, c, save_name_pre))
     plt.close()
         

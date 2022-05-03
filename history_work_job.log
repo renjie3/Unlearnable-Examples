@@ -58,7 +58,7 @@ python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/
 51435720 之后的pytorch_aug 是直接从 data_loader当中增加的，应该是绝对正确的
 
 51435697
-51508204
+51508204 baseline
 
 
 51964797 clean_data supervised cifar10
@@ -66,3 +66,9 @@ python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/
 51488092 clean cifar10
 
 51611484 用samplewise的训练好的，对cluster 进行kmeans，然后按照kmeans的label进行classwise的结果
+
+51508204 baseline，可以比较130 epoch的效果
+52229020 baseline pytorch_aug
+
+51029070 eot_10 simclr contrastive 效果特别好
+51508207 同上

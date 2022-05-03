@@ -258,7 +258,7 @@ def train_align(net, pos_1, pos_2, train_optimizer, normalize=False):
 
     return total_loss * pos_1.shape[0], pos_1.shape[0]
 
-def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0]):
+def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], pytorch_aug=False):
     # train a batch
     # print("pos_1.shape: ", pos_1.shape)
     # print("pos_2.shape: ", pos_2.shape)
@@ -292,7 +292,11 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
         elif mix in ['mnist']:
             pos_1, pos_2 = train_diff_transform_resize28(pos_1), train_diff_transform_resize28(pos_2)
         else:
-            pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
+            if pytorch_aug:
+                # input('check pytorch_aug')
+                pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
+            else:
+                pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
         # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     # input(pos_1.shape)
     feature_1, out_1 = net(pos_1)
@@ -790,6 +794,59 @@ def train_simclr_target_task(net, pos_1, pos_2, train_optimizer, batch_size, tem
     # input()
     
     return total_loss * pos_1.shape[0], pos_1.shape[0], numerator, denominator
+
+
+def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True):
+
+    sample = x.reshape(x.shape[0], -1)
+    cluster_label = labels
+
+    class_center = []
+    class_center_wholeset = []
+    intra_class_dis = []
+    c = torch.max(cluster_label) + 1
+    # print(c)
+    # print("time2: {}".format(time2 - time1))
+    for i in range(c):
+        # print(i)
+        idx_i = torch.where(cluster_label == i)[0]
+        if idx_i.shape[0] == 0:
+            continue
+        class_i = sample[idx_i, :]
+
+        class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
+
+        class_center.append(class_i_center)
+
+        point_dis_to_center = torch.sqrt(torch.sum((class_i-class_i_center)**2, dim = 1))
+
+        intra_class_dis.append(torch.mean(point_dis_to_center))
+
+    # print("time3: {}".format(time3 - time2))
+    if len(class_center) <= 1:
+        return 0
+    class_center = torch.stack(class_center, dim=0)
+
+    c = len(intra_class_dis)
+    
+    class_dis = torch.cdist(class_center, class_center, p=2) # TODO: this can be done for only one time in the whole set
+
+    mask = (torch.ones_like(class_dis) - torch.eye(class_dis.shape[0], device=class_dis.device)).bool()
+    class_dis = class_dis.masked_select(mask).view(class_dis.shape[0], -1)
+
+    intra_class_dis = torch.tensor(intra_class_dis).unsqueeze(1).repeat((1, c)).cuda()
+    trans_intra_class_dis = torch.transpose(intra_class_dis, 0, 1)
+    intra_class_dis_pair_sum = intra_class_dis + trans_intra_class_dis
+    intra_class_dis_pair_sum = intra_class_dis_pair_sum.masked_select(mask).view(intra_class_dis_pair_sum.shape[0], -1)
+
+    if use_mean_dbindex:
+        cluster_DB_loss = (intra_class_dis_pair_sum / (class_dis + 0.00001)).mean()
+    else:
+        cluster_DB_loss = torch.max(intra_class_dis_pair_sum / (class_dis + 0.00001), dim=1)[0].mean()
+
+    loss = cluster_DB_loss
+
+    return loss
 
 def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbindex, dbindex_label_index, x2, use_aug):
 
@@ -1606,7 +1663,7 @@ def test_ssl_theory(net, memory_data_loader, test_data_loader, k, temperature, e
 def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
-    c = 10
+    # c = 10
     with torch.no_grad():
         # generate feature bank
         for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):
@@ -1854,7 +1911,8 @@ def test_instance_sim(net, memory_data_loader, test_data_loader, k, temperature,
     net.eval()
     total_top1, total_top5, total_num, feature_bank1 = 0.0, 0.0, 0, []
     feature_bank1, feature_bank2, feature_bank, sim_list = [], [], [], []
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
     transform_func = {'simclr': train_diff_transform, 
                       'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
                       'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
@@ -1934,7 +1992,8 @@ def test_instance_sim_thoery(net, memory_data_loader, test_data_loader, k, tempe
     net.eval()
     total_top1, total_top5, total_num, feature_bank1 = 0.0, 0.0, 0, []
     feature_bank1, feature_bank2, feature_bank, sim_list = [], [], [], []
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
         
     with torch.no_grad():
         
@@ -2039,7 +2098,8 @@ def test_instance_sim_thoery(net, memory_data_loader, test_data_loader, k, tempe
 def test_ssl_softmax(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
     with torch.no_grad():
         # generate feature bank
         for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):
@@ -2084,7 +2144,8 @@ def test_ssl_softmax(net, memory_data_loader, test_data_loader, k, temperature, 
 # test for one epoch, use noised image to visualize
 def test_ssl_visualization(net, test_data_visualization, random_noise_class_test, classwise_noise, pre_load_name, flag_test=False):
     net.eval()
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
     feature_bank = []
     tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
     with torch.no_grad():
@@ -2180,7 +2241,8 @@ def test_ssl_visualization(net, test_data_visualization, random_noise_class_test
 def test_ssl_for_simclrpy(net, memory_data_loader, test_data_loader):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
     with torch.no_grad():
         # generate feature bank
         for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):

@@ -20,6 +20,9 @@ parser.add_argument('--clean_train', action='store_true', default=False)
 parser.add_argument('--pytorch_aug', action='store_true', default=False)
 parser.add_argument('--load_model', action='store_true', default=False)
 parser.add_argument('--load_model_path', default='', type=str, help='The backbone of encoder')
+parser.add_argument('--kmeans_index', default=-1, type=int, help='perturbation_rate')
+parser.add_argument('--unlearnable_kmeans_label', action='store_true', default=False)
+
 
 # args parse
 args = parser.parse_args()
@@ -343,7 +346,7 @@ if __name__ == '__main__':
         save_name_pre += '_orglabel'
     print(save_name_pre)
 
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train)
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label)
     if args.save_img_group:
         train_data.save_noise_img()
     # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
@@ -362,9 +365,9 @@ if __name__ == '__main__':
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
-    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    flops, params = clever_format([flops, params])
-    print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+    # flops, params = clever_format([flops, params])
+    # print('# Model Params: {} FLOPs: {}'.format(params, flops))
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     # optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1, weight_decay=0.0005, momentum=0.9)
     c = len(memory_data.classes)

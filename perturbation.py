@@ -31,6 +31,8 @@ parser.add_argument('--step_size', default=0.8, type=float, help='perturb step s
 parser.add_argument('--random_start', action='store_true', default=False)
 parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
 parser.add_argument('--local_dev', default='', type=str, help='The gpu number used on developing node.')
+parser.add_argument('--linear_noise_dbindex_weight', default=0, type=float, help='perturbation')
+parser.add_argument('--simclr_weight', default=1, type=float, help='perturbation')
 args = parser.parse_args()
 import collections
 import datetime
@@ -326,13 +328,13 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 # Add Sample-wise Noise to each sample
                 for i, (image, label) in enumerate(zip(images, labels)):
                     sample_noise = random_noise[train_idx]
-                    c, h, w = image.shape[0], image.shape[1], image.shape[2]
-                    mask = np.zeros((c, h, w), np.float32)
-                    x1, x2, y1, y2 = mask_cord_list[train_idx]
+                    # c, h, w = image.shape[0], image.shape[1], image.shape[2]
+                    # mask = np.zeros((c, h, w), np.float32)
+                    # x1, x2, y1, y2 = mask_cord_list[train_idx]
                     if type(sample_noise) is np.ndarray:
-                        mask[:, x1: x2, y1: y2] = sample_noise
+                        mask = sample_noise
                     else:
-                        mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+                        mask = sample_noise.cpu().numpy()
                     # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
                     sample_noise = torch.from_numpy(mask).to(device)
                     images[i] = images[i] + sample_noise
@@ -352,13 +354,13 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
             batch_noise, batch_start_idx = [], idx
             for i, (image, label) in enumerate(zip(images, labels)):
                 sample_noise = random_noise[idx]
-                c, h, w = image.shape[0], image.shape[1], image.shape[2]
-                mask = np.zeros((c, h, w), np.float32)
-                x1, x2, y1, y2 = mask_cord_list[idx]
+                # c, h, w = image.shape[0], image.shape[1], image.shape[2]
+                # mask = np.zeros((c, h, w), np.float32)
+                # x1, x2, y1, y2 = mask_cord_list[idx]
                 if type(sample_noise) is np.ndarray:
-                    mask[:, x1: x2, y1: y2] = sample_noise
+                    mask = sample_noise
                 else:
-                    mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+                    mask = sample_noise.cpu().numpy()
                 # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
                 sample_noise = torch.from_numpy(mask).to(device)
                 batch_noise.append(sample_noise)
@@ -370,15 +372,15 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 param.requires_grad = False
             batch_noise = torch.stack(batch_noise).to(device)
             if args.attack_type == 'min-min':
-                perturb_img, eta = noise_generator.min_min_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
+                perturb_img, eta = noise_generator.min_min_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise, simclr_weight=args.simclr_weight, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight)
             elif args.attack_type == 'min-max':
                 perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
             else:
                 raise('Invalid attack')
 
             for i, delta in enumerate(eta):
-                x1, x2, y1, y2 = mask_cord_list[batch_start_idx+i]
-                delta = delta[:, x1: x2, y1: y2]
+                # x1, x2, y1, y2 = mask_cord_list[batch_start_idx+i]
+                # delta = delta[:, x1: x2, y1: y2]
                 if torch.is_tensor(random_noise):
                     random_noise[batch_start_idx+i] = delta.detach().cpu().clone()
                 else:
@@ -402,10 +404,10 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         new_random_noise = []
         for idx in range(len(random_noise)):
             sample_noise = random_noise[idx]
-            c, h, w = image.shape[0], image.shape[1], image.shape[2]
-            mask = np.zeros((c, h, w), np.float32)
-            x1, x2, y1, y2 = mask_cord_list[idx]
-            mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+            # c, h, w = image.shape[0], image.shape[1], image.shape[2]
+            # mask = np.zeros((c, h, w), np.float32)
+            # x1, x2, y1, y2 = mask_cord_list[idx]
+            mask = sample_noise.cpu().numpy()
             new_random_noise.append(torch.from_numpy(mask))
         new_random_noise = torch.stack(new_random_noise)
         return new_random_noise
@@ -486,10 +488,10 @@ def main():
             noise = sample_wise_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
         elif args.perturb_type == 'classwise':
             noise = universal_perturbation(noise_generator, trainer, evaluator, model, criterion, optimizer, scheduler, random_noise, ENV)
-        torch.save(noise, os.path.join(args.exp_name, 'perturbation.pt'))
+        torch.save(noise, os.path.join(args.exp_name, '{}_perturbation.pt'.format(args.job_id)))
         logger.info(noise)
         logger.info(noise.shape)
-        logger.info('Noise saved at %s' % (os.path.join(args.exp_name, 'perturbation.pt')))
+        logger.info('Noise saved at %s' % (os.path.join(args.exp_name, '{}_perturbation.pt'.format(args.job_id))))
     else:
         raise('Not implemented yet')
     return

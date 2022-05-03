@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from torch.autograd import Variable
-from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_return_loss_tensor, train_simclr_noise_return_loss_tensor_eot, train_simclr_noise_return_loss_tensor_target_task, train_simclr_noise_return_loss_tensor_full_gpu, get_dbindex_loss, train_simclr_noise_return_loss_tensor_no_eval, train_simclr_noise_return_loss_tensor_no_eval_pos_only
+from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_return_loss_tensor, train_simclr_noise_return_loss_tensor_eot, train_simclr_noise_return_loss_tensor_target_task, train_simclr_noise_return_loss_tensor_full_gpu, get_dbindex_loss, train_simclr_noise_return_loss_tensor_no_eval, train_simclr_noise_return_loss_tensor_no_eval_pos_only, get_linear_noise_dbindex_loss
 from utils import train_diff_transform, train_diff_transform2, train_transform_no_totensor
 
 import time
@@ -25,33 +25,49 @@ class PerturbationTool():
         random_noise = torch.FloatTensor(*noise_shape).uniform_(-self.epsilon, self.epsilon).to(device)
         return random_noise
 
-    def min_min_attack(self, images, labels, model, optimizer, criterion, random_noise=None, sample_wise=False):
+    def min_min_attack(self, images, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, simclr_weight=1, linear_noise_dbindex_weight=0):
         if random_noise is None:
             random_noise = torch.FloatTensor(*images.shape).uniform_(-self.epsilon, self.epsilon).to(device)
 
-        perturb_img = Variable(images.data + random_noise, requires_grad=True)
-        perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
+        # perturb_img = Variable(images.data + random_noise, requires_grad=True)
+
+        # perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
+        perturb = Variable(random_noise, requires_grad=True)
+        perturb_img = torch.clamp(images.data + perturb, 0, 1)
+        
         eta = random_noise
-        for _ in range(self.num_steps):
-            opt = torch.optim.SGD([perturb_img], lr=1e-3)
+        for _step in range(self.num_steps):
+            # print(_step)
+            opt = torch.optim.SGD([perturb], lr=1e-3)
             opt.zero_grad()
             model.zero_grad()
             if isinstance(criterion, torch.nn.CrossEntropyLoss):
                 if hasattr(model, 'classify'):
                     model.classify = True
-                logits = model(perturb_img)
-                loss = criterion(logits, labels)
+                if simclr_weight != 0:
+                    logits = model(perturb_img)
+                    simclr_loss = criterion(logits, labels)
+                else:
+                    simclr_loss = 0
+                if linear_noise_dbindex_weight != 0:
+                    # input('check linear_noise_dbindex_weight')
+                    linear_noise_dbindex_loss = get_linear_noise_dbindex_loss(perturb, labels)
+                else:
+                    linear_noise_dbindex_loss = 0
+                loss = simclr_loss * simclr_weight + linear_noise_dbindex_loss * linear_noise_dbindex_weight
+                # print(type(loss))
             else:
                 logits, loss = criterion(model, perturb_img, labels, optimizer)
             perturb_img.retain_grad()
             loss.backward()
-            eta = self.step_size * perturb_img.grad.data.sign() * (-1)
+            eta = self.step_size * perturb.grad.data.sign() * (-1)
             perturb_img = Variable(perturb_img.data + eta, requires_grad=True)
             eta = torch.clamp(perturb_img.data - images.data, -self.epsilon, self.epsilon)
-            perturb_img = Variable(images.data + eta, requires_grad=True)
-            perturb_img = Variable(torch.clamp(perturb_img, 0, 1), requires_grad=True)
 
-        return perturb_img, eta, loss.item()
+            perturb = Variable(eta, requires_grad=True)
+            perturb_img = torch.clamp(images.data + perturb, 0, 1)
+
+        return perturb_img, eta
 
     def feature_space_distribution_attack(self, group_model, images, target_feature_space, random_noise):
         # if random_noise is None:
@@ -405,7 +421,7 @@ class PerturbationTool():
 
         return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8]):
+    def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if random_noise is None:
             random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
@@ -476,7 +492,20 @@ class PerturbationTool():
                 else:
                     noise_simclr_loss = 0
 
-                loss = dbindex_loss * dbindex_weight + simclr_loss * simclr_weight + noise_dbindex_loss * noise_dbindex_weight + noise_simclr_loss * noise_simclr_weight
+                if linear_noise_dbindex_weight:
+                    linear_noise_dbindex_loss = get_linear_noise_dbindex_loss(perturb, labels[:, linear_noise_dbindex_index])
+                else:
+                    linear_noise_dbindex_loss = 0
+
+                if use_supervised_g != 0:
+                    g_net.zero_grad()
+                    inputs = supervised_transform_train(torch.cat([perturb_img1, perturb_img2], dim=0))
+                    feature, outputs = g_net(inputs)
+                    supervised_loss = supervised_criterion(outputs, labels[:, 1].repeat((2,)))
+                else:
+                    supervised_loss = 0
+
+                loss = dbindex_loss * dbindex_weight + simclr_loss * simclr_weight + noise_dbindex_loss * noise_dbindex_weight + noise_simclr_loss * noise_simclr_weight + supervised_weight * supervised_loss + linear_noise_dbindex_loss * linear_noise_dbindex_weight
                 
                 perturb.retain_grad()
                 loss.backward()

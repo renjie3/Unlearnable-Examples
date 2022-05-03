@@ -19,6 +19,7 @@ parser.add_argument('--no_save', action='store_true', default=False)
 parser.add_argument('--clean_train', action='store_true', default=False)
 parser.add_argument('--pytorch_aug', action='store_true', default=False)
 parser.add_argument('--no_bn', action='store_true', default=False)
+parser.add_argument('--save_noise_input_space', action='store_true', default=False)
 
 # args parse
 args = parser.parse_args()
@@ -88,7 +89,8 @@ def train(net, data_loader, train_optimizer):
 def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
     with torch.no_grad():
         # generate feature bank
         for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):
@@ -133,7 +135,8 @@ def test_ssl(net, memory_data_loader, test_data_loader, k, temperature, epoch, e
 # test for one epoch, use noised image to visualize
 def test_ssl_visualization(net, test_data_visualization, random_noise_class_test, classwise_noise):
     net.eval()
-    c = 10
+    # c = 10
+    c = np.max(memory_data_loader.dataset.targets) + 1
     feature_bank = []
     tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
     with torch.no_grad():

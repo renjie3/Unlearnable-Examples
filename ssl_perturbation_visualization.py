@@ -115,7 +115,8 @@ shutil.copyfile(config_file, os.path.join(exp_path, args.version+'.yaml'))
 
 def plot_distribution(net, test_data_visualization, samplewise_noise, pre_load_name):
     net.eval()
-    c = 10
+    # c = 10
+    c = np.max(test_data_visualization.targets) + 1
     feature_bank = []
     tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
     with torch.no_grad():
@@ -164,7 +165,8 @@ def plot_distribution(net, test_data_visualization, samplewise_noise, pre_load_n
 
 def plot_distribution_2D(net, test_data_visualization, samplewise_noise, pre_load_name):
     net.eval()
-    c = 10
+    # c = 10
+    c = np.max(test_data_visualization.targets) + 1
     out_bank = []
     with torch.no_grad():
         test_data_visualization_loader = DataLoader(test_data_visualization, batch_size=512, shuffle=False, num_workers=16, pin_memory=True)

@@ -45,6 +45,19 @@ class Model(nn.Module):
             return F.normalize(feature, dim=-1), F.normalize(out, dim=-1)
         # return feature, F.normalize(out, dim=-1)
 
+class LinearModel(nn.Module):
+    def __init__(self, shape, n_class):
+        super(LinearModel, self).__init__()
+        feature_length = shape[0] * shape[1] * shape[2]
+        self.fc = nn.Linear(feature_length, n_class)
+    
+    def forward(self, x):
+        feature = x.reshape(x.shape[0], -1)
+        logits = self.fc(feature)
+        out = torch.softmax(logits, dim=1)
+        
+        return logits, out
+
 def nested_children(m: torch.nn.Module):
     children = dict(m.named_children())
     output = {}
