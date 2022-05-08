@@ -39,6 +39,7 @@ parser.add_argument('--perturb_type', default='classwise', type=str, choices=['c
 parser.add_argument('--patch_location', default='center', type=str, choices=['center', 'random'], help='Location of the noise')
 parser.add_argument('--poison_rate', default=1.0, type=float)
 parser.add_argument('--perturb_tensor_filepath', default=None, type=str)
+parser.add_argument('--job_id', type=str, default='')
 args = parser.parse_args()
 
 

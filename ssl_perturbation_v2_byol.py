@@ -125,10 +125,7 @@ parser.add_argument('--not_use_normalized', action='store_true', default=False)
 parser.add_argument('--use_wholeset_center', action='store_true', default=False)
 parser.add_argument('--modify_dbindex', default='', type=str, help='just_test_temp_save_file')
 parser.add_argument('--two_stage_PGD', action='store_true', default=False)
-parser.add_argument('--model_g_augment_first', action='store_true', default=False)
-parser.add_argument('--dbindex_augmentation', action='store_true', default=False)
-parser.add_argument('--linear_xnoise_dbindex_weight', default=0, type=float, help='noise_simclr_weight')
-parser.add_argument('--linear_xnoise_dbindex_index', default=1, type=int, help='noise_simclr_weight')
+parser.add_argument('--cl_algorithm', default='simclr', type=str, help='just_test_temp_save_file')
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 
@@ -166,10 +163,12 @@ import utils
 from utils import train_diff_transform
 import datetime
 from model import Model, LooC, TheoryModel, MICL, LinearModel
+from byol_pytorch import BYOL
 import pandas as pd
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from simclr import test_ssl, train_simclr, train_simclr_noise_return_loss_tensor, train_simclr_target_task, train_simclr_softmax, test_ssl_softmax, train_align, train_looc, train_micl, train_simclr_newneg, train_simclr_2digit, test_intra_inter_sim, test_instance_sim, train_simclr_theory, test_ssl_theory, test_instance_sim_thoery, test_cluster, find_cluster
+from byol_utils import train_byol
 import random
 import matplotlib.pyplot as plt
 import matplotlib
@@ -213,10 +212,7 @@ logger = util.setup_logger(name=args.version, log_file=log_file_path + ".log")
 if not args.no_save:
     logger.info("PyTorch Version: %s" % (torch.__version__))
 if torch.cuda.is_available():
-    torch.manual_seed(args.seed)
     torch.cuda.manual_seed(args.seed)
-    np.random.seed(args.seed)
-    random.seed(args.seed)
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
     device = torch.device('cuda')
@@ -689,7 +685,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     model.train()
                     for param in model.parameters():
                         param.requires_grad = True
-                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform_train_model, pytorch_aug=False)
+                    batch_train_loss, batch_size_count = train_byol(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform_train_model, pytorch_aug=False)
 
                     if args.use_supervised_g:
                         g_net.train()
@@ -699,10 +695,6 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
-                    sum_numerator += numerator
-                    sum_numerator_count += 1
-                    sum_denominator += denominator
-                    sum_denominator_count += 1
 
                     _end = time.time()
 
@@ -783,7 +775,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     dbindex_weight = 0
                 if args.attack_type == 'min-min':
                     if args.min_min_attack_fn == "eot_v1":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight, simclr_weight=args.simclr_weight, augmentation_prob=args.augmentation_prob, clean_weight=args.clean_weight, noise_simclr_weight=args.noise_simclr_weight, double_perturb=args.double_perturb, upper_half_linear=args.upper_half_linear, batch_simclr_mask=batch_simclr_mask, batch_linear_noise=batch_linear_noise, mask_linear_constraint=args.mask_linear_constraint, mask1=batch_mask1, mask2=batch_mask2, mask_linear_noise_range=args.mask_linear_noise_range, use_supervised_g=args.use_supervised_g, g_net=g_net, supervised_criterion=supervised_criterion, supervised_weight=args.supervised_weight, supervised_transform_train=supervised_transform_train, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight, linear_noise_dbindex_index=args.linear_noise_dbindex_index, linear_noise_dbindex_weight2=args.linear_noise_dbindex_weight2, linear_noise_dbindex_index2=args.linear_noise_dbindex_index2, use_mean_dbindex=flag_use_mean_dbindex, use_normalized=flag_use_normalized, noise_centroids=noise_centroids, modify_dbindex=args.modify_dbindex, two_stage_PGD=args.two_stage_PGD, model_g_augment_first=args.model_g_augment_first, dbindex_augmentation=args.dbindex_augmentation, linear_xnoise_dbindex_weight=args.linear_xnoise_dbindex_weight, linear_xnoise_dbindex_index=args.linear_xnoise_dbindex_index,)
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight, simclr_weight=args.simclr_weight, augmentation_prob=args.augmentation_prob, clean_weight=args.clean_weight, noise_simclr_weight=args.noise_simclr_weight, double_perturb=args.double_perturb, upper_half_linear=args.upper_half_linear, batch_simclr_mask=batch_simclr_mask, batch_linear_noise=batch_linear_noise, mask_linear_constraint=args.mask_linear_constraint, mask1=batch_mask1, mask2=batch_mask2, mask_linear_noise_range=args.mask_linear_noise_range, use_supervised_g=args.use_supervised_g, g_net=g_net, supervised_criterion=supervised_criterion, supervised_weight=args.supervised_weight, supervised_transform_train=supervised_transform_train, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight, linear_noise_dbindex_index=args.linear_noise_dbindex_index, linear_noise_dbindex_weight2=args.linear_noise_dbindex_weight2, linear_noise_dbindex_index2=args.linear_noise_dbindex_index2, use_mean_dbindex=flag_use_mean_dbindex, use_normalized=flag_use_normalized, noise_centroids=noise_centroids, modify_dbindex=args.modify_dbindex, two_stage_PGD=args.two_stage_PGD)
                     elif args.min_min_attack_fn == "non_eot":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, split_transform=args.split_transform)
                     else:
@@ -810,8 +802,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 # print("noise_ave_value", noise_ave_value)
         
         train_loss = sum_train_loss / float(sum_train_batch_size)
-        numerator = sum_numerator / float(sum_numerator_count)
-        denominator = sum_denominator / float(sum_denominator_count)
+        numerator = 0
+        denominator = 0
         print(train_loss)
         results['train_loss'].append(train_loss)
         test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
@@ -970,9 +962,7 @@ def main():
                             momentum=0.9, weight_decay=5e-4)
         supervised_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(supervised_optimizer, T_max=epochs)
     else:
-        supervised_transform_train = transforms.Compose([
-            transforms.RandomCrop(32, padding=4),
-        ])
+        supervised_transform_train = None
         g_net = None
         supervised_criterion = None
         supervised_optimizer = None
@@ -1044,8 +1034,13 @@ def main():
                                                 num_steps=args.num_steps,
                                                 step_size=args.step_size)
 
-    model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
-    model = model.cuda()
+    if args.cl_algorithm == 'simclr':
+        model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
+        model = model.cuda()
+    elif args.cl_algorithm == 'byol':
+        backbone = torchvision.models.resnet18()
+        model = BYOL(backbone, image_size = 32, hidden_layer = 'avgpool', use_momentum = True)
+        model = model.cuda()
 
     # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
     # flops, params = clever_format([flops, params])

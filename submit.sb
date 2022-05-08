@@ -7,7 +7,7 @@
 #SBATCH --job-name SimCLR      # you can give your job a name for easier identification (same as -J)
 #SBATCH --time=3:50:00             # limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --cpus-per-task=5           # number of CPUs (or cores) per task (same as -c)
-#SBATCH --gres=gpu:v100s:1
+#SBATCH --gres=gpu:v100:1
 #SBATCH -o /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
 #SBATCH -e /mnt/ufs18/home-145/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
 
@@ -25,7 +25,7 @@ MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52280541_1_20220502215417_0.5_512_2_checkpoint_perturbation_epoch_10 --train_data_type CIFAR100 --samplewise --pytorch_aug --clean_train --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch VGG19 --pre_load_name unlearnable_samplewise_52428805_1_20220505181516_0.5_512_2_checkpoint_perturbation_epoch_20 --samplewise --job_id ${SLURM_JOB_ID}_1"
 MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
 MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 

@@ -72,3 +72,17 @@ python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/
 
 51029070 eot_10 simclr contrastive 效果特别好
 51508207 同上
+
+
+52332131 cifar100
+52366249 eot cifar10 pytorch_aug
+
+52327559 10、20 kmeans simclr_weight0
+52366152 52351432
+
+Submitted batch job 52428866 52428805 比较一下区别
+
+52734683 good
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 51 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --not_use_normalized --linear_noise_dbindex_weight 0.1 --two_stage_PGD
+

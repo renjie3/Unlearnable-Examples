@@ -74,6 +74,7 @@ def train(net, data_loader, train_optimizer):
     for pos_1, pos_2, target in train_bar:
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
         if not args.pytorch_aug:
+            raise('Please use pytorch_aug')
             pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
         feature_1, out_1 = net(pos_1)
         feature_2, out_2 = net(pos_2)
@@ -461,7 +462,7 @@ if __name__ == '__main__':
             train_data.save_noise_img()
         if args.save_noise_input_space:
             noise_input_space = train_data.perturb_tensor.reshape((train_data.perturb_tensor.shape[0], -1))
-            utils.plot_feature(noise_input_space[:2000], train_data.targets[:2000], pre_load_name)
+            utils.plot_feature(noise_input_space[:1000], train_data.targets[:1000], pre_load_name)
             input('save_noise_input_space done')
         # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
         # load noise here:

@@ -70,257 +70,27 @@ def train(net, data_loader, train_optimizer):
 
     return total_loss / total_num
 
-def train_looc(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], n_zspace=3):
-    # train a batch
-    # print("pos_1.shape: ", pos_1.shape)
-    # print("pos_2.shape: ", pos_2.shape)
-    net.train()
-    total_loss, total_num = 0.0, 0
-    # the order of faugmentation_prob in Z space is [colorJitter, rotation, reCrop, None]
-    if n_zspace == 2:
-        base_transform = nn.Sequential(Kaug.RandomResizedCrop([32,32]), Kaug.RandomHorizontalFlip(p=0.5), Kaug.RandomGrayscale(p=0.2))
-        z_augs = [Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=augmentation_prob[0]), 
-                  Kaug.RandomRotation(360, p=augmentation_prob[1])]
-    elif n_zspace == 3:
-        base_transform = nn.Sequential(Kaug.RandomHorizontalFlip(p=0.5), Kaug.RandomGrayscale(p=0.2)) # probability may influence rotation
-        z_augs = [Kaug.ColorJitter(0.4, 0.4, 0.4, 0.1, p=augmentation_prob[0]), 
-                  Kaug.RandomRotation(360, p=augmentation_prob[1]),
-                  Kaug.RandomResizedCrop([32,32], p=augmentation_prob[2])
-                  ]
-        
-    pos_1 = pos_1.cuda(non_blocking=True)
-    view_q = base_transform(pos_1)
-    q_aug_params = []
-    for z_aug in z_augs:
-        view_q = z_aug(view_q)
-        q_aug_params.append(z_aug._params)
-    
-    view_0 = base_transform(pos_1)
-    for z_aug in z_augs:
-        view_0 = z_aug(view_0)
-        
-    views = [pos_1, view_q, view_0]
-        
-    for i in range(n_zspace):
-        view = base_transform(pos_1)
-        for j in range(len(z_augs)):
-            if j == i:
-                # example: transform(x_rgb, params=transform._params)
-                view = z_augs[j](view, params=q_aug_params[j])
-            else:
-                view = z_augs[j](view)
-        views.append(view)
-    
-    features, outs = net(views) # [x,q,I0-In]
-    z_loss = 0
-    z0 = outs[0]
-    pos_z0 = 0
-    for i in range(2,n_zspace + 3):
-        # [B]
-        pos_z0 += torch.exp(torch.sum(z0[1] * z0[i], dim=-1) / temperature)
-    # [B, B]
-    simmat_q_x = torch.exp(torch.mm(z0[1], z0[0].t().contiguous()) / temperature)
-    mask = (torch.ones_like(simmat_q_x) - torch.eye(pos_1.shape[0], device=simmat_q_x.device)).bool()
-    # [B, B-1]
-    simmat_q_x = simmat_q_x.masked_select(mask).view(pos_1.shape[0], -1)
-    z_loss += (- torch.log(pos_z0 / simmat_q_x.sum(dim=-1))).mean()
-    
-    for i in range(3, n_zspace+3):
-        zi = outs[i-2]
-        pos_zi = 0
-        neg_zi_Ik = 0
-        for j in range(2,n_zspace+3):
-            # [B]
-            if j == i:
-                pos_zi += torch.exp(torch.sum(zi[1] * zi[j], dim=-1) / temperature)
-            else:
-                neg_zi_Ik += torch.exp(torch.sum(zi[1] * zi[j], dim=-1) / temperature)
-        simmat_q_x = torch.exp(torch.mm(z0[1], z0[0].t().contiguous()) / temperature)
-        mask = (torch.ones_like(simmat_q_x) - torch.eye(pos_1.shape[0], device=simmat_q_x.device)).bool()
-        # [B, B-1]
-        simmat_q_x = simmat_q_x.masked_select(mask).view(pos_1.shape[0], -1)
-        z_loss += (- torch.log(pos_zi / (neg_zi_Ik + simmat_q_x.sum(dim=-1)))).mean()
-    
-    # # [2*B, D]
-    # out = torch.cat([q_1, out_2], dim=0)
-    # # [2*B, 2*B]
-    # sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
-    # mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
-    # # [2*B, 2*B-1]
-    # sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
-
-    # # compute loss
-    # pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
-    # # [2*B]
-    # pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
-    # loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
-    
-    loss = z_loss
-    
-    train_optimizer.zero_grad()
-    loss.backward()
-    train_optimizer.step()
-
-    # total_num += batch_size
-    total_loss = loss.item()
-    # # train_bar.set_description('Train Epoch: [{}/{}] Loss: {:.4f}'.format(epoch, epochs, total_loss / total_num))
-    # print(pos_sim.shape)
-    # print(sim_matrix.sum(dim=-1).shape)
-    # input()
-
-    return total_loss * pos_1.shape[0], pos_1.shape[0]
-
-def train_micl(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], n_zspace=3):
-    # train a batch
-    # print("pos_1.shape: ", pos_1.shape)
-    # print("pos_2.shape: ", pos_2.shape)
-    net.train()
-    total_loss, total_num = 0.0, 0
-    # the order of faugmentation_prob in Z space is [colorJitter, rotation, reCrop, None]
-    # the order of input params of train_diff_transform_prob2 is [recrop, hflip, cj, gray, rot]
-    if n_zspace == 2:
-        augs = [utils.train_diff_transform_prob2(1.0, 0.5, augmentation_prob[0], 0.2, 0), 
-                utils.train_diff_transform_prob2(1.0, 0.5, 0, 0.2, augmentation_prob[1])]
-    elif n_zspace == 3:
-        augs = [utils.train_diff_transform_prob2(0, 0.5, augmentation_prob[0], 0.2, 0), 
-                utils.train_diff_transform_prob2(0, 0.5, 0, 0.2, augmentation_prob[1]),
-                utils.train_diff_transform_prob2(augmentation_prob[2], 0.5, 0, 0.2, 0),]
-        
-    pos_1 = pos_1.cuda(non_blocking=True)
-    views_1 = []
-    views_2 = []
-    for i in range(n_zspace):
-        views_1.append(augs[i](pos_1))
-        views_2.append(augs[i](pos_1))
-    
-    features_1, outs_1 = net(views_1)
-    features_2, outs_2 = net(views_2)
-    
-    z_loss = []
-    loss = 0
-    for i in range(n_zspace):
-        out_1, out_2 = outs_1[i], outs_2[i]
-        # [2*B, D]
-        out = torch.cat([out_1, out_2], dim=0)
-        # [2*B, 2*B]
-        sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
-        mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
-        # [2*B, 2*B-1]
-        sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
-
-        # compute loss
-        pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
-        # [2*B]
-        pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
-        loss_single_space = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
-        loss += loss_single_space
-        z_loss.append(loss_single_space)
-    
-    train_optimizer.zero_grad()
-    loss.backward()
-    train_optimizer.step()
-
-    total_loss = loss.item()
-    for i in range(len(z_loss)):
-        z_loss[i] = z_loss[i].item()*pos_1.shape[0]
-
-    return total_loss * pos_1.shape[0], pos_1.shape[0], z_loss
-
-def train_align(net, pos_1, pos_2, train_optimizer, normalize=False):
-    net.train()
-    total_loss, total_num = 0.0, 0.0
-        
-    pos_1, pos_2 = pos_1.cuda(non_blocking=True)[:,0,:,0], pos_2.cuda(non_blocking=True)[:,0,:,0]
-    
-    out_1 = net(pos_1)
-    out_2 = net(pos_2)
-    
-    a = 0.01
-    
-    if normalize:
-        l_align = (out_1 - out_2)**2
-        loss = torch.mean(l_align)
-    else:
-        l_align = (out_1 - out_2)**2
-        # l_norm = out_1**2 + out_2**2
-        loss = torch.mean(l_align) # + a / torch.mean(out_1**2) + a / torch.mean(out_2**2)
-        L1_reg = torch.tensor(0., requires_grad=True)
-        for name, param in net.named_parameters():
-            if 'weight' in name:
-                L1_reg = L1_reg + torch.norm(param, 1)
-        loss += a / L1_reg
-    
-    train_optimizer.zero_grad()
-    loss.backward()
-    train_optimizer.step()
-
-    total_loss = loss.item()
-
-    return total_loss * pos_1.shape[0], pos_1.shape[0]
-
-def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], pytorch_aug=False):
+def train_byol(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], pytorch_aug=False):
     # train a batch
     # print("pos_1.shape: ", pos_1.shape)
     # print("pos_2.shape: ", pos_2.shape)
     net.train()
     total_loss, total_num = 0.0, 0
     # for pos_1, pos_2, target in train_bar:
-    transform_func = {'simclr': train_diff_transform, 
-                      'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
-                      'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
-                      'ReCrop_Hflip_Con': utils.train_diff_transform_ReCrop_Hflip_Con,
-                      'ReCrop_Hflip_Sat': utils.train_diff_transform_ReCrop_Hflip_Sat,
-                      'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
-                      'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
-                      'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
-                      'Tri': utils.train_diff_transform_Tri, 
-                      }
-    if np.sum(augmentation_prob) == 0:
-        if augmentation in transform_func:
-            my_transform_func = transform_func[augmentation]
-        else:
-            raise("Wrong augmentation.")
-    else:
-        my_transform_func = utils.train_diff_transform_prob(*augmentation_prob)
+    train_transform_no_totensor = transforms.Compose([
+        transforms.RandomResizedCrop(image_size),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
+        transforms.RandomGrayscale(p=0.2),
+        # transforms.ToTensor(),
+        # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+        ])
         
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-    if not noise_after_transform:
-        if mix in ['concat_samplewise_train_mnist_18_128', 'concat_samplewise_all_mnist_18_128']:
-            pos_1, pos_2 = train_diff_transform_resize48(pos_1), train_diff_transform_resize48(pos_2)
-        elif mix in ['concat4_samplewise_train_mnist_18_128', 'concat4_samplewise_all_mnist_18_128']:
-            pos_1, pos_2 = train_diff_transform_resize64(pos_1), train_diff_transform_resize64(pos_2)
-        elif mix in ['mnist']:
-            pos_1, pos_2 = train_diff_transform_resize28(pos_1), train_diff_transform_resize28(pos_2)
-        else:
-            if pytorch_aug:
-                # input('check pytorch_aug')
-                pos_1, pos_2 = train_transform_no_totensor(pos_1), train_transform_no_totensor(pos_2)
-            else:
-                pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
+    pos_1, pos_2 = transform_func(pos_1), transform_func(pos_2)
         # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     # input(pos_1.shape)
-    feature_1, out_1 = net(pos_1)
-    feature_2, out_2 = net(pos_2)
-    # [2*B, D]
-    out = torch.cat([out_1, out_2], dim=0)
-    # [2*B, 2*B]
-    sim_matrix = torch.exp(torch.mm(out, out.t().contiguous()) / temperature)
-    mask = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device)).bool()
-    pos_den_mask1 = torch.cat([torch.zeros((pos_1.shape[0], pos_1.shape[0]), device=sim_matrix.device), torch.eye(pos_1.shape[0], device=sim_matrix.device)], dim=0)
-    pos_den_mask2 = torch.cat([torch.eye(pos_1.shape[0], device=sim_matrix.device), torch.zeros((pos_1.shape[0], pos_1.shape[0]), device=sim_matrix.device)], dim=0)
-    pos_den_mask = torch.cat([pos_den_mask1, pos_den_mask2], dim=1)
-    mask2 = (torch.ones_like(sim_matrix) - torch.eye(2 * pos_1.shape[0], device=sim_matrix.device) - pos_den_mask).bool()
-    # [2*B, 2*B-1]
-    neg_sim_matrix2 = sim_matrix.masked_select(mask2).view(2 * pos_1.shape[0], -1)
-    sim_matrix = sim_matrix.masked_select(mask).view(2 * pos_1.shape[0], -1)
-    
-    sim_weight, sim_indices = neg_sim_matrix2.topk(k=10, dim=-1)
-
-    # compute loss
-    pos_sim = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
-    # [2*B]
-    pos_sim = torch.cat([pos_sim, pos_sim], dim=0)
-    loss = (- torch.log(pos_sim / sim_matrix.sum(dim=-1))).mean()
+    loss = net(pos_1, pos_2)
     train_optimizer.zero_grad()
     loss.backward()
     train_optimizer.step()
@@ -332,7 +102,7 @@ def train_simclr(net, pos_1, pos_2, train_optimizer, batch_size, temperature, no
     # print(sim_matrix.sum(dim=-1).shape)
     # input()
 
-    return total_loss * pos_1.shape[0], pos_1.shape[0], torch.log(pos_sim.mean()).item() / 2, torch.log(sim_weight.mean()).item() / 2
+    return total_loss * pos_1.shape[0], pos_1.shape[0]
 
 def train_simclr_dbindex(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], dbindex_weight=0, pytorch_aug=False, simclr_weight=1, labels=None):
     # train a batch

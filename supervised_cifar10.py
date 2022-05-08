@@ -16,7 +16,9 @@ parser.add_argument('--local', default='', type=str, help='The gpu number used o
 parser.add_argument('--clean_train', action='store_true', default=False)
 parser.add_argument('--class_4', action='store_true', default=False)
 parser.add_argument('--samplewise', action='store_true', default=False)
+parser.add_argument('--arch', default='resnet18', type=str, help='load_model_path')
 parser.add_argument('--train_data_type', default='cifar10', type=str, help='the data used to train')
+parser.add_argument('--poison_rate', default=1, type=float, help='learning rate')
 args = parser.parse_args()
 
 import os
@@ -35,7 +37,7 @@ import torchvision.transforms as transforms
 from supervised_models import *
 # from utils import progress_bar
 from tqdm import tqdm
-from utils import TransferCIFAR10Pair, CIFAR10Pair, TransferCIFAR100Pair, CIFAR100Pair
+from utils import TransferCIFAR10Pair, CIFAR10Pair, TransferCIFAR100Pair, CIFAR100Pair, PoisonTransferCIFAR10Pair
 
 from sklearn import metrics
 
@@ -55,7 +57,10 @@ def train(epoch, optimizer):
     for pos_1, pos_2, targets in train_bar:
         inputs, targets = pos_1.to(device), targets.to(device)
         optimizer.zero_grad()
-        feature, outputs = net(inputs)
+        if args.arch == 'resnet18':
+            feature, outputs = net(inputs)
+        else:
+            outputs = net(inputs)
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
@@ -82,7 +87,10 @@ def test(epoch, optimizer, save_name_pre):
     with torch.no_grad():
         for pos_1, pos_2, targets in test_bar:
             inputs, targets = pos_1.to(device), targets.to(device)
-            feature, outputs = net(inputs)
+            if args.arch == 'resnet18':
+                feature, outputs = net(inputs)
+            else:
+                outputs = net(inputs)
             loss = criterion(outputs, targets)
 
             test_loss += loss.item()
@@ -166,7 +174,10 @@ if __name__ == '__main__':
         save_name_pre = pre_load_name + "_supervised_class{}".format(args.num_class)
 
     if args.train_data_type == 'cifar10':
-        trainset = TransferCIFAR10Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=args.class_4, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
+        if args.poison_rate == 1:
+            trainset = TransferCIFAR10Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=args.class_4, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
+        else:
+            trainset = PoisonTransferCIFAR10Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=args.class_4, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train, perturb_rate=args.poison_rate)
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=128, shuffle=True, num_workers=2)
 
         testset = CIFAR10Pair(root='data', train=False, transform=transform_test, download=True, class_4=args.class_4)
@@ -183,9 +194,10 @@ if __name__ == '__main__':
         
 
     # Model
-    print('==> Building model..')
+    print('==> Building model.. {}'.format(args.arch))
+    
     # net = VGG('VGG19')
-    net = ResNet18(args.num_class)
+    # net = ResNet18(args.num_class)
     # net = PreActResNet18()
     # net = GoogLeNet()
     # net = DenseNet121()
@@ -199,6 +211,32 @@ if __name__ == '__main__':
     # net = EfficientNetB0()
     # net = RegNetX_200MF()
     # net = SimpleDLA()
+
+    model_zoo = {'VGG': VGG,
+    'resnet18': ResNet18,
+    'PreActResNet18': PreActResNet18,
+    'GoogLeNet': GoogLeNet,
+    'DenseNet121': DenseNet121,
+    'ResNeXt29_2x64d': ResNeXt29_2x64d,
+    'MobileNet': MobileNet,
+    'MobileNetV2': MobileNetV2,
+    'DPN92': DPN92,
+    'ShuffleNetG2': ShuffleNetG2,
+    'SENet18': SENet18,
+    # 'ShuffleNetV2': ShuffleNetV2(1),
+    'EfficientNetB0': EfficientNetB0,
+    'RegNetX_200MF': RegNetX_200MF,
+    'simpledla': SimpleDLA}
+
+    if 'VGG' in args.arch:
+        net = model_zoo['VGG'](args.arch)
+    elif args.arch in ['DenseNet121', 'PreActResNet18', 'GoogLeNet']:
+        net = model_zoo[args.arch]()
+    elif args.arch =='resnet18':
+        net = model_zoo[args.arch](args.num_class)
+    else:
+        net = model_zoo[args.arch]() #(args.num_class)
+
     net = net.to(device)
     if device == 'cuda':
         net = torch.nn.DataParallel(net)

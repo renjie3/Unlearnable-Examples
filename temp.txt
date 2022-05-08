@@ -1,162 +1,37 @@
-unlearnable_theory_44712142_1_20220125152151_0.5_512_1000_final_model
-unlearnable_theory_44712142_2_20220125152151_0.5_512_1000_final_model
-unlearnable_theory_44712142_3_20220125152151_0.5_512_1000_final_model
-unlearnable_theory_44712159_1_20220125152504_0.5_512_1000_final_model
-unlearnable_theory_44712159_2_20220125152504_0.5_512_1000_final_model
-unlearnable_theory_44712159_3_20220125152504_0.5_512_1000_final_model
-unlearnable_theory_44712169_1_20220125152504_0.5_512_1000_final_model
-unlearnable_theory_44712169_2_20220125152504_0.5_512_1000_final_model
-unlearnable_theory_44712169_3_20220125152504_0.5_512_1000_final_model
-unlearnable_theory_44712170_1_20220125152512_0.5_512_1000_final_model
-unlearnable_theory_44712170_2_20220125152512_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44712176_1_20220125152550_0.5_512_1000_final_model
-unlearnable_theory_44712176_2_20220125152550_0.5_512_1000_final_model
-unlearnable_theory_44712176_3_20220125152550_0.5_512_1000_final_model
-unlearnable_theory_44712177_1_20220125152550_0.5_512_1000_final_model
-unlearnable_theory_44712177_2_20220125152550_0.5_512_1000_final_model
-unlearnable_theory_44712177_3_20220125152550_0.5_512_1000_final_model
-unlearnable_theory_44712178_1_20220125152631_0.5_512_1000_final_model
-unlearnable_theory_44712178_2_20220125152631_0.5_512_1000_final_model
-unlearnable_theory_44712178_3_20220125152631_0.5_512_1000_final_model
-unlearnable_theory_44712180_1_20220125152744_0.5_512_1000_final_model
-unlearnable_theory_44712180_2_20220125152744_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44712192_1_20220125153350_0.5_512_1000_final_model
-unlearnable_theory_44712192_2_20220125153350_0.5_512_1000_final_model
-unlearnable_theory_44712192_3_20220125153350_0.5_512_1000_final_model
-unlearnable_theory_44712200_1_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712200_2_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712200_3_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712202_1_20220125153758_0.5_512_1000_final_model
-unlearnable_theory_44712202_2_20220125153758_0.5_512_1000_final_model
-unlearnable_theory_44712202_3_20220125153758_0.5_512_1000_final_model
-unlearnable_theory_44712203_1_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712203_2_20220125153819_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44712204_1_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712204_2_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712204_3_20220125153819_0.5_512_1000_final_model
-unlearnable_theory_44712205_1_20220125153910_0.5_512_1000_final_model
-unlearnable_theory_44712205_2_20220125153910_0.5_512_1000_final_model
-unlearnable_theory_44712205_3_20220125153910_0.5_512_1000_final_model
-unlearnable_theory_44712206_1_20220125153910_0.5_512_1000_final_model
-unlearnable_theory_44712206_2_20220125153910_0.5_512_1000_final_model
-unlearnable_theory_44712206_3_20220125153910_0.5_512_1000_final_model
-unlearnable_theory_44712207_1_20220125153956_0.5_512_1000_final_model
-unlearnable_theory_44712207_2_20220125153956_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44712211_1_20220125154557_0.5_512_1000_final_model
-unlearnable_theory_44712211_2_20220125154557_0.5_512_1000_final_model
-unlearnable_theory_44712211_3_20220125154557_0.5_512_1000_final_model
-unlearnable_theory_44712212_1_20220125154656_0.5_512_1000_final_model
-unlearnable_theory_44712212_2_20220125154655_0.5_512_1000_final_model
-unlearnable_theory_44712212_3_20220125154656_0.5_512_1000_final_model
-unlearnable_theory_44712214_1_20220125154958_0.5_512_1000_final_model
-unlearnable_theory_44712214_2_20220125154958_0.5_512_1000_final_model
-unlearnable_theory_44712214_3_20220125154958_0.5_512_1000_final_model
-unlearnable_theory_44712215_1_20220125155047_0.5_512_1000_final_model
-unlearnable_theory_44712215_2_20220125155046_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44712216_1_20220125155047_0.5_512_1000_final_model
-unlearnable_theory_44712216_2_20220125155046_0.5_512_1000_final_model
-unlearnable_theory_44712216_3_20220125155046_0.5_512_1000_final_model
-unlearnable_theory_44712218_1_20220125155046_0.5_512_1000_final_model
-unlearnable_theory_44712218_2_20220125155046_0.5_512_1000_final_model
-unlearnable_theory_44712218_3_20220125155046_0.5_512_1000_final_model
-unlearnable_theory_44712219_1_20220125155043_0.5_512_1000_final_model
-unlearnable_theory_44712219_2_20220125155043_0.5_512_1000_final_model
-unlearnable_theory_44712219_3_20220125155043_0.5_512_1000_final_model
-unlearnable_theory_44712220_1_20220125155045_0.5_512_1000_final_model
-unlearnable_theory_44712220_2_20220125155045_0.5_512_1000_final_model
-
-
-/
-
-
-unlearnable_theory_44718002_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718002_2_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718002_3_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718003_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718003_2_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718003_3_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718004_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718004_2_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718004_3_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718006_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718006_2_20220125195731_0.5_512_1000_final_model
-
-
-/
-
-unlearnable_theory_44718002_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718002_2_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718002_3_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718003_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718003_2_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718003_3_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718004_1_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718004_2_20220125195731_0.5_512_1000_final_model
-unlearnable_theory_44718004_3_20220125195731_0.5_512_1000_final_model
-
-
-/
-
-unlearnable_theory_44739025_1_20220126154841_0.5_512_1000_final_model
-unlearnable_theory_44739025_2_20220126154841_0.5_512_1000_final_model
-unlearnable_theory_44739025_3_20220126154841_0.5_512_1000_final_model
-unlearnable_theory_44739056_1_20220126160111_0.5_512_1000_final_model
-unlearnable_theory_44739056_2_20220126160111_0.5_512_1000_final_model
-unlearnable_theory_44739056_3_20220126160111_0.5_512_1000_final_model
-unlearnable_theory_44739088_1_20220126161549_0.5_512_1000_final_model
-unlearnable_theory_44739088_2_20220126161549_0.5_512_1000_final_model
-unlearnable_theory_44739088_3_20220126161549_0.5_512_1000_final_model
-unlearnable_theory_44739089_1_20220126162927_0.5_512_1000_final_model
-unlearnable_theory_44739089_2_20220126162927_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44739672_1_20220126164320_0.5_512_1000_final_model
-unlearnable_theory_44739672_2_20220126164320_0.5_512_1000_final_model
-unlearnable_theory_44739672_3_20220126164320_0.5_512_1000_final_model
-unlearnable_theory_44739673_1_20220126165657_0.5_512_1000_final_model
-unlearnable_theory_44739673_2_20220126165657_0.5_512_1000_final_model
-unlearnable_theory_44739673_3_20220126165657_0.5_512_1000_final_model
-unlearnable_theory_44739687_1_20220126171154_0.5_512_1000_final_model
-unlearnable_theory_44739687_2_20220126171155_0.5_512_1000_final_model
-unlearnable_theory_44739687_3_20220126171155_0.5_512_1000_final_model
-
-/
-
-unlearnable_theory_44756401_1_20220126212301_0.5_512_1000_final_model
-unlearnable_theory_44756401_2_20220126212300_0.5_512_1000_final_model
-unlearnable_theory_44756401_3_20220126212300_0.5_512_1000_final_model
-unlearnable_theory_44756417_1_20220126212828_0.5_512_1000_final_model
-unlearnable_theory_44756417_2_20220126212828_0.5_512_1000_final_model
-unlearnable_theory_44756417_3_20220126212828_0.5_512_1000_final_model
-unlearnable_theory_44756421_1_20220126213639_0.5_512_1000_final_model
-unlearnable_theory_44756421_2_20220126213639_0.5_512_1000_final_model
-unlearnable_theory_44756421_3_20220126213639_0.5_512_1000_final_model
-unlearnable_theory_44756422_1_20220126213921_0.5_512_1000_final_model
-unlearnable_theory_44756422_2_20220126213921_0.5_512_1000_final_model
-unlearnable_theory_44756422_3_20220126213921_0.5_512_1000_final_model
-
-
-/
-
-unlearnable_theory_44764244_1_20220126224916_0.5_512_1000_final_model
-unlearnable_theory_44764244_2_20220126224916_0.5_512_1000_final_model
-unlearnable_theory_44764244_3_20220126224916_0.5_512_1000_final_model
-unlearnable_theory_44764460_1_20220126224951_0.5_512_1000_final_model
-unlearnable_theory_44764460_2_20220126224951_0.5_512_1000_final_model
-unlearnable_theory_44764460_3_20220126224951_0.5_512_1000_final_model
+52265910  cmse-gpu   SimCLR  renjie3  R   13:34:33      1 nvl-001
+52229020  cmse-gpu   SimCLR  renjie3  R 1-13:51:32      1 nvl-007
+52265908  cmse-gpu   SimCLR  renjie3  R   18:37:45      1 nvl-001
+52260435  cmse-gpu   SimCLR  renjie3  R 1-06:55:22      1 nvl-001
+52260429  cmse-gpu   SimCLR  renjie3  R 1-07:51:40      1 nvl-001
+52258233  cmse-gpu   SimCLR  renjie3  R 1-08:47:05      1 nvl-001
+52258240  cmse-gpu   SimCLR  renjie3  R 1-08:47:05      1 nvl-001
+52258189  cmse-gpu   SimCLR  renjie3  R 1-08:50:08      1 nvl-001
+52277591 general-l   SimCLR  renjie3 PD       0:00      1 (Priority)
+52242950 general-l   SimCLR  renjie3  R 1-18:24:17      1 nvl-007
+52242947 general-l   SimCLR  renjie3  R 1-17:49:05      1 nvf-019
+52242948 general-l   SimCLR  renjie3  R 1-17:25:21      1 nvf-018
+52242949 general-l   SimCLR  renjie3  R 1-16:31:27      1 nvf-018
+52242951 general-l   SimCLR  renjie3  R 1-14:36:16      1 nvl-007
+52260275 general-l   SimCLR  renjie3  R 1-07:43:21      1 nvf-018
+52260377 general-l   SimCLR  renjie3  R 1-07:43:21      1 nvf-018
+52260390 general-l   SimCLR  renjie3  R 1-07:32:07      1 nvf-020
+52260407 general-l   SimCLR  renjie3  R 1-07:32:07      1 nvf-020
+52260409 general-l   SimCLR  renjie3  R 1-06:53:04      1 nvf-020
+52277590 general-l   SimCLR  renjie3  R   13:23:27      1 nvf-019
+52277589 general-l   SimCLR  renjie3  R   19:16:10      1 nvf-019
+52321004 general-l   SimCLR  renjie3 PD       0:00      1 (Priority)
+52321003 general-l   SimCLR  renjie3 PD       0:00      1 (Priority)
+52321002 general-l   SimCLR  renjie3 PD       0:00      1 (Priority)
+52314569 general-s   SimCLR  renjie3  R    2:28:46      1 nvf-000
+52314570 general-s   SimCLR  renjie3  R    2:28:46      1 nvf-007
+52316681 general-s   SimCLR  renjie3  R    1:21:17      1 nvf-009
+52311463 general-s   SimCLR  renjie3  R    3:27:16      1 nvf-007
+52311448 general-s   SimCLR  renjie3  R    3:29:58      1 nvf-000
+52311411 general-s   SimCLR  renjie3  R    3:36:12      1 nvf-000
+52318849 general-s   SimCLR  renjie3  R      33:24      1 nvf-001
+52315865 general-s   SimCLR  renjie3  R    1:45:09      1 nvf-000
+52314758 general-s   SimCLR  renjie3  R    2:22:26      1 nvf-007
+52314780 general-s   SimCLR  renjie3  R    2:22:26      1 nvf-007
+52318871 general-s   SimCLR  renjie3  R      33:24      1 nvf-003
+52318737 general-s   SimCLR  renjie3  R      37:06      1 nvf-001
+52318740 general-s   SimCLR  renjie3  R      37:06      1 nvf-001

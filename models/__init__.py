@@ -21,7 +21,7 @@ mlconfig.register(ResNet.ResNet50)
 mlconfig.register(ResNet.ResNet101)
 mlconfig.register(ResNet.ResNet152)
 mlconfig.register(ToyModel.ToyModel)
-mlconfig.register(DenseNet.DenseNet121)
+# mlconfig.register(DenseNet.DenseNet121)
 mlconfig.register(inception_resnet_v1.InceptionResnetV1)
 # torchvision models
 mlconfig.register(torchvision.models.resnet18)
