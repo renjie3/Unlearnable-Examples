@@ -33,7 +33,6 @@ import matplotlib
 from matplotlib.colors import ListedColormap
 
 from torchvision import transforms
-
 import torch.nn.functional as F
 
 import faiss
@@ -74,49 +73,49 @@ def train(net, data_loader, train_optimizer):
 
     return total_loss / total_num
 
-def train_byol(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], pytorch_aug=False):
+def train_simsiam(net, pos_1, pos_2, train_optimizer, batch_size, temperature, noise_after_transform=False, mix="no", augmentation="simclr", augmentation_prob=[0,0,0,0], pytorch_aug=False):
     # train a batch
     # print("pos_1.shape: ", pos_1.shape)
     # print("pos_2.shape: ", pos_2.shape)
     net.train()
     total_loss, total_num = 0.0, 0
     # for pos_1, pos_2, target in train_bar:
-    # transform_func = transforms.Compose([
-    #     transforms.RandomResizedCrop(32),
-    #     transforms.RandomHorizontalFlip(p=0.5),
-    #     transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
-    #     transforms.RandomGrayscale(p=0.2),
-    #     # transforms.ToTensor(),
-    #     # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
-    #     ])
+    transform_func = transforms.Compose([
+        transforms.RandomResizedCrop(32),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
+        transforms.RandomGrayscale(p=0.2),
+        # transforms.ToTensor(),
+        # transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+        ])
 
-    transform_func = {'simclr': train_diff_transform, 
-                      'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
-                      'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
-                      'ReCrop_Hflip_Con': utils.train_diff_transform_ReCrop_Hflip_Con,
-                      'ReCrop_Hflip_Sat': utils.train_diff_transform_ReCrop_Hflip_Sat,
-                      'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
-                      'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
-                      'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
-                      'Tri': utils.train_diff_transform_Tri, 
-                      }
-    if np.sum(augmentation_prob) == 0:
-        if augmentation in transform_func:
-            my_transform_func = transform_func[augmentation]
-        else:
-            raise("Wrong augmentation.")
-    else:
-        my_transform_func = utils.train_diff_transform_prob(*augmentation_prob)
+    # transform_func = {'simclr': train_diff_transform, 
+    #                   'ReCrop_Hflip': utils.train_diff_transform_ReCrop_Hflip,
+    #                   'ReCrop_Hflip_Bri': utils.train_diff_transform_ReCrop_Hflip_Bri,
+    #                   'ReCrop_Hflip_Con': utils.train_diff_transform_ReCrop_Hflip_Con,
+    #                   'ReCrop_Hflip_Sat': utils.train_diff_transform_ReCrop_Hflip_Sat,
+    #                   'ReCrop_Hflip_Hue': utils.train_diff_transform_ReCrop_Hflip_Hue,
+    #                   'Hflip_Bri': utils.train_diff_transform_Hflip_Bri,
+    #                   'ReCrop_Bri': utils.train_diff_transform_ReCrop_Bri,
+    #                   'Tri': utils.train_diff_transform_Tri, 
+    #                   }
+    # if np.sum(augmentation_prob) == 0:
+    #     if augmentation in transform_func:
+    #         my_transform_func = transform_func[augmentation]
+    #     else:
+    #         raise("Wrong augmentation.")
+    # else:
+    #     my_transform_func = utils.train_diff_transform_prob(*augmentation_prob)
         
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-    pos_1, pos_2 = my_transform_func(pos_1), my_transform_func(pos_2)
+    pos_1, pos_2 = transform_func(pos_1), transform_func(pos_2)
         # pos_1, pos_2 = train_diff_transform(pos_1), train_diff_transform(pos_2)
     # input(pos_1.shape)
     loss = net(pos_1, pos_2)
     train_optimizer.zero_grad()
     loss.backward()
     train_optimizer.step()
-    net.update_moving_average()
+    # net.update_moving_average()
 
     # total_num += batch_size
     total_loss = loss.item()
@@ -155,14 +154,14 @@ def train_byol_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batc
 
 
 # test for one epoch, use weighted knn to find the most similar images' label to assign the test image
-def test_byol(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
+def test_simsiam(net, memory_data_loader, test_data_loader, k, temperature, epoch, epochs):
     net.eval()
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
     # c = 10
     with torch.no_grad():
         # generate feature bank
         for data, _, target in tqdm(memory_data_loader, desc='Feature extracting'):
-            out, feature = net(data.cuda(non_blocking=True), return_embedding=True)
+            feature = net(data.cuda(non_blocking=True))
             feature = F.normalize(feature, dim=1)
             feature_bank.append(feature)
             # print("data.shape:", data.shape)
@@ -178,7 +177,7 @@ def test_byol(net, memory_data_loader, test_data_loader, k, temperature, epoch, 
         test_bar = tqdm(test_data_loader)
         for data, _, target in test_bar:
             data, target = data.cuda(non_blocking=True), target.cuda(non_blocking=True)
-            out, feature = net(data, return_embedding=True)
+            feature = net(data)
             feature = F.normalize(feature, dim=1)
 
             total_num += data.size(0)

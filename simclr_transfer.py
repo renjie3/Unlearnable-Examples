@@ -21,6 +21,7 @@ parser.add_argument('--pytorch_aug', action='store_true', default=False)
 parser.add_argument('--no_bn', action='store_true', default=False)
 parser.add_argument('--save_noise_input_space', action='store_true', default=False)
 parser.add_argument('--train_data_type', default='CIFAR10', type=str, help='The backbone of encoder')
+parser.add_argument('--ignore_model_size', action='store_true', default=False)
 
 parser.add_argument('--load_model', action='store_true', default=False)
 parser.add_argument('--load_model_path', default='', type=str, help='load_model_path')
@@ -514,9 +515,10 @@ if __name__ == '__main__':
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints['state_dict'])
 
-    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    flops, params = clever_format([flops, params])
-    print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    if not args.ignore_model_size:
+        flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+        flops, params = clever_format([flops, params])
+        print('# Model Params: {} FLOPs: {}'.format(params, flops))
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     # optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1, weight_decay=0.0005, momentum=0.9)
 
@@ -541,7 +543,7 @@ if __name__ == '__main__':
             for i in range(len(results[key])):
                 load_list.append(results[key][i+1])
             results[key] = load_list
-        best_loss = results['best_acc'][len(results['best_acc'])-1]
+        best_acc = results['best_acc'][len(results['best_acc'])-1]
         best_acc_loss = results['best_acc_loss'][len(results['best_acc_loss'])-1]
     else:
         results = {'train_loss': [], 'test_acc@1': [], 'test_acc@5': [], 'best_acc': [], 'best_acc_loss': []}

@@ -163,11 +163,11 @@ class NetWrapper(nn.Module):
 
         projector = self._get_projector(representation)
         projection = projector(representation)
-        return projection, representation
+        return representation, projection
 
 # main class
 
-class BYOL(nn.Module):
+class BYOL_(nn.Module):
     def __init__(
         self,
         net,
@@ -187,7 +187,7 @@ class BYOL(nn.Module):
 
         # DEFAULT_AUG = torch.nn.Sequential(
         #     RandomApply(
-        #         T.ColorJitter(0.4, 0.4, 0.4, 0.1),
+        #         T.ColorJitter(0.8, 0.8, 0.8, 0.2),
         #         p = 0.3
         #     ),
         #     T.RandomGrayscale(p=0.2),
@@ -197,9 +197,9 @@ class BYOL(nn.Module):
         #         p = 0.2
         #     ),
         #     T.RandomResizedCrop((image_size, image_size)),
-        #     T.Normalize(
-        #         mean=torch.tensor([0.485, 0.456, 0.406]),
-        #         std=torch.tensor([0.229, 0.224, 0.225])),
+        #     # T.Normalize(
+        #     #     mean=torch.tensor([0.485, 0.456, 0.406]),
+        #     #     std=torch.tensor([0.229, 0.224, 0.225])),
         # )
 
         # self.augment1 = default(augment_fn, DEFAULT_AUG)
@@ -247,18 +247,21 @@ class BYOL(nn.Module):
         if return_embedding:
             return self.online_encoder(x1, return_projection = return_projection)
 
+        if x2 == None:
+            raise('Please input x2')
+
         image_one, image_two = x1, x2
 
-        online_proj_one, _ = self.online_encoder(image_one)
-        online_proj_two, _ = self.online_encoder(image_two)
+        _, online_proj_one = self.online_encoder(image_one)
+        _, online_proj_two = self.online_encoder(image_two)
 
         online_pred_one = self.online_predictor(online_proj_one)
         online_pred_two = self.online_predictor(online_proj_two)
 
         with torch.no_grad():
             target_encoder = self._get_target_encoder() if self.use_momentum else self.online_encoder
-            target_proj_one, _ = target_encoder(image_one)
-            target_proj_two, _ = target_encoder(image_two)
+            _, target_proj_one = target_encoder(image_one)
+            _, target_proj_two = target_encoder(image_two)
             target_proj_one.detach_()
             target_proj_two.detach_()
 

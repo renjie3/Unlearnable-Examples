@@ -45,10 +45,16 @@ MYGRES="gpu:v100:1"
 # 52866589 unlearnable_samplewise_52866589_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
 # 52866590 unlearnable_samplewise_52866590_1_20220507200823_0.5_512_2_checkpoint_perturbation_epoch_10
 
+# 52802192
+# 52802195
+# 52802196
+# 52802236
+# 52802261
+
 JOB_INFO="samplewise perturbation"
-# MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52866590_1_20220507200823_0.5_512_2_checkpoint_perturbation_epoch_10 --train_data_type CIFAR10 --samplewise --pytorch_aug"
-# MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch VGG11 --pre_load_name unlearnable_samplewise_52866448_1_20220507200521_0.5_512_2_checkpoint_perturbation --samplewise"
-MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch VGG19 --pre_load_name unlearnable_samplewise_52428805_1_20220505181516_0.5_512_2_checkpoint_perturbation_epoch_20 --samplewise"
+# MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52802261_1_20220507103138_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug"
+# MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_52802261_1_20220507103138_0.5_512_2_checkpoint_perturbation --samplewise"
+MYCOMMEND="python3 -u ssl_perturbation_v2_byol.py --epochs 100 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol"
 
 MYCOMMEND2="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52260377_1_20220502113459_0.5_512_300_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug"
 
@@ -58,8 +64,8 @@ MYCOMMEND2="No_commend2"
 MYCOMMEND3="No_commend3"
 
 
-# cat ./slurm_files/sconfigs1_cmse.sb > submit.sb
-cat ./slurm_files/sconfigs1.sb > submit.sb
+cat ./slurm_files/sconfigs1_cmse.sb > submit.sb
+# cat ./slurm_files/sconfigs1.sb > submit.sb
 echo "#SBATCH --time=${MYTIME}             # limit of wall clock time - how long the job will run (same as -t)" >> submit.sb
 echo "#SBATCH --cpus-per-task=${MYCPU}           # number of CPUs (or cores) per task (same as -c)" >> submit.sb
 echo "#SBATCH --gres=${MYGRES}" >> submit.sb
