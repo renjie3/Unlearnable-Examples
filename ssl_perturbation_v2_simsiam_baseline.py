@@ -306,9 +306,9 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     print("The whole epochs are {}".format(epochs))
     if save_name_pre == None:
         if args.job_id == '':
-            save_name_pre = 'unlearnable_byol_samplewise_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
+            save_name_pre = 'unlearnable_simsiam_samplewise_local_{}_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
         else:
-            save_name_pre = 'unlearnable_byol_samplewise_{}_{}_{}_{}_{}'.format(args.job_id, datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
+            save_name_pre = 'unlearnable_simsiam_samplewise_{}_{}_{}_{}_{}'.format(args.job_id, datetime.datetime.now().strftime("%Y%m%d%H%M%S"), temperature, batch_size, epochs)
 
     if args.load_piermaro_model and args.piermaro_whole_epoch != '':
         results = pd.read_csv('results/{}_statistics.csv'.format(save_name_pre), index_col='epoch').to_dict()

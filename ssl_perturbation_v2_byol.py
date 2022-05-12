@@ -126,6 +126,7 @@ parser.add_argument('--use_wholeset_center', action='store_true', default=False)
 parser.add_argument('--modify_dbindex', default='', type=str, help='just_test_temp_save_file')
 parser.add_argument('--two_stage_PGD', action='store_true', default=False)
 parser.add_argument('--cl_algorithm', default='simclr', type=str, help='just_test_temp_save_file')
+parser.add_argument('--simclr_optimizer', action='store_true', default=False)
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 
@@ -182,6 +183,7 @@ from utils import train_supervised_batch
 from supervised_models import *
 from torchvision import transforms
 import torchvision
+from resnet_cifar import resnet18_test
 
 import pickle
 
@@ -391,16 +393,14 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
                         train_pos_2.append(pos_samples_2[i]+class_noise)
                     # Train
                     model.train()
-                    for param in model.parameters():
+                    for param in model.online_encoder.parameters():
+                        param.requires_grad = True
+                    for param in model.online_predictor.parameters():
                         param.requires_grad = True
                     # trainer.train_batch(torch.stack(train_imgs).to(device), labels, model, optimizer)
-                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
+                    batch_train_loss, batch_size_count = train_byol(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform)
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
-                    sum_numerator += numerator
-                    sum_numerator_count += 1
-                    sum_denominator += denominator
-                    sum_denominator_count += 1
                 
             train_noise_loss_sum, train_noise_loss_count = 0, 0
             for i, (pos_samples_1, pos_samples_2, labels) in tqdm(enumerate(train_noise_data_loader_simclr), total=len(train_noise_data_loader_simclr), desc="Training perturbation"):
@@ -417,7 +417,9 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
                 # Update universal perturbation
                 model.eval()
-                for param in model.parameters():
+                for param in model.online_encoder.parameters():
+                    param.requires_grad = False
+                for param in model.online_predictor.parameters():
                     param.requires_grad = False
 
                 batch_noise = torch.stack(batch_noise).to(device)
@@ -428,7 +430,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
                 if args.attack_type == 'min-min':
                     if args.min_min_attack_fn == "eot_v1":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight)
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_byol_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight)
                     elif args.min_min_attack_fn == "non_eot":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform)
                     elif args.min_min_attack_fn in ["pos/neg", "pos", "neg"]:
@@ -497,8 +499,8 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
         results['best_loss'].append(best_loss)
         results['best_loss_acc'].append(best_loss_acc)
 
-        results['numerator'].append(numerator)
-        results['denominator'].append(denominator)
+        results['numerator'].append(0)
+        results['denominator'].append(0)
 
         # print("results['numerator']", results['numerator'])
         # print("results['denominator']", results['denominator'])
@@ -1045,8 +1047,8 @@ def main():
         model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
         model = model.cuda()
     elif args.cl_algorithm == 'byol':
-        backbone = torchvision.models.resnet18()
-        model = BYOL(backbone, image_size = 32, hidden_layer = 'avgpool', use_momentum = True)
+        # backbone = torchvision.models.resnet18()
+        model = BYOL(resnet18_test(), image_size = 32, hidden_layer = 'avgpool', use_momentum = True)
         model = model.cuda()
 
     # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
@@ -1067,7 +1069,10 @@ def main():
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints['state_dict'])
 
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    if args.simclr_optimizer:
+        optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=3e-4, weight_decay=1e-6)
 
     if args.load_model or args.load_piermaro_model:
         if 'optimizer' in checkpoints:

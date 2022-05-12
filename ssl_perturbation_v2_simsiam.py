@@ -182,6 +182,8 @@ from torch.utils.data.distributed import DistributedSampler
 from utils import train_supervised_batch
 from supervised_models import *
 from torchvision import transforms
+from simsiam_utils import train_simsiam
+from methods import set_model
 
 import pickle
 
@@ -428,7 +430,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
 
                 if args.attack_type == 'min-min':
                     if args.min_min_attack_fn == "eot_v1":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight)
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_simsiam_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight)
                     elif args.min_min_attack_fn == "non_eot":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform)
                     elif args.min_min_attack_fn in ["pos/neg", "pos", "neg"]:
@@ -609,7 +611,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     # logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
     flag_cluster = False
 
-    test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, 0, epochs)
+    # test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, 0, epochs)
 
     for _epoch_idx in range(1, epochs+1):
         epoch_idx = _epoch_idx + args.piermaro_restart_epoch
@@ -690,7 +692,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     model.train()
                     for param in model.parameters():
                         param.requires_grad = True
-                    batch_train_loss, batch_size_count, numerator, denominator = train_simclr(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform_train_model, pytorch_aug=False)
+                    batch_train_loss, batch_size_count = train_simsiam(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer, batch_size, temperature, noise_after_transform=args.noise_after_transform_train_model, pytorch_aug=False)
 
                     if args.use_supervised_g:
                         g_net.train()
@@ -700,10 +702,10 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     
                     sum_train_loss += batch_train_loss
                     sum_train_batch_size += batch_size_count
-                    sum_numerator += numerator
-                    sum_numerator_count += 1
-                    sum_denominator += denominator
-                    sum_denominator_count += 1
+                    # sum_numerator += numerator
+                    # sum_numerator_count += 1
+                    # sum_denominator += denominator
+                    # sum_denominator_count += 1
 
                     _end = time.time()
 
@@ -784,7 +786,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     dbindex_weight = 0
                 if args.attack_type == 'min-min':
                     if args.min_min_attack_fn == "eot_v1":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight, simclr_weight=args.simclr_weight, augmentation_prob=args.augmentation_prob, clean_weight=args.clean_weight, noise_simclr_weight=args.noise_simclr_weight, double_perturb=args.double_perturb, upper_half_linear=args.upper_half_linear, batch_simclr_mask=batch_simclr_mask, batch_linear_noise=batch_linear_noise, mask_linear_constraint=args.mask_linear_constraint, mask1=batch_mask1, mask2=batch_mask2, mask_linear_noise_range=args.mask_linear_noise_range, use_supervised_g=args.use_supervised_g, g_net=g_net, supervised_criterion=supervised_criterion, supervised_weight=args.supervised_weight, supervised_transform_train=supervised_transform_train, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight, linear_noise_dbindex_index=args.linear_noise_dbindex_index, linear_noise_dbindex_weight2=args.linear_noise_dbindex_weight2, linear_noise_dbindex_index2=args.linear_noise_dbindex_index2, use_mean_dbindex=flag_use_mean_dbindex, use_normalized=flag_use_normalized, noise_centroids=noise_centroids, modify_dbindex=args.modify_dbindex, two_stage_PGD=args.two_stage_PGD, model_g_augment_first=args.model_g_augment_first, dbindex_augmentation=args.dbindex_augmentation, linear_xnoise_dbindex_weight=args.linear_xnoise_dbindex_weight, linear_xnoise_dbindex_index=args.linear_xnoise_dbindex_index,)
+                        _, eta, train_noise_loss = noise_generator.min_min_attack_simsiam_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight, simclr_weight=args.simclr_weight, augmentation_prob=args.augmentation_prob, clean_weight=args.clean_weight, noise_simclr_weight=args.noise_simclr_weight, double_perturb=args.double_perturb, upper_half_linear=args.upper_half_linear, batch_simclr_mask=batch_simclr_mask, batch_linear_noise=batch_linear_noise, mask_linear_constraint=args.mask_linear_constraint, mask1=batch_mask1, mask2=batch_mask2, mask_linear_noise_range=args.mask_linear_noise_range, use_supervised_g=args.use_supervised_g, g_net=g_net, supervised_criterion=supervised_criterion, supervised_weight=args.supervised_weight, supervised_transform_train=supervised_transform_train, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight, linear_noise_dbindex_index=args.linear_noise_dbindex_index, linear_noise_dbindex_weight2=args.linear_noise_dbindex_weight2, linear_noise_dbindex_index2=args.linear_noise_dbindex_index2, use_mean_dbindex=flag_use_mean_dbindex, use_normalized=flag_use_normalized, noise_centroids=noise_centroids, modify_dbindex=args.modify_dbindex, two_stage_PGD=args.two_stage_PGD, model_g_augment_first=args.model_g_augment_first, dbindex_augmentation=args.dbindex_augmentation, linear_xnoise_dbindex_weight=args.linear_xnoise_dbindex_weight, linear_xnoise_dbindex_index=args.linear_xnoise_dbindex_index,)
                     elif args.min_min_attack_fn == "non_eot":
                         _, eta, train_noise_loss = noise_generator.min_min_attack_simclr_return_loss_tensor(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, split_transform=args.split_transform)
                     else:
@@ -811,8 +813,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 # print("noise_ave_value", noise_ave_value)
         
         train_loss = sum_train_loss / float(sum_train_batch_size)
-        numerator = sum_numerator / float(sum_numerator_count)
-        denominator = sum_denominator / float(sum_denominator_count)
+        # numerator = sum_numerator / float(sum_numerator_count)
+        # denominator = sum_denominator / float(sum_denominator_count)
         print(train_loss)
         results['train_loss'].append(train_loss)
         test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
@@ -828,8 +830,8 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         results['best_loss'].append(best_loss)
         results['best_loss_acc'].append(best_loss_acc)
 
-        results['numerator'].append(numerator)
-        results['denominator'].append(denominator)
+        results['numerator'].append(0)
+        results['denominator'].append(0)
 
         # print("results['numerator']", results['numerator'])
         # print("results['denominator']", results['denominator'])
@@ -1045,7 +1047,9 @@ def main():
                                                 num_steps=args.num_steps,
                                                 step_size=args.step_size)
 
-    model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
+    # model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
+    # model = model.cuda()
+    model = set_model('resnet18', 'cifar10')
     model = model.cuda()
 
     # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))

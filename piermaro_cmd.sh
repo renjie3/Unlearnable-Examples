@@ -7,8 +7,8 @@ cd $PIERMARO_JOB_ROOT_PATH
 DATE_NAME=${1}
 echo $$
 
-WHOLE_EPOCH=1000
-SINGLE_EPOCH=50
+WHOLE_EPOCH=42
+SINGLE_EPOCH=2
 REJOB_TIMES=`expr $WHOLE_EPOCH / $SINGLE_EPOCH`
 MYGRES="gpu:v100s:1"
 
@@ -34,8 +34,9 @@ JOB_INFO="cifar10 based on samplewise"
 # python3 -u simclr_transfer.py --piermaro_whole_epoch 42 --epochs 2 --batch_size 512 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --pytorch_aug --samplewise
 
 # PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --kmeans_index 0"
+# python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1
 
-PIERMARO_MYCOMMEND="python3 -u simclr_transfer.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --batch_size 512 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52280541_1_20220502215417_0.5_512_2_checkpoint_perturbation_epoch_30 --train_data_type CIFAR100 --pytorch_aug --samplewise --ignore_model_size"
+PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1"
 
 PIERMARO_MYCOMMEND2=""
 

@@ -796,7 +796,7 @@ def train_simclr_target_task(net, pos_1, pos_2, train_optimizer, batch_size, tem
     return total_loss * pos_1.shape[0], pos_1.shape[0], numerator, denominator
 
 
-def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex=''):
+def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', reverse_code=False):
 
     sample = x.reshape(x.shape[0], -1)
     cluster_label = labels
@@ -812,17 +812,28 @@ def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True, use_normaliz
         idx_i = torch.where(cluster_label == i)[0]
         if idx_i.shape[0] == 0:
             continue
-        class_i = sample[idx_i, :]
-
-        if noise_centroids == None:
-            if use_normalized:
-                class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
-            else:
-                class_i_center = class_i.mean(dim=0)
+        
+        if modify_dbindex == '':
+            class_i = sample[idx_i, :]
         else:
-            class_i_center = noise_centroids[i].cuda()
+            class_i = nn.functional.normalize(sample[idx_i, :], p=2, dim=1)
 
-        class_center.append(class_i.mean(dim=0))
+        if reverse_code:
+            class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
+        else:
+            if noise_centroids == None:
+                if use_normalized:
+                    # input('check here')
+                    class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
+                    # print(class_i_center.shape)
+                    # print(torch.sum(class_i_center **2, dim=0))
+                    # input(class_i_center.shape)
+                else:
+                    class_i_center = class_i.mean(dim=0)
+            else:
+                class_i_center = noise_centroids[i].cuda()
+
+        class_center.append(class_i_center)
 
         point_dis_to_center = torch.sqrt(torch.sum((class_i-class_i_center)**2, dim = 1))
 
@@ -846,20 +857,14 @@ def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True, use_normaliz
     intra_class_dis_pair_sum = intra_class_dis_pair_sum.masked_select(mask).view(intra_class_dis_pair_sum.shape[0], -1)
 
     if use_mean_dbindex:
-        cluster_DB_loss = ((intra_class_dis_pair_sum + 0.00001) / (class_dis + 0.00001)).mean()
+        if reverse_code:
+            cluster_DB_loss = (intra_class_dis_pair_sum / (class_dis + 0.00001)).mean()
+        else:
+            cluster_DB_loss = ((intra_class_dis_pair_sum + 0.00001) / (class_dis + 0.00001)).mean()
     else:
         cluster_DB_loss = torch.max((intra_class_dis_pair_sum + 0.00001) / (class_dis + 0.00001), dim=1)[0].mean()
     
-    if modify_dbindex == '':
-        loss = cluster_DB_loss
-    elif modify_dbindex == '_e_B':
-        loss = -torch.exp(- cluster_DB_loss)
-    elif modify_dbindex == 'e_B':
-        loss = torch.exp(cluster_DB_loss)
-    elif modify_dbindex == 'log_B':
-        loss = torch.log(cluster_DB_loss)
-    elif modify_dbindex == 'log_B1':
-        loss = torch.log(cluster_DB_loss + 1)
+    loss = cluster_DB_loss
 
     print('get_linear_noise_dbindex_loss:', cluster_DB_loss.item())
 
