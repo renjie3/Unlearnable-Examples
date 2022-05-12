@@ -45,25 +45,7 @@ Check GPU settings. A free GPU in Colab is <= Tesla P100. The log of the demo is
 # gpu_info = '\n'.join(gpu_info)
 # print(gpu_info)
 
-from datetime import datetime
-from functools import partial
-from PIL import Image
-from torch.utils.data import DataLoader
-from torchvision import transforms
-from torchvision.datasets import CIFAR10
-from torchvision.models import resnet
-from tqdm import tqdm
 import argparse
-import json
-import math
-import os
-import pandas as pd
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import utils
-
-"""### Set arguments"""
 
 parser = argparse.ArgumentParser(description='Train MoCo on CIFAR-10')
 
@@ -102,8 +84,33 @@ parser.add_argument('--pre_load_name', default='', type=str, help='pre_load_name
 
 parser.add_argument('--local', default='', type=str, help='The gpu number used on developing node.')
 parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
+parser.add_argument('--no_save', action='store_true', help='use a symmetric loss function that backprops to both crops')
 
 args = parser.parse_args()  # running in command line
+
+import os
+if args.local != '':
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.local
+
+from datetime import datetime
+from functools import partial
+from PIL import Image
+from torch.utils.data import DataLoader
+from torchvision import transforms
+from torchvision.datasets import CIFAR10
+from torchvision.models import resnet
+from tqdm import tqdm
+import json
+import math
+import pandas as pd
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import utils
+
+"""### Set arguments"""
+
+
 # args = parser.parse_args('')  # running in ipynb
 
 # set command line arguments here when running in ipynb
@@ -456,11 +463,12 @@ if args.resume is not '':
 
 # logging
 results = {'train_loss': [], 'test_acc@1': []}
-if not os.path.exists(args.results_dir):
-    os.mkdir(args.results_dir)
-# dump args
-with open(args.results_dir + '/args.json', 'w') as fid:
-    json.dump(args.__dict__, fid, indent=2)
+if not args.no_save:
+    if not os.path.exists(args.results_dir):
+        os.mkdir(args.results_dir)
+    # dump args
+    with open(args.results_dir + '/args.json', 'w') as fid:
+        json.dump(args.__dict__, fid, indent=2)
 
 # training loop
 for epoch in range(epoch_start, args.epochs + 1):
@@ -470,6 +478,8 @@ for epoch in range(epoch_start, args.epochs + 1):
     results['test_acc@1'].append(test_acc_1)
     # save statistics
     data_frame = pd.DataFrame(data=results, index=range(epoch_start, epoch + 1))
-    data_frame.to_csv(args.results_dir + '/log.csv', index_label='epoch')
+    if not args.no_save:
+        data_frame.to_csv(args.results_dir + '/log.csv', index_label='epoch')
     # save model
-    torch.save({'epoch': epoch, 'state_dict': model.state_dict(), 'optimizer' : optimizer.state_dict(),}, args.results_dir + '/model_last.pth')
+    if not args.no_save:
+        torch.save({'epoch': epoch, 'state_dict': model.state_dict(), 'optimizer' : optimizer.state_dict(),}, args.results_dir + '/model_last.pth')
