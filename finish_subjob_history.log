@@ -19133,3 +19133,1048 @@ Thu May 12 01:32:04 EDT 2022
 cifar10 baseline
 python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53339660_1
 ---------------------------------------------------------------
+Thu May 12 02:10:04 EDT 2022
+53339170
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.5 --reverse_code --job_id 53339170_1
+---------------------------------------------------------------
+Thu May 12 02:10:12 EDT 2022
+53339172
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --job_id 53339172_1
+---------------------------------------------------------------
+Thu May 12 02:10:17 EDT 2022
+53339174
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 10 --reverse_code --job_id 53339174_1
+---------------------------------------------------------------
+Thu May 12 02:10:22 EDT 2022
+53339158
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317357_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339158_1
+---------------------------------------------------------------
+Thu May 12 02:10:54 EDT 2022
+53339166
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --reverse_code --job_id 53339166_1
+---------------------------------------------------------------
+Thu May 12 02:11:21 EDT 2022
+53339168
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317351_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339168_1
+---------------------------------------------------------------
+Thu May 12 02:12:09 EDT 2022
+53339182
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336328_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53339182_1
+---------------------------------------------------------------
+Thu May 12 02:13:16 EDT 2022
+53339175
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336327_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53339175_1
+---------------------------------------------------------------
+Thu May 12 02:13:30 EDT 2022
+53339209
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336331_1_20220511212322_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53339209_1
+---------------------------------------------------------------
+Thu May 12 02:15:08 EDT 2022
+53339788
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53339788_1
+---------------------------------------------------------------
+Thu May 12 02:15:31 EDT 2022
+53339173
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --reverse_code --job_id 53339173_1
+---------------------------------------------------------------
+Thu May 12 02:15:48 EDT 2022
+53339187
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317350_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339187_1
+---------------------------------------------------------------
+Thu May 12 02:17:41 EDT 2022
+53339191
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317358_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339191_1
+---------------------------------------------------------------
+Thu May 12 02:17:43 EDT 2022
+53339217
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339217_1
+---------------------------------------------------------------
+Thu May 12 02:24:58 EDT 2022
+53340533
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53340533_1
+---------------------------------------------------------------
+Thu May 12 02:25:29 EDT 2022
+53339235
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317352_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339235_1
+---------------------------------------------------------------
+Thu May 12 02:25:29 EDT 2022
+53340536
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53340536_1
+---------------------------------------------------------------
+Thu May 12 02:32:25 EDT 2022
+53339293
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.005 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332657_1_20220511191614_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339293_1
+---------------------------------------------------------------
+Thu May 12 02:33:21 EDT 2022
+53339176
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --job_id 53339176_1
+---------------------------------------------------------------
+Thu May 12 02:33:28 EDT 2022
+53339301
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332660_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339301_1
+---------------------------------------------------------------
+Thu May 12 02:37:27 EDT 2022
+53339327
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.01 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332658_1_20220511191615_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339327_1
+---------------------------------------------------------------
+Thu May 12 02:41:52 EDT 2022
+53339332
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.05 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332659_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339332_1
+---------------------------------------------------------------
+Thu May 12 02:47:17 EDT 2022
+53339794
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319940_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53339794_1
+---------------------------------------------------------------
+Thu May 12 02:50:53 EDT 2022
+53339817
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319985_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53339817_1
+---------------------------------------------------------------
+Thu May 12 03:00:07 EDT 2022
+53339767
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319979_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53339767_1
+---------------------------------------------------------------
+Thu May 12 03:08:04 EDT 2022
+53339670
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320435_1_20220511145244_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339670_1
+---------------------------------------------------------------
+Thu May 12 03:10:08 EDT 2022
+53339663
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320431_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339663_1
+---------------------------------------------------------------
+Thu May 12 03:13:53 EDT 2022
+53340516
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1.6 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319968_1_20220511144628_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53340516_1
+---------------------------------------------------------------
+Thu May 12 03:17:54 EDT 2022
+53339695
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320434_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339695_1
+---------------------------------------------------------------
+Thu May 12 03:18:07 EDT 2022
+53341795
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 20 --job_id 53341795_1
+---------------------------------------------------------------
+Thu May 12 03:19:08 EDT 2022
+53341792
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 20 --job_id 53341792_1
+---------------------------------------------------------------
+Thu May 12 03:28:36 EDT 2022
+53339793
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337240_1_20220511224021_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53339793_1
+---------------------------------------------------------------
+Thu May 12 03:28:39 EDT 2022
+53341768
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53341768_1
+---------------------------------------------------------------
+Thu May 12 03:30:05 EDT 2022
+53339805
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337241_1_20220511224024_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53339805_1
+---------------------------------------------------------------
+Thu May 12 03:31:56 EDT 2022
+53339772
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320404_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339772_1
+---------------------------------------------------------------
+Thu May 12 03:35:06 EDT 2022
+53339693
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332661_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339693_1
+---------------------------------------------------------------
+Thu May 12 03:40:33 EDT 2022
+53339700
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 50 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332663_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339700_1
+---------------------------------------------------------------
+Thu May 12 03:44:32 EDT 2022
+53339759
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 15 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332662_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53339759_1
+---------------------------------------------------------------
+Thu May 12 03:51:50 EDT 2022
+53339806
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317496_1_20220511140625_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339806_1
+---------------------------------------------------------------
+Thu May 12 03:56:28 EDT 2022
+53339643
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317644_1_20220511141337_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53339643_1
+---------------------------------------------------------------
+Thu May 12 03:56:54 EDT 2022
+53339859
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317488_1_20220511140526_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339859_1
+---------------------------------------------------------------
+Thu May 12 03:59:56 EDT 2022
+53339632
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317520_1_20220511140944_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53339632_1
+---------------------------------------------------------------
+Thu May 12 04:01:38 EDT 2022
+53339896
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317489_1_20220511140543_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53339896_1
+---------------------------------------------------------------
+Thu May 12 04:10:13 EDT 2022
+53340462
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317505_1_20220511140722_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53340462_1
+---------------------------------------------------------------
+Thu May 12 04:10:58 EDT 2022
+53361548
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 22 --job_id 53361548_1
+---------------------------------------------------------------
+Thu May 12 04:11:04 EDT 2022
+53340473
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317497_1_20220511140652_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53340473_1
+---------------------------------------------------------------
+Thu May 12 04:11:51 EDT 2022
+53362236
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 22 --job_id 53362236_1
+---------------------------------------------------------------
+Thu May 12 04:11:52 EDT 2022
+53339671
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317514_1_20220511140834_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53339671_1
+---------------------------------------------------------------
+Thu May 12 04:31:16 EDT 2022
+53344720
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319940_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53344720_1
+---------------------------------------------------------------
+Thu May 12 04:33:28 EDT 2022
+53348527
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319985_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53348527_1
+---------------------------------------------------------------
+Thu May 12 04:33:55 EDT 2022
+53341743
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 10 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339174_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53341743_1
+---------------------------------------------------------------
+Thu May 12 04:35:24 EDT 2022
+53341740
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317357_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53341740_1
+---------------------------------------------------------------
+Thu May 12 04:38:25 EDT 2022
+53341741
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.5 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339170_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53341741_1
+---------------------------------------------------------------
+Thu May 12 04:38:25 EDT 2022
+53341763
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336331_1_20220511212322_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53341763_1
+---------------------------------------------------------------
+Thu May 12 04:38:31 EDT 2022
+53341746
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317351_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53341746_1
+---------------------------------------------------------------
+Thu May 12 04:38:54 EDT 2022
+53341754
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336328_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53341754_1
+---------------------------------------------------------------
+Thu May 12 04:39:09 EDT 2022
+53341744
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339166_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53341744_1
+---------------------------------------------------------------
+Thu May 12 04:39:13 EDT 2022
+53341742
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339172_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53341742_1
+---------------------------------------------------------------
+Thu May 12 04:40:48 EDT 2022
+53341764
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336327_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53341764_1
+---------------------------------------------------------------
+Thu May 12 04:42:44 EDT 2022
+53370666
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53370666_1
+---------------------------------------------------------------
+Thu May 12 04:42:44 EDT 2022
+53341781
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --job_id 53341781_1
+---------------------------------------------------------------
+Thu May 12 04:44:24 EDT 2022
+53341788
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 0 --job_id 53341788_1
+---------------------------------------------------------------
+Thu May 12 04:44:39 EDT 2022
+53341770
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317350_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53341770_1
+---------------------------------------------------------------
+Thu May 12 04:44:45 EDT 2022
+53341782
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --job_id 53341782_1
+---------------------------------------------------------------
+Thu May 12 04:46:33 EDT 2022
+53341775
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53341775_1
+---------------------------------------------------------------
+Thu May 12 04:46:49 EDT 2022
+53341774
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317358_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53341774_1
+---------------------------------------------------------------
+Thu May 12 04:48:09 EDT 2022
+53341769
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339173_1_20220511234614_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53341769_1
+---------------------------------------------------------------
+Thu May 12 04:55:11 EDT 2022
+53341796
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317352_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53341796_1
+---------------------------------------------------------------
+Thu May 12 04:58:02 EDT 2022
+53341835
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.005 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332657_1_20220511191614_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53341835_1
+---------------------------------------------------------------
+Thu May 12 04:59:12 EDT 2022
+53356789
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1.6 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319968_1_20220511144628_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53356789_1
+---------------------------------------------------------------
+Thu May 12 05:00:00 EDT 2022
+53341836
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332660_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53341836_1
+---------------------------------------------------------------
+Thu May 12 05:01:47 EDT 2022
+53352090
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319979_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53352090_1
+---------------------------------------------------------------
+Thu May 12 05:04:04 EDT 2022
+53411811
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 24 --job_id 53411811_1
+---------------------------------------------------------------
+Thu May 12 05:04:19 EDT 2022
+53341886
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.01 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332658_1_20220511191615_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53341886_1
+---------------------------------------------------------------
+Thu May 12 05:04:52 EDT 2022
+53413020
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 24 --job_id 53413020_1
+---------------------------------------------------------------
+Thu May 12 05:07:53 EDT 2022
+53341789
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 1 --job_id 53341789_1
+---------------------------------------------------------------
+Thu May 12 05:10:18 EDT 2022
+53341904
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.05 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332659_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53341904_1
+---------------------------------------------------------------
+Thu May 12 05:23:41 EDT 2022
+53341837
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339176_1_20220511234727_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53341837_1
+---------------------------------------------------------------
+Thu May 12 05:36:01 EDT 2022
+53354778
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320435_1_20220511145244_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53354778_1
+---------------------------------------------------------------
+Thu May 12 05:39:36 EDT 2022
+53355386
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320431_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53355386_1
+---------------------------------------------------------------
+Thu May 12 05:45:51 EDT 2022
+53361547
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320434_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53361547_1
+---------------------------------------------------------------
+Thu May 12 05:55:28 EDT 2022
+53370667
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337240_1_20220511224021_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53370667_1
+---------------------------------------------------------------
+Thu May 12 05:57:09 EDT 2022
+53442460
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 26 --job_id 53442460_1
+---------------------------------------------------------------
+Thu May 12 05:57:11 EDT 2022
+53435646
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53435646_1
+---------------------------------------------------------------
+Thu May 12 05:57:21 EDT 2022
+53371124
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337241_1_20220511224024_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53371124_1
+---------------------------------------------------------------
+Thu May 12 05:58:27 EDT 2022
+53442585
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 26 --job_id 53442585_1
+---------------------------------------------------------------
+Thu May 12 06:05:19 EDT 2022
+53371476
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320404_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53371476_1
+---------------------------------------------------------------
+Thu May 12 06:15:48 EDT 2022
+53431511
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319985_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53431511_1
+---------------------------------------------------------------
+Thu May 12 06:17:21 EDT 2022
+53429543
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319940_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53429543_1
+---------------------------------------------------------------
+Thu May 12 06:21:35 EDT 2022
+53376159
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332661_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53376159_1
+---------------------------------------------------------------
+Thu May 12 06:30:26 EDT 2022
+53381798
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 50 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332663_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53381798_1
+---------------------------------------------------------------
+Thu May 12 06:31:08 EDT 2022
+53384330
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 15 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332662_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53384330_1
+---------------------------------------------------------------
+Thu May 12 06:36:52 EDT 2022
+53393158
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317496_1_20220511140625_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53393158_1
+---------------------------------------------------------------
+Thu May 12 06:42:51 EDT 2022
+53396362
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317488_1_20220511140526_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53396362_1
+---------------------------------------------------------------
+Thu May 12 06:44:01 EDT 2022
+53441846
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1.6 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319968_1_20220511144628_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53441846_1
+---------------------------------------------------------------
+Thu May 12 06:48:47 EDT 2022
+53402997
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317489_1_20220511140543_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53402997_1
+---------------------------------------------------------------
+Thu May 12 06:49:46 EDT 2022
+53449382
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 28 --job_id 53449382_1
+---------------------------------------------------------------
+Thu May 12 06:51:43 EDT 2022
+53449506
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 28 --job_id 53449506_1
+---------------------------------------------------------------
+Thu May 12 06:57:02 EDT 2022
+53411810
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317497_1_20220511140652_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53411810_1
+---------------------------------------------------------------
+Thu May 12 06:57:05 EDT 2022
+53410826
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317505_1_20220511140722_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53410826_1
+---------------------------------------------------------------
+Thu May 12 06:58:11 EDT 2022
+53431774
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 10 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339174_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53431774_1
+---------------------------------------------------------------
+Thu May 12 07:00:54 EDT 2022
+53432345
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317357_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53432345_1
+---------------------------------------------------------------
+Thu May 12 07:03:23 EDT 2022
+53442212
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319979_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53442212_1
+---------------------------------------------------------------
+Thu May 12 07:03:47 EDT 2022
+53433349
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336331_1_20220511212322_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53433349_1
+---------------------------------------------------------------
+Thu May 12 07:05:33 EDT 2022
+53433351
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317351_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53433351_1
+---------------------------------------------------------------
+Thu May 12 07:05:35 EDT 2022
+53433627
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336328_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53433627_1
+---------------------------------------------------------------
+Thu May 12 07:06:45 EDT 2022
+53433350
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.5 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339170_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53433350_1
+---------------------------------------------------------------
+Thu May 12 07:07:22 EDT 2022
+53433941
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339172_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53433941_1
+---------------------------------------------------------------
+Thu May 12 07:09:04 EDT 2022
+53434623
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336327_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53434623_1
+---------------------------------------------------------------
+Thu May 12 07:09:55 EDT 2022
+53433626
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339166_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53433626_1
+---------------------------------------------------------------
+Thu May 12 07:09:57 EDT 2022
+53435647
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341781_1_20220512022108_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53435647_1
+---------------------------------------------------------------
+Thu May 12 07:11:28 EDT 2022
+53449381
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 20 --job_id 53449381_1
+---------------------------------------------------------------
+Thu May 12 07:12:46 EDT 2022
+53436563
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317350_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53436563_1
+---------------------------------------------------------------
+Thu May 12 07:13:21 EDT 2022
+53436706
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341782_1_20220512022109_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53436706_1
+---------------------------------------------------------------
+Thu May 12 07:14:31 EDT 2022
+53436564
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341788_1_20220512022214_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53436564_1
+---------------------------------------------------------------
+Thu May 12 07:15:25 EDT 2022
+53437632
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53437632_1
+---------------------------------------------------------------
+Thu May 12 07:16:22 EDT 2022
+53437764
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317358_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53437764_1
+---------------------------------------------------------------
+Thu May 12 07:19:44 EDT 2022
+53396095
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317644_1_20220511141337_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53396095_1
+---------------------------------------------------------------
+Thu May 12 07:21:07 EDT 2022
+53438414
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339173_1_20220511234614_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53438414_1
+---------------------------------------------------------------
+Thu May 12 07:23:57 EDT 2022
+53441662
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.005 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332657_1_20220511191614_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53441662_1
+---------------------------------------------------------------
+Thu May 12 07:25:31 EDT 2022
+53441208
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317352_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53441208_1
+---------------------------------------------------------------
+Thu May 12 07:26:31 EDT 2022
+53441968
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332660_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53441968_1
+---------------------------------------------------------------
+Thu May 12 07:31:07 EDT 2022
+53400085
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317520_1_20220511140944_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53400085_1
+---------------------------------------------------------------
+Thu May 12 07:32:19 EDT 2022
+53442582
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.01 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332658_1_20220511191615_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53442582_1
+---------------------------------------------------------------
+Thu May 12 07:40:13 EDT 2022
+53443433
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.05 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332659_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53443433_1
+---------------------------------------------------------------
+Thu May 12 07:42:53 EDT 2022
+53463763
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 30 --job_id 53463763_1
+---------------------------------------------------------------
+Thu May 12 07:43:30 EDT 2022
+53413021
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317514_1_20220511140834_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53413021_1
+---------------------------------------------------------------
+Thu May 12 07:46:03 EDT 2022
+53464583
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 30 --job_id 53464583_1
+---------------------------------------------------------------
+Thu May 12 07:58:15 EDT 2022
+53451831
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319985_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53451831_1
+---------------------------------------------------------------
+Thu May 12 07:59:45 EDT 2022
+53443047
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341789_1_20220512022214_0.5_512_2_piermaro_model --piermaro_restart_epoch 2 --job_id 53443047_1
+---------------------------------------------------------------
+Thu May 12 08:02:17 EDT 2022
+53452083
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319940_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53452083_1
+---------------------------------------------------------------
+Thu May 12 08:03:29 EDT 2022
+53446752
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320435_1_20220511145244_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53446752_1
+---------------------------------------------------------------
+Thu May 12 08:09:39 EDT 2022
+53447130
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320431_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53447130_1
+---------------------------------------------------------------
+Thu May 12 08:13:11 EDT 2022
+53445055
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339176_1_20220511234727_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53445055_1
+---------------------------------------------------------------
+Thu May 12 08:13:40 EDT 2022
+53447873
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320434_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53447873_1
+---------------------------------------------------------------
+Thu May 12 08:22:49 EDT 2022
+53449195
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337240_1_20220511224021_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53449195_1
+---------------------------------------------------------------
+Thu May 12 08:23:30 EDT 2022
+53449380
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337241_1_20220511224024_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53449380_1
+---------------------------------------------------------------
+Thu May 12 08:26:06 EDT 2022
+53472179
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 22 --job_id 53472179_1
+---------------------------------------------------------------
+Thu May 12 08:29:16 EDT 2022
+53460881
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1.6 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319968_1_20220511144628_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53460881_1
+---------------------------------------------------------------
+Thu May 12 08:35:56 EDT 2022
+53485309
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 32 --job_id 53485309_1
+---------------------------------------------------------------
+Thu May 12 08:37:08 EDT 2022
+53450432
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --modify_dbindex eb --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53320404_1_20220511145245_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53450432_1
+---------------------------------------------------------------
+Thu May 12 08:40:09 EDT 2022
+53486485
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 32 --job_id 53486485_1
+---------------------------------------------------------------
+Thu May 12 09:05:14 EDT 2022
+53468823
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319979_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53468823_1
+---------------------------------------------------------------
+Thu May 12 09:07:14 EDT 2022
+53452606
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332661_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53452606_1
+---------------------------------------------------------------
+Thu May 12 09:18:12 EDT 2022
+53455220
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 50 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332663_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53455220_1
+---------------------------------------------------------------
+Thu May 12 09:20:43 EDT 2022
+53455839
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 15 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332662_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53455839_1
+---------------------------------------------------------------
+Thu May 12 09:22:27 EDT 2022
+53458152
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317496_1_20220511140625_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53458152_1
+---------------------------------------------------------------
+Thu May 12 09:22:32 EDT 2022
+53466811
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 10 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339174_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53466811_1
+---------------------------------------------------------------
+Thu May 12 09:27:12 EDT 2022
+53467977
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317357_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53467977_1
+---------------------------------------------------------------
+Thu May 12 09:27:39 EDT 2022
+53460517
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317488_1_20220511140526_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53460517_1
+---------------------------------------------------------------
+Thu May 12 09:28:43 EDT 2022
+53509518
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 34 --job_id 53509518_1
+---------------------------------------------------------------
+Thu May 12 09:29:48 EDT 2022
+53468925
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336331_1_20220511212322_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53468925_1
+---------------------------------------------------------------
+Thu May 12 09:31:49 EDT 2022
+53469897
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336328_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53469897_1
+---------------------------------------------------------------
+Thu May 12 09:32:40 EDT 2022
+53469896
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317351_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53469896_1
+---------------------------------------------------------------
+Thu May 12 09:34:02 EDT 2022
+53511444
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 34 --job_id 53511444_1
+---------------------------------------------------------------
+Thu May 12 09:35:20 EDT 2022
+53463142
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317489_1_20220511140543_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53463142_1
+---------------------------------------------------------------
+Thu May 12 09:35:48 EDT 2022
+53470326
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.5 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339170_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53470326_1
+---------------------------------------------------------------
+Thu May 12 09:36:00 EDT 2022
+53470536
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339172_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53470536_1
+---------------------------------------------------------------
+Thu May 12 09:36:10 EDT 2022
+53471635
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339166_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53471635_1
+---------------------------------------------------------------
+Thu May 12 09:36:31 EDT 2022
+53471036
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336327_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53471036_1
+---------------------------------------------------------------
+Thu May 12 09:40:15 EDT 2022
+53504961
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 24 --job_id 53504961_1
+---------------------------------------------------------------
+Thu May 12 09:40:26 EDT 2022
+53471634
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341781_1_20220512022108_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53471634_1
+---------------------------------------------------------------
+Thu May 12 09:40:55 EDT 2022
+53472808
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317350_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53472808_1
+---------------------------------------------------------------
+Thu May 12 09:40:56 EDT 2022
+53491427
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319985_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 20 --job_id 53491427_1
+---------------------------------------------------------------
+Thu May 12 09:41:40 EDT 2022
+53473216
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341782_1_20220512022109_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53473216_1
+---------------------------------------------------------------
+Thu May 12 09:42:41 EDT 2022
+53466328
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317497_1_20220511140652_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53466328_1
+---------------------------------------------------------------
+Thu May 12 09:43:49 EDT 2022
+53473647
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341788_1_20220512022214_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53473647_1
+---------------------------------------------------------------
+Thu May 12 09:43:53 EDT 2022
+53466327
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317505_1_20220511140722_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53466327_1
+---------------------------------------------------------------
+Thu May 12 09:44:25 EDT 2022
+53474001
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53474001_1
+---------------------------------------------------------------
+Thu May 12 09:46:53 EDT 2022
+53474564
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317358_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53474564_1
+---------------------------------------------------------------
+Thu May 12 09:47:53 EDT 2022
+53493066
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319940_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 20 --job_id 53493066_1
+---------------------------------------------------------------
+Thu May 12 09:50:15 EDT 2022
+53477646
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.005 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332657_1_20220511191614_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53477646_1
+---------------------------------------------------------------
+Thu May 12 09:53:44 EDT 2022
+53478771
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332660_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53478771_1
+---------------------------------------------------------------
+Thu May 12 09:54:04 EDT 2022
+53476461
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339173_1_20220511234614_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53476461_1
+---------------------------------------------------------------
+Thu May 12 09:59:52 EDT 2022
+53481225
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.01 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332658_1_20220511191615_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53481225_1
+---------------------------------------------------------------
+Thu May 12 10:22:21 EDT 2022
+53517540
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 36 --job_id 53517540_1
+---------------------------------------------------------------
+Thu May 12 10:28:11 EDT 2022
+53518061
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 36 --job_id 53518061_1
+---------------------------------------------------------------
+Thu May 12 10:44:12 EDT 2022
+53475933
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317644_1_20220511141337_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53475933_1
+---------------------------------------------------------------
+Thu May 12 10:45:48 EDT 2022
+53491685
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341789_1_20220512022214_0.5_512_2_piermaro_model --piermaro_restart_epoch 4 --job_id 53491685_1
+---------------------------------------------------------------
+Thu May 12 10:49:56 EDT 2022
+53503175
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337240_1_20220511224021_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53503175_1
+---------------------------------------------------------------
+Thu May 12 10:55:58 EDT 2022
+53518752
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1.4 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317360_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 26 --job_id 53518752_1
+---------------------------------------------------------------
+Thu May 12 11:00:42 EDT 2022
+53498755
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339176_1_20220511234727_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53498755_1
+---------------------------------------------------------------
+Thu May 12 11:02:16 EDT 2022
+53480642
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317520_1_20220511140944_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53480642_1
+---------------------------------------------------------------
+Thu May 12 11:08:59 EDT 2022
+53515049
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319979_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 18 --job_id 53515049_1
+---------------------------------------------------------------
+Thu May 12 11:15:53 EDT 2022
+53485474
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317514_1_20220511140834_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53485474_1
+---------------------------------------------------------------
+Thu May 12 11:18:35 EDT 2022
+53523503
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319951_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 38 --job_id 53523503_1
+---------------------------------------------------------------
+Thu May 12 11:27:01 EDT 2022
+53518759
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319985_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 22 --job_id 53518759_1
+---------------------------------------------------------------
+Thu May 12 11:33:15 EDT 2022
+53524088
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319973_1_20220511144627_0.5_512_2_piermaro_model --piermaro_restart_epoch 38 --job_id 53524088_1
+---------------------------------------------------------------
+Thu May 12 11:33:45 EDT 2022
+53519417
+cifar10 baseline
+python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53319940_1_20220511144543_0.5_512_2_piermaro_model --piermaro_restart_epoch 22 --job_id 53519417_1
+---------------------------------------------------------------
+Thu May 12 11:52:54 EDT 2022
+53517330
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317357_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53517330_1
+---------------------------------------------------------------
+Thu May 12 11:55:13 EDT 2022
+53515267
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 5 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332661_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53515267_1
+---------------------------------------------------------------
+Thu May 12 12:02:34 EDT 2022
+53518355
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53336327_1_20220511212323_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53518355_1
+---------------------------------------------------------------
+Thu May 12 12:03:37 EDT 2022
+53518354
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339166_1_20220511234515_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53518354_1
+---------------------------------------------------------------
+Thu May 12 12:04:45 EDT 2022
+53516431
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 50 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332663_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53516431_1
+---------------------------------------------------------------
+Thu May 12 12:05:00 EDT 2022
+53518300
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --reverse_code --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53339172_1_20220511234615_0.5_512_2_piermaro_model --piermaro_restart_epoch 8 --job_id 53518300_1
+---------------------------------------------------------------
+Thu May 12 12:06:04 EDT 2022
+53516833
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.6 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317496_1_20220511140625_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53516833_1
+---------------------------------------------------------------
+Thu May 12 12:06:56 EDT 2022
+53518753
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341781_1_20220512022108_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53518753_1
+---------------------------------------------------------------
+Thu May 12 12:08:20 EDT 2022
+53517450
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317488_1_20220511140526_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53517450_1
+---------------------------------------------------------------
+Thu May 12 12:09:47 EDT 2022
+53519031
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341788_1_20220512022214_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53519031_1
+---------------------------------------------------------------
+Thu May 12 12:09:50 EDT 2022
+53518758
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317350_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53518758_1
+---------------------------------------------------------------
+Thu May 12 12:09:52 EDT 2022
+53516734
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 15 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332662_1_20220511191618_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53516734_1
+---------------------------------------------------------------
+Thu May 12 12:13:56 EDT 2022
+53519118
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_piermaro_model --piermaro_restart_epoch 16 --job_id 53519118_1
+---------------------------------------------------------------
+Thu May 12 12:17:05 EDT 2022
+53519598
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.005 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332657_1_20220511191614_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53519598_1
+---------------------------------------------------------------
+Thu May 12 12:24:46 EDT 2022
+53520016
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53332660_1_20220511191617_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53520016_1
+---------------------------------------------------------------
+Thu May 12 12:30:24 EDT 2022
+53518941
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317497_1_20220511140652_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53518941_1
+---------------------------------------------------------------
+Thu May 12 12:35:27 EDT 2022
+53519030
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 2 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53317505_1_20220511140722_0.5_512_2_piermaro_model --piermaro_restart_epoch 14 --job_id 53519030_1
+---------------------------------------------------------------
+Thu May 12 13:15:44 EDT 2022
+53526006
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53337240_1_20220511224021_0.5_512_2_piermaro_model --piermaro_restart_epoch 10 --job_id 53526006_1
+---------------------------------------------------------------
+Thu May 12 13:37:56 EDT 2022
+53525417
+cifar10 baseline
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53341789_1_20220512022214_0.5_512_2_piermaro_model --piermaro_restart_epoch 6 --job_id 53525417_1
+---------------------------------------------------------------
+Thu May 12 14:17:32 EDT 2022
+53525318
+cifar10 baseline
+python3 -u ssl_perturbation_v2_byol.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --simclr_optimizer --linear_noise_dbindex_weight 0 --load_piermaro_model --load_piermaro_model_path unlearnable_byol_samplewise_53317644_1_20220511141337_0.5_512_2_piermaro_model --piermaro_restart_epoch 12 --job_id 53525318_1
+---------------------------------------------------------------

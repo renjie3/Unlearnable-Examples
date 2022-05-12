@@ -7620,3 +7620,11 @@ python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_loa
 
 
 ---------------------------------------------------------------
+Thu May 12 10:39:36 EDT 2022
+53312604
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52866856_1_20220507200828_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --pytorch_aug --samplewise --job_id 53312604_1
+
+
+
+---------------------------------------------------------------

@@ -1,14 +1,13 @@
 #!/bin/bash --login
 ########## SBATCH Lines for Resource Request ##########
 
-#SBATCH --account=cmse
 #SBATCH --nodes=1                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
 #SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --mem-per-cpu=8G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
 #SBATCH --job-name SimCLR      # you can give your job a name for easier identification (same as -J)
 #SBATCH --time=3:50:00             # limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --cpus-per-task=5           # number of CPUs (or cores) per task (same as -c)
-#SBATCH --gres=gpu:v100:1
+#SBATCH --gres=gpu:v100s:1
 #SBATCH -o /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.log
 #SBATCH -e /mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/logfile/%j.err
 
@@ -26,7 +25,7 @@ MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --samplewise --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --job_id ${SLURM_JOB_ID}_1"
 MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
 MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 
