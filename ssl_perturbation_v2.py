@@ -130,7 +130,7 @@ parser.add_argument('--dbindex_augmentation', action='store_true', default=False
 parser.add_argument('--linear_xnoise_dbindex_weight', default=0, type=float, help='noise_simclr_weight')
 parser.add_argument('--linear_xnoise_dbindex_index', default=1, type=int, help='noise_simclr_weight')
 parser.add_argument('--reverse_code', action='store_true', default=False)
-parser.add_argument('--second_seed', default=-1, type=int, help='noise_simclr_weight')
+# parser.add_argument('--second_seed', default=-1, type=int, help='noise_simclr_weight')
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 
@@ -216,18 +216,23 @@ if not args.no_save:
     logger.info("PyTorch Version: %s" % (torch.__version__))
 if torch.cuda.is_available():
     # torch.manual_seed(args.seed)
-    torch.cuda.manual_seed(args.seed)
-    # torch.cuda.manual_seed_all(args.seed)
-    # np.random.seed(args.seed)
-    # random.seed(args.seed)
-    if args.second_seed >= 0:
+    if args.seed > 0:
+        torch.cuda.manual_seed(args.seed)
         torch.manual_seed(args.seed)
         torch.cuda.manual_seed_all(args.seed)
         np.random.seed(args.seed)
         random.seed(args.seed)
+    else:
+        torch.cuda.manual_seed(0)
+        if args.second_seed >= 0:
+            torch.cuda.manual_seed(0)
+            torch.cuda.manual_seed(0)
+            torch.cuda.manual_seed(0)
+            torch.cuda.manual_seed(0)
 
-    torch.backends.cudnn.enabled = True
-    torch.backends.cudnn.benchmark = True
+    # torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
     device = torch.device('cuda')
     device_list = [torch.cuda.get_device_name(i) for i in range(0, torch.cuda.device_count())]
     if not args.no_save:

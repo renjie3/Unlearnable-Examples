@@ -19,7 +19,7 @@ TRAIN_STEP='2'
 
 # MY_CMD="python3 -u ssl_perturbation_v2_simsiam.py --epochs 100 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --local 3 --no_save"
 
-# MY_CMD="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --pytorch_aug --local 3 --no_save"
+MY_CMD="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --pytorch_aug --second_seed 0 --local 3 --no_save"
 
 # MY_CMD="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 2 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --local 1,2 --no_save"
 # use_dbindex_train_model
@@ -75,7 +75,7 @@ TRAIN_STEP='2'
 # unlearnable_samplewise_52866449_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
 # unlearnable_samplewise_52428805_1_20220505181516_0.5_512_2_checkpoint_perturbation_epoch_20
 
-MY_CMD="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_checkpoint_perturbation --samplewise --perturbation_budget 2 --local 2 --no_save"
+# MY_CMD="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53317349_1_20220511135754_0.5_512_2_checkpoint_perturbation --samplewise --perturbation_budget 2 --local 2 --no_save"
 
 # MY_CMD="python3 -u main.py --version resnet18 --exp_name path/to/your/experiment/folder_cifar10_main --config_path configs/cifar10 --train_data_type PoisonCIFAR10 --poison_rate 1.0 --perturb_type samplewise --perturb_tensor_filepath results/cifar10_unlearnable_52378127_1_perturbation.pt --train"
 
