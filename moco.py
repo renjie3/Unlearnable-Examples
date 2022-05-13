@@ -271,13 +271,12 @@ class ModelMoCo(nn.Module):
         """
         return x[idx_unshuffle]
 
-    def contrastive_loss(self, im_q, im_k):
+    def contrastive_loss(self, im_q, im_k, k_grad=False):
         # compute query features
         q = self.encoder_q(im_q)  # queries: NxC
         q = nn.functional.normalize(q, dim=1)  # already normalized
 
-        # compute key features
-        with torch.no_grad():  # no gradient to keys
+        if k_grad:
             # shuffle for making use of BN
             im_k_, idx_unshuffle = self._batch_shuffle_single_gpu(im_k)
 
@@ -286,6 +285,17 @@ class ModelMoCo(nn.Module):
 
             # undo shuffle
             k = self._batch_unshuffle_single_gpu(k, idx_unshuffle)
+        else:
+            # compute key features
+            with torch.no_grad():  # no gradient to keys
+                # shuffle for making use of BN
+                im_k_, idx_unshuffle = self._batch_shuffle_single_gpu(im_k)
+
+                k = self.encoder_k(im_k_)  # keys: NxC
+                k = nn.functional.normalize(k, dim=1)  # already normalized
+
+                # undo shuffle
+                k = self._batch_unshuffle_single_gpu(k, idx_unshuffle)
 
         # compute logits
         # Einstein sum is more intuitive
@@ -307,7 +317,7 @@ class ModelMoCo(nn.Module):
 
         return loss, q, k
 
-    def forward(self, im1, im2, update_queue=True):
+    def forward(self, im1, im2, update_queue=True, k_grad=False):
         """
         Input:
             im_q: a batch of query images
@@ -322,12 +332,12 @@ class ModelMoCo(nn.Module):
 
         # compute loss
         if self.symmetric:  # asymmetric loss
-            loss_12, q1, k2 = self.contrastive_loss(im1, im2)
-            loss_21, q2, k1 = self.contrastive_loss(im2, im1)
+            loss_12, q1, k2 = self.contrastive_loss(im1, im2, k_grad=k_grad)
+            loss_21, q2, k1 = self.contrastive_loss(im2, im1, k_grad=k_grad)
             loss = loss_12 + loss_21
             k = torch.cat([k1, k2], dim=0)
         else:  # asymmetric loss
-            loss, q, k = self.contrastive_loss(im1, im2)
+            loss, q, k = self.contrastive_loss(im1, im2, k_grad=k_grad)
 
         if update_queue:
             self._dequeue_and_enqueue(k)
@@ -392,10 +402,10 @@ def train_moco(net, im_1, im_2, train_optimizer):
 
     return loss.item() * im_1.shape[0], im_1.shape[0]
 
-def train_moco_noise_return_loss_tensor(net, im_1, im_2):
+def train_moco_noise_return_loss_tensor(net, im_1, im_2, k_grad=False):
     im_1, im_2 = im_1.cuda(non_blocking=True), im_2.cuda(non_blocking=True)
 
-    loss = net(im_1, im_2)
+    loss = net(im_1, im_2, k_grad=k_grad)
 
     return loss
 

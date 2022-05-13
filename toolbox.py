@@ -840,7 +840,7 @@ class PerturbationTool():
 
             return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_moco_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1, linear_noise_dbindex_weight2=0, linear_noise_dbindex_index2=2, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', two_stage_PGD=False, model_g_augment_first=False, dbindex_augmentation=False, linear_xnoise_dbindex_weight=0, linear_xnoise_dbindex_index=1):
+    def min_min_attack_moco_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1, linear_noise_dbindex_weight2=0, linear_noise_dbindex_index2=2, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', two_stage_PGD=False, model_g_augment_first=False, dbindex_augmentation=False, linear_xnoise_dbindex_weight=0, linear_xnoise_dbindex_index=1, k_grad=False):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if not two_stage_PGD:
             if random_noise is None:
@@ -869,7 +869,7 @@ class PerturbationTool():
                     model.zero_grad()
 
                     if simclr_weight != 0:
-                        simclr_loss = train_moco_noise_return_loss_tensor(model, perturb_img1, perturb_img2)
+                        simclr_loss = train_moco_noise_return_loss_tensor(model, perturb_img1, perturb_img2, k_grad=k_grad)
                     else:
                         simclr_loss = 0
 

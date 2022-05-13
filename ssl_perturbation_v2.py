@@ -130,7 +130,7 @@ parser.add_argument('--dbindex_augmentation', action='store_true', default=False
 parser.add_argument('--linear_xnoise_dbindex_weight', default=0, type=float, help='noise_simclr_weight')
 parser.add_argument('--linear_xnoise_dbindex_index', default=1, type=int, help='noise_simclr_weight')
 parser.add_argument('--reverse_code', action='store_true', default=False)
-# parser.add_argument('--second_seed', default=-1, type=int, help='noise_simclr_weight')
+parser.add_argument('--second_seed', default=-1, type=int, help='noise_simclr_weight')
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 

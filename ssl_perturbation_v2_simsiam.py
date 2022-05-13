@@ -220,8 +220,9 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(args.seed)
     np.random.seed(args.seed)
     random.seed(args.seed)
-    torch.backends.cudnn.enabled = True
-    torch.backends.cudnn.benchmark = True
+    # torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
     device = torch.device('cuda')
     device_list = [torch.cuda.get_device_name(i) for i in range(0, torch.cuda.device_count())]
     if not args.no_save:
@@ -487,7 +488,7 @@ def universal_perturbation(noise_generator, trainer, evaluator, model, criterion
         print("train_loss:", train_loss)
         results['train_loss'].append(train_loss)
         results['noise_ave_value'].append(noise_ave_value)
-        test_acc_1, test_acc_5 = test_simsiam(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
+        test_acc_1, test_acc_5 = test_simsiam(model.backbone, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
         results['test_acc@1'].append(test_acc_1)
         results['test_acc@5'].append(test_acc_5)
 
@@ -611,7 +612,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     # logger.info('=' * 20 + 'Searching Samplewise Perturbation' + '=' * 20)
     flag_cluster = False
 
-    test_acc_1, test_acc_5 = test_simsiam(model, memory_loader, test_loader, k, temperature, 0, epochs)
+    test_acc_1, test_acc_5 = test_simsiam(model.backbone, memory_loader, test_loader, k, temperature, 0, epochs)
 
     for _epoch_idx in range(1, epochs+1):
         epoch_idx = _epoch_idx + args.piermaro_restart_epoch
@@ -817,7 +818,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         # denominator = sum_denominator / float(sum_denominator_count)
         print(train_loss)
         results['train_loss'].append(train_loss)
-        test_acc_1, test_acc_5 = test_simsiam(model, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
+        test_acc_1, test_acc_5 = test_simsiam(model.backbone, memory_loader, test_loader, k, temperature, epoch_idx, epochs)
         results['test_acc@1'].append(test_acc_1)
         results['test_acc@5'].append(test_acc_5)
         results['noise_ave_value'].append(noise_ave_value)
