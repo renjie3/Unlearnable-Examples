@@ -1277,7 +1277,7 @@ class TransferCIFAR100Pair(CIFAR100):
                     else:
                         noise = self.noise_255[idx]
                         # print("check it goes samplewise.")
-                    noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
+                    # noise = patch_noise_extend_to_img(noise, [32, 32, 3], patch_location='center')
                     self.data[idx] = self.data[idx] + noise
                     self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
                 self.data = self.data.astype(np.uint8)

@@ -40,7 +40,7 @@ class SimSiamModel(CLModel):
                 )
         
     
-    def forward(self, x1, x2):
+    def forward(self, x1, x2, k_grad=False):
         x1 = self.backbone(x1)
         x2 = self.backbone(x2)
 
@@ -52,5 +52,5 @@ class SimSiamModel(CLModel):
         p1 = self.pred_head(z1)
         p2 = self.pred_head(z2)
         
-        return self.criterion(p1, p2, z1, z2)
+        return self.criterion(p1, p2, z1, z2, k_grad=k_grad)
     

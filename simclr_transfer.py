@@ -486,7 +486,7 @@ if __name__ == '__main__':
             train_data.save_noise_img()
         if args.save_noise_input_space:
             noise_input_space = train_data.perturb_tensor.reshape((train_data.perturb_tensor.shape[0], -1))
-            utils.plot_feature(noise_input_space[:10000], train_data.targets[:10000], pre_load_name)
+            utils.plot_feature(noise_input_space[:1000], train_data.targets[:1000], pre_load_name)
             input('save_noise_input_space done')
 
         train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)

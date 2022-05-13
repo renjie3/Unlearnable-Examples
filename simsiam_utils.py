@@ -128,7 +128,7 @@ def train_simsiam(net, pos_1, pos_2, train_optimizer, batch_size, temperature, n
     return total_loss * pos_1.shape[0], pos_1.shape[0]
 
 
-def train_simsiam_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None, single_noise_after_transform=False, no_eval=False, augmentation_prob=None, org_pos1=None, org_pos2=None, clean_weight=0):
+def train_simsiam_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, batch_size, temperature, flag_strong_aug = True, noise_after_transform=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, dbindex_labels=None, num_clusters=None, single_noise_after_transform=False, no_eval=False, augmentation_prob=None, org_pos1=None, org_pos2=None, clean_weight=0, k_grad=False):
     total_loss, total_num = 0.0, 0
     
     pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
@@ -146,7 +146,7 @@ def train_simsiam_noise_return_loss_tensor(net, pos_1, pos_2, train_optimizer, b
 
     time0 = time.time()
 
-    loss = net(pos_1, pos_2)
+    loss = net(pos_1, pos_2, k_grad=k_grad)
 
     time2 = time.time()
 

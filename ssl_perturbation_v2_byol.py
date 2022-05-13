@@ -220,8 +220,9 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(args.seed)
     np.random.seed(args.seed)
     random.seed(args.seed)
-    torch.backends.cudnn.enabled = True
-    torch.backends.cudnn.benchmark = True
+    # torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
     device = torch.device('cuda')
     device_list = [torch.cuda.get_device_name(i) for i in range(0, torch.cuda.device_count())]
     if not args.no_save:

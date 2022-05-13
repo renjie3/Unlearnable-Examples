@@ -823,7 +823,6 @@ def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True, use_normaliz
         else:
             if noise_centroids == None:
                 if use_normalized:
-                    # input('check here')
                     class_i_center = nn.functional.normalize(class_i.mean(dim=0), p=2, dim=0)
                     # print(class_i_center.shape)
                     # print(torch.sum(class_i_center **2, dim=0))

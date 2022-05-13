@@ -661,7 +661,7 @@ class PerturbationTool():
 
             return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
-    def min_min_attack_simsiam_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1, linear_noise_dbindex_weight2=0, linear_noise_dbindex_index2=2, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', two_stage_PGD=False, model_g_augment_first=False, dbindex_augmentation=False, linear_xnoise_dbindex_weight=0, linear_xnoise_dbindex_index=1):
+    def min_min_attack_simsiam_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1, linear_noise_dbindex_weight2=0, linear_noise_dbindex_index2=2, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', two_stage_PGD=False, model_g_augment_first=False, dbindex_augmentation=False, linear_xnoise_dbindex_weight=0, linear_xnoise_dbindex_index=1, k_grad=False):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if not two_stage_PGD:
             if random_noise is None:
@@ -691,7 +691,7 @@ class PerturbationTool():
 
                     if simclr_weight != 0:
                             
-                        simclr_loss = train_simsiam_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight)
+                        simclr_loss = train_simsiam_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight, k_grad=k_grad)
                     else:
                         simclr_loss = 0
 
@@ -1019,6 +1019,241 @@ class PerturbationTool():
             return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
 
     def min_min_attack_simclr_return_loss_tensor_eot_v1(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1, linear_noise_dbindex_weight2=0, linear_noise_dbindex_index2=2, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', two_stage_PGD=False, model_g_augment_first=False, dbindex_augmentation=False, linear_xnoise_dbindex_weight=0, linear_xnoise_dbindex_index=1, reverse_code=False):
+    # v1 means it can repeat min_min_attack many times serially and average the results.
+        if not two_stage_PGD:
+            if random_noise is None:
+                random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+            perturb = Variable(random_noise, requires_grad=True)
+
+            eta = random_noise
+            train_loss_batch_sum, train_loss_batch_count = 0, 0
+            for _ in range(self.num_steps):
+
+                start = time.time()
+
+                eot_grad = torch.zeros(perturb.shape, dtype=torch.float).to(device)
+                eot_loss = 0
+
+                # perturb_org = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+
+                for i_eot in range(eot_size):
+                    time0 = time.time()
+                    if upper_half_linear:
+                        _perturb = perturb * batch_simclr_mask + batch_linear_noise
+                        perturb_img1 = torch.clamp(pos_samples_1.data + _perturb, 0, 1)
+                        perturb_img2 = torch.clamp(pos_samples_2.data + _perturb, 0, 1)
+                    elif mask_linear_constraint:
+                        _perturb1 = torch.clamp(perturb, -self.epsilon, -self.epsilon*0.25,) * mask1
+                        _perturb2 = torch.clamp(perturb, self.epsilon*0.25, self.epsilon,) * mask2
+                        _perturb = _perturb1 + _perturb2
+                        perturb_img1 = torch.clamp(pos_samples_1.data + _perturb, 0, 1)
+                        perturb_img2 = torch.clamp(pos_samples_2.data + _perturb, 0, 1)
+                    else:
+                        perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+                        perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+                    opt = torch.optim.SGD([perturb], lr=1e-3)
+                    opt.zero_grad()
+                    model.zero_grad()
+
+                    if dbindex_weight != 0:
+                        dbindex_loss = get_dbindex_loss(model, perturb_img1, labels, [4], True, True, dbindex_label_index, x2=perturb_img2, use_aug=True)
+                    else:
+                        dbindex_loss = 0
+
+                    if noise_dbindex_weight != 0:
+                        perturb1 = torch.clamp(0.5 + perturb, 0, 1)
+                        perturb2 = torch.clamp(0.5 + perturb, 0, 1)
+                        noise_dbindex_loss = get_dbindex_loss(model, perturb1, labels, [4], True, True, dbindex_label_index, x2=perturb2, use_aug=True)
+                    else:
+                        noise_dbindex_loss = 0
+
+                    if simclr_weight != 0:
+                        if double_perturb:
+                            perturb_img1 = train_diff_transform(perturb_img1)
+                            perturb_img2 = train_diff_transform(perturb_img2)
+                            perturb_img1 = torch.clamp(perturb_img1 + perturb, 0, 1)
+                            perturb_img2 = torch.clamp(perturb_img2 + perturb, 0, 1)
+                            _noise_after_transform = False
+                            # input('check double')
+                        else:
+                            _noise_after_transform = noise_after_transform
+                            
+                        simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=_noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight)
+                    else:
+                        simclr_loss = 0
+
+                    if noise_simclr_weight != 0:
+                        perturb1 = torch.clamp(0.5 + perturb, 0, 1)
+                        perturb2 = torch.clamp(0.5 + perturb, 0, 1)
+                        noise_simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb1, perturb2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=noise_after_transform, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight)
+                    else:
+                        noise_simclr_loss = 0
+
+                    if linear_noise_dbindex_weight != 0:
+                        linear_noise_dbindex_loss = get_linear_noise_dbindex_loss(perturb, labels[:, linear_noise_dbindex_index], use_mean_dbindex=use_mean_dbindex, use_normalized=use_normalized, noise_centroids=noise_centroids, modify_dbindex=modify_dbindex, reverse_code=reverse_code)
+                    else:
+                        linear_noise_dbindex_loss = 0
+
+                    if linear_xnoise_dbindex_weight != 0:
+                        linear_xnoise_dbindex_loss = get_linear_noise_dbindex_loss(torch.clamp(pos_samples_1.data + perturb, 0, 1), labels[:, linear_noise_dbindex_index], use_mean_dbindex=use_mean_dbindex, use_normalized=use_normalized, noise_centroids=noise_centroids, modify_dbindex=modify_dbindex)
+                    else:
+                        linear_xnoise_dbindex_loss = 0
+
+                    if linear_noise_dbindex_weight2 != 0:
+                        linear_noise_dbindex_loss2 = get_linear_noise_dbindex_loss(perturb, labels[:, linear_noise_dbindex_index2], use_mean_dbindex=use_mean_dbindex, use_normalized=use_normalized, noise_centroids=noise_centroids)
+                    else:
+                        linear_noise_dbindex_loss2 = 0
+
+                    if use_supervised_g != 0:
+                        g_net.zero_grad()
+                        if not model_g_augment_first:
+                            inputs = supervised_transform_train(torch.cat([perturb_img1, perturb_img2], dim=0))
+                            feature, outputs = g_net(inputs)
+                            supervised_loss = supervised_criterion(outputs, labels[:, 1].repeat((2,)))
+                        else:
+                            inputs = torch.clamp(supervised_transform_train(torch.clamp(pos_samples_1.data, 0, 1)) + perturb, 0, 1)
+                            feature, outputs = g_net(inputs)
+                            supervised_loss = supervised_criterion(outputs, labels[:, 1])
+                    else:
+                        supervised_loss = 0
+
+                    print(linear_xnoise_dbindex_loss)
+                    loss = dbindex_loss * dbindex_weight + simclr_loss * simclr_weight + noise_dbindex_loss * noise_dbindex_weight + noise_simclr_loss * noise_simclr_weight + supervised_weight * supervised_loss + linear_noise_dbindex_loss * linear_noise_dbindex_weight + linear_noise_dbindex_weight2 * linear_noise_dbindex_loss2 + linear_xnoise_dbindex_loss * linear_xnoise_dbindex_weight
+                    
+                    perturb.retain_grad()
+                    loss.backward()
+                    
+                    eot_grad += perturb.grad.data
+                    eot_loss += loss.item()
+                
+                eot_loss /= eot_size
+                eot_grad /= eot_size
+
+                train_loss_batch = loss.item()/float(perturb.shape[0])
+                train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+                train_loss_batch_count += perturb.shape[0]
+
+                eta_step = self.step_size * eot_grad.sign() * (-1)
+                sign_print = perturb.grad.data.sign() * (-1)
+                # print("+:", np.sum(sign_print.cpu().numpy() == 1))
+                # print("-:", np.sum(sign_print.cpu().numpy() == -1))
+                # print("0:", np.sum(sign_print.cpu().numpy() == 0))
+                perturb_img1 = perturb_img1.data + eta_step
+                eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+                perturb_img2 = perturb_img2.data + eta_step
+                eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+                # diff_eta = eta1 - eta2
+                # print(diff_eta.cpu().numpy())
+                eta = (eta1 + eta2) / 2
+                if mask_linear_constraint:
+                    if mask_linear_noise_range[0] >= mask_linear_noise_range[1]:
+                        raise('wrong parameter mask_linear_noise_range')
+                    _eta1 = torch.clamp(eta, -mask_linear_noise_range[1] / 255.0, -mask_linear_noise_range[0] / 255.0,) * mask1
+                    _eta2 = torch.clamp(eta, mask_linear_noise_range[0] / 255.0, mask_linear_noise_range[1] / 255.0,) * mask2
+                    eta = _eta1 + _eta2
+                # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+                perturb = Variable(eta, requires_grad=True)
+                # perturb_img1 = pos_samples_1.data + perturb
+                # perturb_img1 = torch.clamp(perturb_img1, 0, 1)
+                # perturb_img2 = pos_samples_2.data + perturb
+                # perturb_img2 = torch.clamp(perturb_img2, 0, 1)
+                print("min_min_attack_simclr_return_loss_tensor_eot_v1:", eot_loss)
+
+                end = time.time()
+
+                print("time: ", end - start)
+            # print("eta all")
+            # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+            # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+            # print(">0:", np.sum(eta.cpu().numpy() > 0))
+            # print("<0:", np.sum(eta.cpu().numpy() < 0))
+            # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+            return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+        else:
+            
+            if random_noise is None:
+                random_noise = torch.FloatTensor(*pos_samples_1.shape).uniform_(-self.epsilon, self.epsilon).to(device)
+
+            perturb = Variable(random_noise, requires_grad=True)
+
+            eta = random_noise
+            train_loss_batch_sum, train_loss_batch_count = 0, 0
+            for _ in range(self.num_steps):
+
+                start = time.time()
+
+                eot_grad = torch.zeros(perturb.shape, dtype=torch.float).to(device)
+                eot_linear_noise_grad = torch.zeros(perturb.shape, dtype=torch.float).to(device)
+                eot_loss = 0
+
+                for i_eot in range(eot_size):
+                    opt = torch.optim.SGD([perturb], lr=1e-3)
+                    opt.zero_grad()
+                    model.zero_grad()
+
+                    perturb_img1 = torch.clamp(pos_samples_1.data + perturb, 0, 1)
+                    perturb_img2 = torch.clamp(pos_samples_2.data + perturb, 0, 1)
+                            
+                    simclr_loss = train_simclr_noise_return_loss_tensor(model, perturb_img1, perturb_img2, opt, batch_size, temperature, flag_strong_aug, noise_after_transform=False, pytorch_aug=pytorch_aug, single_noise_after_transform=single_noise_after_transform, no_eval=no_eval, augmentation_prob=augmentation_prob, org_pos1=pos_samples_1, org_pos2=pos_samples_2, clean_weight=clean_weight)
+
+                    loss = simclr_loss
+                    
+                    perturb.retain_grad()
+                    loss.backward()
+                    
+                    eot_grad += perturb.grad.data
+                    eot_loss += loss.item()
+
+                    opt = torch.optim.SGD([perturb], lr=1e-3)
+                    opt.zero_grad()
+                    model.zero_grad()
+
+                    linear_noise_dbindex_loss = get_linear_noise_dbindex_loss(perturb, labels[:, linear_noise_dbindex_index], use_mean_dbindex=use_mean_dbindex, use_normalized=use_normalized, noise_centroids=noise_centroids, modify_dbindex=modify_dbindex)
+                    
+                    loss = linear_noise_dbindex_loss
+                    
+                    perturb.retain_grad()
+                    loss.backward()
+                    
+                    eot_linear_noise_grad += perturb.grad.data
+                
+                eot_loss /= eot_size
+                eot_grad /= eot_size
+
+                train_loss_batch = loss.item()/float(perturb.shape[0])
+                train_loss_batch_sum += train_loss_batch * perturb.shape[0]
+                train_loss_batch_count += perturb.shape[0]
+
+                eta_step = self.step_size * eot_grad.sign() * (-1) + linear_noise_dbindex_weight * self.step_size * eot_linear_noise_grad.sign() * (-1)
+                sign_print = perturb.grad.data.sign() * (-1)
+
+                perturb_img1 = perturb_img1.data + eta_step
+                eta1 = torch.clamp(perturb_img1.data - pos_samples_1.data, -self.epsilon, self.epsilon)
+                perturb_img2 = perturb_img2.data + eta_step
+                eta2 = torch.clamp(perturb_img2.data - pos_samples_2.data, -self.epsilon, self.epsilon)
+
+                eta = (eta1 + eta2) / 2
+
+                # print("pos1 and pos2 diff: ", np.sum((eta1 - eta2).cpu().numpy()))
+                perturb = Variable(eta, requires_grad=True)
+
+                print("min_min_attack_simclr_return_loss_tensor_eot_v1:", eot_loss)
+
+                end = time.time()
+                print("time: ", end - start)
+            # print("eta all")
+            # print("+:", np.sum(eta.cpu().numpy() > 0.0313724))
+            # print("-:", np.sum(eta.cpu().numpy() < -0.0313724))
+            # print(">0:", np.sum(eta.cpu().numpy() > 0))
+            # print("<0:", np.sum(eta.cpu().numpy() < 0))
+            # print("=0:", np.sum(eta.cpu().numpy() == 0))
+
+            return None, eta, train_loss_batch_sum / float(train_loss_batch_count)
+
+
+    def min_min_attack_simclr_return_loss_tensor_eot_v1_mask(self, pos_samples_1, pos_samples_2, labels, model, optimizer, criterion, random_noise=None, sample_wise=False, batch_size=512, temperature=None, flag_strong_aug=True, noise_after_transform=False, eot_size=30, one_gpu_eot_times=1, cross_eot=False, split_transform=False, pytorch_aug=False, dbindex_weight=0, single_noise_after_transform=False, no_eval=False, dbindex_label_index=1, noise_dbindex_weight=0, simclr_weight=1, augmentation_prob=None, clean_weight=0, noise_simclr_weight=0, double_perturb=False, upper_half_linear=False, batch_simclr_mask=None, batch_linear_noise=None, mask_linear_constraint=False, mask1=None, mask2=None, mask_linear_noise_range=[2, 8], use_supervised_g=False, g_net=None, supervised_criterion=None, supervised_weight=0, supervised_transform_train=None, linear_noise_dbindex_weight=0, linear_noise_dbindex_index=1, linear_noise_dbindex_weight2=0, linear_noise_dbindex_index2=2, use_mean_dbindex=True, use_normalized=True, noise_centroids=None, modify_dbindex='', two_stage_PGD=False, model_g_augment_first=False, dbindex_augmentation=False, linear_xnoise_dbindex_weight=0, linear_xnoise_dbindex_index=1, reverse_code=False):
     # v1 means it can repeat min_min_attack many times serially and average the results.
         if not two_stage_PGD:
             if random_noise is None:
