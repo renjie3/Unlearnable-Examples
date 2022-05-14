@@ -130,6 +130,8 @@ parser.add_argument('--dbindex_augmentation', action='store_true', default=False
 parser.add_argument('--linear_xnoise_dbindex_weight', default=0, type=float, help='noise_simclr_weight')
 parser.add_argument('--linear_xnoise_dbindex_index', default=1, type=int, help='noise_simclr_weight')
 parser.add_argument('--k_grad', action='store_true', default=False)
+parser.add_argument('--simsiam_optim', action='store_true', default=False)
+parser.add_argument('--moco_optim', action='store_true', default=False)
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 
@@ -1072,7 +1074,13 @@ def main():
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints['state_dict'])
 
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    if args.simsiam_optim:
+        if args.moco_optim:
+            optimizer = optim.SGD(model.parameters(), lr=0.3, momentum=0.9, weight_decay=1e-4)
+        else:
+            optimizer = optim.SGD(model.parameters(), lr=0.06, momentum=0.9, weight_decay=5e-4)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 
     if args.load_model or args.load_piermaro_model:
         if 'optimizer' in checkpoints:

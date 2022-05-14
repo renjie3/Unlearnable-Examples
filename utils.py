@@ -1281,6 +1281,7 @@ class TransferCIFAR100Pair(CIFAR100):
                     self.data[idx] = self.data[idx] + noise
                     self.data[idx] = np.clip(self.data[idx], a_min=0, a_max=255)
                 self.data = self.data.astype(np.uint8)
+            print('load perturb done ______________')
         else:
             print('it is clean train')
 

@@ -187,7 +187,7 @@ if __name__ == '__main__':
         classes = ('plane', 'car', 'bird', 'cat', 'deer',
                 'dog', 'frog', 'horse', 'ship', 'truck')
     elif args.train_data_type == 'cifar100':
-        trainset = TransferCIFAR100Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
+        trainset = TransferCIFAR100Pair(root='data', train=True, transform=transform_train, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=args.perturbation_budget, samplewise_perturb=samplewise_perturb, org_label_flag=False, flag_save_img_group=False, clean_train=args.clean_train)
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=128, shuffle=True, num_workers=2)
 
         testset = CIFAR100Pair(root='data', train=False, transform=transform_test, download=True)

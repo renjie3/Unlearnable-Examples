@@ -7628,3 +7628,35 @@ python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --pertu
 
 
 ---------------------------------------------------------------
+Sat May 14 01:21:02 EDT 2022
+53666803
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-30 --not_use_normalized --seed 3 --job_id 53666803_1
+unlearnable_samplewise_53666803_1_20220513224404_0.5_512_2
+
+
+---------------------------------------------------------------
+Sat May 14 01:29:54 EDT 2022
+53666842
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-32 --not_use_normalized --seed 3 --job_id 53666842_1
+unlearnable_samplewise_53666842_1_20220513225246_0.5_512_2
+
+
+---------------------------------------------------------------
+Sat May 14 01:32:40 EDT 2022
+53666852
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-27 --not_use_normalized --seed 3 --job_id 53666852_1
+unlearnable_samplewise_53666852_1_20220513225314_0.5_512_2
+
+
+---------------------------------------------------------------
+Sat May 14 10:24:05 EDT 2022
+53688662
+samplewise perturbation
+python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53657706_1_20220513184955_0.5_512_2_checkpoint_perturbation --samplewise --job_id 53688662_1
+
+
+
+---------------------------------------------------------------

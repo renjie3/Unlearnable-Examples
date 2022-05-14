@@ -52,9 +52,9 @@ MYGRES="gpu:v100:1"
 # 52802261
 
 JOB_INFO="samplewise perturbation"
-# MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52802261_1_20220507103138_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug"
-# MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_52802261_1_20220507103138_0.5_512_2_checkpoint_perturbation --samplewise"
-MYCOMMEND="python simsiam_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53601567_1_20220512204802_0.5_512_1_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise"
+MYCOMMEND="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53332663_1_20220511191618_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --samplewise --pytorch_aug"
+# MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53657706_1_20220513184955_0.5_512_2_checkpoint_perturbation --samplewise"
+# MYCOMMEND="python simsiam_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53673062_1_20220514034616_0.5_512_1_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --clean_train"
 
 MYCOMMEND2="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52260377_1_20220502113459_0.5_512_300_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug"
 

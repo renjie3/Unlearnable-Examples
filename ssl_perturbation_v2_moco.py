@@ -31,7 +31,7 @@ parser.add_argument('--step_size', default=0.8, type=float, help='perturb step s
 parser.add_argument('--random_start', action='store_true', default=False)
 # Self-supervised Options
 parser.add_argument('--feature_dim', default=128, type=int, help='Feature dim for latent vector')
-parser.add_argument('--temperature', default=0.5, type=float, help='Temperature used in softmax')
+parser.add_argument('--temperature', default=0.2, type=float, help='Temperature used in softmax')
 parser.add_argument('--k', default=200, type=int, help='Top k most similar images used to predict the label')
 parser.add_argument('--batch_size', default=512, type=int, help='Number of images in each mini-batch')
 parser.add_argument('--epochs', default=300, type=int, help='Number of sweeps over the dataset to train')
@@ -130,6 +130,9 @@ parser.add_argument('--dbindex_augmentation', action='store_true', default=False
 parser.add_argument('--linear_xnoise_dbindex_weight', default=0, type=float, help='noise_simclr_weight')
 parser.add_argument('--linear_xnoise_dbindex_index', default=1, type=int, help='noise_simclr_weight')
 parser.add_argument('--k_grad', action='store_true', default=False)
+parser.add_argument('--asymmetric', action='store_true', default=False)
+parser.add_argument('--moco_t', default=0.1, type=float, help='noise_simclr_weight')
+parser.add_argument('--SGD_optim', action='store_true', default=False)
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 
@@ -1036,14 +1039,15 @@ def main():
                                                 num_steps=args.num_steps,
                                                 step_size=args.step_size)
 
+    flag_symmetric = not args.asymmetric
     model = ModelMoCo(
         dim=128,
         K=4096,
         m=0.99,
-        T=0.1,
+        T=args.moco_t,
         arch='resnet18',
         bn_splits=8,
-        symmetric=True, ).cuda()
+        symmetric=flag_symmetric, ).cuda()
     # model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
     # model = model.cuda()
 
@@ -1065,7 +1069,10 @@ def main():
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints['state_dict'])
 
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    if args.SGD_optim:
+        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 
     if args.load_model or args.load_piermaro_model:
         if 'optimizer' in checkpoints:
