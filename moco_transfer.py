@@ -85,6 +85,7 @@ parser.add_argument('--pre_load_name', default='', type=str, help='pre_load_name
 parser.add_argument('--local', default='', type=str, help='The gpu number used on developing node.')
 parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
 parser.add_argument('--no_save', action='store_true', help='use a symmetric loss function that backprops to both crops')
+parser.add_argument('--kornia_aug', action='store_true', help='use a symmetric loss function that backprops to both crops')
 
 args = parser.parse_args()  # running in command line
 
@@ -151,7 +152,10 @@ test_transform = transforms.Compose([
     transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])])
 
 # data prepare
-train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
+if args.kornia_aug:
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
+else:
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
 train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
 
 memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=False)
@@ -371,6 +375,9 @@ def train(net, data_loader, train_optimizer, epoch, args):
     total_loss, total_num, train_bar = 0.0, 0, tqdm(data_loader)
     for im_1, im_2, target in train_bar:
         im_1, im_2 = im_1.cuda(non_blocking=True), im_2.cuda(non_blocking=True)
+
+        if args.kornia_aug:
+            im_1, im_2 = utils.train_diff_transform(im_1), utils.train_diff_transform(im_2)
 
         loss = net(im_1, im_2)
         

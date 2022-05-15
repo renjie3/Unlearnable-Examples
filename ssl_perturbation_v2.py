@@ -640,11 +640,11 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 train_noise_data_loader_simclr.dataset.add_kmeans_label(kmeans_labels)
                 flag_cluster = True
         if args.save_kmeans_label:
-            kmeans_labels1 = find_cluster(model, const_train_loader, random_noise, 10)
-            kmeans_labels2 = find_cluster(model, const_train_loader, random_noise, 100)
-            kmeans_labels3 = find_cluster(model, const_train_loader, random_noise, 500)
+            kmeans_labels1 = find_cluster(model, const_train_loader, random_noise, 20, seed=1, use_feature_find_cluster=False)
+            kmeans_labels2 = find_cluster(model, const_train_loader, random_noise, 20, seed=1, use_feature_find_cluster=True)
+            kmeans_labels3 = find_cluster(model, const_train_loader, random_noise, 20, seed=2, use_feature_find_cluster=False)
             kmeans_labels = np.stack([kmeans_labels1, kmeans_labels2, kmeans_labels3], axis=0)
-            # f = open('./data/kmeans_label/kmeans_unlearnable_simclr_label.pkl', 'wb')
+            # f = open('./data/kmeans_label/kmeans_cifar10.pkl', 'wb')
             # pickle.dump(kmeans_labels, f)
             # f.close()
             input('kmeans_unlearnable_simclr_label done')
@@ -1061,9 +1061,9 @@ def main():
     model = Model(feature_dim, arch=args.arch, train_mode=args.perturb_type, f_logits_dim=args.batch_size)
     model = model.cuda()
 
-    # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    # flops, params = clever_format([flops, params])
-    # print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+    flops, params = clever_format([flops, params])
+    print('# Model Params: {} FLOPs: {}'.format(params, flops))
 
     if args.load_model:
         load_model_path = './results/{}.pth'.format(args.load_model_path)

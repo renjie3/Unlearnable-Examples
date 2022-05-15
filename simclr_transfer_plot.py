@@ -22,7 +22,7 @@ parser.add_argument('--load_model', action='store_true', default=False)
 parser.add_argument('--load_model_path', default='', type=str, help='The backbone of encoder')
 parser.add_argument('--kmeans_index', default=-1, type=int, help='perturbation_rate')
 parser.add_argument('--unlearnable_kmeans_label', action='store_true', default=False)
-
+parser.add_argument('--kmeans_label_file', default='', type=str, help='The backbone of encoder')
 
 # args parse
 args = parser.parse_args()
@@ -220,7 +220,8 @@ def test_ssl_visualization(net, test_data_visualization):
         fig = plt.figure(figsize=(8, 8))
         ax = fig.add_subplot(1, 1, 1)
         plt.title("clean data with original label")
-        plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=plt.cm.Spectral)
+        cm = plt.cm.get_cmap('gist_rainbow', c)
+        plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=cm)
         ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         ax.yaxis.set_major_formatter(NullFormatter())
         plt.savefig('./visualization/cleandata_orglabel.png')
@@ -328,9 +329,11 @@ if __name__ == '__main__':
     # unlearnable_samplewise_107535314_1_20211120061615_0.5_512_1000perturbation
 
     if args.pre_load_name == '':
-        raise("Use pre_load_name.")
+        # raise("Use pre_load_name.")
+        pass
     else:
         pre_load_name = args.pre_load_name
+    pre_load_name = args.pre_load_name
     
     class_4 = args.class_4
     perturbation_budget = args.perturbation_budget
@@ -346,7 +349,12 @@ if __name__ == '__main__':
         save_name_pre += '_orglabel'
     print(save_name_pre)
 
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label)
+    if args.pre_load_name != '':
+        perturb_tensor_filepath = "./results/{}.pt".format(pre_load_name)
+    else:
+        perturb_tensor_filepath = None
+
+    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath=perturb_tensor_filepath, random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
     if args.save_img_group:
         train_data.save_noise_img()
     # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
@@ -365,9 +373,9 @@ if __name__ == '__main__':
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
-    # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    # flops, params = clever_format([flops, params])
-    # print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+    flops, params = clever_format([flops, params])
+    print('# Model Params: {} FLOPs: {}'.format(params, flops))
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     # optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1, weight_decay=0.0005, momentum=0.9)
     c = len(memory_data.classes)
@@ -383,7 +391,7 @@ if __name__ == '__main__':
 
 
     epoch=0
-    test_acc_1, test_acc_5 = test_ssl_for_simclrpy(model, memory_loader, test_loader)
+    # test_acc_1, test_acc_5 = test_ssl_for_simclrpy(model, memory_loader, test_loader)
 
     test_ssl_visualization(model, train_data)
     # print(type(train_data.perturb_tensor))

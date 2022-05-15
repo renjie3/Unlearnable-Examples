@@ -133,6 +133,7 @@ parser.add_argument('--k_grad', action='store_true', default=False)
 parser.add_argument('--asymmetric', action='store_true', default=False)
 parser.add_argument('--moco_t', default=0.1, type=float, help='noise_simclr_weight')
 parser.add_argument('--SGD_optim', action='store_true', default=False)
+parser.add_argument('--train_perturb_fisrt', action='store_true', default=False)
 
 parser.add_argument('--no_eval', action='store_true', default=False)
 
@@ -637,73 +638,77 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
             input('kmeans_unlearnable_simclr_label done')
 
         while condition:
-            if args.attack_type == 'min-min':
-                # Train Batch for min-min noise
-                end_of_iteration = "END_OF_ITERATION"
-                for j in range(0, args.train_step):
-                    _start = time.time()
-                    try:
-                        next_item = next(data_iter, end_of_iteration)
-                        if next_item != end_of_iteration:
-                            (pos_samples_1, pos_samples_2, labels) = next_item
+            if epoch_idx != 1 or not args.train_perturb_fisrt:
+                if args.attack_type == 'min-min':
+                    # Train Batch for min-min noise
+                    end_of_iteration = "END_OF_ITERATION"
+                    for j in range(0, args.train_step):
+                        _start = time.time()
+                        try:
+                            next_item = next(data_iter, end_of_iteration)
+                            if next_item != end_of_iteration:
+                                (pos_samples_1, pos_samples_2, labels) = next_item
+                                
+                            else:
+                                condition = False
+                                del data_iter
+                                break
+                        except:
+                            # data_iter = iter(data_loader['train_dataset'])
+                            # (pos_1, pos_2, labels) = next(data_iter)
+                            raise('train loader iteration problem')
+
+                        if args.skip_train_model:
+                            continue
+
+                        pos_samples_1, pos_samples_2, labels = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device)
+                        if args.noise_after_transform_train_model:
+                            pos_samples_1 = utils.train_diff_transform(pos_samples_1)
+                            pos_samples_2 = utils.train_diff_transform(pos_samples_2)
+
+                        # Add Sample-wise Noise to each sample
+                        train_pos_1 = []
+                        train_pos_2 = []
+                        for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
+                            sample_noise = random_noise[label[0].item()]
+                            # c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
+                            # mask = np.zeros((c, h, w), np.float32)
+                            # x1, x2, y1, y2 = mask_cord_list[train_idx]
+                            if type(sample_noise) is np.ndarray:
+                                mask = sample_noise
+                            else:
+                                mask = sample_noise.cpu().numpy()
+                            # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+                            if args.upper_half_linear:
+                                sample_noise = torch.from_numpy(mask).to(device) * simclr_mask[label[0].item()] + linear_separable_noise[label[0].item()]
+                            else:
+                                sample_noise = torch.from_numpy(mask).to(device)
                             
-                        else:
-                            condition = False
-                            del data_iter
-                            break
-                    except:
-                        # data_iter = iter(data_loader['train_dataset'])
-                        # (pos_1, pos_2, labels) = next(data_iter)
-                        raise('train loader iteration problem')
+                            # images[i] = images[i] + sample_noise
+                            train_pos_1.append(pos_samples_1[i]+sample_noise)
+                            train_pos_2.append(pos_samples_2[i]+sample_noise)
+                            train_idx += 1
 
-                    if args.skip_train_model:
-                        continue
-
-                    pos_samples_1, pos_samples_2, labels = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device)
-                    if args.noise_after_transform_train_model:
-                        pos_samples_1 = utils.train_diff_transform(pos_samples_1)
-                        pos_samples_2 = utils.train_diff_transform(pos_samples_2)
-
-                    # Add Sample-wise Noise to each sample
-                    train_pos_1 = []
-                    train_pos_2 = []
-                    for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
-                        sample_noise = random_noise[label[0].item()]
-                        # c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
-                        # mask = np.zeros((c, h, w), np.float32)
-                        # x1, x2, y1, y2 = mask_cord_list[train_idx]
-                        if type(sample_noise) is np.ndarray:
-                            mask = sample_noise
-                        else:
-                            mask = sample_noise.cpu().numpy()
-                        # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
-                        if args.upper_half_linear:
-                            sample_noise = torch.from_numpy(mask).to(device) * simclr_mask[label[0].item()] + linear_separable_noise[label[0].item()]
-                        else:
-                            sample_noise = torch.from_numpy(mask).to(device)
-                        
-                        # images[i] = images[i] + sample_noise
-                        train_pos_1.append(pos_samples_1[i]+sample_noise)
-                        train_pos_2.append(pos_samples_2[i]+sample_noise)
-                        train_idx += 1
-
-                    model.train()
-                    for param in model.parameters():
-                        param.requires_grad = True
-                    batch_train_loss, batch_size_count = train_moco(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer)
-
-                    if args.use_supervised_g:
-                        g_net.train()
-                        for param in g_net.parameters():
+                        model.train()
+                        for param in model.parameters():
                             param.requires_grad = True
-                        train_supervised_batch(g_net, torch.stack(train_pos_1).to(device), labels[:, 1].to(device), supervised_criterion, supervised_optimizer, supervised_transform_train)
-                    
-                    sum_train_loss += batch_train_loss
-                    sum_train_batch_size += batch_size_count
+                        batch_train_loss, batch_size_count = train_moco(model, torch.stack(train_pos_1).to(device), torch.stack(train_pos_2).to(device), optimizer)
 
-                    _end = time.time()
+                        if args.use_supervised_g:
+                            g_net.train()
+                            for param in g_net.parameters():
+                                param.requires_grad = True
+                            train_supervised_batch(g_net, torch.stack(train_pos_1).to(device), labels[:, 1].to(device), supervised_criterion, supervised_optimizer, supervised_transform_train)
+                        
+                        sum_train_loss += batch_train_loss
+                        sum_train_batch_size += batch_size_count
 
-                    print("traning model time:", _end - _start)
+                        _end = time.time()
+
+                        print("traning model time:", _end - _start)
+
+            else:
+                condition = False
 
             # Search For Noise
 

@@ -965,7 +965,7 @@ def get_dbindex_loss(net, x, labels, num_clusters, use_out_dbindex, use_mean_dbi
 
     return loss
 
-def run_kmeans(x, num_clusters, device, temperature):
+def run_kmeans(x, num_clusters, device, temperature, my_seed=0):
     """
     Args:
         x: data to be clustered
@@ -982,7 +982,7 @@ def run_kmeans(x, num_clusters, device, temperature):
         clus.verbose = True
         clus.niter = 20
         clus.nredo = 5
-        clus.seed = seed
+        clus.seed = my_seed
         clus.max_points_per_centroid = 1000
         clus.min_points_per_centroid = 10
 
@@ -1034,7 +1034,7 @@ def run_kmeans(x, num_clusters, device, temperature):
         
     return results
 
-def find_cluster(net, memory_data_loader, random_noise, n_components, label_index=0, use_feature_find_cluster=False):
+def find_cluster(net, memory_data_loader, random_noise, n_components, seed=0, label_index=0, use_feature_find_cluster=False):
 
     time0 = time.time()
 
@@ -1084,7 +1084,7 @@ def find_cluster(net, memory_data_loader, random_noise, n_components, label_inde
 
         # print(adj)
 
-        kmeans_result = run_kmeans(feature_bank.detach().cpu().numpy(), [n_components], 0, 0.5)
+        kmeans_result = run_kmeans(feature_bank.detach().cpu().numpy(), [n_components], 0, 0.5, my_seed=seed)
 
     # adj = csr_matrix(adj)
     # n_components, labels = connected_components(csgraph=adj, directed=False, return_labels=True)

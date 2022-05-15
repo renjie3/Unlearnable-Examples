@@ -31,6 +31,8 @@ parser.add_argument('--load_piermaro_model_path', default='', type=str, help='Pa
 parser.add_argument('--piermaro_whole_epoch', default='', type=str, help='Whole epoch when use re_job to train')
 parser.add_argument('--piermaro_restart_epoch', default=0, type=int, help='The order of epoch when use re_job to train')
 
+parser.add_argument('--plot_kmeans_label', action='store_true', default=False)
+
 # args parse
 args = parser.parse_args()
 import os
@@ -463,7 +465,7 @@ if __name__ == '__main__':
             train_data.save_noise_img()
         if args.save_noise_input_space:
             noise_input_space = train_data.perturb_tensor.reshape((train_data.perturb_tensor.shape[0], -1))
-            utils.plot_feature(noise_input_space[:1000], train_data.targets[:1000], pre_load_name)
+            feature_bank = utils.plot_feature(noise_input_space[:1000], train_data.targets[:1000], pre_load_name)
             input('save_noise_input_space done')
         # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
         # load noise here:
