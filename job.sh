@@ -4,7 +4,7 @@ MY_JOB_ROOT_PATH=`pwd`
 # echo $MY_JOB_ROOT_PATH
 cd $MY_JOB_ROOT_PATH
 
-MYTIME="48:50:00"
+MYTIME="30:50:00"
 MYCPU="5"
 MYGRES="gpu:v100:1"
 
@@ -52,9 +52,9 @@ MYGRES="gpu:v100:1"
 # 52802261
 
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --pytorch_aug --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10 --seed 3"
+# MYCOMMEND="python3 -u ssl_perturbation_v2_byol.py --epochs 100 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol"
 # MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53657706_1_20220513184955_0.5_512_2_checkpoint_perturbation --samplewise"
-# MYCOMMEND="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 50 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --linear_noise_dbindex_weight 1 --not_use_normalized --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10 --random_start"
+MYCOMMEND="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --samplewise"
 
 MYCOMMEND2="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52260377_1_20220502113459_0.5_512_300_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug"
 

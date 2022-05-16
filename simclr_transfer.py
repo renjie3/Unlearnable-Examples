@@ -517,10 +517,10 @@ if __name__ == '__main__':
         checkpoints = torch.load(load_model_path, map_location=device)
         model.load_state_dict(checkpoints['state_dict'])
 
-    if not args.ignore_model_size:
-        flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-        flops, params = clever_format([flops, params])
-        print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    # if not args.ignore_model_size:
+    #     flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+    #     flops, params = clever_format([flops, params])
+    #     print('# Model Params: {} FLOPs: {}'.format(params, flops))
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     # optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1, weight_decay=0.0005, momentum=0.9)
 

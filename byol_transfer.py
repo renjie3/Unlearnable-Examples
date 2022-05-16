@@ -435,7 +435,7 @@ if __name__ == '__main__':
         save_name_pre = pre_load_name + "_budget{}_class4".format(perturbation_budget)
     else:
         random_noise_class_path = 'noise_class_label.npy'
-        save_name_pre = pre_load_name + "_budget{}_class10".format(perturbation_budget)
+        save_name_pre = pre_load_name + "_byol_budget{}_class10".format(perturbation_budget)
 
     if args.orglabel:
         save_name_pre += '_orglabel'

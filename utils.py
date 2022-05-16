@@ -720,6 +720,38 @@ class CIFAR10Pair(CIFAR10):
         self.data = self.data.astype(np.uint8)
 
 
+class LinearModelData(CIFAR10):
+    """CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        perturb_tensor_filepath = None
+    ) -> None:
+
+        super(LinearModelData, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        self.train = train
+
+        if perturb_tensor_filepath != None:
+            self.data = torch.load(perturb_tensor_filepath).to('cpu').numpy()
+            # self.noise_255 = self.perturb_tensor.mul(255*perturbation_budget).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
+        # else:
+        #     raise('Use perturb data path')
+
+
+    def __getitem__(self, index):
+        img, target = self.data[index], self.targets[index]
+        pos_1 = self.transform(img)
+        pos_2 = self.transform(img)
+        return pos_1, pos_2, target
+
+
+
 class PytorchAugCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """

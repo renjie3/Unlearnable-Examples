@@ -240,7 +240,8 @@ class BYOL(nn.Module):
         x1,
         x2 = None,
         return_embedding = False,
-        return_projection = True
+        return_projection = True,
+        k_grad=False
     ):
         assert not (self.training and x1.shape[0] == 1), 'you must have greater than 1 sample when training, due to the batchnorm in the projection layer'
 
@@ -255,12 +256,20 @@ class BYOL(nn.Module):
         online_pred_one = self.online_predictor(online_proj_one)
         online_pred_two = self.online_predictor(online_proj_two)
 
-        with torch.no_grad():
+        if k_grad:
+            # input('check')
             target_encoder = self._get_target_encoder() if self.use_momentum else self.online_encoder
             target_proj_one, _ = target_encoder(image_one)
             target_proj_two, _ = target_encoder(image_two)
             target_proj_one.detach_()
             target_proj_two.detach_()
+        else:
+            with torch.no_grad():
+                target_encoder = self._get_target_encoder() if self.use_momentum else self.online_encoder
+                target_proj_one, _ = target_encoder(image_one)
+                target_proj_two, _ = target_encoder(image_two)
+                target_proj_one.detach_()
+                target_proj_two.detach_()
 
         loss_one = loss_fn(online_pred_one, target_proj_two.detach())
         loss_two = loss_fn(online_pred_two, target_proj_one.detach())
