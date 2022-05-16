@@ -32,13 +32,15 @@ TRAIN_STEP='100'
 
 # MY_CMD="python simsiam_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53673062_1_20220514034616_0.5_512_1_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --local 3 --no_save"
 
-# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53672818_1_20220514020540_0.2_512_2_checkpoint_model_epoch_40 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --local 3 --no_save"
-MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --samplewise"
+MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53727356_1_20220514233656_0.2_512_60_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --local 2 --no_save"
+# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --samplewise"
+
+# MY_CMD="python3 -u byol_transfer_clean_train.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52866856_1_20220507200828_0.5_512_2_checkpoint_perturbation_epoch_20_byol_optim --train_data_type CIFAR10 --samplewise --pytorch_aug --clean_train --local 3 --no_save"
 
 # MY_CMD="python byol_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_byol_samplewise_53758198_1_20220515130952_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --local 2 --no_save"
 
 # MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52802196_1_20220507103138_0.5_512_2_checkpoint_perturbation --save_img_group --train_data_type CIFAR10 --samplewise --local 1"
-# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52321002_1_20220503192049_0.5_512_300_checkpoint_perturbation_epoch_40 --save_noise_input_space --train_data_type CIFAR100 --samplewise --local 3"
+# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53730783_1_20220515042709_0.5_512_2_checkpoint_perturbation --save_noise_input_space --train_data_type CIFAR100 --samplewise --local 3"
 # 52734683 unlearnable_samplewise_52734683_1_20220507001155_0.5_512_2_checkpoint_perturbation
 # unlearnable_samplewise_52428866_1_20220505211256_0.5_512_2_checkpoint_perturbation
 # unlearnable_samplewise_52806124_1_20220507111200_0.5_512_2_checkpoint_perturbation
@@ -76,7 +78,7 @@ MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name u
     # 'RegNetX_200MF': RegNetX_200MF,
     # 'simpledla': SimpleDLA}
 
-# MY_CMD="python supervised_cifar10.py --train_data_type cifar100 --arch resnet18 --pre_load_name unlearnable_samplewise_52321002_1_20220503192049_0.5_512_300_checkpoint_perturbation_epoch_40 --local 1 --no_save"
+# MY_CMD="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_1_out --local 2 --no_save"
 # unlearnable_samplewise_52866449_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
 # unlearnable_samplewise_52428805_1_20220505181516_0.5_512_2_checkpoint_perturbation_epoch_20
 

@@ -22,6 +22,7 @@ parser.add_argument('--no_bn', action='store_true', default=False)
 parser.add_argument('--save_noise_input_space', action='store_true', default=False)
 parser.add_argument('--train_data_type', default='CIFAR10', type=str, help='The backbone of encoder')
 parser.add_argument('--ignore_model_size', action='store_true', default=False)
+parser.add_argument('--byol_optim', action='store_true', default=False)
 
 parser.add_argument('--load_model', action='store_true', default=False)
 parser.add_argument('--load_model_path', default='', type=str, help='load_model_path')
@@ -511,7 +512,11 @@ if __name__ == '__main__':
     #     flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),torch.randn(1, 3, 32, 32).cuda()))
     #     flops, params = clever_format([flops, params])
     #     print('# Model Params: {} FLOPs: {}'.format(params, flops))
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    if args.byol_optim:
+        optimizer = optim.Adam(model.parameters(), lr=3e-4)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    print(optimizer)
     # optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1, weight_decay=0.0005, momentum=0.9)
 
     if args.load_model or args.load_piermaro_model:

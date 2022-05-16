@@ -25,8 +25,8 @@ JOB_INFO="cifar10 baseline"
 
 source ./re_job_cmd/${DATE_NAME}.sh
 
-cat ./slurm_files/sconfigs1_cmse.sb > submit_${DATE_NAME}.sb
-# cat ./slurm_files/sconfigs1.sb > submit_${DATE_NAME}.sb
+# cat ./slurm_files/sconfigs1_cmse.sb > submit_${DATE_NAME}.sb
+cat ./slurm_files/sconfigs1.sb > submit_${DATE_NAME}.sb
 echo "#SBATCH --gres=${MYGRES}"  >> submit_${DATE_NAME}.sb
 echo "#SBATCH --time=${MYTIME}             # limit of wall clock time - how long the job will run (same as -t)" >> submit_${DATE_NAME}.sb
 echo "#SBATCH --cpus-per-task=${MYCPU}           # number of CPUs (or cores) per task (same as -c)" >> submit_${DATE_NAME}.sb
