@@ -1,12 +1,13 @@
 import torch.nn as nn 
 
 from methods.base import CLModel
-from .losses import negcos
+from .losses import negcos, k_grad_negcos
 
 class SimSiamModel(CLModel):
-    def __init__(self, arch, dataset):
-        super().__init__(arch, dataset)
+    def __init__(self, method, arch, dataset):
+        super().__init__(method, arch, dataset)
         self.criterion = negcos
+        self.k_grad_criterion = k_grad_negcos
 
         if self.mlp_layers == 2:
             self.proj_head = nn.Sequential(
@@ -40,7 +41,7 @@ class SimSiamModel(CLModel):
                 )
         
     
-    def forward(self, x1, x2, k_grad=False):
+    def forward(self, x1, x2):
         x1 = self.backbone(x1)
         x2 = self.backbone(x2)
 
@@ -52,5 +53,19 @@ class SimSiamModel(CLModel):
         p1 = self.pred_head(z1)
         p2 = self.pred_head(z2)
         
-        return self.criterion(p1, p2, z1, z2, k_grad=k_grad)
+        return self.criterion(p1, p2, z1, z2)
+
+    def k_grad_forward(self, x1, x2):
+        x1 = self.backbone(x1)
+        x2 = self.backbone(x2)
+
+        # print(x1.shape)
+        
+        z1 = self.proj_head(x1)
+        z2 = self.proj_head(x2)
+        
+        p1 = self.pred_head(z1)
+        p2 = self.pred_head(z2)
+        
+        return self.k_grad_criterion(p1, p2, z1, z2)
     

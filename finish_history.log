@@ -7972,3 +7972,11 @@ python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_loa
 
 
 ---------------------------------------------------------------
+Mon May 16 21:42:34 EDT 2022
+53884642
+samplewise perturbation
+python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --samplewise --job_id 53884642_1
+
+
+
+---------------------------------------------------------------

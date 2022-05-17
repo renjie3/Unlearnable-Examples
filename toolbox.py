@@ -4,7 +4,7 @@ from torch.autograd import Variable
 from simclr import test_ssl, train_simclr, train_simclr_noise, train_simclr_noise_return_loss_tensor, train_simclr_noise_return_loss_tensor_eot, train_simclr_noise_return_loss_tensor_target_task, train_simclr_noise_return_loss_tensor_full_gpu, get_dbindex_loss, train_simclr_noise_return_loss_tensor_no_eval, train_simclr_noise_return_loss_tensor_no_eval_pos_only, get_linear_noise_dbindex_loss
 from utils import train_diff_transform, train_diff_transform2, train_transform_no_totensor
 from byol_utils import train_byol_noise_return_loss_tensor
-from simsiam_utils import train_simsiam_noise_return_loss_tensor
+from simsiam_utils2 import train_simsiam_noise_return_loss_tensor
 from moco import train_moco_noise_return_loss_tensor
 
 import time
@@ -1135,6 +1135,7 @@ class PerturbationTool():
                 train_loss_batch_count += perturb.shape[0]
 
                 eta_step = self.step_size * eot_grad.sign() * (-1)
+                # print('self.step_size: ',self.step_size)
                 sign_print = perturb.grad.data.sign() * (-1)
                 # print("+:", np.sum(sign_print.cpu().numpy() == 1))
                 # print("-:", np.sum(sign_print.cpu().numpy() == -1))
@@ -1146,6 +1147,9 @@ class PerturbationTool():
                 # diff_eta = eta1 - eta2
                 # print(diff_eta.cpu().numpy())
                 eta = (eta1 + eta2) / 2
+                # print(eta)
+                # print(torch.sum(eta != 0))
+                # input()
                 if mask_linear_constraint:
                     if mask_linear_noise_range[0] >= mask_linear_noise_range[1]:
                         raise('wrong parameter mask_linear_noise_range')

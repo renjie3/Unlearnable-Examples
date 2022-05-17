@@ -403,6 +403,7 @@ def train_moco(net, im_1, im_2, train_optimizer):
     return loss.item() * im_1.shape[0], im_1.shape[0]
 
 def train_moco_noise_return_loss_tensor(net, im_1, im_2, k_grad=False):
+    net.eval()
     im_1, im_2 = im_1.cuda(non_blocking=True), im_2.cuda(non_blocking=True)
 
     loss = net(im_1, im_2, k_grad=k_grad)

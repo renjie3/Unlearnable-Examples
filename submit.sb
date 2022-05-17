@@ -26,7 +26,7 @@ MY_ROOT_PATH="/mnt/home/renjie3/Documents/unlearnable/Unlearnable-Examples/"
 
 cd ${MY_ROOT_PATH}
 JOB_INFO="samplewise perturbation"
-MYCOMMEND="python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_1_out --samplewise --job_id ${SLURM_JOB_ID}_1"
+MYCOMMEND="python main_train.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --job_id ${SLURM_JOB_ID}_1"
 MYCOMMEND2="No_commend2 --job_id ${SLURM_JOB_ID}_2"
 MYCOMMEND3="No_commend3 --job_id ${SLURM_JOB_ID}_3"
 

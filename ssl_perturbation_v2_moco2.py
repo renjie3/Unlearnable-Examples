@@ -765,7 +765,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                     idx += 1
 
                 # Update sample-wise perturbation
-                # model.eval()
+                model.eval()
                 for param in model.parameters():
                     param.requires_grad = False
                 if args.use_supervised_g:
