@@ -23,6 +23,8 @@ parser.add_argument('--load_model_path', default='', type=str, help='The backbon
 parser.add_argument('--kmeans_index', default=-1, type=int, help='perturbation_rate')
 parser.add_argument('--unlearnable_kmeans_label', action='store_true', default=False)
 parser.add_argument('--kmeans_label_file', default='', type=str, help='The backbone of encoder')
+parser.add_argument('--save_name', default='', type=str, help='The backbone of encoder')
+parser.add_argument('--train_data_type', default='CIFAR10', type=str, help='The backbone of encoder')
 
 # args parse
 args = parser.parse_args()
@@ -224,7 +226,7 @@ def test_ssl_visualization(net, test_data_visualization):
         plt.scatter(feature_tsne_output[:, 0], feature_tsne_output[:, 1], s=10, c=labels_tsne_color, cmap=cm)
         ax.xaxis.set_major_formatter(NullFormatter())  # 设置标签显示格式为空
         ax.yaxis.set_major_formatter(NullFormatter())
-        plt.savefig('./visualization/cleandata_orglabel.png')
+        plt.savefig('./visualization/cleandata_orglabel_{}.png'.format(args.save_name))
 
     return 
 
@@ -354,20 +356,32 @@ if __name__ == '__main__':
     else:
         perturb_tensor_filepath = None
 
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath=perturb_tensor_filepath, random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
-    if args.save_img_group:
-        train_data.save_noise_img()
-    # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
-    # load noise here:
-    # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
-    # random_noise_class = np.load('noise_class_label_1024_4class.npy')
-    # train_data.make_unlearnable(random_noise_class, pretrained_classwise_noise)
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
-    # sys.exit()
-    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=class_4)
-    memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
-    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=class_4)
-    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
+    if args.train_data_type == 'CIFAR10':
+
+        train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath=perturb_tensor_filepath, random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
+        if args.save_img_group:
+            train_data.save_noise_img()
+        # train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}_checkpoint_perturbation.pt".format(pre_load_name), random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, class_4=class_4)
+        # load noise here:
+        # pretrained_classwise_noise = torch.load("./results/{}_checkpoint_perturbation.pt".format(pre_load_name))
+        # random_noise_class = np.load('noise_class_label_1024_4class.npy')
+        # train_data.make_unlearnable(random_noise_class, pretrained_classwise_noise)
+        train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
+        # sys.exit()
+        memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=class_4)
+        memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
+        test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=class_4)
+        test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
+
+    elif args.train_data_type == 'CIFAR100':
+        train_data = utils.TransferCIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath=perturb_tensor_filepath, random_noise_class_path=random_noise_class_path, perturbation_budget=perturbation_budget, samplewise_perturb=samplewise_perturb, org_label_flag=args.orglabel, flag_save_img_group=args.save_img_group, perturb_rate=args.perturb_rate, clean_train=args.clean_train, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
+
+        train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
+        # sys.exit()
+        memory_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
+        memory_loader = DataLoader(memory_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
+        test_data = utils.CIFAR100Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True)
+        test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
     # print(type(train_data))
 

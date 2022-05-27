@@ -58,7 +58,7 @@ def train(epoch, optimizer):
     for pos_1, pos_2, targets in train_bar:
         inputs, targets = pos_1.to(device), targets.to(device)
         optimizer.zero_grad()
-        if args.arch == 'resnet18':
+        if args.arch in ['resnet18', 'resnet50']:
             feature, outputs = net(inputs)
         else:
             outputs = net(inputs)
@@ -88,7 +88,7 @@ def test(epoch, optimizer, save_name_pre):
     with torch.no_grad():
         for pos_1, pos_2, targets in test_bar:
             inputs, targets = pos_1.to(device), targets.to(device)
-            if args.arch == 'resnet18':
+            if args.arch in ['resnet18', 'resnet50']:
                 feature, outputs = net(inputs)
             else:
                 outputs = net(inputs)
@@ -107,17 +107,17 @@ def test(epoch, optimizer, save_name_pre):
     # Save checkpoint.
     acc = 100.*correct/total
     if acc > best_acc:
-        print('Saving..')
-        state = {
-            'net': net.state_dict(),
-            'optimizer': optimizer.state_dict(),
-            'acc': acc,
-            'epoch': epoch,
-        }
-        if not os.path.isdir('checkpoint'):
-            os.mkdir('checkpoint')
-        if not args.no_save and not args.just_test:
-            torch.save(state, './results/{}.pth'.format(save_name_pre))
+        # print('Saving..')
+        # state = {
+        #     'net': net.state_dict(),
+        #     'optimizer': optimizer.state_dict(),
+        #     'acc': acc,
+        #     'epoch': epoch,
+        # }
+        # if not os.path.isdir('checkpoint'):
+        #     os.mkdir('checkpoint')
+        # if not args.no_save and not args.just_test:
+        #     torch.save(state, './results/{}.pth'.format(save_name_pre))
         best_acc = acc
     return best_acc
 
@@ -215,6 +215,7 @@ if __name__ == '__main__':
 
     model_zoo = {'VGG': VGG,
     'resnet18': ResNet18,
+    'resnet50': ResNet50,
     'PreActResNet18': PreActResNet18,
     'GoogLeNet': GoogLeNet,
     'DenseNet121': DenseNet121,
@@ -233,7 +234,7 @@ if __name__ == '__main__':
         net = model_zoo['VGG'](args.arch)
     elif args.arch in ['DenseNet121', 'PreActResNet18', 'GoogLeNet']:
         net = model_zoo[args.arch]()
-    elif args.arch =='resnet18':
+    elif args.arch in ['resnet18'] :
         net = model_zoo[args.arch](args.num_class)
     else:
         net = model_zoo[args.arch]() #(args.num_class)

@@ -10,38 +10,18 @@ echo $$
 WHOLE_EPOCH=42
 SINGLE_EPOCH=2
 REJOB_TIMES=`expr $WHOLE_EPOCH / $SINGLE_EPOCH`
-MYGRES="gpu:v100s:1"
+MYGRES="gpu:v100:1"
+MYCPU="3"
 
 JOB_INFO="cifar10 based on samplewise"
-# MYCOMMEND="python main.py --batch_size 512 --epochs 300 --arch resnet18 --data_name cifar10_20000_4class --train_data_drop_last --train_mode inst_suppress --not_shuffle_train_data"
+# python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 8 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_53967350_1_20220516215150_0.5_512_2_checkpoint_perturbation_epoch_40
+# unlearnable_samplewise_52866270_1_20220507200522_0.5_512_2_checkpoint_perturbation
+# unlearnable_samplewise_54120121_1_20220519102435_0.5_512_2_checkpoint_model_epoch_40
+# unlearnable_samplewise_54120137_1_20220519103718_0.5_512_2_checkpoint_perturbation_epoch_40
 
-# MYCOMMEND2="python main.py --batch_size 512 --epochs 300 --arch resnet18 --data_name cifar10_20000_4class --train_mode inst_suppress --not_shuffle_train_data"
+# PIERMARO_MYCOMMEND="python simclr_transfer.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54637334_1_20220524211141_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --samplewise --pytorch_aug"
 
-# whole_cifar10 DBindex_cluster_momentum_kmeans_wholeset DBindex_cluster_momentum_kmeans_repeat_v2 normal_48210871_1_20220316164538_0.5_200_512_1000_model
-# normal_49260763_1_20220322155227_0.5_200_512_200_piermaro_model       200_epoch_whole_cifar10_base
-# normal_48899799_1_20220319160643_0.5_200_512_1000_model       880_epoch_base
-# normal_49449742_1_20220323194707_0.5_200_512_200_piermaro_model  200_epch_base_pytroch_transform
-# 10 30 100
-# 200 500
-# 1000 1500
-# random_initial_model1
-# train_dbindex_loss
-
-# --load_model --load_model_path unlearnable_samplewise_52734683_1_20220507001155_0.5_512_2_piermaro_model --pre_load_noise_name unlearnable_samplewise_52734683_1_20220507001155_0.5_512_2_checkpoint_perturbation
-# --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --not_use_normalized --linear_noise_dbindex_weight 1e-15
-# unlearnable_samplewise_52726305_1_20220506231929_0.5_512_2_checkpoint_perturbation_epoch_10
-# python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --use_supervised_g --model_g_augment_first --pytorch_aug
-# python3 -u simclr_transfer.py --piermaro_whole_epoch 42 --epochs 2 --batch_size 512 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --pytorch_aug --samplewise
-
-# PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --kmeans_index 0"
-# python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1
-# not_use_normalized
-# python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52280541_1_20220502215417_0.5_512_2_checkpoint_perturbation_epoch_10 --train_data_type CIFAR100 --samplewise --pytorch_aug --clean_train
-# python3 -u byol_transfer_clean_train.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52866856_1_20220507200828_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR100 --samplewise --pytorch_aug
-
-# python3 -u ssl_perturbation_v2_moco2_cifar100.py --epochs 200 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --local 3 --no_save
-
-PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 25 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --linear_noise_dbindex_weight 0 --seed 3"
+PIERMARO_MYCOMMEND="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch ${WHOLE_EPOCH} --epochs ${SINGLE_EPOCH} --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0.08 --not_use_normalized --two_stage_PGD --seed 1"
 
 PIERMARO_MYCOMMEND2=""
 
@@ -54,8 +34,9 @@ echo "MYCOMMEND=\"${PIERMARO_MYCOMMEND}\"" > re_job_cmd/${DATE_NAME}.sh
 echo "MYCOMMEND2=\"${PIERMARO_MYCOMMEND2}\"" >> re_job_cmd/${DATE_NAME}.sh
 echo "MYCOMMEND3=\"${PIERMARO_MYCOMMEND3}\"" >> re_job_cmd/${DATE_NAME}.sh
 echo "MYGRES=\"${MYGRES}\"" >> re_job_cmd/${DATE_NAME}.sh
+echo "MYCPU=\"${MYCPU}\"" >> re_job_cmd/${DATE_NAME}.sh
 
-PIERMARO_RETURN=`sh ./re_job.sh ${DATE_NAME}`
+PIERMARO_RETURN=`sh ./re_job_cpu.sh ${DATE_NAME}`
 echo $PIERMARO_RETURN
 PIERMARO_SLURM_JOB_ID=`echo $PIERMARO_RETURN | awk '{print $4}'`
 SUBJOB_ID=$PIERMARO_SLURM_JOB_ID
@@ -108,8 +89,9 @@ do
     echo "MYCOMMEND2=\"${MYCOMMEND2}\"" >> re_job_cmd/${DATE_NAME}.sh
     echo "MYCOMMEND3=\"${MYCOMMEND3}\"" >> re_job_cmd/${DATE_NAME}.sh
     echo "MYGRES=\"${MYGRES}\"" >> re_job_cmd/${DATE_NAME}.sh
+    echo "MYCPU=\"${MYCPU}\"" >> re_job_cmd/${DATE_NAME}.sh
 
-    SUBJOB_RETURN=`sh ./re_job.sh ${DATE_NAME}`
+    SUBJOB_RETURN=`sh ./re_job_cpu.sh ${DATE_NAME}`
     echo $SUBJOB_RETURN
     SUBJOB_ID=`echo $SUBJOB_RETURN | awk '{print $4}'`
     subjob_id_str="${subjob_id_str} ${SUBJOB_ID}"

@@ -1060,6 +1060,10 @@ def main():
     # flops, params = clever_format([flops, params])
     # print('# Model Params: {} FLOPs: {}'.format(params, flops))
 
+    if args.debug:
+        torch.save(model.state_dict(), 'results/moco_initial_seed2_model.pth')
+        input('save done')
+
     if args.load_model:
         load_model_path = './results/{}.pth'.format(args.load_model_path)
         checkpoints = torch.load(load_model_path, map_location=device)

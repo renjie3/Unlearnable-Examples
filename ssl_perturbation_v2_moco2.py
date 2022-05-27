@@ -132,6 +132,7 @@ parser.add_argument('--linear_xnoise_dbindex_index', default=1, type=int, help='
 parser.add_argument('--k_grad', action='store_true', default=False)
 parser.add_argument('--asymmetric', action='store_true', default=False)
 parser.add_argument('--moco_t', default=0.1, type=float, help='noise_simclr_weight')
+parser.add_argument('--moco_m', default=0.99, type=float, help='noise_simclr_weight')
 parser.add_argument('--SGD_optim', action='store_true', default=False)
 parser.add_argument('--train_perturb_fisrt', action='store_true', default=False)
 
@@ -1051,7 +1052,7 @@ def main():
     model = ModelMoCo(
         dim=128,
         K=4096,
-        m=0.99,
+        m=args.moco_m,
         T=args.moco_t,
         arch='resnet18',
         bn_splits=8,
@@ -1062,6 +1063,10 @@ def main():
     # flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
     # flops, params = clever_format([flops, params])
     # print('# Model Params: {} FLOPs: {}'.format(params, flops))
+
+    if args.debug:
+        torch.save(model.state_dict(), 'results/moco2_initial_seed3_model.pth')
+        input('save done')
 
     if args.load_model:
         load_model_path = './results/{}.pth'.format(args.load_model_path)

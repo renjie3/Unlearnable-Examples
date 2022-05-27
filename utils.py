@@ -719,6 +719,179 @@ class CIFAR10Pair(CIFAR10):
 
         self.data = self.data.astype(np.uint8)
 
+class CIFAR10PairTuple(CIFAR10):
+    """CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        class_4: bool = True,
+        train_noise_after_transform: bool = True,
+        mix: str = 'no', 
+        gray: str = 'no', 
+        class_4_train_size = 1024,
+        kmeans_index = -1,
+        kmeans_index2 = -1,
+        unlearnable_kmeans_label = False,
+        kmeans_label_file = ''
+    ) -> None:
+
+        super(CIFAR10PairTuple, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        self.train = train
+
+        if kmeans_index >= 0:
+            if kmeans_label_file == '':
+                if class_4:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+                else:
+                    if not unlearnable_kmeans_label:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                    else:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+            else:
+                kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index]
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+            self.targets = kmeans_labels
+
+        if kmeans_index2 >= 0:
+            if kmeans_label_file == '':
+                if class_4:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+                else:
+                    if not unlearnable_kmeans_label:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                    else:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+            else:
+                kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index2]
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+            self.targets = np.stack([self.targets, kmeans_labels], axis=1)
+        
+        self.train_noise_after_transform = train_noise_after_transform
+
+    def __getitem__(self, index):
+        img, target = self.data[index], self.targets[index]
+        img = Image.fromarray(img)
+
+        if self.transform is not None:
+            if self.train:
+                if self.train_noise_after_transform:
+                    pos_1 = train_transform(img)
+                    pos_2 = train_transform(img)
+                else:
+                    pos_1 = self.transform(img)
+                    pos_2 = self.transform(img)
+            else:
+                pos_1 = self.transform(img)
+                pos_2 = self.transform(img)
+
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        return [pos_1, pos_2], target
+
+    def replace_targets_with_id(self):
+        idx_label = []
+        for i in range(len(self.targets)):
+            # print(self.targets[i], random_noise_class[i])
+            idx_label.append(i)
+
+        gt_label = np.array(self.targets)
+        idx_label = np.array(idx_label)
+        # print(gt_label.shape)
+        # print(idx_label.shape)
+        if len(gt_label.shape) > 1:
+            idx_label = np.expand_dims(idx_label, axis=1)
+            self.targets = np.concatenate([idx_label, gt_label], axis=1)
+        else:
+            self.targets = np.stack([idx_label, gt_label], axis=1)
+
+    def add_kmeans_label(self, kmeans_label):
+
+        self.targets = np.concatenate([self.targets[:, :2], np.expand_dims(kmeans_label, axis=1)], axis=1)
+        print("add_kmeans_label done: ", self.targets.shape)
+
+
+class CIFAR100PairTuple(CIFAR100):
+    """CIFAR10 Dataset.
+    """
+
+    def __init__(
+        self,
+        root: str,
+        train: bool = True,
+        transform: Optional[Callable] = None,
+        target_transform: Optional[Callable] = None,
+        download: bool = False,
+        kmeans_index = -1,
+        kmeans_label_file = ''
+    ) -> None:
+
+        super(CIFAR100PairTuple, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
+        self.train = train
+
+        if kmeans_index >= 0:
+            if kmeans_label_file == '':
+                raise('use kmeans_label_file')
+            else:
+                kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index]
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+            self.targets = kmeans_labels
+        
+        # self.train_noise_after_transform = train_noise_after_transform
+
+    def __getitem__(self, index):
+        img, target = self.data[index], self.targets[index]
+        img = Image.fromarray(img)
+
+        if self.transform is not None:
+            if self.train:
+                pos_1 = self.transform(img)
+                pos_2 = self.transform(img)
+            else:
+                pos_1 = self.transform(img)
+                pos_2 = self.transform(img)
+
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        return [pos_1, pos_2], target
+
+    def replace_targets_with_id(self):
+        idx_label = []
+        for i in range(len(self.targets)):
+            # print(self.targets[i], random_noise_class[i])
+            idx_label.append(i)
+
+        gt_label = np.array(self.targets)
+        idx_label = np.array(idx_label)
+        # print(gt_label.shape)
+        # print(idx_label.shape)
+        if len(gt_label.shape) > 1:
+            idx_label = np.expand_dims(idx_label, axis=1)
+            self.targets = np.concatenate([idx_label, gt_label], axis=1)
+        else:
+            self.targets = np.stack([idx_label, gt_label], axis=1)
+
+    def add_kmeans_label(self, kmeans_label):
+
+        self.targets = np.concatenate([self.targets[:, :2], np.expand_dims(kmeans_label, axis=1)], axis=1)
+        print("add_kmeans_label done: ", self.targets.shape)
+
 
 class LinearModelData(CIFAR10):
     """CIFAR10 Dataset.
@@ -961,23 +1134,21 @@ class CIFAR100Pair(CIFAR100):
         download: bool = False,
         train_noise_after_transform: bool = True,
         kmeans_index = -1,
-        unlearnable_kmeans_label = False
+        unlearnable_kmeans_label = False,
+        kmeans_label_file = ''
     ) -> None:
 
         super(CIFAR100Pair, self).__init__(root, train=train, transform=transform, target_transform=target_transform, download=download)
         self.train = train
         if kmeans_index >= 0:
-            raise('kmeans label files are not generated.')
-            # if class_4:
-            #     kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
-            # else:
-            #     if not unlearnable_kmeans_label:
-            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
-            #     else:
-            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
-            # with open(kmeans_filepath, "rb") as f:
-            #     kmeans_labels = pickle.load(f)[kmeans_index]
-            #     print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+            if kmeans_label_file == '':
+                raise('use kmeans_label_file')
+            else:
+                kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index]
+                print(kmeans_filepath)
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
             self.targets = kmeans_labels
         
@@ -1141,11 +1312,12 @@ class PoisonCIFAR10Pair(CIFAR10):
 class TransferCIFAR10Pair(CIFAR10):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False, kmeans_index=-1, unlearnable_kmeans_label=False, kmeans_label_file=''):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, class_4: bool = True, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False, kmeans_index=-1, unlearnable_kmeans_label=False, kmeans_label_file='', in_tuple=False):
         super(TransferCIFAR10Pair, self).__init__(root=root, train=train, download=download, transform=transform)
 
         self.class_4 = class_4
         self.samplewise_perturb = samplewise_perturb
+        self.in_tuple = in_tuple
 
         if class_4:
             sampled_filepath = os.path.join(root, "sampled_cifar10", "cifar10_1024_4class.pkl")
@@ -1179,7 +1351,7 @@ class TransferCIFAR10Pair(CIFAR10):
                     print(kmeans_filepath)
                     print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
-            self.targets = kmeans_labels
+                self.targets = kmeans_labels
             return
 
         if random_noise_class_path != None:
@@ -1251,7 +1423,10 @@ class TransferCIFAR10Pair(CIFAR10):
         if self.target_transform is not None:
             target = self.target_transform(target)
 
-        return pos_1, pos_2, target
+        if self.in_tuple:
+            return [pos_1, pos_2], target
+        else:
+            return pos_1, pos_2, target
 
     def replace_random_noise_class(self, random_noise_class):
         # print('length of targets is ', len(self.targets))
@@ -1486,16 +1661,34 @@ class PoisonTransferCIFAR10Pair(CIFAR10):
 class TransferCIFAR100Pair(CIFAR100):
     """CIFAR10 Dataset.
     """
-    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False, kmeans_index=-1, unlearnable_kmeans_label=False):
+    def __init__(self, root='data', train=True, transform=None, download=True, perturb_tensor_filepath=None, random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb: bool = False, org_label_flag: bool = False, flag_save_img_group: bool = False, perturb_rate: float = 1.0, clean_train=False, kmeans_index=-1, unlearnable_kmeans_label=False, kmeans_label_file='', in_tuple=False):
         super(TransferCIFAR100Pair, self).__init__(root=root, train=train, download=download, transform=transform)
 
         self.samplewise_perturb = samplewise_perturb
+        self.in_tuple = in_tuple
 
         if perturb_tensor_filepath != None:
             self.perturb_tensor = torch.load(perturb_tensor_filepath)
             self.noise_255 = self.perturb_tensor.mul(255*perturbation_budget).clamp_(-255, 255).permute(0, 2, 3, 1).to('cpu').numpy()
         else:
             self.perturb_tensor = None
+            if kmeans_index >= 0:
+                if kmeans_label_file == '':
+                    if class_4:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+                    else:
+                        if not unlearnable_kmeans_label:
+                            kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                        else:
+                            kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+                else:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
+                with open(kmeans_filepath, "rb") as f:
+                    kmeans_labels = pickle.load(f)[kmeans_index]
+                    print(kmeans_filepath)
+                    print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+
+                self.targets = kmeans_labels
             return
 
         if random_noise_class_path != None:
@@ -1531,20 +1724,22 @@ class TransferCIFAR100Pair(CIFAR100):
             print('it is clean train')
 
         if kmeans_index >= 0:
-            raise('kmeans_index needs generated')
-            # if class_4:
-            #     kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
-            # else:
-            #     if not unlearnable_kmeans_label:
-            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
-            #     else:
-            #         kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
-            # with open(kmeans_filepath, "rb") as f:
-            #     kmeans_labels = pickle.load(f)[kmeans_index]
-            #     print(kmeans_filepath)
-            #     print("kmeans_label_num: ", np.max(kmeans_labels)+1)
+            if kmeans_label_file == '':
+                if class_4:
+                    kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_4class.pkl")
+                else:
+                    if not unlearnable_kmeans_label:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_cifar10.pkl")
+                    else:
+                        kmeans_filepath = os.path.join(root, "kmeans_label/kmeans_unlearnable_simclr_label.pkl")
+            else:
+                kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
+            with open(kmeans_filepath, "rb") as f:
+                kmeans_labels = pickle.load(f)[kmeans_index]
+                print(kmeans_filepath)
+                print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
-            # self.targets = kmeans_labels
+            self.targets = kmeans_labels
 
 
     def __getitem__(self, index):
@@ -1564,7 +1759,10 @@ class TransferCIFAR100Pair(CIFAR100):
         if self.target_transform is not None:
             target = self.target_transform(target)
 
-        return pos_1, pos_2, target
+        if self.in_tuple:
+            return [pos_1, pos_2], target
+        else:
+            return pos_1, pos_2, target
     
     def make_unlearnable(self, random_noise_class, noise):
 

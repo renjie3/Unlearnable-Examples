@@ -16,6 +16,7 @@ parser.add_argument('--arch', default='resnet18', type=str)
 parser.add_argument('--method', default='simclr', choices=['simclr', 'moco', 'simsiam'])
 parser.add_argument('--epochs', default=1000, type=int)                   
 parser.add_argument('--knn_eval_freq', default=0, type=int)
+parser.add_argument('--num_classes', default=10, type=int)
 
 parser.add_argument('--resume', action='store_true')
 parser.add_argument('--saved_path', default='none', type=str)
@@ -30,24 +31,10 @@ parser.add_argument('--moco-m', default=0.999, type=float)
 
 parser.add_argument('--trial', default=0, type=int)
 
-# ddp 
-# parser.add_argument('--world-size', default=-1, type=int,
-#                     help='number of nodes for distributed training')
-# parser.add_argument('--rank', default=-1, type=int,
-#                     help='node rank for distributed training')
-# parser.add_argument('--dist-url', default='tcp://224.66.41.62:23456', type=str,
-#                     help='url used to set up distributed training')
-# parser.add_argument('--dist-backend', default='nccl', type=str,
-#                     help='distributed backend')
 parser.add_argument('--seed', default=None, type=int,
                     help='seed for initializing training. ')
 parser.add_argument('--gpu', default=None, type=int,
                     help='GPU id to use.')
-# parser.add_argument('--multiprocessing-distributed', action='store_true',
-#                     help='Use multi-processing distributed training to launch '
-#                          'N processes per node, which has N GPUs. This is the '
-#                          'fastest way to use PyTorch for either single node or '
-#                          'multi node data parallel training')
 
 parser.add_argument('--local', default='', type=str)
 parser.add_argument('--job_id', default='', type=str)
@@ -104,13 +91,7 @@ def main():
                       'from checkpoints.')
 
     if args.gpu is not None:
-        warnings.warn('You have chosen a specific GPU. This will completely '
-                      'disable data parallelism.')
-
-    # if args.dist_url == "env://" and args.world_size == -1:
-    #     args.world_size = int(os.environ["WORLD_SIZE"])
-
-    # args.distributed = args.world_size > 1 or args.multiprocessing_distributed
+        warnings.warn('You have chosen a specific GPU. This will completely disable data parallelism.')
 
     ngpus_per_node = torch.cuda.device_count()
     
@@ -118,6 +99,8 @@ def main():
 
 def main_worker(gpu, ngpus_per_node, args):
     args.gpu = gpu
+    if args.dataset == 'cifar100':
+        args.num_classes = 100
 
     # suppress printing if not master
 
@@ -143,22 +126,22 @@ def main_worker(gpu, ngpus_per_node, args):
     # create data loader
     train_sampler = None
     if args.dataset == 'cifar10':
-        train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=False, samplewise_perturb=True, org_label_flag=False, flag_save_img_group=False, perturb_rate=1.0, clean_train=False)
+        train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, class_4=False, samplewise_perturb=True, org_label_flag=False, flag_save_img_group=False, perturb_rate=1.0, clean_train=False, in_tuple=True)
 
         train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
         # sys.exit()
-        memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=class_4)
+        memory_data = utils.CIFAR10PairTuple(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=False)
         memory_loader = DataLoader(memory_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
-        test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=class_4)
+        test_data = utils.CIFAR10PairTuple(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=False)
         test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
     elif args.dataset == 'cifar100':
-        train_data = utils.TransferCIFAR100Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb=True, org_label_flag=False, flag_save_img_group=False, perturb_rate=1.0, clean_train=False)
+        train_data = utils.TransferCIFAR100Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), random_noise_class_path=None, perturbation_budget=1.0, samplewise_perturb=True, org_label_flag=False, flag_save_img_group=False, perturb_rate=1.0, clean_train=False, in_tuple=True)
 
         train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
         # sys.exit()
-        memory_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
+        memory_data = utils.CIFAR100PairTuple(root='data', train=True, transform=utils.ToTensor_transform, download=True)
         memory_loader = DataLoader(memory_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
-        test_data = utils.CIFAR100Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True)
+        test_data = utils.CIFAR100PairTuple(root='data', train=False, transform=utils.ToTensor_transform, download=True)
         test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
     
     # create optimizer

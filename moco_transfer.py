@@ -78,14 +78,20 @@ parser.add_argument('--knn-t', default=0.1, type=float, help='softmax temperatur
 parser.add_argument('--resume', default='', type=str, metavar='PATH', help='path to latest checkpoint (default: none)')
 parser.add_argument('--results-dir', default='', type=str, metavar='PATH', help='path to cache (default: none)')
 
-parser.add_argument('--samplewise', action='store_true', help='use a symmetric loss function that backprops to both crops')
-parser.add_argument('--clean_train', action='store_true', help='use a symmetric loss function that backprops to both crops')
+parser.add_argument('--samplewise', action='store_true', default=False, help='use a symmetric loss function that backprops to both crops')
+parser.add_argument('--clean_train', action='store_true', default=False, help='use a symmetric loss function that backprops to both crops')
 parser.add_argument('--pre_load_name', default='', type=str, help='pre_load_name')
+parser.add_argument('--load_model', action='store_true', default=False)
+parser.add_argument('--load_model_path', default='', type=str, help='pre_load_name')
+
+parser.add_argument('--load_piermaro_model', action='store_true', default=False)
+parser.add_argument('--load_piermaro_model_path', default='', type=str, help='pre_load_name')
 
 parser.add_argument('--local', default='', type=str, help='The gpu number used on developing node.')
 parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
 parser.add_argument('--no_save', action='store_true', help='use a symmetric loss function that backprops to both crops')
 parser.add_argument('--kornia_aug', action='store_true', help='use a symmetric loss function that backprops to both crops')
+parser.add_argument('--dataset', default='cifar10', type=str)
 
 args = parser.parse_args()  # running in command line
 
@@ -152,17 +158,27 @@ test_transform = transforms.Compose([
     transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])])
 
 # data prepare
-if args.kornia_aug:
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
-else:
-    train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
-train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
+if args.dataset == 'cifar10':
+    if args.kornia_aug:
+        train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
+    else:
+        train_data = utils.TransferCIFAR10Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, class_4=False, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
+    train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
 
-memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=False)
-memory_loader = DataLoader(memory_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
+    memory_data = utils.CIFAR10Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, class_4=False)
+    memory_loader = DataLoader(memory_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
-test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=False)
-test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
+    test_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=False)
+    test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
+elif args.dataset == 'cifar100':
+    train_data = utils.TransferCIFAR100Pair(root='data', train=True, transform=utils.train_transform, download=True, perturb_tensor_filepath="./results/{}.pt".format(args.pre_load_name), perturbation_budget=1.0, samplewise_perturb=args.samplewise, org_label_flag=False, perturb_rate=1.0, clean_train=args.clean_train)
+    train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
+
+    memory_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True)
+    memory_loader = DataLoader(memory_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
+
+    test_data = utils.CIFAR100Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True)
+    test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
 """### Define base encoder"""
 
@@ -467,6 +483,20 @@ if args.resume is not '':
     optimizer.load_state_dict(checkpoint['optimizer'])
     epoch_start = checkpoint['epoch'] + 1
     print('Loaded from: {}'.format(args.resume))
+
+if args.load_model:
+    # checkpoint = torch.load(args.resume)
+    model.load_state_dict(torch.load('./results/{}.pth'.format(args.load_model_path)))
+    print('Loaded from: {}'.format(args.resume))
+
+if args.load_piermaro_model:
+    load_model_path = './results/{}.pth'.format(args.load_piermaro_model_path)
+    checkpoints = torch.load(load_model_path)
+    model.load_state_dict(checkpoints['state_dict'])
+
+if args.load_model or args.load_piermaro_model:
+    if 'optimizer' in checkpoints:
+        optimizer.load_state_dict(checkpoints['optimizer'])
 
 # logging
 results = {'train_loss': [], 'test_acc@1': []}

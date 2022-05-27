@@ -1151,7 +1151,7 @@ def main():
             if args.pre_load_noise_name != '':
                 random_noise = torch.load("./results/{}.pt".format(args.pre_load_noise_name))
 
-            if args.load_piermaro_model:
+            if args.load_piermaro_model or args.load_model:
                 if 'perturbation' in checkpoints:
                     random_noise = checkpoints['perturbation']
                     print('piermaro random_noise loaded')

@@ -900,3 +900,297 @@ cifar10 based on samplewise
 python3 -u simclr_transfer_clean_train.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52280541_1_20220502215417_0.5_512_2_checkpoint_perturbation_epoch_10 --train_data_type CIFAR100 --samplewise --pytorch_aug --clean_train --load_piermaro_model --load_piermaro_model_path transfer_53838020_1_20220515160226_piermaro_model --piermaro_restart_epoch 950
 53838020 53847474 53852618 53855910 53861952 53865839 53869810 53877595 53881006 53884537 53889348 53891322 53894078 53896315 53899731 53902222 53904826 53911704 53919506 53967365
 ---------------------------------------------------------------
+Tue May 17 08:42:45 EDT 2022
+Tue May 17 08:42:45 EDT 2022
+53976282
+53976271
+cifar10 based on samplewise
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 512 --arch DenseNet121 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 512 --arch resnet50 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+53976282 53976492 53976687 53978461 53980078 53981354 53982469 53983295 53983974 53984228 53984646 53985039 53985320 53985542 53985695 53985935 53986215 53986384 53986612 53986853
+53976271 53976473 53976611 53977990 53979222 53981107 53981508 53983141 53983370 53984023 53984519 53984647 53985103 53985319 53985543 53985697 53985998 53986307 53986599 53986802
+---------------------------------------------------------------
+---------------------------------------------------------------
+Tue May 17 09:19:23 EDT 2022
+53976612
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 512 --arch DenseNet121 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+53976612 53978153 53979750 53981206 53981563 53983293 53983796 53984134 53984611 53985040 53985321 53985544 53985696 53985936 53986244 53986487 53986613 53986928 53987243 53987397
+---------------------------------------------------------------
+Tue May 17 09:26:25 EDT 2022
+53976615
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 512 --arch resnet50 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+53976615 53978331 53979959 53981274 53981598 53983294 53983975 53984521 53984688 53985145 53985363 53985594 53985755 53986100 53986383 53986600 53986854 53987219 53987379 53987538
+---------------------------------------------------------------
+Tue May 17 11:19:53 EDT 2022
+53976319
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch resnet50 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976319_1_20220517024331_piermaro_model --piermaro_restart_epoch 950
+53976319 53983261 53986298 53990306 53990506 53991150 53991754 53992376 53992571 53992857 53992994 53992999 53993009 53993051 53993064 53993272 53993312 53994394 53994412 53994423
+---------------------------------------------------------------
+Tue May 17 11:20:25 EDT 2022
+53976316
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976316_1_20220517024331_piermaro_model --piermaro_restart_epoch 950
+53976316 53981024 53984560 53986166 53987521 53991228 53992377 53992570 53992856 53992993 53992998 53993008 53993050 53993063 53993271 53993313 53994393 53994411 53994433 53994472
+---------------------------------------------------------------
+Wed May 18 05:06:26 EDT 2022
+53730909
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --not_use_normalized --linear_noise_dbindex_weight 1e-25 --seed 2 --load_model --load_model_path unlearnable_samplewise_53673341_1_20220514041544_0.5_512_1_piermaro_model --pre_load_noise_name unlearnable_samplewise_53673341_1_20220514041544_0.5_512_1_checkpoint_perturbation --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53730909_1_20220515043418_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+53730909 53735805 53739974 53763382 53843126 53856476 53869861 53883400 53892225 53899993 53905582 53919372 53956879 53966129 53971838 53978504 53985517 53989032 54001418 54017353 54037305
+---------------------------------------------------------------
+Wed May 18 05:08:56 EDT 2022
+53730917
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --not_use_normalized --linear_noise_dbindex_weight 1e-25 --seed 1 --load_model --load_model_path unlearnable_samplewise_53673343_1_20220514041556_0.5_512_1_piermaro_model --pre_load_noise_name unlearnable_samplewise_53673343_1_20220514041556_0.5_512_1_checkpoint_perturbation --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53730917_1_20220515044941_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+53730917 53736592 53740161 53774217 53844826 53857430 53873852 53884848 53892996 53900112 53906450 53920643 53957960 53967364 53973255 53981002 53985949 53991008 54003285 54018408 54037586
+---------------------------------------------------------------
+Wed May 18 11:09:38 EDT 2022
+53976297
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch MobileNetV2 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976297_1_20220517024331_piermaro_model --piermaro_restart_epoch 950
+53976297 53978938 53983131 53984681 53985710 53986639 53987851 53990148 53995697 54000557 54004896 54010700 54029776 54036293 54039831 54044899 54046764 54049590 54052958 54058795
+---------------------------------------------------------------
+Wed May 18 12:06:33 EDT 2022
+53976500
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch MobileNetV2 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976500_1_20220517030213_piermaro_model --piermaro_restart_epoch 950
+53976500 53979591 53983210 53984867 53986031 53987213 53988064 53990956 53996618 54002216 54010505 54029111 54036161 54039820 54044844 54046717 54049410 54052154 54058462 54062161
+---------------------------------------------------------------
+Wed May 18 18:05:31 EDT 2022
+53944286
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 25 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --moco_t 0.2 --asymmetric --SGD_optim --k_grad --seed 1 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --piermaro_restart_epoch 40
+53944286 53958514 53964937 53969151 53972260 53975478 53980956 53984725 53986532 53989036 53997383 54005088 54016997 54033776 54040035 54046639 54050826 54058925 54064441 54074505 54078687
+---------------------------------------------------------------
+Thu May 19 04:26:57 EDT 2022
+54016995
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599872_1_20220512202701_0.5_512_2_checkpoint_perturbation_epoch_30 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path transfer_54016995_1_20220517214324_piermaro_model --piermaro_restart_epoch 950
+54016995 54032622 54037977 54042676 54046572 54049648 54056089 54059522 54064256 54069057 54074927 54077332 54080698 54084006 54087059 54092364 54096663 54098366 54100398 54102376
+---------------------------------------------------------------
+Thu May 19 04:28:27 EDT 2022
+54017015
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599886_1_20220512202701_0.5_512_2_checkpoint_perturbation_epoch_30 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path transfer_54017015_1_20220517220449_piermaro_model --piermaro_restart_epoch 950
+54017015 54033384 54038159 54042702 54046735 54050086 54056236 54059558 54064255 54069067 54074946 54078654 54081478 54084088 54087054 54092124 54096585 54098106 54099998 54102377
+---------------------------------------------------------------
+Thu May 19 05:31:31 EDT 2022
+54038846
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 40 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --use_supervised_g --model_g_augment_first --pytorch_aug --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54038846_1_20220518032244_0.5_512_2_piermaro_model --piermaro_restart_epoch 38
+54038846 54043526 54046555 54049594 54055105 54059285 54063693 54068387 54072411 54076328 54079166 54082633 54085808 54089492 54093871 54097224 54098625 54100425 54102654 54103988
+---------------------------------------------------------------
+Thu May 19 05:34:15 EDT 2022
+54017042
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599898_1_20220512202702_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path transfer_54017042_1_20220517220451_piermaro_model --piermaro_restart_epoch 950
+54017042 54033557 54038700 54042713 54046753 54050331 54056804 54060770 54066076 54071045 54076427 54080593 54083725 54086274 54090625 54096240 54097958 54099977 54102210 54103845
+---------------------------------------------------------------
+Thu May 19 06:13:33 EDT 2022
+54038826
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 40 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --use_supervised_g --model_g_augment_first --pytorch_aug --kmeans_index 0 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54038826_1_20220518032251_0.5_512_2_piermaro_model --piermaro_restart_epoch 38
+54038826 54043464 54046556 54049538 54053193 54059221 54063709 54068440 54073060 54077037 54080400 54082845 54086152 54089756 54094769 54097615 54099134 54100773 54103048 54104892
+---------------------------------------------------------------
+Thu May 19 06:38:04 EDT 2022
+53967350
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2_simsiam2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 25 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --pytorch_aug --linear_noise_dbindex_weight 0 --simsiam_optim --seed 1 --k_grad --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53967350_1_20220516215150_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+53967350 53971484 53974902 53981478 53985498 53987482 53996182 54003798 54015894 54033884 54041071 54047665 54053066 54063548 54069803 54078747 54083825 54090336 54097473 54100556 54103869
+---------------------------------------------------------------
+Thu May 19 07:19:07 EDT 2022
+53976499
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch DenseNet121 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976499_1_20220517030213_piermaro_model --piermaro_restart_epoch 950
+53976499 53983134 53985802 53987857 53997103 54005724 54018094 54035269 54042204 54048758 54053678 54063412 54069344 54078336 54083252 54089506 54096970 54099900 54102354 54105031
+---------------------------------------------------------------
+Thu May 19 09:05:12 EDT 2022
+53976312
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch DenseNet121 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976312_1_20220517024331_piermaro_model --piermaro_restart_epoch 950
+53976312 53982289 53985724 53987877 53997298 54006208 54030550 54039073 54047141 54052094 54061620 54068751 54076283 54081403 54085806 54093439 54098077 54100848 54104704 54109203
+---------------------------------------------------------------
+Thu May 19 10:36:47 EDT 2022
+54056587
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 40 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --use_supervised_g --model_g_augment_first --pytorch_aug --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54056587_1_20220518093645_0.5_512_2_piermaro_model --piermaro_restart_epoch 38
+54056587 54059528 54064219 54068693 54073727 54077271 54080402 54082825 54085807 54089513 54094099 54097346 54098771 54100526 54102866 54104895 54106882 54109923 54113074 54117131
+---------------------------------------------------------------
+Thu May 19 11:41:02 EDT 2022
+54120525
+cifar10 based on samplewise
+python3 -u main_train_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 8 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_53967350_1_20220516215150_0.5_512_2_checkpoint_perturbation_epoch_40 --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54120525 54120930 54121479 54121608 54121741 54121754 54121786 54121834 54121909 54122168 54122256 54122394 54122523 54122796 54122843 54122882 54123481 54123529 54123753 54123791
+---------------------------------------------------------------
+Thu May 19 12:08:29 EDT 2022
+Thu May 19 12:08:29 EDT 2022
+53976491
+cifar10 based on samplewise
+53976322
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch VGG19 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976491_1_20220517024655_piermaro_model --piermaro_restart_epoch 950
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch VGG19 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53976322_1_20220517024414_piermaro_model --piermaro_restart_epoch 950
+53976491 53983214 53986262 53990467 54001791 54016001 54034144 54042196 54049532 54056708 54064305 54073603 54079163 54084420 54092490 54098033 54101130 54105020 54110551 54118926
+53976322 53983232 53986265 53990269 54001429 54015374 54033978 54041598 54049389 54056125 54064065 54073232 54079199 54084419 54092488 54098032 54101147 54105032 54111021 54119140
+---------------------------------------------------------------
+---------------------------------------------------------------
+Thu May 19 20:56:23 EDT 2022
+54097865
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54057939_1_20220518112915_0.5_512_40_checkpoint_perturbation --train_data_type CIFAR100 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path transfer_54097865_1_20220518233647_piermaro_model --piermaro_restart_epoch 950
+54097865 54099348 54100753 54102850 54104700 54106259 54109239 54111889 54115158 54119388 54121886 54124444 54128358 54132429 54136543 54139234 54142692 54149216 54157557 54166570
+---------------------------------------------------------------
+Thu May 19 22:33:25 EDT 2022
+53989073
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch resnet50 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53989073_1_20220517100437_piermaro_model --piermaro_restart_epoch 950
+53989073 54000717 54011189 54034382 54042488 54049744 54060020 54069255 54077372 54083251 54091525 54097913 54101246 54105146 54111662 54120127 54128046 54137147 54147138 54169438
+---------------------------------------------------------------
+Thu May 19 22:43:55 EDT 2022
+53989074
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch resnet50 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53989074_1_20220517100439_piermaro_model --piermaro_restart_epoch 950
+53989074 54000745 54013376 54034381 54042513 54049684 54059841 54069168 54077291 54083291 54091440 54097914 54101302 54105141 54111627 54120322 54128383 54137473 54149002 54171315
+---------------------------------------------------------------
+Fri May 20 00:24:03 EDT 2022
+53989076
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53989076_1_20220517100437_piermaro_model --piermaro_restart_epoch 950
+53989076 53997265 54034269 54046955 54050921 54081608 54089196 54094779 54102273 54104042 54106349 54111132 54115816 54132047 54137174 54142687 54154682 54166718 54177017 54184549
+---------------------------------------------------------------
+Fri May 20 01:17:34 EDT 2022
+54098023
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53228692_1_20220509155617_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path transfer_54098023_1_20220518234143_piermaro_model --piermaro_restart_epoch 950
+54098023 54099972 54101359 54103816 54105408 54108125 54111842 54116514 54120338 54124011 54128762 54133544 54137177 54141128 54147471 54157716 54170343 54176830 54182757 54195846
+---------------------------------------------------------------
+Fri May 20 01:59:36 EDT 2022
+53989070
+cifar10 based on samplewise
+python3 -u simclr_transfer_backbone.py --piermaro_whole_epoch 1000 --epochs 50 --batch_size 256 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53599772_1_20220512202552_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --load_piermaro_model --load_piermaro_model_path transfer_53989070_1_20220517100437_piermaro_model --piermaro_restart_epoch 950
+53989070 53997187 54028864 54046956 54050945 54089056 54094767 54102237 54104120 54106645 54111197 54116441 54131662 54137152 54142377 54153370 54164480 54176279 54183895 54197333
+---------------------------------------------------------------
+Sun May 22 04:24:04 EDT 2022
+54120129
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-5 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120129_1_20220519103718_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120129 54129872 54140372 54158895 54179454 54199192 54204082 54212620 54221170 54232399 54245191 54253706 54262352 54266612 54269947 54273542 54280682 54289220 54298036 54317089 54346283
+---------------------------------------------------------------
+Sun May 22 04:25:04 EDT 2022
+54120128
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-8 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120128_1_20220519103037_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120128 54129492 54139947 54158156 54179557 54199325 54204095 54212853 54221332 54232471 54245349 54253921 54262431 54266828 54270154 54273655 54280700 54289212 54297763 54317090 54346419
+---------------------------------------------------------------
+Sun May 22 04:25:04 EDT 2022
+54120121
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-20 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120121_1_20220519102435_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120121 54129183 54139405 54157558 54177584 54197711 54203308 54210982 54219571 54231178 54243395 54252405 54261343 54265860 54269313 54272857 54279691 54288336 54296622 54317100 54346452
+---------------------------------------------------------------
+Sun May 22 04:27:04 EDT 2022
+54120126
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-11 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120126_1_20220519103037_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120126 54129496 54139773 54158155 54179558 54199324 54204306 54213125 54222168 54233341 54246552 54254799 54263150 54267343 54271079 54274751 54282833 54291639 54305017 54320553 54346561
+---------------------------------------------------------------
+Sun May 22 04:28:04 EDT 2022
+54120137
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-2 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120137_1_20220519103718_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120137 54129896 54140382 54158929 54181244 54199483 54204075 54212571 54221202 54233048 54245583 54254384 54263116 54267307 54271088 54274887 54283287 54292384 54305480 54321813 54346420
+---------------------------------------------------------------
+Sun May 22 04:30:04 EDT 2022
+54120122
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-17 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120122_1_20220519103037_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120122 54129437 54139733 54157965 54180726 54199355 54204054 54212568 54221131 54232390 54245136 54253676 54262357 54266783 54270197 54273785 54281667 54289964 54302160 54318349 54346775
+---------------------------------------------------------------
+Sun May 22 04:30:34 EDT 2022
+54120123
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-14 --not_use_normalized --seed 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_54120123_1_20220519103034_0.5_512_2_piermaro_model --piermaro_restart_epoch 40
+54120123 54129459 54139772 54158059 54179419 54199133 54204078 54212569 54221149 54232380 54245156 54253679 54262353 54266688 54270155 54273708 54281081 54289666 54300559 54317702 54346595
+---------------------------------------------------------------
+Sun May 22 22:48:01 EDT 2022
+54401241
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120129_1_20220519103718_0.5_512_2_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54401241 54424838 54430471 54431159 54431389 54431580 54431657 54431774 54431850 54431959 54432036 54432183 54432289 54432452 54432583 54432726 54432893 54432955 54433073 54433199
+---------------------------------------------------------------
+Sun May 22 22:49:01 EDT 2022
+54401208
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120137_1_20220519103718_0.5_512_2_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54401208 54424225 54430450 54431160 54431487 54431658 54431775 54431851 54431960 54432034 54432182 54432290 54432453 54432584 54432725 54432897 54432956 54433072 54433203 54433218
+---------------------------------------------------------------
+Sun May 22 22:50:01 EDT 2022
+54401282
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120128_1_20220519103037_0.5_512_2_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54401282 54424875 54430473 54431163 54431489 54431662 54431777 54431961 54432037 54432184 54432292 54432454 54432575 54432723 54432896 54432954 54433069 54433200 54433219 54433293
+---------------------------------------------------------------
+Sun May 22 22:50:01 EDT 2022
+54401284
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120126_1_20220519103037_0.5_512_2_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54401284 54425039 54430745 54431390 54431581 54431773 54431849 54431958 54432035 54432181 54432288 54432451 54432572 54432724 54432894 54432957 54433071 54433202 54433220 54433292
+---------------------------------------------------------------
+Sun May 22 22:51:01 EDT 2022
+54401298
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120123_1_20220519103034_0.5_512_2_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54401298 54425110 54430754 54431391 54431663 54431738 54431855 54431962 54432040 54432186 54432293 54432481 54432596 54432898 54432959 54433075 54433198 54433221 54433291 54433563
+---------------------------------------------------------------
+Sun May 22 22:51:01 EDT 2022
+54401470
+cifar10 based on samplewise
+python3 -u simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet11 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120121_1_20220519102435_0.5_512_2_checkpoint_perturbation_epoch_40 --train_data_type CIFAR10 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 950
+54401470 54427289 54430921 54431326 54431492 54431691 54431884 54432041 54432142 54432299 54432485 54432567 54432722 54432895 54432958 54433074 54433201 54433222 54433294 54433564
+---------------------------------------------------------------
+Tue May 24 14:36:31 EDT 2022
+54478407
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 100 --epochs 4 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 50 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --linear_noise_dbindex_weight 0 --moco_m 0.8 --seed 3 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_54478407_1_20220523144139_0.2_512_4_piermaro_model --piermaro_restart_epoch 96
+54478407 54486165 54488834 54509201 54511477 54514978 54518555 54520383 54523174 54525859 54529941 54534212 54537390 54539873 54542275 54544915 54547632 54551019 54553539 54562025 54570213 54577312 54583875 54589778 54597420
+---------------------------------------------------------------
+Tue May 24 14:37:02 EDT 2022
+54478408
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 100 --epochs 4 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 10 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 50 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --linear_noise_dbindex_weight 0 --moco_m 0.9 --seed 3 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_54478408_1_20220523144139_0.2_512_4_piermaro_model --piermaro_restart_epoch 96
+54478408 54486182 54488835 54509199 54511497 54514971 54518428 54520361 54523170 54525879 54529896 54534211 54537350 54539874 54542301 54544917 54547633 54551020 54553538 54562026 54570212 54577313 54583874 54589779 54597421
+---------------------------------------------------------------
+Tue May 24 20:33:14 EDT 2022
+54478401
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 25 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --linear_noise_dbindex_weight 0 --moco_m 0.8 --seed 3 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_54478401_1_20220523134707_0.2_512_2_piermaro_model --piermaro_restart_epoch 40
+54478401 54482905 54488606 54509978 54515449 54520290 54524561 54530470 54536712 54540694 54544968 54549805 54556300 54568216 54581096 54589943 54600612 54610633 54618646 54628632 54631672
+---------------------------------------------------------------
+Wed May 25 08:58:46 EDT 2022
+54641921
+cifar10 based on samplewise
+python simclr_transfer.py --batch_size 512 --piermaro_whole_epoch 1000 --epochs 100 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120126_1_20220519103037_0.5_512_2_checkpoint_model_epoch_40 --train_data_type CIFAR100 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 900
+54641921 54644102 54649069 54650154 54650461 54650950 54651349 54677745 54713115 54713617
+---------------------------------------------------------------
+Wed May 25 09:33:44 EDT 2022
+54718264
+cifar10 based on samplewise
+python simclr_transfer.py --batch_size 512 --piermaro_whole_epoch 1000 --epochs 100 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54120137_1_20220519103718_0.5_512_2_checkpoint_model_epoch_40 --train_data_type CIFAR100 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path --piermaro_restart_epoch 900
+54718264 54718681 54718874 54719837 54719990 54720242 54720414 54720596 54720818 54721119
+---------------------------------------------------------------
+Thu May 26 02:56:00 EDT 2022
+54483632
+cifar10 based on samplewise
+python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 100 --epochs 5 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 25 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --linear_noise_dbindex_weight 0 --moco_m 0.95 --seed 3 --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_54483632_1_20220523145630_0.2_512_5_piermaro_model --piermaro_restart_epoch 95
+54483632 54491742 54518236 54529266 54541439 54551847 54580154 54604196 54624831 54636641 54654712 54669566 54682464 54704621 54727547 54750720 54772917 54795570 54806729 54822574
+---------------------------------------------------------------
+Thu May 26 18:53:23 EDT 2022
+54805234
+cifar10 based on samplewise
+python simclr_transfer.py --piermaro_whole_epoch 1000 --epochs 100 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54637334_1_20220524211141_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --samplewise --pytorch_aug --load_piermaro_model --load_piermaro_model_path transfer_54805234_1_20220525211103_piermaro_model --piermaro_restart_epoch 900
+54805234 54815490 54827005 54842266 54850764 54865156 54876193 54886197 54892208 54898736
+---------------------------------------------------------------

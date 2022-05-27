@@ -57,6 +57,7 @@ import datetime
 from resnet_big_normal import Model_bn
 from resnet_big import Model_no_bn
 
+from backbones import *
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -501,7 +502,36 @@ if __name__ == '__main__':
     # print(type(train_data))
 
     # model setup and optimizer config
-    model = Model(feature_dim, arch=args.arch).cuda()
+    # model = Model(feature_dim, arch=args.arch).cuda()
+
+    model_zoo = {'VGG': VGG,
+    'resnet18': ResNet18,
+    'resnet50': ResNet50,
+    # 'PreActResNet18': PreActResNet18,
+    # 'GoogLeNet': GoogLeNet,
+    'DenseNet121': DenseNet121,
+    # 'ResNeXt29_2x64d': ResNeXt29_2x64d,
+    'MobileNet': MobileNet,
+    'MobileNetV2': MobileNetV2,
+    # 'DPN92': DPN92,
+    # 'ShuffleNetG2': ShuffleNetG2,
+    # 'SENet18': SENet18,
+    # # 'ShuffleNetV2': ShuffleNetV2(1),
+    # 'EfficientNetB0': EfficientNetB0,
+    # 'RegNetX_200MF': RegNetX_200MF,
+    # 'simpledla': SimpleDLA
+    }
+
+    if 'VGG' in args.arch:
+        net = model_zoo['VGG'](args.arch)
+    elif args.arch in ['DenseNet121', 'PreActResNet18', 'GoogLeNet']:
+        net = model_zoo[args.arch]()
+    elif args.arch =='resnet18':
+        net = model_zoo[args.arch](10)
+    else:
+        net = model_zoo[args.arch]() #(args.num_class)
+
+    model = net.cuda()
 
     if args.load_model:
         load_model_path = './results/{}.pth'.format(args.load_model_path)
@@ -531,7 +561,7 @@ if __name__ == '__main__':
     c = len(memory_data.classes)
 
     # training loop
-    save_name_pre = '{}_retrain_model'.format(save_name_pre)
+    save_name_pre = '{}_{}_retrain_model'.format(args.arch, save_name_pre)
     if args.piermaro_whole_epoch != '':
         if args.load_piermaro_model:
             save_name_pre = args.load_piermaro_model_path

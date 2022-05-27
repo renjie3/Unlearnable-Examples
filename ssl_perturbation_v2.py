@@ -640,12 +640,12 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 train_noise_data_loader_simclr.dataset.add_kmeans_label(kmeans_labels)
                 flag_cluster = True
         if args.save_kmeans_label:
-            cls_num = 20
-            kmeans_labels1 = find_cluster(model, const_train_loader, random_noise, cls_num, seed=3, use_feature_find_cluster=False)
-            kmeans_labels2 = find_cluster(model, const_train_loader, random_noise, cls_num, seed=4, use_feature_find_cluster=True)
-            kmeans_labels3 = find_cluster(model, const_train_loader, random_noise, cls_num, seed=5, use_feature_find_cluster=False)
+            cls_num = 100
+            kmeans_labels1 = find_cluster(model, const_train_loader, random_noise, 3, seed=3, use_feature_find_cluster=False)
+            kmeans_labels2 = find_cluster(model, const_train_loader, random_noise, 4, seed=4, use_feature_find_cluster=True)
+            kmeans_labels3 = find_cluster(model, const_train_loader, random_noise, 5, seed=5, use_feature_find_cluster=False)
             kmeans_labels = np.stack([kmeans_labels1, kmeans_labels2, kmeans_labels3], axis=0)
-            f = open('./data/kmeans_label/kmeans_cifar10_{}.pkl'.format(cls_num), 'wb')
+            f = open('./data/kmeans_label/kmeans_cifar100_{}.pkl'.format(cls_num), 'wb')
             pickle.dump(kmeans_labels, f)
             f.close()
             input('kmeans_unlearnable_simclr_label done')
@@ -1031,16 +1031,16 @@ def main():
         plot_input_data = utils.CIFAR10Pair(root='data', train=False, transform=utils.ToTensor_transform, download=True, class_4=args.class_4, train_noise_after_transform=False, gray=args.gray_test, class_4_train_size=args.class_4_train_size)
         plot_input_data_loader = DataLoader(plot_input_data, batch_size=1024, shuffle=True, num_workers=args.num_workers, pin_memory=True)
     elif args.train_data_type == 'CIFAR100':
-        train_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, train_noise_after_transform=args.noise_after_transform_dataset, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label)
+        train_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, train_noise_after_transform=args.noise_after_transform_dataset, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
         train_data.replace_targets_with_id()
 
         train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=flag_shuffle_train_data, num_workers=args.num_workers, pin_memory=True, drop_last=False)
 
-        const_train_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, train_noise_after_transform=False, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label)
+        const_train_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, train_noise_after_transform=False, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
         const_train_data.replace_targets_with_id()
         const_train_loader = DataLoader(const_train_data, batch_size=batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True, drop_last=False)
 
-        train_noise_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, train_noise_after_transform=args.noise_after_transform_noise_dataset, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label)
+        train_noise_data = utils.CIFAR100Pair(root='data', train=True, transform=utils.ToTensor_transform, download=True, train_noise_after_transform=args.noise_after_transform_noise_dataset, kmeans_index=args.kmeans_index, unlearnable_kmeans_label=args.unlearnable_kmeans_label, kmeans_label_file=args.kmeans_label_file)
         
         train_noise_data.replace_targets_with_id()
         

@@ -11,7 +11,7 @@ def knn_monitor(net, memory_data_loader, test_data_loader, epoch, k=200, t=0.1, 
     total_top1, total_top5, total_num, feature_bank = 0.0, 0.0, 0, []
     # generate feature bank
     for data, target in tqdm(memory_data_loader, desc='Feature extracting', leave=False, disable=hide_progress):
-        feature = net(data.cuda(non_blocking=True))
+        feature = net(data[0].cuda(non_blocking=True))
         feature = F.normalize(feature, dim=1)
         feature_bank.append(feature)
     # feature_bank: [dim, total num]
@@ -27,7 +27,7 @@ def knn_monitor(net, memory_data_loader, test_data_loader, epoch, k=200, t=0.1, 
     # loop test data to predict the label by weighted knn search
     test_bar = tqdm(test_data_loader, desc='kNN', disable=hide_progress)
     for data, target in test_bar:
-        data, target = data.cuda(non_blocking=True), target.cuda(non_blocking=True)
+        data, target = data[0].cuda(non_blocking=True), target.cuda(non_blocking=True)
         feature= net(data)
         feature = F.normalize(feature, dim=1)
         # feature: [bsz, dim]

@@ -861,6 +861,7 @@ def get_linear_noise_dbindex_loss(x, labels, use_mean_dbindex=True, use_normaliz
         else:
             cluster_DB_loss = ((intra_class_dis_pair_sum + 0.00001) / (class_dis + 0.00001)).mean()
     else:
+        # input('check use_mean_dbindex')
         cluster_DB_loss = torch.max((intra_class_dis_pair_sum + 0.00001) / (class_dis + 0.00001), dim=1)[0].mean()
     
     loss = cluster_DB_loss

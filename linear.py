@@ -7,6 +7,7 @@ parser.add_argument('--batch_size', type=int, default=512, help='Number of image
 parser.add_argument('--epochs', type=int, default=100, help='Number of sweeps over the dataset to train')
 parser.add_argument('--job_id', type=str, default='', help='Number of sweeps over the dataset to train')
 parser.add_argument('--local', default='', type=str, help='The gpu number used on developing node.')
+parser.add_argument('--dataset', default='cifar10', type=str, help='The gpu number used on developing node.')
 
 args = parser.parse_args()
 
@@ -20,7 +21,7 @@ import torch.nn as nn
 import torch.optim as optim
 from thop import profile, clever_format
 from torch.utils.data import DataLoader
-from torchvision.datasets import CIFAR10
+from torchvision.datasets import CIFAR10, CIFAR100
 from tqdm import tqdm
 
 import utils
@@ -76,10 +77,16 @@ def train_val(net, data_loader, train_optimizer):
 
 if __name__ == '__main__':
     model_path, batch_size, epochs = args.model_path, args.batch_size, args.epochs
-    train_data = CIFAR10(root='data', train=True, transform=utils.train_transform, download=True)
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=16, pin_memory=True)
-    test_data = CIFAR10(root='data', train=False, transform=utils.test_transform, download=True)
-    test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=16, pin_memory=True)
+    if args.dataset == 'cifar10':
+        train_data = CIFAR10(root='data', train=True, transform=utils.train_transform, download=True)
+        train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True)
+        test_data = CIFAR10(root='data', train=False, transform=utils.test_transform, download=True)
+        test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
+    elif args.dataset == 'cifar100':
+        train_data = CIFAR100(root='data', train=True, transform=utils.train_transform, download=True)
+        train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True)
+        test_data = CIFAR100(root='data', train=False, transform=utils.test_transform, download=True)
+        test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
     model = Net(num_class=len(train_data.classes), pretrained_path='results/{}.pth'.format(model_path)).cuda()
     for param in model.f.parameters():

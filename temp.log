@@ -1,0 +1,2336 @@
+
+User:     renjie3
+Accounts: cmse
+Default:  general
+
+
+Buyin: scavenger
+  Partition: scavenger
+    lac-045 (drained*)
+    lac-166 (drained*)
+    lac-210 (down*)
+    amr-009 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54079184   christlibu sandswi3   1    5-05:48:26 1-18:11:34
+      54079191   christlibu sandswi3   1    5-05:48:26 1-18:11:34
+      54079193   christlibu sandswi3   1    5-05:48:26 1-18:11:34
+      54079189   christlibu sandswi3   1    5-05:48:26 1-18:11:34
+      54075841   christlibu sandswi3   1    5-07:25:19 1-16:34:41
+      54075365   christlibu sandswi3   1    5-07:37:33 1-16:22:27
+    amr-068 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54485886   junlin     mangavel   1       5:10:04 3-22:49:56
+    amr-072 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54066314   planets    dobsonco   6    5-10:07:51 1-13:52:09
+      54263762   planets    barne383   60   3-00:27:58 3-23:32:02
+    amr-073 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54066315   planets    dobsonco   6    5-10:07:51 1-13:52:09
+      54221392   planets    barne383   60   3-12:45:48 3-11:14:12
+    amr-074 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54263802   planets    barne383   60   3-00:23:52 3-23:36:08
+      54263788   planets    barne383   60   3-00:26:03 3-23:33:57
+    amr-075 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54221375   planets    barne383   60   3-12:46:36 3-11:13:24
+    amr-076 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54263820   planets    barne383   60   3-00:22:17 3-23:37:43
+      54263811   planets    barne383   60   3-00:22:59 3-23:37:01
+    amr-077 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54066316   planets    dobsonco   6    5-10:07:57 1-13:52:03
+    amr-078 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54066317   planets    dobsonco   6    5-10:08:00 1-13:52:00
+    amr-083 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54498064   merzjrke   jinhongn   12      2:27:05   21:32:55
+    amr-095 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54486188   wmich      k0006645   32      7:15:54 6-16:43:06
+      54486145   wmich      k0006645   32      7:17:50 6-16:41:10
+      54486100   wmich      k0006645   32      7:18:54 6-16:40:06
+      54486063   wmich      k0006645   32      7:19:53 6-16:39:07
+      54455358   wmich      k0006645   32     18:32:00 6-05:27:00
+      54455346   wmich      k0006645   32     18:34:03 6-05:24:57
+      54455306   wmich      k0006645   32     18:36:04 6-05:22:56
+      54457159   wmich      k0006645   16     18:02:30 6-05:56:30
+    amr-096 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54123483   cmich      moses1iaCM 48   4-11:03:45 2-12:55:15
+    amr-097 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54123483   cmich      moses1iaCM 48   4-11:03:48 2-12:55:12
+    amr-098 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54119129   cmich      nguye8tCMI 90   4-12:42:40 2-11:17:20
+    amr-099 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54119167   cmich      nguye8tCMI 110  4-12:41:58 2-11:18:02
+    amr-100 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54375183   cmich      nguye8tCMI 120  1-12:32:09 5-11:27:51
+    amr-101 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54371892   general    paulsank   5      20:37:02 2-01:11:58
+    amr-103 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54330595   general    bedhanem   10   1-07:45:01 4-22:14:59
+    amr-106 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54245987   bradburd   rhtoczyd   2    1-03:00:13 5-20:59:47
+      54245933   bradburd   rhtoczyd   2    2-08:46:12 4-15:13:48
+      54491600   bradburd   rhtoczyd   12      5:02:18 6-18:57:42
+      54491604   bradburd   rhtoczyd   12      5:02:18 6-18:57:42
+    amr-107 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54245889   bradburd   rhtoczyd   2    2-15:33:55 4-08:26:05
+      54489416   bradburd   rhtoczyd   2       6:11:29 6-17:48:31
+    amr-108 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      53646363_9 edgerpat   teresisc   24   4-11:59:04 2-08:00:56
+      53646363_6 edgerpat   teresisc   24   4-22:17:45 1-21:42:15
+    amr-109 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      53646363_8 edgerpat   teresisc   24   4-17:41:02 2-02:18:58
+      53646363_7 edgerpat   teresisc   24   4-19:18:08 2-00:41:52
+    amr-120 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54468182   colej      wangjic1   20     12:53:14 6-11:06:46
+      54468183   colej      wangjic1   20     12:53:14 6-11:06:46
+      54468184   colej      wangjic1   20     12:53:14 6-11:06:46
+      54466362   colej      wangjic1   20     13:44:06 6-10:15:54
+      54466255   colej      wangjic1   20     13:47:05 6-10:12:55
+      54466192   colej      wangjic1   20     13:49:08 6-10:10:52
+    amr-121 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509618   charms     f0101170   50         3:50    9:55:10
+    amr-123 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54499690   ansgenetic liujind1   40      1:36:26   10:23:34
+      54499266   ansgenetic liujind1   40      2:05:55    9:54:05
+      54498993   ansgenetic liujind1   40      2:06:59    9:53:01
+      54509247   ansgenetic tansuxu    4          0:08    3:59:52
+      54509253   ansgenetic tansuxu    4          0:08    3:59:52
+    amr-127 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      53986611   cmich      chowd2rCMI 120  1-02:57:12 5-21:02:48
+    amr-128 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54487648   vanburen_l schust97   96      6:53:29 2-17:06:31
+    amr-134 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      53986611   cmich      chowd2rCMI 120  1-02:57:15 5-21:02:45
+    amr-135 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      53986611   cmich      chowd2rCMI 120  1-02:57:16 5-21:02:44
+    amr-136 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54475869   cmich      nguye8tCMI 117    10:10:33 1-13:49:27
+    amr-141 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54375603   cmich      nguye8tCMI 125  1-12:27:28 5-11:32:32
+    amr-144 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54220502   cmich      nguye8tCMI 120  3-13:03:46 3-10:56:14
+    amr-145 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54221490   cmich      nguye8tCMI 120  3-12:42:49 3-11:17:11
+    amr-155 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54066318   planets    dobsonco   6    5-10:08:37 1-13:51:23
+      54066319   planets    dobsonco   6    5-10:08:37 1-13:51:23
+      54221387   planets    barne383   60   3-12:46:52 3-11:13:08
+    amr-160 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54486188   wmich      k0006645   32      7:16:28 6-16:42:32
+      54486145   wmich      k0006645   32      7:18:24 6-16:40:36
+      54486100   wmich      k0006645   32      7:19:28 6-16:39:32
+      54486063   wmich      k0006645   32      7:20:27 6-16:38:33
+      54455358   wmich      k0006645   32     18:32:34 6-05:26:26
+      54455346   wmich      k0006645   32     18:34:37 6-05:24:23
+      54455306   wmich      k0006645   32     18:36:38 6-05:22:22
+    amr-163 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54219535   mendoza_q  linyuhs7   64   3-07:42:28 3-16:17:32
+      54497235   mendoza_q  f0101303   24      2:40:13 6-21:19:47
+    amr-164 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54437707   liulab     wuyunqiq   10     19:39:40    4:20:20
+      54462760   liulab     wuyunqiq   10     15:20:20    8:39:40
+      54462756   liulab     wuyunqiq   10     15:22:22    8:37:38
+      54461621   liulab     wuyunqiq   10     15:56:54    8:03:06
+      54461169   liulab     wuyunqiq   10     16:13:08    7:46:52
+      54457514   liulab     wuyunqiq   10     17:57:03    6:02:57
+      54455398   liulab     wuyunqiq   10     18:30:36    5:29:24
+      54507061   liulab     wuyunqiq   10         3:36   23:56:24
+      54507821   liulab     wuyunqiq   10         0:33   23:59:27
+      54507822   liulab     wuyunqiq   10         0:33   23:59:27
+    amr-165 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54462761   liulab     wuyunqiq   10     15:20:22    8:39:38
+      54453888   liulab     wuyunqiq   10     19:10:22    4:49:38
+      54462323   liulab     wuyunqiq   10     15:40:41    8:19:19
+      54507830   liulab     wuyunqiq   10         0:34   23:59:26
+      54507831   liulab     wuyunqiq   10         0:34   23:59:26
+      54507825   liulab     wuyunqiq   10         0:35   23:59:25
+      54507826   liulab     wuyunqiq   10         0:35   23:59:25
+      54507827   liulab     wuyunqiq   10         0:35   23:59:25
+      54507828   liulab     wuyunqiq   10         0:35   23:59:25
+      54507829   liulab     wuyunqiq   10         0:35   23:59:25
+    amr-166 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54475189   liulab     wuyunqiq   10      8:05:17   15:54:43
+      54458136   liulab     wuyunqiq   10     17:38:48    6:21:12
+      54456799   liulab     wuyunqiq   10     18:15:26    5:44:34
+      54506843   liulab     wuyunqiq   10         4:44   23:55:16
+      54507106   liulab     wuyunqiq   10         2:43   23:57:17
+      54507112   liulab     wuyunqiq   10         2:43   23:57:17
+      54507120   liulab     wuyunqiq   10         2:43   23:57:17
+      54507126   liulab     wuyunqiq   10         2:43   23:57:17
+      54507132   liulab     wuyunqiq   10         2:43   23:57:17
+      54507823   liulab     wuyunqiq   10         0:36   23:59:24
+      54507820   liulab     wuyunqiq   10         1:40   23:58:20
+      54507824   liulab     wuyunqiq   10         0:36   23:59:24
+    amr-167 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54418179   liulab     wuyunqiq   10     20:37:17    3:22:43
+      54437711   liulab     wuyunqiq   10     19:39:45    4:20:15
+      54453889   liulab     wuyunqiq   10     19:10:25    4:49:35
+      54462326   liulab     wuyunqiq   10     15:40:44    8:19:16
+      54458460   liulab     wuyunqiq   10     17:22:37    6:37:23
+      54457480   liulab     wuyunqiq   10     17:58:10    6:01:50
+      54455392   liulab     wuyunqiq   10     18:31:45    5:28:15
+      54507095   liulab     wuyunqiq   10         2:45   23:57:15
+      54507099   liulab     wuyunqiq   10         2:45   23:57:15
+      54507021   liulab     wuyunqiq   10         3:41   23:56:19
+      54507027   liulab     wuyunqiq   10         3:41   23:56:19
+      54507032   liulab     wuyunqiq   10         3:41   23:56:19
+    amr-168 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54486188   wmich      k0006645   32      7:16:38 6-16:42:22
+      54486145   wmich      k0006645   32      7:18:34 6-16:40:26
+      54486100   wmich      k0006645   32      7:19:38 6-16:39:22
+      54486063   wmich      k0006645   32      7:20:37 6-16:38:23
+      54455358   wmich      k0006645   32     18:32:44 6-05:26:16
+      54455346   wmich      k0006645   32     18:34:47 6-05:24:13
+      54455306   wmich      k0006645   32     18:36:48 6-05:22:12
+    amr-176 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54487762   michigan   atkin168   40      6:50:52 6-17:09:08
+      54482127   michigan   atkin168   40      8:05:22 6-15:54:38
+      54261101   general    paulsank   5      21:03:24 2-00:45:36
+    amr-177 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54017250   michigan   atkin168   30   6-05:26:47   18:33:13
+    amr-178 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54468054   mendoza_q  maldo103   128    13:12:01 6-10:47:59
+    amr-179 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54493121   mendoza_q  linyuhs7   128     4:21:19 6-19:38:41
+      54497235   mendoza_q  f0101303   24      2:40:26 6-21:19:34
+    amr-239 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54490247   mancuso    mancus16   1       4:01:57   19:58:03
+    amr-243 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54060753   michigan   atkin168   70   5-11:43:18 1-12:16:42
+      54075334   michigan   beringe4   40   5-07:42:51 1-16:17:09
+    csm-002 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509228   ansgenetic dingrong   12         7:58    1:51:02
+      54493794   general    hettin14   1       3:50:17       9:43
+      54505523   general    jiangc21   1          6:57    3:53:03
+      54505526   general    jiangc21   1          6:57    3:53:03
+      54505529   general    jiangc21   1          6:57    3:53:03
+      54505535   general    jiangc21   1          6:57    3:53:03
+    csm-017 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509230   ansgenetic dingrong   12         8:01    1:50:59
+      54505500   general    jiangc21   1          7:00    3:53:00
+      54509095   general    huangk18   8         12:05      47:55
+    csm-018 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509231   ansgenetic dingrong   12         8:02    1:50:58
+      54509095   general    huangk18   8         12:06      47:54
+      54507000   guowei-sea chendo11   1       1:01:23      58:37
+    csm-020 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509234   ansgenetic dingrong   12         8:02    1:50:58
+      54505511   general    jiangc21   1          7:01    3:52:59
+      54509095   general    huangk18   8         12:06      47:54
+    csm-021 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509236   ansgenetic dingrong   12         8:03    1:50:57
+      54505517   general    jiangc21   1          7:02    3:52:58
+      54509095   general    huangk18   8         12:07      47:53
+    csm-022 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509240   ansgenetic dingrong   12         8:03    1:50:57
+      54505520   general    jiangc21   1          7:02    3:52:58
+      54509095   general    huangk18   8         12:07      47:53
+    csn-001 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:21   17:34:39
+      54443096_8 deyoungbuy kochocki   1      22:12:36   17:47:24
+    csn-002 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:21   17:34:39
+      54443096_8 deyoungbuy kochocki   1      22:10:33   17:49:27
+    csn-003 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:22   17:34:38
+      54443096_8 deyoungbuy kochocki   1      22:10:34   17:49:26
+    csn-004 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:22   17:34:38
+      54443096_7 deyoungbuy kochocki   1      22:25:22   17:34:38
+    csn-005 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:23   17:34:37
+      54443096_7 deyoungbuy kochocki   1      22:25:23   17:34:37
+    csn-006 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:24   17:34:36
+      54443096_7 deyoungbuy kochocki   1      22:25:24   17:34:36
+    csn-007 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:24   17:34:36
+      54443096_7 deyoungbuy kochocki   1      22:25:24   17:34:36
+    csn-008 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:24   17:34:36
+      54443096_7 deyoungbuy kochocki   1      22:25:24   17:34:36
+    csn-009 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:25   17:34:35
+      54443096_7 deyoungbuy kochocki   1      22:25:25   17:34:35
+    csn-010 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:26   17:34:34
+      54443096_7 deyoungbuy kochocki   1      22:25:26   17:34:34
+    csn-011 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:27   17:34:33
+      54443096_8 deyoungbuy kochocki   1      22:14:52   17:45:08
+    csn-013 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:28   17:34:32
+      54443096_8 deyoungbuy kochocki   1      22:10:40   17:49:20
+    csn-014 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:29   17:34:31
+      54443096_8 deyoungbuy kochocki   1      22:08:35   17:51:25
+    csn-015 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:30   17:34:30
+      54443096_8 deyoungbuy kochocki   1      22:06:42   17:53:18
+    csn-016 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_8 deyoungbuy kochocki   1      22:25:31   17:34:29
+      54443096_8 deyoungbuy kochocki   1      22:08:37   17:51:23
+    csn-017 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_8 deyoungbuy kochocki   1      22:25:32   17:34:28
+      54443096_8 deyoungbuy kochocki   1      22:06:44   17:53:16
+    csn-018 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_8 deyoungbuy kochocki   1      22:25:34   17:34:26
+      54443096_8 deyoungbuy kochocki   1      22:12:49   17:47:11
+    csn-019 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_8 deyoungbuy kochocki   1      22:25:35   17:34:25
+      54443096_8 deyoungbuy kochocki   1      22:12:50   17:47:10
+    csn-021 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1      13:38:19 1-02:21:41
+      54443096_9 deyoungbuy kochocki   1      13:38:19 1-02:21:41
+    csn-022 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1      13:38:20 1-02:21:40
+      54443096_9 deyoungbuy kochocki   1      13:38:20 1-02:21:40
+    csn-023 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:38   17:34:22
+      54443096_7 deyoungbuy kochocki   1      22:25:38   17:34:22
+    csn-024 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:39   17:34:21
+      54443096_7 deyoungbuy kochocki   1      22:25:39   17:34:21
+    csn-025 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:40   17:34:20
+      54443096_7 deyoungbuy kochocki   1      22:25:40   17:34:20
+    csn-026 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:42   17:34:18
+      54443096_7 deyoungbuy kochocki   1      22:25:42   17:34:18
+    csn-027 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:43   17:34:17
+      54443096_7 deyoungbuy kochocki   1      22:25:43   17:34:17
+    csn-028 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:44   17:34:16
+      54443096_7 deyoungbuy kochocki   1      22:25:44   17:34:16
+    csn-029 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:45   17:34:15
+      54443096_7 deyoungbuy kochocki   1      22:25:45   17:34:15
+    csn-030 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:46   17:34:14
+      54443096_7 deyoungbuy kochocki   1      22:25:46   17:34:14
+    csn-031 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:47   17:34:13
+      54443096_7 deyoungbuy kochocki   1      22:25:47   17:34:13
+    csn-032 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:48   17:34:12
+      54443096_7 deyoungbuy kochocki   1      22:25:48   17:34:12
+    csn-033 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:49   17:34:11
+      54443096_7 deyoungbuy kochocki   1      22:25:49   17:34:11
+    csn-034 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:50   17:34:10
+      54443096_7 deyoungbuy kochocki   1      22:25:50   17:34:10
+    csn-035 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:52   17:34:08
+      54443096_7 deyoungbuy kochocki   1      22:25:52   17:34:08
+    csn-036 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_7 deyoungbuy kochocki   1      22:25:52   17:34:08
+      54443096_7 deyoungbuy kochocki   1      22:25:52   17:34:08
+    csn-037 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509254   ansgenetic dingrong   12         8:36    1:50:24
+    csn-039 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509256   ansgenetic dingrong   12         8:37    1:50:23
+    css-007 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509229   ansgenetic dingrong   12         8:38    1:50:22
+      54505506   general    jiangc21   1          7:37    3:52:23
+    css-020 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505462   general    jiangc21   1          7:38    3:52:22
+      54505468   general    jiangc21   1          7:38    3:52:22
+      54505473   general    jiangc21   1          7:38    3:52:22
+      54505478   general    jiangc21   1          7:38    3:52:22
+      54505483   general    jiangc21   1          7:38    3:52:22
+      54505489   general    jiangc21   1          7:38    3:52:22
+      54505494   general    jiangc21   1          7:38    3:52:22
+    css-033 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54508298   general    mondalpr   1         47:15    3:12:45
+      54505438   general    jiangc21   1          7:39    3:52:21
+      54505440   general    jiangc21   1          7:39    3:52:21
+      54505446   general    jiangc21   1          7:39    3:52:21
+      54505451   general    jiangc21   1          7:39    3:52:21
+      54505457   general    jiangc21   1          7:39    3:52:21
+      54505419   general    jiangc21   1          9:40    3:50:20
+      54505414   general    jiangc21   1         10:45    3:49:15
+    css-106 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54502753   general    aeber1lCMI 50      1:40:45    2:19:15
+      54506420   general    jiangc21   1          1:35    3:58:25
+      54506410   general    jiangc21   1          3:43    3:56:17
+      54506421   general    jiangc21   1          0:38    3:59:22
+      54506422   general    jiangc21   1          0:38    3:59:22
+      54506423   general    jiangc21   1          0:38    3:59:22
+      54506424   general    jiangc21   1          0:38    3:59:22
+    css-120 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54506407   general    jiangc21   1          4:39    3:55:21
+      54506408   general    jiangc21   1          4:39    3:55:21
+      54506409   general    jiangc21   1          4:39    3:55:21
+    css-122 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505552   general    jiangc21   1          6:48    3:53:12
+      54505556   general    jiangc21   1          6:48    3:53:12
+      54505562   general    jiangc21   1          6:48    3:53:12
+    lac-000 (mixed)
+    lac-001 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509188   ansgenetic tansuxu    4          4:28    3:55:32
+    lac-002 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509189   ansgenetic tansuxu    4          4:29    3:55:31
+    lac-003 (mixed)
+    lac-004 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509191   ansgenetic tansuxu    4          4:30    3:55:30
+    lac-006 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509193   ansgenetic tansuxu    4          4:32    3:55:28
+    lac-008 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509197   ansgenetic tansuxu    4          4:32    3:55:28
+    lac-009 (mixed)
+    lac-010 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509203   ansgenetic tansuxu    4          4:33    3:55:27
+    lac-011 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509205   ansgenetic tansuxu    4          4:34    3:55:26
+    lac-012 (mixed)
+    lac-013 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509209   ansgenetic tansuxu    4          4:36    3:55:24
+    lac-014 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509210   ansgenetic tansuxu    4          4:37    3:55:23
+    lac-015 (mixed)
+    lac-024 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1       1:40:08 1-14:19:52
+      54443096_9 deyoungbuy kochocki   1       1:43:05 1-14:16:55
+      54443096_9 deyoungbuy kochocki   1       1:47:07 1-14:12:53
+      54443096_9 deyoungbuy kochocki   1       1:48:11 1-14:11:49
+      54443096_9 deyoungbuy kochocki   1       1:55:09 1-14:04:51
+      54443096_9 deyoungbuy kochocki   1       1:59:18 1-14:00:42
+      54443096_9 deyoungbuy kochocki   1       2:04:29 1-13:55:31
+    lac-025 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497882   general    kanaomar   20      2:32:16    1:27:44
+    lac-030 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54478187   merzjrke   f0009515   25        11:03 3-23:48:57
+    lac-031 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436216   merzjrke   tanemur1   8      23:24:31      35:29
+      54436217   merzjrke   tanemur1   8      23:24:31      35:29
+      54436068   merzjrke   tanemur1   1      23:26:27      33:33
+      54464074   merzjrke   tanemur1   1      14:34:46    9:25:14
+    lac-037 (mixed)
+    lac-076 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:45:15   22:13:45
+    lac-080 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54485828   merzjrke   jinhongn   12      7:25:16   16:34:44
+      54485820   merzjrke   jinhongn   12      7:26:17   16:33:43
+    lac-084 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509195   general    kanaomar   20        12:24    3:47:36
+    lac-087 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1      17:24:53   22:35:07
+      54443096_9 deyoungbuy kochocki   1      17:30:12   22:29:48
+      54443096_9 deyoungbuy kochocki   1      17:30:12   22:29:48
+      54443096_9 deyoungbuy kochocki   1      19:29:45   20:30:15
+      54484468   general    almeidan   10        42:06   23:17:54
+    lac-136 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436218   merzjrke   tanemur1   8      23:24:49      35:11
+      54436220   merzjrke   tanemur1   8      23:24:49      35:11
+      54464082   merzjrke   tanemur1   1      14:34:04    9:25:56
+      54464083   merzjrke   tanemur1   1      14:34:04    9:25:56
+      54464084   merzjrke   tanemur1   1      14:34:04    9:25:56
+      54464085   merzjrke   tanemur1   1      14:34:04    9:25:56
+    lac-138 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54464099   merzjrke   tanemur1   1      14:34:07    9:25:53
+      54464100   merzjrke   tanemur1   1      14:34:07    9:25:53
+      54464102   merzjrke   tanemur1   1      14:34:07    9:25:53
+      54464103   merzjrke   tanemur1   1      14:34:07    9:25:53
+    lac-139 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54483796   merzjrke   jinhongn   12      7:38:37   16:21:23
+      54464104   merzjrke   tanemur1   1      14:34:11    9:25:49
+      54464105   merzjrke   tanemur1   1      14:34:11    9:25:49
+    lac-140 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54484199   merzjrke   jinhongn   12      7:35:41   16:24:19
+      54483819   merzjrke   jinhongn   12      7:38:39   16:21:21
+    lac-141 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54484326   merzjrke   jinhongn   12      7:33:40   16:26:20
+      54484249   merzjrke   jinhongn   12      7:34:38   16:25:22
+    lac-142 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54484770   merzjrke   jinhongn   12      7:28:39   16:31:21
+    lac-143 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54478175   merzjrke   f0009515   25        24:24 3-23:35:36
+    lac-192 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436240   merzjrke   tanemur1   8      23:25:06      34:54
+      54436241   merzjrke   tanemur1   8      23:25:06      34:54
+      54436242   merzjrke   tanemur1   8      23:25:06      34:54
+    lac-193 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436243   merzjrke   tanemur1   8      23:25:09      34:51
+      54436244   merzjrke   tanemur1   8      23:25:09      34:51
+      54464091   merzjrke   tanemur1   1      14:34:24    9:25:36
+      54464092   merzjrke   tanemur1   1      14:34:24    9:25:36
+      54464093   merzjrke   tanemur1   1      14:34:24    9:25:36
+      54464094   merzjrke   tanemur1   1      14:34:24    9:25:36
+    lac-194 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54464095   merzjrke   tanemur1   1      14:34:27    9:25:33
+      54464096   merzjrke   tanemur1   1      14:34:27    9:25:33
+      54464097   merzjrke   tanemur1   1      14:34:27    9:25:33
+      54464098   merzjrke   tanemur1   1      14:34:27    9:25:33
+    lac-195 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54343254   merzjrke   songlin3   4    1-21:52:22 2-06:07:38
+      54343255   merzjrke   songlin3   4    1-21:52:22 2-06:07:38
+    lac-196 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1      15:37:36 1-00:22:24
+      54483307   general    almeidan   10        46:10   23:13:50
+      54483884   general    almeidan   10        46:10   23:13:50
+      54343256   merzjrke   songlin3   4    1-21:52:25 2-06:07:35
+    lac-198 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1       1:38:46 1-14:21:14
+      54443096_9 deyoungbuy kochocki   1       1:38:46 1-14:21:14
+      54443096_9 deyoungbuy kochocki   1       1:38:46 1-14:21:14
+      54443096_9 deyoungbuy kochocki   1       1:38:46 1-14:21:14
+      54443096_1 deyoungbuy kochocki   1       1:38:46 1-14:21:14
+      54443096_9 deyoungbuy kochocki   1       1:50:38 1-14:09:22
+      54443096_9 deyoungbuy kochocki   1       3:40:50 1-12:19:10
+      54501087   general    hepengf1   1       1:56:21 2-10:03:39
+    lac-199 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1      18:12:54   21:47:06
+      54443096_9 deyoungbuy kochocki   1      18:12:54   21:47:06
+      54443096_9 deyoungbuy kochocki   1      18:12:54   21:47:06
+      54443096_9 deyoungbuy kochocki   1      18:12:54   21:47:06
+      54507797   general    turkette   16      1:01:21    3:58:39
+      54501088   general    hepengf1   1       1:56:24 2-10:03:36
+    lac-214 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:07:39   15:51:21
+    lac-215 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470874   tonggao    zlin       1      12:11:56 6-11:47:04
+      54470869   tonggao    zlin       1      12:12:56 6-11:46:04
+      54470872   tonggao    zlin       1      12:12:56 6-11:46:04
+      54470867   tonggao    zlin       1      12:13:59 6-11:45:01
+      54470862   tonggao    zlin       1      12:14:56 6-11:44:04
+      54470847   tonggao    zlin       1      12:16:00 6-11:43:00
+      54470859   tonggao    zlin       1      12:16:00 6-11:43:00
+      54470815   tonggao    zlin       1      12:16:59 6-11:42:01
+      54470817   tonggao    zlin       1      12:16:59 6-11:42:01
+      54470810   tonggao    zlin       1      12:18:04 6-11:40:56
+      54470809   tonggao    zlin       1      12:19:00 6-11:40:00
+      54470741   tonggao    zlin       1      12:20:01 6-11:38:59
+      54470725   tonggao    zlin       1      12:21:05 6-11:37:55
+      54470739   tonggao    zlin       1      12:21:05 6-11:37:55
+    lac-218 (mixed)
+    lac-219 (mixed)
+    lac-222 (mixed)
+    lac-251 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509226   ansgenetic dingrong   12        10:45    1:48:15
+      54509227   ansgenetic dingrong   12        10:45    1:48:15
+      54259159   ansgenetic tansuxu    1    3-02:10:55 2-21:49:05
+      54259164   ansgenetic tansuxu    1    3-02:10:55 2-21:49:05
+      54362698   ansgenetic tansuxu    1    1-16:35:30 1-07:24:30
+    lac-287 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436221   merzjrke   tanemur1   8      23:25:43      34:17
+      54436222   merzjrke   tanemur1   8      23:25:43      34:17
+      54436224   merzjrke   tanemur1   8      23:25:43      34:17
+    lac-288 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1      11:26:59 1-04:33:01
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+      54443096_9 deyoungbuy kochocki   1      12:42:34 1-03:17:26
+    lac-289 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54478172   merzjrke   f0009515   25        56:28 3-23:03:32
+    lac-290 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54478174   merzjrke   f0009515   25        45:07 3-23:14:53
+    lac-291 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54478173   merzjrke   f0009515   25        48:45 3-23:11:15
+    lac-292 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_8 deyoungbuy kochocki   1      22:27:50   17:32:10
+      54443096_8 deyoungbuy kochocki   1      22:27:50   17:32:10
+    lac-293 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1       1:39:25 1-14:20:35
+      54443096_9 deyoungbuy kochocki   1       1:39:25 1-14:20:35
+      54443096_9 deyoungbuy kochocki   1       1:39:25 1-14:20:35
+      54443096_9 deyoungbuy kochocki   1       1:39:25 1-14:20:35
+      54443096_9 deyoungbuy kochocki   1       1:51:17 1-14:08:43
+      54501063   general    hepengf1   1       1:57:00 2-10:03:00
+      54488611   general    almeidan   10        27:10   23:32:50
+    lac-316 (mixed)
+    lac-317 (mixed)
+    lac-320 (mixed)
+    lac-321 (mixed)
+    lac-322 (mixed)
+    lac-324 (mixed)
+    lac-325 (mixed)
+    lac-326 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509155   ansgenetic tansuxu    4          6:30    3:53:30
+    lac-327 (mixed)
+    lac-328 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54482202   cmich      medin1cmCM 12      8:06:22 6-15:52:38
+    lac-344 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1       3:38:40 1-12:21:20
+      54443096_9 deyoungbuy kochocki   1      11:34:29 1-04:25:31
+      54443096_9 deyoungbuy kochocki   1      11:34:30 1-04:25:30
+      54443096_9 deyoungbuy kochocki   1      11:34:30 1-04:25:30
+      54343251   merzjrke   songlin3   4    1-21:53:29 2-06:06:31
+    lac-345 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436232   merzjrke   tanemur1   8      23:26:23      33:37
+      54436233   merzjrke   tanemur1   8      23:26:23      33:37
+      54464078   merzjrke   tanemur1   1      14:35:38    9:24:22
+      54464080   merzjrke   tanemur1   1      14:35:38    9:24:22
+      54464081   merzjrke   tanemur1   1      14:35:38    9:24:22
+    lac-346 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436236   merzjrke   tanemur1   8      23:26:24      33:36
+      54436237   merzjrke   tanemur1   8      23:26:24      33:36
+      54436238   merzjrke   tanemur1   8      23:26:24      33:36
+    lac-347 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436234   merzjrke   tanemur1   8      23:26:27      33:33
+      54436235   merzjrke   tanemur1   8      23:26:27      33:33
+      54464086   merzjrke   tanemur1   1      14:35:42    9:24:18
+      54464087   merzjrke   tanemur1   1      14:35:42    9:24:18
+      54464089   merzjrke   tanemur1   1      14:35:42    9:24:18
+      54464090   merzjrke   tanemur1   1      14:35:42    9:24:18
+    lac-348 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54343253   merzjrke   songlin3   4    1-21:53:37 2-06:06:23
+      54343252   merzjrke   songlin3   4    1-21:53:38 2-06:06:22
+    lac-349 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54483738   merzjrke   jinhongn   12      7:41:16   16:18:44
+      54483690   merzjrke   jinhongn   12      7:42:18   16:17:42
+    lac-369 (mixed)
+    lac-421 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509632   ansgenetic tansuxu    4          0:11    3:59:49
+    nal-000 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54443096_9 deyoungbuy kochocki   1       1:51:57 1-14:08:03
+      54313986   merzjrke   sharmag3   4    2-05:42:50 4-00:17:10
+      54314025   merzjrke   sharmag3   4    2-05:40:43 4-00:19:17
+      54335564   merzjrke   sharmag3   4    1-23:35:08 4-06:24:52
+    nal-001 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54481099   merzjrke   sharmag3   4         34:36 6-05:25:24
+    nif-000 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54447393   general    cookpat4   5      21:23:30 6-02:36:30
+    nvf-000 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451552_6 guowei-sea qiuyuchi   1         34:41    3:24:19
+      54451552_1 guowei-sea qiuyuchi   1         51:58    3:07:02
+      54451551_8 guowei-sea qiuyuchi   1         59:06    2:59:54
+      54451551_7 guowei-sea qiuyuchi   1       1:06:28    2:52:32
+    nvf-001 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54325783   merzjrke   jafarima   1    2-02:08:26 1-21:51:34
+      54325513   merzjrke   jafarima   1    2-02:15:38 1-21:44:22
+      54325423   merzjrke   jafarima   1    2-02:16:34 1-21:43:26
+      54325693   merzjrke   jafarima   1    2-02:11:26 1-21:48:34
+    nvf-002 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451552_5 guowei-sea qiuyuchi   1         43:00    3:16:00
+      54451552_4 guowei-sea qiuyuchi   1         43:56    3:15:04
+      54451552_3 guowei-sea qiuyuchi   1         46:57    3:12:03
+      54411081   merzjrke   jafarima   1    1-04:31:38 2-19:28:22
+    nvf-003 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451553_4 guowei-sea qiuyuchi   1         18:36    3:40:24
+      54451553_2 guowei-sea qiuyuchi   1         23:49    3:35:11
+      54451553_1 guowei-sea qiuyuchi   1         26:49    3:32:11
+      54451551_9 guowei-sea qiuyuchi   1         57:11    3:01:49
+    nvf-004 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451554_2 guowei-sea qiuyuchi   1          3:26    3:55:34
+      54451554_0 guowei-sea qiuyuchi   1         10:30    3:48:30
+      54451553_8 guowei-sea qiuyuchi   1         17:40    3:41:20
+      54451550_0 guowei-sea qiuyuchi   1       2:28:36    1:30:24
+    nvf-005 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451554_1 guowei-sea qiuyuchi   1          8:33    3:50:27
+      54451551_3 guowei-sea qiuyuchi   1       1:56:42    2:02:18
+      54451550_9 guowei-sea qiuyuchi   1       1:56:42    2:02:18
+      54451551_4 guowei-sea qiuyuchi   1       1:56:42    2:02:18
+    nvf-006 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451207_3 guowei-sea qiuyuchi   1       1:58:48   22:00:12
+      54451207_2 guowei-sea qiuyuchi   1       2:42:03   21:16:57
+      54451207_1 guowei-sea qiuyuchi   1       3:20:43   20:38:17
+      54451207_0 guowei-sea qiuyuchi   1       4:01:30   19:57:30
+    nvf-007 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451552_8 guowei-sea qiuyuchi   1         31:51    3:27:09
+      54451551_0 guowei-sea qiuyuchi   1       2:20:29    1:38:31
+    nvf-008 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451553_5 guowei-sea qiuyuchi   1         18:41    3:40:19
+      54451553_6 guowei-sea qiuyuchi   1         18:41    3:40:19
+      54451550_8 guowei-sea qiuyuchi   1       1:56:45    2:02:15
+      54451550_7 guowei-sea qiuyuchi   1       2:15:23    1:43:37
+    nvf-009 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54500967   vermaaslab razasaad   1       2:01:54    1:58:06
+      54508590   vermaaslab razasaad   1         42:02    3:17:58
+      54509225   vermaaslab razasaad   1         11:36    3:48:24
+      54509776   vermaaslab razasaad   1          2:28    3:57:32
+    nvf-010 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451553_3 guowei-sea qiuyuchi   1         20:50    3:38:10
+      54508676   vermaaslab razasaad   1         40:07    3:19:53
+      54508855   vermaaslab razasaad   1         31:54    3:28:06
+      54509797   vermaaslab razasaad   1          1:26    3:58:34
+    nvf-011 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451553_7 guowei-sea qiuyuchi   1         18:43    3:40:17
+      54501430   vermaaslab razasaad   1       1:54:45    2:05:15
+      54506335   vermaaslab razasaad   1       1:03:31    2:56:29
+      54505876   vermaaslab razasaad   1       1:19:04    2:40:56
+    nvf-012 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451553_0 guowei-sea qiuyuchi   1         31:54    3:27:06
+      54451552_9 guowei-sea qiuyuchi   1         31:54    3:27:06
+      54506236   vermaaslab razasaad   1       1:10:53    2:49:07
+      54506139   vermaaslab razasaad   1       1:15:56    2:44:04
+    nvf-013 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451552_2 guowei-sea qiuyuchi   1         49:08    3:09:52
+      54504191   vermaaslab razasaad   1       1:40:43    2:19:17
+      54504391   vermaaslab razasaad   1       1:20:14    2:39:46
+      54508153   vermaaslab razasaad   1         54:12    3:05:48
+    nvf-014 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54498338   vermaaslab razasaad   1       2:20:27    1:39:33
+      54508566   vermaaslab razasaad   1         43:09    3:16:51
+      54508891   vermaaslab razasaad   1         29:59    3:30:01
+      54509196   vermaaslab razasaad   1         14:44    3:45:16
+    nvf-015 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54501429   vermaaslab razasaad   1       1:55:49    2:04:11
+      54504200   vermaaslab razasaad   1       1:27:24    2:32:36
+      54508305   vermaaslab razasaad   1         44:07    3:15:53
+      54508787   vermaaslab razasaad   1         36:00    3:24:00
+    nvf-016 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451553_9 guowei-sea qiuyuchi   1         17:48    3:41:12
+      54451549_5 guowei-sea qiuyuchi   1       2:34:53    1:24:07
+      54506425   vermaaslab razasaad   1         57:20    3:02:40
+      54506398   vermaaslab razasaad   1       1:02:33    2:57:27
+    nvf-017 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54407091   multiscale gepei      1       6:28:17 1-01:31:43
+      54407111   multiscale gepei      1       6:15:56 1-01:44:04
+      54407092   multiscale gepei      1       6:02:38 1-01:57:22
+      54407093   multiscale gepei      1       5:46:25 1-02:13:35
+    nvf-018 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54252017   cmse       renjie3    5    3-05:08:05   23:41:55
+      54451552_0 guowei-sea qiuyuchi   1         56:10    3:02:50
+      54451551_6 guowei-sea qiuyuchi   1       1:07:04    2:51:56
+      54451551_5 guowei-sea qiuyuchi   1       1:48:32    2:10:28
+    nvf-019 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54252028   cmse       renjie3    5    3-05:08:06   23:41:54
+      54251982   cmse       renjie3    3    3-05:10:43   23:39:17
+      54391885   general    ashbyeli   32   1-08:53:12   15:06:48
+      54451552_7 guowei-sea qiuyuchi   1         32:03    3:26:57
+    nvf-020 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54392014   general    ashbyeli   32   1-07:23:01   16:36:59
+      54451207_6 guowei-sea qiuyuchi   1       1:21:37   22:37:23
+      54451207_5 guowei-sea qiuyuchi   1       1:35:22   22:23:38
+      54451207_4 guowei-sea qiuyuchi   1       1:44:28   22:14:32
+    nvl-000 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54508849   general    zhan1908   4         34:04    2:24:56
+      54508850   general    zhan1908   4         34:04    2:24:56
+      54506601   vermaaslab razasaad   1         54:46    3:05:14
+      54506628   vermaaslab razasaad   1         54:45    3:05:15
+      54506663   vermaaslab razasaad   1         54:45    3:05:15
+      54506675   vermaaslab razasaad   1         54:45    3:05:15
+      54506677   vermaaslab razasaad   1         54:45    3:05:15
+      54507419   vermaaslab razasaad   1         54:45    3:05:15
+    nvl-001 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54448475   cmse       lijuanh1   3      13:59:35   10:00:25
+      54476310   cmse       lijuanh1   3       8:20:28   15:39:32
+      54476342   cmse       lijuanh1   3       7:20:34   16:39:26
+      54476471   cmse       lijuanh1   3       6:45:33   17:14:27
+      54477128   cmse       lijuanh1   3       6:23:12   17:36:48
+      54477215   cmse       lijuanh1   3       2:06:07   21:53:53
+      54477363   cmse       lijuanh1   3       1:43:45   22:16:15
+      54477144   cmse       lijuanh1   3       2:49:16   21:10:44
+    nvl-002 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54508851   general    zhan1908   4         34:04    2:24:56
+      54508852   general    zhan1908   4         34:04    2:24:56
+      54508853   general    zhan1908   4         34:04    2:24:56
+    nvl-003 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54507466   vermaaslab razasaad   1         54:46    3:05:14
+      54507683   vermaaslab razasaad   1         54:46    3:05:14
+      54507723   vermaaslab razasaad   1         54:46    3:05:14
+      54507800   vermaaslab razasaad   1         54:46    3:05:14
+      54507816   vermaaslab razasaad   1         54:46    3:05:14
+      54507848   vermaaslab razasaad   1         54:46    3:05:14
+      54508192   vermaaslab razasaad   1         51:10    3:08:50
+      54507882   vermaaslab razasaad   1         54:46    3:05:14
+    nvl-004 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54508845   general    zhan1908   4         34:05    2:24:55
+      54508846   general    zhan1908   4         34:05    2:24:55
+      54508847   general    zhan1908   4         34:05    2:24:55
+      54508848   general    zhan1908   4         34:05    2:24:55
+      54509199   cmse       renjie3    5         11:05    3:38:55
+      54509201   cmse       renjie3    5         11:05    3:38:55
+      54488606   general    renjie3    5         54:18    2:55:42
+      54491742   general    renjie3    5         54:14    2:55:46
+    nvl-005 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54482245   general    mayhewfi   1       7:13:04 4-16:45:56
+      54392554   general    ashbyeli   32   1-04:38:03   19:21:57
+      54479742   general    yaoyugua   4       1:03:04   10:56:56
+    nvl-006 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54449832   cmse       lijuanh1   3      13:38:49   10:21:11
+      54451120   cmse       lijuanh1   3      13:05:22   10:54:38
+      54478394   general    yaoyugua   4       3:37:37    3:22:23
+      54478395   general    yaoyugua   4       3:18:02    3:41:58
+      54478821   general    yaoyugua   4       3:07:17    8:52:43
+      54478822   general    yaoyugua   4       2:56:49    9:03:11
+      54479611   general    yaoyugua   4       2:53:39    9:06:21
+      54479613   general    yaoyugua   4       1:32:55   10:27:05
+    qml-000 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54506140   perealab   suarezs3   2       1:30:54    4:29:06
+      54509249   ansgenetic dingrong   12        11:44    1:47:16
+      54509250   ansgenetic dingrong   12        11:44    1:47:16
+      54509252   ansgenetic dingrong   12        11:44    1:47:16
+      54509289   ansgenetic tansuxu    4          4:13    3:55:47
+    skl-117 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54507791   daylab     chenhua9   5       1:04:36   22:55:24
+      54507835   daylab     chenhua9   5       1:01:34   22:58:26
+      54507853   daylab     chenhua9   5       1:01:34   22:58:26
+    skl-136 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54073586   junlin     junlin     64   5-08:18:13 1-15:41:47
+    skl-140 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54408202   shadeash-c f0008425   16   1-05:33:06 5-10:26:54
+    skl-141 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54408215   shadeash-c f0008425   16   1-05:03:40 5-10:56:20
+    skl-143 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54006212   general    pazdanie   20   1-08:13:43 5-15:46:17
+    vim-001 (mixed)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54474633   general    bedhanem   10     10:54:04 5-13:05:56
+    amr-000 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54508741   liulab     gaomeiju   1         37:13 1-23:22:47
+      54508752   liulab     gaomeiju   1         37:13 1-23:22:47
+      54508704   liulab     gaomeiju   1         38:10 1-23:21:50
+      54508705   liulab     gaomeiju   1         38:10 1-23:21:50
+      54508727   liulab     gaomeiju   1         38:10 1-23:21:50
+      54488638   liulab     gaomeiju   1       6:39:38 6-09:20:22
+      54488646   liulab     gaomeiju   1       6:39:38 6-09:20:22
+      54488648   liulab     gaomeiju   1       6:39:38 6-09:20:22
+      54484647   liulab     wuyunqiq   10      5:28:15 6-18:31:45
+      54460477   liulab     wuyunqiq   10     16:33:32    7:26:28
+      54456758   liulab     wuyunqiq   10     18:19:31    5:40:29
+      54462352   liulab     wuyunqiq   10     15:43:43    8:16:17
+      54462320   liulab     wuyunqiq   10     15:44:47    8:15:13
+      54459951   liulab     wuyunqiq   10     16:51:06    7:08:54
+      54458086   liulab     wuyunqiq   10     17:43:51    6:16:09
+      54454993   liulab     wuyunqiq   10     18:50:07    5:09:53
+      54507866   liulab     wuyunqiq   10         0:35   23:59:25
+      54507895   liulab     wuyunqiq   10         0:35   23:59:25
+    amr-001 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54488633   liulab     gaomeiju   1       6:39:38 6-09:20:22
+      54488623   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54488624   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54488626   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54488627   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54488628   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54488631   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54488632   liulab     gaomeiju   1       6:40:35 6-09:19:25
+      54418180   liulab     wuyunqiq   10     20:41:20    3:18:40
+      54460471   liulab     wuyunqiq   10     16:33:32    7:26:28
+      54458089   liulab     wuyunqiq   10     17:43:51    6:16:09
+      54455397   liulab     wuyunqiq   10     18:34:44    5:25:16
+      54453953   liulab     wuyunqiq   10     19:13:28    4:46:32
+      54507140   liulab     wuyunqiq   10         5:45   23:54:15
+      54507819   liulab     wuyunqiq   10         5:45   23:54:15
+      54507854   liulab     wuyunqiq   10         1:38   23:58:22
+      54507855   liulab     wuyunqiq   10         1:38   23:58:22
+      54507856   liulab     wuyunqiq   10         1:38   23:58:22
+    amr-010 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54445975   christlibu sandswi3   128    21:47:29 6-02:12:31
+    amr-016 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54473853   promislow  tanzengq   8      11:10:13 6-11:49:47
+      54473776   promislow  tanzengq   8      11:11:07 6-11:48:53
+      54473728   promislow  tanzengq   8      11:12:10 6-11:47:50
+      54507786   promislow  tanzengq   8       1:04:40 6-21:55:20
+      54507721   promislow  tanzengq   8       1:06:53 6-21:53:07
+      54507689   promislow  tanzengq   8       1:09:01 6-21:50:59
+      54507465   promislow  tanzengq   8       1:10:09 6-21:49:51
+      54507421   promislow  tanzengq   8       1:12:07 6-21:47:53
+      54507906   promislow  tanzengq   8       1:00:34 6-21:59:26
+      54507814   promislow  tanzengq   8       1:02:43 6-21:57:17
+      54508150   promislow  tanzengq   8         55:23 6-22:04:37
+      54508138   promislow  tanzengq   8         56:30 6-22:03:30
+      54508267   promislow  tanzengq   8         50:25 6-22:09:35
+      54508213   promislow  tanzengq   8         52:23 6-22:07:37
+      54508195   promislow  tanzengq   8         53:27 6-22:06:33
+      54508304   promislow  tanzengq   8         48:18 6-22:11:42
+    amr-017 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54474841   promislow  tanzengq   8      10:51:01 6-12:08:59
+      54474721   promislow  tanzengq   8      10:51:59 6-12:08:01
+      54474654   promislow  tanzengq   8      10:52:57 6-12:07:03
+      54474629   promislow  tanzengq   8      10:54:01 6-12:05:59
+      54474593   promislow  tanzengq   8      10:55:01 6-12:04:59
+      54474536   promislow  tanzengq   8      10:55:55 6-12:04:05
+      54474879   promislow  tanzengq   8      10:48:58 6-12:11:02
+      54475052   promislow  tanzengq   8      10:44:55 6-12:15:05
+      54475051   promislow  tanzengq   8      10:45:59 6-12:14:01
+      54475041   promislow  tanzengq   8      10:47:01 6-12:12:59
+      54474975   promislow  tanzengq   8      10:47:59 6-12:12:01
+      54475238   promislow  tanzengq   8      10:40:52 6-12:19:08
+      54475197   promislow  tanzengq   8      10:41:51 6-12:18:09
+      54475170   promislow  tanzengq   8      10:42:49 6-12:17:11
+      54475105   promislow  tanzengq   8      10:43:54 6-12:16:06
+      54475317   promislow  tanzengq   8      10:38:47 6-12:21:13
+    amr-018 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54117103   weilai     daijin2    128  4-11:47:24 2-12:12:36
+    amr-019 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54116950   weilai     daijin2    128  4-13:14:52 2-10:45:08
+    amr-020 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54222246   weilai     daijin2    128    16:41:27 6-07:18:33
+    amr-094 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54486188   wmich      k0006645   32      7:20:43 6-16:38:17
+      54486145   wmich      k0006645   32      7:22:39 6-16:36:21
+      54486100   wmich      k0006645   32      7:23:43 6-16:35:17
+      54486063   wmich      k0006645   32      7:24:42 6-16:34:18
+      54455358   wmich      k0006645   32     18:36:49 6-05:22:11
+      54455346   wmich      k0006645   32     18:38:52 6-05:20:08
+      54455306   wmich      k0006645   32     18:40:53 6-05:18:07
+    amr-122 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54499384   ansgenetic liujind1   40      2:01:07    9:58:53
+      54499423   ansgenetic liujind1   40      2:01:07    9:58:53
+      54498882   ansgenetic liujind1   40      2:12:35    9:47:25
+      54259192   ansgenetic tansuxu    1    3-02:12:32 2-21:47:28
+      54259201   ansgenetic tansuxu    1    3-02:10:27 2-21:49:33
+      54259214   ansgenetic tansuxu    1    3-02:10:27 2-21:49:33
+      54259198   ansgenetic tansuxu    1    3-02:12:32 2-21:47:28
+      54259225   ansgenetic tansuxu    1    3-02:10:27 2-21:49:33
+      54259274   ansgenetic tansuxu    1    3-02:10:27 2-21:49:33
+      54259277   ansgenetic tansuxu    1    3-02:10:27 2-21:49:33
+      54259285   ansgenetic tansuxu    1    3-02:10:27 2-21:49:33
+    csm-003 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54468181   colej      wangjic1   20     12:58:48 6-11:01:12
+    csm-004 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54467666   colej      wangjic1   20     13:28:17 6-10:31:43
+    csm-005 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54469038   colej      wangjic1   20         9:56 6-23:50:04
+    csp-019 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504979   general    jiangc21   1       1:33:53    2:26:07
+      54504984   general    jiangc21   1       1:33:53    2:26:07
+      54504987   general    jiangc21   1       1:33:53    2:26:07
+      54504989   general    jiangc21   1       1:33:53    2:26:07
+      54504992   general    jiangc21   1       1:33:53    2:26:07
+      54504995   general    jiangc21   1       1:33:53    2:26:07
+      54505000   general    jiangc21   1       1:33:53    2:26:07
+      54505006   general    jiangc21   1       1:33:53    2:26:07
+      54505012   general    jiangc21   1       1:33:53    2:26:07
+      54505017   general    jiangc21   1       1:33:53    2:26:07
+      54505021   general    jiangc21   1       1:33:53    2:26:07
+      54505027   general    jiangc21   1       1:33:53    2:26:07
+      54505032   general    jiangc21   1       1:33:53    2:26:07
+      54505038   general    jiangc21   1       1:33:53    2:26:07
+      54505043   general    jiangc21   1       1:33:53    2:26:07
+      54505049   general    jiangc21   1       1:33:53    2:26:07
+      54505054   general    jiangc21   1       1:33:53    2:26:07
+      54505060   general    jiangc21   1       1:33:53    2:26:07
+      54505064   general    jiangc21   1       1:33:53    2:26:07
+      54505070   general    jiangc21   1       1:33:53    2:26:07
+    csp-026 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505283   general    jiangc21   1       1:32:50    2:27:10
+      54505288   general    jiangc21   1       1:32:50    2:27:10
+      54505293   general    jiangc21   1       1:32:50    2:27:10
+      54505299   general    jiangc21   1       1:32:50    2:27:10
+      54505304   general    jiangc21   1       1:32:50    2:27:10
+      54505309   general    jiangc21   1       1:32:50    2:27:10
+      54505315   general    jiangc21   1       1:32:50    2:27:10
+      54505074   general    jiangc21   1       1:33:53    2:26:07
+      54505077   general    jiangc21   1       1:33:53    2:26:07
+      54505080   general    jiangc21   1       1:33:53    2:26:07
+      54505083   general    jiangc21   1       1:33:53    2:26:07
+      54505085   general    jiangc21   1       1:33:53    2:26:07
+      54505091   general    jiangc21   1       1:33:53    2:26:07
+      54505096   general    jiangc21   1       1:33:53    2:26:07
+      54505104   general    jiangc21   1       1:33:53    2:26:07
+      54505109   general    jiangc21   1       1:33:53    2:26:07
+      54505114   general    jiangc21   1       1:33:53    2:26:07
+      54505119   general    jiangc21   1       1:33:53    2:26:07
+      54505125   general    jiangc21   1       1:33:53    2:26:07
+      54505131   general    jiangc21   1       1:33:53    2:26:07
+    css-002 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54469037   colej      wangjic1   20        30:16 6-23:29:44
+    css-003 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505320   general    jiangc21   1       1:32:51    2:27:09
+      54505325   general    jiangc21   1       1:32:51    2:27:09
+      54505331   general    jiangc21   1       1:32:51    2:27:09
+      54505336   general    jiangc21   1       1:32:51    2:27:09
+      54505339   general    jiangc21   1       1:32:51    2:27:09
+      54505341   general    jiangc21   1       1:32:51    2:27:09
+      54505344   general    jiangc21   1       1:32:51    2:27:09
+      54505347   general    jiangc21   1       1:32:51    2:27:09
+      54505351   general    jiangc21   1       1:32:51    2:27:09
+      54505355   general    jiangc21   1       1:32:51    2:27:09
+      54505360   general    jiangc21   1       1:32:51    2:27:09
+      54505364   general    jiangc21   1       1:32:51    2:27:09
+      54505369   general    jiangc21   1       1:32:51    2:27:09
+      54505375   general    jiangc21   1       1:32:51    2:27:09
+      54505381   general    jiangc21   1       1:32:51    2:27:09
+      54505386   general    jiangc21   1       1:32:51    2:27:09
+      54505392   general    jiangc21   1       1:32:51    2:27:09
+      54505398   general    jiangc21   1       1:32:51    2:27:09
+      54505403   general    jiangc21   1       1:32:51    2:27:09
+      54505409   general    jiangc21   1       1:32:51    2:27:09
+    css-067 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505796   general    jiangc21   1          9:57    3:50:03
+      54505425   general    jiangc21   1         11:55    3:48:05
+      54506162   general    jiangc21   1          9:57    3:50:03
+      54506163   general    jiangc21   1          9:57    3:50:03
+      54506164   general    jiangc21   1          9:57    3:50:03
+      54506165   general    jiangc21   1          9:57    3:50:03
+      54506166   general    jiangc21   1          9:57    3:50:03
+      54506167   general    jiangc21   1          9:57    3:50:03
+      54506168   general    jiangc21   1          9:57    3:50:03
+      54506169   general    jiangc21   1          9:57    3:50:03
+      54506170   general    jiangc21   1          9:57    3:50:03
+      54506171   general    jiangc21   1          9:57    3:50:03
+      54506172   general    jiangc21   1          9:57    3:50:03
+      54506173   general    jiangc21   1          9:57    3:50:03
+      54506174   general    jiangc21   1          9:57    3:50:03
+      54506175   general    jiangc21   1          9:57    3:50:03
+      54506176   general    jiangc21   1          9:57    3:50:03
+      54506177   general    jiangc21   1          9:57    3:50:03
+      54506178   general    jiangc21   1          9:57    3:50:03
+      54506179   general    jiangc21   1          9:57    3:50:03
+    css-072 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54464645   colej      wangjic1   20     14:09:47 6-09:50:13
+    css-074 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505624   general    jiangc21   1          9:58    3:50:02
+      54505630   general    jiangc21   1          9:58    3:50:02
+      54505634   general    jiangc21   1          9:58    3:50:02
+      54505639   general    jiangc21   1          9:58    3:50:02
+      54505645   general    jiangc21   1          9:58    3:50:02
+      54505651   general    jiangc21   1          9:58    3:50:02
+      54505657   general    jiangc21   1          9:58    3:50:02
+      54505663   general    jiangc21   1          9:58    3:50:02
+      54505669   general    jiangc21   1          9:58    3:50:02
+      54505675   general    jiangc21   1          9:58    3:50:02
+      54505681   general    jiangc21   1          9:58    3:50:02
+      54505687   general    jiangc21   1          9:58    3:50:02
+      54505693   general    jiangc21   1          9:58    3:50:02
+      54505697   general    jiangc21   1          9:58    3:50:02
+      54505700   general    jiangc21   1          9:58    3:50:02
+      54505703   general    jiangc21   1          9:58    3:50:02
+      54505706   general    jiangc21   1          9:58    3:50:02
+      54506283   general    jiangc21   1          8:57    3:51:03
+      54506284   general    jiangc21   1          8:57    3:51:03
+      54506285   general    jiangc21   1          8:57    3:51:03
+    css-081 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54506180   general    jiangc21   1          9:59    3:50:01
+      54506181   general    jiangc21   1          9:59    3:50:01
+      54506182   general    jiangc21   1          9:59    3:50:01
+      54506183   general    jiangc21   1          9:59    3:50:01
+      54506187   general    jiangc21   1          9:59    3:50:01
+      54506188   general    jiangc21   1          9:59    3:50:01
+      54506189   general    jiangc21   1          9:59    3:50:01
+      54506191   general    jiangc21   1          9:59    3:50:01
+      54506192   general    jiangc21   1          9:59    3:50:01
+      54506193   general    jiangc21   1          9:59    3:50:01
+      54506197   general    jiangc21   1          9:59    3:50:01
+      54506206   general    jiangc21   1          9:59    3:50:01
+      54506207   general    jiangc21   1          9:59    3:50:01
+      54506209   general    jiangc21   1          9:59    3:50:01
+      54506210   general    jiangc21   1          9:59    3:50:01
+      54506212   general    jiangc21   1          9:59    3:50:01
+      54506213   general    jiangc21   1          9:59    3:50:01
+      54506217   general    jiangc21   1          9:59    3:50:01
+      54506218   general    jiangc21   1          9:59    3:50:01
+      54506279   general    jiangc21   1          8:58    3:51:02
+    css-084 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54506241   general    jiangc21   1          9:59    3:50:01
+      54506242   general    jiangc21   1          9:59    3:50:01
+      54506243   general    jiangc21   1          9:59    3:50:01
+      54506314   general    jiangc21   1          8:58    3:51:02
+      54506315   general    jiangc21   1          8:58    3:51:02
+      54506316   general    jiangc21   1          8:58    3:51:02
+      54506317   general    jiangc21   1          8:58    3:51:02
+      54506318   general    jiangc21   1          8:58    3:51:02
+      54506319   general    jiangc21   1          8:58    3:51:02
+      54506320   general    jiangc21   1          8:58    3:51:02
+      54506321   general    jiangc21   1          8:58    3:51:02
+      54506322   general    jiangc21   1          8:58    3:51:02
+      54506324   general    jiangc21   1          8:58    3:51:02
+      54506325   general    jiangc21   1          8:58    3:51:02
+      54506326   general    jiangc21   1          8:58    3:51:02
+      54506327   general    jiangc21   1          8:58    3:51:02
+      54506328   general    jiangc21   1          8:58    3:51:02
+      54506329   general    jiangc21   1          8:58    3:51:02
+      54506330   general    jiangc21   1          8:58    3:51:02
+      54506331   general    jiangc21   1          8:58    3:51:02
+    css-085 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54506219   general    jiangc21   1         10:00    3:50:00
+      54506220   general    jiangc21   1         10:00    3:50:00
+      54506222   general    jiangc21   1         10:00    3:50:00
+      54506223   general    jiangc21   1         10:00    3:50:00
+      54506225   general    jiangc21   1         10:00    3:50:00
+      54506226   general    jiangc21   1         10:00    3:50:00
+      54506227   general    jiangc21   1         10:00    3:50:00
+      54506228   general    jiangc21   1         10:00    3:50:00
+      54506229   general    jiangc21   1         10:00    3:50:00
+      54506230   general    jiangc21   1         10:00    3:50:00
+      54506231   general    jiangc21   1         10:00    3:50:00
+      54506232   general    jiangc21   1         10:00    3:50:00
+      54506233   general    jiangc21   1         10:00    3:50:00
+      54506234   general    jiangc21   1         10:00    3:50:00
+      54506239   general    jiangc21   1         10:00    3:50:00
+      54506240   general    jiangc21   1         10:00    3:50:00
+      54506310   general    jiangc21   1          8:59    3:51:01
+      54506311   general    jiangc21   1          8:59    3:51:01
+      54506312   general    jiangc21   1          8:59    3:51:01
+      54506313   general    jiangc21   1          8:59    3:51:01
+    css-090 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505615   general    jiangc21   1         10:00    3:50:00
+      54505618   general    jiangc21   1         10:00    3:50:00
+      54505606   general    jiangc21   1         10:01    3:49:59
+      54505609   general    jiangc21   1         10:01    3:49:59
+      54505612   general    jiangc21   1         10:01    3:49:59
+      54506332   general    jiangc21   1          8:59    3:51:01
+      54506333   general    jiangc21   1          8:59    3:51:01
+      54506334   general    jiangc21   1          8:59    3:51:01
+      54506336   general    jiangc21   1          8:59    3:51:01
+      54506337   general    jiangc21   1          8:59    3:51:01
+      54506338   general    jiangc21   1          8:59    3:51:01
+      54506339   general    jiangc21   1          8:59    3:51:01
+      54506340   general    jiangc21   1          8:59    3:51:01
+      54506341   general    jiangc21   1          8:59    3:51:01
+      54506342   general    jiangc21   1          8:59    3:51:01
+      54506343   general    jiangc21   1          8:59    3:51:01
+      54506344   general    jiangc21   1          8:59    3:51:01
+      54506345   general    jiangc21   1          8:59    3:51:01
+      54506346   general    jiangc21   1          8:59    3:51:01
+      54506394   general    jiangc21   1          7:53    3:52:07
+    css-091 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505590   general    jiangc21   1         10:02    3:49:58
+      54505596   general    jiangc21   1         10:02    3:49:58
+      54505601   general    jiangc21   1         10:02    3:49:58
+      54506347   general    jiangc21   1          9:00    3:51:00
+      54506348   general    jiangc21   1          9:00    3:51:00
+      54506349   general    jiangc21   1          9:00    3:51:00
+      54506350   general    jiangc21   1          9:00    3:51:00
+      54506351   general    jiangc21   1          9:00    3:51:00
+      54506352   general    jiangc21   1          9:00    3:51:00
+      54506353   general    jiangc21   1          9:00    3:51:00
+      54506354   general    jiangc21   1          9:00    3:51:00
+      54506355   general    jiangc21   1          9:00    3:51:00
+      54506356   general    jiangc21   1          9:00    3:51:00
+      54506357   general    jiangc21   1          9:00    3:51:00
+      54506358   general    jiangc21   1          9:00    3:51:00
+      54506359   general    jiangc21   1          9:00    3:51:00
+      54506360   general    jiangc21   1          9:00    3:51:00
+      54506361   general    jiangc21   1          9:00    3:51:00
+      54506395   general    jiangc21   1          7:54    3:52:06
+      54506396   general    jiangc21   1          7:54    3:52:06
+    css-100 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54502753   general    aeber1lCMI 50      1:44:01    2:15:59
+      54505568   general    jiangc21   1         10:02    3:49:58
+      54505573   general    jiangc21   1         10:02    3:49:58
+      54505579   general    jiangc21   1         10:02    3:49:58
+      54505584   general    jiangc21   1         10:02    3:49:58
+      54506362   general    jiangc21   1          9:00    3:51:00
+      54506363   general    jiangc21   1          9:00    3:51:00
+      54506364   general    jiangc21   1          9:00    3:51:00
+      54506365   general    jiangc21   1          9:00    3:51:00
+      54506366   general    jiangc21   1          9:00    3:51:00
+      54506367   general    jiangc21   1          9:00    3:51:00
+    css-101 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54502753   general    aeber1lCMI 50      1:44:02    2:15:58
+      54506376   general    jiangc21   1          9:01    3:50:59
+      54506377   general    jiangc21   1          9:01    3:50:59
+      54506378   general    jiangc21   1          9:01    3:50:59
+      54506379   general    jiangc21   1          9:01    3:50:59
+      54506380   general    jiangc21   1          9:01    3:50:59
+      54506381   general    jiangc21   1          9:01    3:50:59
+      54506391   general    jiangc21   1          7:55    3:52:05
+      54506382   general    jiangc21   1          9:01    3:50:59
+      54506383   general    jiangc21   1          9:01    3:50:59
+      54506384   general    jiangc21   1          9:01    3:50:59
+    css-102 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54502753   general    aeber1lCMI 50      1:44:02    2:15:58
+      54505540   general    jiangc21   1         10:03    3:49:57
+      54505546   general    jiangc21   1         10:03    3:49:57
+      54506368   general    jiangc21   1          9:01    3:50:59
+      54506369   general    jiangc21   1          9:01    3:50:59
+      54506370   general    jiangc21   1          9:01    3:50:59
+      54506371   general    jiangc21   1          9:01    3:50:59
+      54506372   general    jiangc21   1          9:01    3:50:59
+      54506373   general    jiangc21   1          9:01    3:50:59
+      54506374   general    jiangc21   1          9:01    3:50:59
+      54506375   general    jiangc21   1          9:01    3:50:59
+    css-103 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54502753   general    aeber1lCMI 50      1:44:03    2:15:57
+      54506397   general    jiangc21   1          7:56    3:52:04
+      54506399   general    jiangc21   1          7:56    3:52:04
+      54506400   general    jiangc21   1          7:56    3:52:04
+      54506401   general    jiangc21   1          7:56    3:52:04
+      54506385   general    jiangc21   1          9:02    3:50:58
+      54506386   general    jiangc21   1          9:02    3:50:58
+      54506387   general    jiangc21   1          9:02    3:50:58
+      54506388   general    jiangc21   1          9:02    3:50:58
+      54506389   general    jiangc21   1          9:02    3:50:58
+      54506390   general    jiangc21   1          9:02    3:50:58
+    css-109 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504495   general    jiangc21   1       1:34:00    2:26:00
+      54504501   general    jiangc21   1       1:34:00    2:26:00
+      54504505   general    jiangc21   1       1:34:00    2:26:00
+      54504470   general    jiangc21   1       1:34:56    2:25:04
+      54504472   general    jiangc21   1       1:34:56    2:25:04
+      54504475   general    jiangc21   1       1:34:56    2:25:04
+      54504482   general    jiangc21   1       1:34:56    2:25:04
+      54504486   general    jiangc21   1       1:34:56    2:25:04
+      54504489   general    jiangc21   1       1:34:56    2:25:04
+      54504491   general    jiangc21   1       1:34:56    2:25:04
+      54506286   general    jiangc21   1          9:02    3:50:58
+      54506287   general    jiangc21   1          9:02    3:50:58
+      54506288   general    jiangc21   1          9:02    3:50:58
+      54506289   general    jiangc21   1          9:02    3:50:58
+      54506290   general    jiangc21   1          9:02    3:50:58
+      54506291   general    jiangc21   1          9:02    3:50:58
+      54506292   general    jiangc21   1          9:02    3:50:58
+      54506293   general    jiangc21   1          9:02    3:50:58
+      54506392   general    jiangc21   1          7:56    3:52:04
+      54506393   general    jiangc21   1          7:56    3:52:04
+    css-111 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504507   general    jiangc21   1       1:34:00    2:26:00
+      54504509   general    jiangc21   1       1:34:00    2:26:00
+      54504512   general    jiangc21   1       1:34:00    2:26:00
+      54504514   general    jiangc21   1       1:34:00    2:26:00
+      54504516   general    jiangc21   1       1:34:00    2:26:00
+      54504518   general    jiangc21   1       1:34:00    2:26:00
+      54504521   general    jiangc21   1       1:34:00    2:26:00
+      54504524   general    jiangc21   1       1:34:00    2:26:00
+      54504527   general    jiangc21   1       1:34:00    2:26:00
+      54504530   general    jiangc21   1       1:34:00    2:26:00
+      54504532   general    jiangc21   1       1:34:00    2:26:00
+      54504534   general    jiangc21   1       1:34:00    2:26:00
+      54504537   general    jiangc21   1       1:34:00    2:26:00
+      54504540   general    jiangc21   1       1:34:00    2:26:00
+      54504543   general    jiangc21   1       1:34:00    2:26:00
+      54504546   general    jiangc21   1       1:34:00    2:26:00
+      54504548   general    jiangc21   1       1:34:00    2:26:00
+      54504551   general    jiangc21   1       1:34:00    2:26:00
+      54504554   general    jiangc21   1       1:34:00    2:26:00
+      54504557   general    jiangc21   1       1:34:00    2:26:00
+    css-112 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504560   general    jiangc21   1       1:34:01    2:25:59
+      54504563   general    jiangc21   1       1:34:01    2:25:59
+      54504566   general    jiangc21   1       1:34:01    2:25:59
+      54504569   general    jiangc21   1       1:34:01    2:25:59
+      54504572   general    jiangc21   1       1:34:01    2:25:59
+      54504575   general    jiangc21   1       1:34:01    2:25:59
+      54504578   general    jiangc21   1       1:34:01    2:25:59
+      54504580   general    jiangc21   1       1:34:01    2:25:59
+      54504584   general    jiangc21   1       1:34:01    2:25:59
+      54504587   general    jiangc21   1       1:34:01    2:25:59
+      54504590   general    jiangc21   1       1:34:01    2:25:59
+      54504594   general    jiangc21   1       1:34:01    2:25:59
+      54504597   general    jiangc21   1       1:34:01    2:25:59
+      54504606   general    jiangc21   1       1:34:01    2:25:59
+      54504609   general    jiangc21   1       1:34:01    2:25:59
+      54504612   general    jiangc21   1       1:34:01    2:25:59
+      54504616   general    jiangc21   1       1:34:01    2:25:59
+      54504619   general    jiangc21   1       1:34:01    2:25:59
+      54504621   general    jiangc21   1       1:34:01    2:25:59
+      54504624   general    jiangc21   1       1:34:01    2:25:59
+    css-113 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504630   general    jiangc21   1       1:34:01    2:25:59
+      54504632   general    jiangc21   1       1:34:01    2:25:59
+      54504635   general    jiangc21   1       1:34:01    2:25:59
+      54504639   general    jiangc21   1       1:34:01    2:25:59
+      54504642   general    jiangc21   1       1:34:01    2:25:59
+      54504647   general    jiangc21   1       1:34:01    2:25:59
+      54504649   general    jiangc21   1       1:34:01    2:25:59
+      54504655   general    jiangc21   1       1:34:01    2:25:59
+      54504657   general    jiangc21   1       1:34:01    2:25:59
+      54504660   general    jiangc21   1       1:34:01    2:25:59
+      54504662   general    jiangc21   1       1:34:01    2:25:59
+      54504665   general    jiangc21   1       1:34:01    2:25:59
+      54504668   general    jiangc21   1       1:34:01    2:25:59
+      54504672   general    jiangc21   1       1:34:01    2:25:59
+      54504674   general    jiangc21   1       1:34:01    2:25:59
+      54504677   general    jiangc21   1       1:34:01    2:25:59
+      54504680   general    jiangc21   1       1:34:01    2:25:59
+      54504683   general    jiangc21   1       1:34:01    2:25:59
+      54504686   general    jiangc21   1       1:34:01    2:25:59
+      54504689   general    jiangc21   1       1:34:01    2:25:59
+    css-114 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504694   general    jiangc21   1       1:34:02    2:25:58
+      54504698   general    jiangc21   1       1:34:02    2:25:58
+      54504700   general    jiangc21   1       1:34:02    2:25:58
+      54504703   general    jiangc21   1       1:34:02    2:25:58
+      54504707   general    jiangc21   1       1:34:02    2:25:58
+      54504710   general    jiangc21   1       1:34:02    2:25:58
+      54504713   general    jiangc21   1       1:34:02    2:25:58
+      54504716   general    jiangc21   1       1:34:02    2:25:58
+      54504724   general    jiangc21   1       1:34:02    2:25:58
+      54504729   general    jiangc21   1       1:34:02    2:25:58
+      54504735   general    jiangc21   1       1:34:02    2:25:58
+      54504740   general    jiangc21   1       1:34:02    2:25:58
+      54504745   general    jiangc21   1       1:34:02    2:25:58
+      54504750   general    jiangc21   1       1:34:02    2:25:58
+      54504757   general    jiangc21   1       1:34:02    2:25:58
+      54504762   general    jiangc21   1       1:34:02    2:25:58
+      54504768   general    jiangc21   1       1:34:02    2:25:58
+      54504772   general    jiangc21   1       1:34:02    2:25:58
+      54504778   general    jiangc21   1       1:34:02    2:25:58
+      54504784   general    jiangc21   1       1:34:02    2:25:58
+    css-116 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504789   general    jiangc21   1       1:34:02    2:25:58
+      54504795   general    jiangc21   1       1:34:02    2:25:58
+      54504800   general    jiangc21   1       1:34:02    2:25:58
+      54504803   general    jiangc21   1       1:34:02    2:25:58
+      54504806   general    jiangc21   1       1:34:02    2:25:58
+      54504808   general    jiangc21   1       1:34:02    2:25:58
+      54504811   general    jiangc21   1       1:34:02    2:25:58
+      54504815   general    jiangc21   1       1:34:02    2:25:58
+      54504820   general    jiangc21   1       1:34:02    2:25:58
+      54504826   general    jiangc21   1       1:34:02    2:25:58
+      54504831   general    jiangc21   1       1:34:02    2:25:58
+      54504835   general    jiangc21   1       1:34:02    2:25:58
+      54504839   general    jiangc21   1       1:34:02    2:25:58
+      54504844   general    jiangc21   1       1:34:02    2:25:58
+      54504850   general    jiangc21   1       1:34:02    2:25:58
+      54504854   general    jiangc21   1       1:34:02    2:25:58
+      54504859   general    jiangc21   1       1:34:02    2:25:58
+      54504865   general    jiangc21   1       1:34:02    2:25:58
+      54504870   general    jiangc21   1       1:34:02    2:25:58
+      54504876   general    jiangc21   1       1:34:02    2:25:58
+    css-117 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54504881   general    jiangc21   1       1:34:03    2:25:57
+      54504887   general    jiangc21   1       1:34:03    2:25:57
+      54504892   general    jiangc21   1       1:34:03    2:25:57
+      54504896   general    jiangc21   1       1:34:03    2:25:57
+      54504899   general    jiangc21   1       1:34:03    2:25:57
+      54504901   general    jiangc21   1       1:34:03    2:25:57
+      54504904   general    jiangc21   1       1:34:03    2:25:57
+      54504909   general    jiangc21   1       1:34:03    2:25:57
+      54504915   general    jiangc21   1       1:34:03    2:25:57
+      54504920   general    jiangc21   1       1:34:03    2:25:57
+      54504926   general    jiangc21   1       1:34:03    2:25:57
+      54504930   general    jiangc21   1       1:34:03    2:25:57
+      54504936   general    jiangc21   1       1:34:03    2:25:57
+      54504941   general    jiangc21   1       1:34:03    2:25:57
+      54504946   general    jiangc21   1       1:34:03    2:25:57
+      54504950   general    jiangc21   1       1:34:03    2:25:57
+      54504956   general    jiangc21   1       1:34:03    2:25:57
+      54504962   general    jiangc21   1       1:34:03    2:25:57
+      54504967   general    jiangc21   1       1:34:03    2:25:57
+      54504973   general    jiangc21   1       1:34:03    2:25:57
+    css-119 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54506294   general    jiangc21   1          9:05    3:50:55
+      54506295   general    jiangc21   1          9:05    3:50:55
+      54506296   general    jiangc21   1          9:05    3:50:55
+      54506297   general    jiangc21   1          9:05    3:50:55
+      54506298   general    jiangc21   1          9:05    3:50:55
+      54506300   general    jiangc21   1          9:05    3:50:55
+      54506301   general    jiangc21   1          9:05    3:50:55
+      54506302   general    jiangc21   1          9:05    3:50:55
+      54506303   general    jiangc21   1          9:05    3:50:55
+      54506304   general    jiangc21   1          9:05    3:50:55
+      54506305   general    jiangc21   1          9:05    3:50:55
+      54506306   general    jiangc21   1          9:05    3:50:55
+      54506307   general    jiangc21   1          9:05    3:50:55
+      54506308   general    jiangc21   1          9:05    3:50:55
+      54506309   general    jiangc21   1          9:05    3:50:55
+      54506402   general    jiangc21   1          7:59    3:52:01
+      54506403   general    jiangc21   1          7:59    3:52:01
+      54506404   general    jiangc21   1          7:59    3:52:01
+      54506405   general    jiangc21   1          7:59    3:52:01
+      54506406   general    jiangc21   1          7:59    3:52:01
+    css-127 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54505710   general    jiangc21   1         10:07    3:49:53
+      54505716   general    jiangc21   1         10:07    3:49:53
+      54505721   general    jiangc21   1         10:07    3:49:53
+      54505727   general    jiangc21   1         10:07    3:49:53
+      54505733   general    jiangc21   1         10:07    3:49:53
+      54505739   general    jiangc21   1         10:07    3:49:53
+      54505744   general    jiangc21   1         10:07    3:49:53
+      54505749   general    jiangc21   1         10:07    3:49:53
+      54505754   general    jiangc21   1         10:07    3:49:53
+      54505760   general    jiangc21   1         10:07    3:49:53
+      54505766   general    jiangc21   1         10:07    3:49:53
+      54505770   general    jiangc21   1         10:07    3:49:53
+      54505776   general    jiangc21   1         10:07    3:49:53
+      54505782   general    jiangc21   1         10:07    3:49:53
+      54505785   general    jiangc21   1         10:07    3:49:53
+      54505788   general    jiangc21   1         10:07    3:49:53
+      54505791   general    jiangc21   1         10:07    3:49:53
+      54505794   general    jiangc21   1         10:07    3:49:53
+      54506280   general    jiangc21   1          9:06    3:50:54
+      54506281   general    jiangc21   1          9:06    3:50:54
+    lac-046 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:39   15:49:21
+    lac-047 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:40   15:49:20
+    lac-048 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:40   15:49:20
+    lac-049 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:40   15:49:20
+    lac-050 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:41   15:49:19
+    lac-051 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:41   15:49:19
+    lac-052 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:42   15:49:18
+    lac-053 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:42   15:49:18
+    lac-054 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:09:43   15:49:17
+    lac-055 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:13   22:10:47
+    lac-056 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:14   22:10:46
+    lac-057 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:14   22:10:46
+    lac-058 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:15   22:10:45
+    lac-059 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:15   22:10:45
+    lac-060 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:16   22:10:44
+    lac-061 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:16   22:10:44
+    lac-062 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:16   22:10:44
+    lac-063 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:17   22:10:43
+    lac-064 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:17   22:10:43
+    lac-065 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:18   22:10:42
+    lac-066 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:18   22:10:42
+    lac-067 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:18   22:10:42
+    lac-068 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:19   22:10:41
+    lac-069 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:19   22:10:41
+    lac-070 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:20   22:10:40
+    lac-071 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:26:42    3:33:18
+    lac-072 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:26:43    3:33:17
+    lac-073 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:26:43    3:33:17
+    lac-074 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:26:44    3:33:16
+    lac-075 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:26:44    3:33:16
+    lac-077 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:54:12    7:05:48
+    lac-079 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:54:12    7:05:48
+    lac-088 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:23   22:10:37
+    lac-089 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:24   22:10:36
+    lac-090 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:24   22:10:36
+    lac-091 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:25   22:10:35
+    lac-092 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:25   22:10:35
+    lac-093 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:26   22:10:34
+    lac-094 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:26   22:10:34
+    lac-095 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:27   22:10:33
+    lac-096 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:48:27   22:10:33
+    lac-097 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:32:03    5:27:57
+    lac-098 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:19   10:24:41
+    lac-099 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:20   10:24:40
+    lac-100 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:20   10:24:40
+    lac-101 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:32:05    5:27:55
+    lac-102 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:40:34    4:19:26
+    lac-103 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:40:34    4:19:26
+    lac-104 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:40:35    4:19:25
+    lac-105 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:40:35    4:19:25
+    lac-106 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:40:36    4:19:24
+    lac-107 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:32:07    5:27:53
+    lac-108 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:40:31   10:19:29
+    lac-109 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:40:31   10:19:29
+    lac-110 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:40:32   10:19:28
+    lac-111 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:40:34   10:19:26
+    lac-112 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:40:35   10:19:25
+    lac-113 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:32   10:24:28
+    lac-114 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:32   10:24:28
+    lac-115 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:35   10:24:25
+    lac-116 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:54:33    7:05:27
+    lac-117 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:54:36    7:05:24
+    lac-118 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:18   15:48:42
+    lac-119 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:20   15:48:40
+    lac-120 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:42   10:24:18
+    lac-121 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:42   10:24:18
+    lac-122 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:35:45   10:24:15
+    lac-124 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:24   15:48:36
+    lac-125 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:27   15:48:33
+    lac-126 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:27   15:48:33
+    lac-127 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:30   15:48:30
+    lac-128 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:30   15:48:30
+    lac-129 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:33   15:48:27
+    lac-130 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:33   15:48:27
+    lac-131 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:36   15:48:24
+    lac-132 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:36   15:48:24
+    lac-133 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:39   15:48:21
+    lac-134 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:36:00   10:24:00
+    lac-135 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:36:03   10:23:57
+    lac-144 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:49:12   22:09:48
+    lac-145 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:49:15   22:09:45
+    lac-146 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:49:16   22:09:44
+    lac-147 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54497721   ptg        agbemava   833     1:49:18   22:09:42
+    lac-148 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:15   10:18:45
+    lac-149 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:17   10:18:43
+    lac-150 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:52   15:48:08
+    lac-151 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:54   15:48:06
+    lac-152 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470818   ptg        wyliejo2   336     1:36:16   10:23:44
+    lac-153 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:57   15:48:03
+    lac-154 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:10:58   15:48:02
+    lac-155 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:27   10:18:33
+    lac-156 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:30   10:18:30
+    lac-157 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:30   10:18:30
+    lac-158 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:33   10:18:27
+    lac-159 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470814   ptg        wyliejo2   336     1:41:33   10:18:27
+    lac-160 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:53:54       6:06
+    lac-161 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:53:54       6:06
+    lac-162 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:11:11   15:47:49
+    lac-163 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:11:13   15:47:47
+    lac-164 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:11:14   15:47:46
+    lac-165 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:55:35    7:04:25
+    lac-167 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:33:22    5:26:38
+    lac-168 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:33:25    5:26:35
+    lac-169 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:33:25    5:26:35
+    lac-170 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:33:28    5:26:32
+    lac-171 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:33:28    5:26:32
+    lac-172 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:18    3:31:42
+    lac-173 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:18    3:31:42
+    lac-174 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:21    3:31:39
+    lac-175 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:21    3:31:39
+    lac-176 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:24    3:31:36
+    lac-177 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:06    4:17:54
+    lac-178 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:09    4:17:51
+    lac-179 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:09    4:17:51
+    lac-180 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:12    4:17:48
+    lac-181 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:12    4:17:48
+    lac-182 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:33    3:31:27
+    lac-183 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470742   ptg        wyliejo2   336     4:28:33    3:31:27
+    lac-184 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:18    4:17:42
+    lac-185 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470580   ptg        wyliejo2   336     7:42:18    4:17:42
+    lac-186 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:33:52    5:26:08
+    lac-187 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:06    7:03:54
+    lac-188 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:32       5:28
+    lac-189 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:35       5:25
+    lac-190 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:37       5:23
+    lac-191 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:38       5:22
+    lac-200 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:40       5:20
+    lac-201 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:16    7:03:44
+    lac-202 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:19    7:03:41
+    lac-203 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:21    7:03:39
+    lac-204 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:22    7:03:38
+    lac-205 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:47       5:13
+    lac-206 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:50       5:10
+    lac-207 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:51       5:09
+    lac-208 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:54:53       5:07
+    lac-211 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:29    7:03:31
+    lac-212 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470687   ptg        wyliejo2   336     4:56:31    7:03:29
+    lac-213 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54477648   ptg        agbemava   833     8:12:13   15:46:47
+    lac-216 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54292440   weilai     heyinin1   28   2-09:54:33 4-14:00:27
+    lac-220 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54292570   weilai     heyinin1   28   2-09:48:05 4-14:06:55
+    lac-221 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54292713   weilai     heyinin1   28   2-09:41:08 4-14:13:52
+    lac-236 (allocated)
+    lac-238 (allocated)
+    lac-242 (allocated)
+    lac-334 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:34:24    5:25:36
+    lac-335 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:34:26    5:25:34
+    lac-340 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470612   ptg        wyliejo2   336     6:34:27    5:25:33
+    lac-341 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54470547   ptg        wyliejo2   336     7:55:06       4:54
+    lac-342 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436225   merzjrke   tanemur1   8      23:30:16      29:44
+      54436226   merzjrke   tanemur1   8      23:30:16      29:44
+      54436227   merzjrke   tanemur1   8      23:30:16      29:44
+      54436231   merzjrke   tanemur1   8      23:30:16      29:44
+    lac-343 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54436228   merzjrke   tanemur1   8      23:30:17      29:43
+      54436229   merzjrke   tanemur1   8      23:30:17      29:43
+      54436230   merzjrke   tanemur1   8      23:30:17      29:43
+      54436231   merzjrke   tanemur1   8      23:30:17      29:43
+    lac-365 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54136652   spg        laiwei     28   4-07:37:13 2-12:17:47
+    nvl-007 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54451107   cmse       lijuanh1   3      13:08:34   10:51:26
+      54451116   cmse       lijuanh1   3      13:08:34   10:51:26
+      54392684   general    ashbyeli   32     13:28:05 1-10:31:55
+      54285072   midi_lab   tuethan    1    2-12:21:59   19:38:01
+      54506551   vermaaslab razasaad   1         58:30    3:01:30
+    qml-002 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54000387   ged        irberlui   4    6-10:21:30   13:38:30
+      54000388   ged        irberlui   4    6-10:21:30   13:38:30
+      54000390   ged        irberlui   4    6-10:21:30   13:38:30
+      54000391   ged        irberlui   4    6-10:21:30   13:38:30
+      54000392   ged        irberlui   4    6-10:21:30   13:38:30
+      54000394   ged        irberlui   4    6-10:21:30   13:38:30
+      54000396   ged        irberlui   4    6-10:21:30   13:38:30
+      54000397   ged        irberlui   4    6-10:21:30   13:38:30
+      54000398   ged        irberlui   4    6-10:21:30   13:38:30
+      54000402   ged        irberlui   4    6-10:21:30   13:38:30
+      54000403   ged        irberlui   4    6-10:21:30   13:38:30
+    qml-003 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509242   ansgenetic dingrong   12        14:58    1:44:02
+      54509244   ansgenetic dingrong   12        14:58    1:44:02
+      54509248   ansgenetic dingrong   12        14:58    1:44:02
+    skl-128 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54073586   junlin     junlin     64   5-08:21:28 1-15:38:32
+    skl-134 (allocated)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54459199   liulab     wuyunqiq   10     17:12:29    6:47:31
+      54458529   liulab     wuyunqiq   10     17:28:48    6:31:12
+      54458453   liulab     wuyunqiq   10     17:29:52    6:30:08
+      54507900   liulab     wuyunqiq   10         2:50   23:57:10
+    amr-002 (idle)
+    amr-003 (idle)
+    amr-004 (idle)
+    amr-005 (idle)
+    amr-006 (idle)
+    amr-007 (idle)
+    amr-008 (idle)
+    amr-011 (idle)
+    amr-012 (idle)
+    amr-013 (idle)
+    amr-014 (idle)
+    amr-015 (idle)
+    amr-021 (idle)
+    amr-022 (idle)
+    amr-023 (idle)
+    amr-024 (idle)
+    amr-025 (idle)
+    amr-026 (idle)
+    amr-027 (idle)
+    amr-028 (idle)
+    amr-029 (idle)
+    amr-030 (idle)
+    amr-031 (idle)
+    amr-032 (idle)
+    amr-033 (idle)
+    amr-034 (idle)
+    amr-035 (idle)
+    amr-036 (idle)
+    amr-037 (idle)
+    amr-038 (idle)
+    amr-039 (idle)
+    amr-040 (idle)
+    amr-041 (idle)
+    amr-042 (idle)
+    amr-043 (idle)
+    amr-044 (idle)
+    amr-045 (idle)
+    amr-046 (idle)
+    amr-047 (idle)
+    amr-048 (idle)
+    amr-049 (idle)
+    amr-050 (idle)
+    amr-051 (idle)
+    amr-052 (idle)
+    amr-053 (idle)
+    amr-054 (idle)
+    amr-055 (idle)
+    amr-056 (idle)
+    amr-057 (idle)
+    amr-058 (idle)
+    amr-059 (idle)
+    amr-060 (idle)
+    amr-061 (idle)
+    amr-062 (idle)
+    amr-063 (idle)
+    amr-064 (idle)
+    amr-065 (idle)
+    amr-066 (idle)
+    amr-067 (idle)
+    amr-069 (idle)
+    amr-070 (idle)
+    amr-071 (idle)
+    amr-079 (idle)
+    amr-080 (idle)
+    amr-081 (idle)
+    amr-084 (idle)
+    amr-085 (idle)
+    amr-086 (idle)
+    amr-087 (idle)
+    amr-088 (idle)
+    amr-089 (idle)
+    amr-090 (idle)
+    amr-091 (idle)
+    amr-092 (idle)
+    amr-093 (idle)
+    amr-102 (idle)
+    amr-104 (idle)
+    amr-105 (idle)
+    amr-110 (idle)
+    amr-111 (idle)
+    amr-112 (idle)
+    amr-113 (idle)
+    amr-114 (idle)
+    amr-115 (idle)
+    amr-116 (idle)
+    amr-117 (idle)
+    amr-118 (idle)
+    amr-119 (idle)
+    amr-124 (idle)
+    amr-125 (idle)
+    amr-126 (idle)
+    amr-129 (idle)
+    amr-130 (idle)
+    amr-131 (idle)
+    amr-132 (idle)
+    amr-133 (idle)
+    amr-137 (idle)
+    amr-138 (idle)
+    amr-139 (idle)
+    amr-140 (idle)
+    amr-142 (idle)
+    amr-143 (idle)
+    amr-146 (idle)
+    amr-147 (idle)
+    amr-148 (idle)
+    amr-149 (idle)
+    amr-150 (idle)
+    amr-151 (idle)
+    amr-152 (idle)
+    amr-153 (idle)
+    amr-154 (idle)
+    amr-156 (idle)
+    amr-157 (idle)
+    amr-158 (idle)
+    amr-159 (idle)
+    amr-161 (idle)
+    amr-162 (idle)
+    amr-169 (idle)
+    amr-170 (idle)
+    amr-171 (idle)
+    amr-172 (idle)
+    amr-173 (idle)
+    amr-174 (idle)
+    amr-175 (idle)
+    amr-180 (idle)
+    amr-181 (idle)
+    amr-182 (idle)
+    amr-183 (idle)
+    amr-238 (idle)
+    amr-240 (idle)
+    amr-241 (idle)
+    amr-242 (idle)
+    amr-244 (idle)
+    css-123 (idle)
+    lac-005 (idle)
+    lac-007 (idle)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509626   ansgenetic tansuxu    4          4:24    3:55:36
+    lac-016 (idle)
+    lac-017 (idle)
+    lac-018 (idle)
+    lac-019 (idle)
+    lac-020 (idle)
+    lac-021 (idle)
+    lac-022 (idle)
+    lac-023 (idle)
+    lac-026 (idle)
+    lac-027 (idle)
+    lac-028 (idle)
+    lac-029 (idle)
+    lac-032 (idle)
+    lac-033 (idle)
+    lac-034 (idle)
+    lac-035 (idle)
+    lac-036 (idle)
+    lac-081 (idle)
+    lac-082 (idle)
+    lac-083 (idle)
+    lac-085 (idle)
+    lac-086 (idle)
+    lac-223 (idle)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509637   ansgenetic tansuxu    4          4:27    3:55:33
+    lac-224 (idle)
+    lac-229 (idle)
+    lac-237 (idle)
+    lac-239 (idle)
+    lac-240 (idle)
+    lac-241 (idle)
+    lac-243 (idle)
+    lac-244 (idle)
+    lac-245 (idle)
+    lac-250 (idle)
+    lac-254 (idle)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509638   ansgenetic tansuxu    4          4:29    3:55:31
+    lac-255 (idle)
+    lac-256 (idle)
+    lac-257 (idle)
+    lac-258 (idle)
+    lac-259 (idle)
+    lac-260 (idle)
+    lac-261 (idle)
+    lac-285 (idle)
+    lac-286 (idle)
+    lac-294 (idle)
+    lac-295 (idle)
+    lac-296 (idle)
+    lac-297 (idle)
+    lac-298 (idle)
+    lac-299 (idle)
+    lac-302 (idle)
+    lac-303 (idle)
+    lac-304 (idle)
+    lac-305 (idle)
+    lac-307 (idle)
+    lac-308 (idle)
+    lac-309 (idle)
+    lac-310 (idle)
+    lac-311 (idle)
+    lac-312 (idle)
+    lac-313 (idle)
+    lac-314 (idle)
+    lac-315 (idle)
+    lac-318 (idle)
+    lac-319 (idle)
+    lac-323 (idle)
+    lac-329 (idle)
+    lac-330 (idle)
+    lac-331 (idle)
+    lac-332 (idle)
+    lac-333 (idle)
+    lac-350 (idle)
+    lac-351 (idle)
+    lac-352 (idle)
+    lac-361 (idle)
+    lac-362 (idle)
+    lac-366 (idle)
+      JOBID      ACCOUNT    USER       CPUS       TIME  TIME_LEFT
+      54509760   ansgenetic tansuxu    4          1:06    3:58:54
+    lac-367 (idle)
+    lac-368 (idle)
+    lac-400 (idle)
+    nal-002 (idle)
+    nif-001 (idle)
+    nif-002 (idle)
+    nif-003 (idle)
+    nif-004 (idle)
+    nif-005 (idle)
+    skl-000 (idle)
+    skl-001 (idle)
+    skl-002 (idle)
+    skl-003 (idle)
+    skl-004 (idle)
+    skl-005 (idle)
+    skl-006 (idle)
+    skl-007 (idle)
+    skl-008 (idle)
+    skl-009 (idle)
+    skl-010 (idle)
+    skl-011 (idle)
+    skl-012 (idle)
+    skl-013 (idle)
+    skl-014 (idle)
+    skl-015 (idle)
+    skl-016 (idle)
+    skl-017 (idle)
+    skl-018 (idle)
+    skl-019 (idle)
+    skl-020 (idle)
+    skl-021 (idle)
+    skl-022 (idle)
+    skl-024 (idle)
+    skl-025 (idle)
+    skl-053 (idle)
+    skl-101 (idle)
+    skl-113 (idle)
+    skl-114 (idle)
+    skl-115 (idle)
+    skl-116 (idle)
+    skl-118 (idle)
+    skl-119 (idle)
+    skl-120 (idle)
+    skl-121 (idle)
+    skl-122 (idle)
+    skl-123 (idle)
+    skl-124 (idle)
+    skl-125 (idle)
+    skl-126 (idle)
+    skl-127 (idle)
+    skl-129 (idle)
+    skl-130 (idle)
+    skl-131 (idle)
+    skl-132 (idle)
+    skl-133 (idle)
+    skl-135 (idle)
+    skl-137 (idle)
+    skl-138 (idle)
+    skl-139 (idle)
+    skl-142 (idle)
+    skl-144 (idle)
+    skl-145 (idle)
+    skl-146 (idle)
+    skl-147 (idle)
+    skl-148 (idle)
+    skl-149 (idle)
+    skl-150 (idle)
+    skl-151 (idle)
+    skl-152 (idle)
+    skl-153 (idle)
+    skl-154 (idle)
+    skl-155 (idle)
+    skl-156 (idle)
+    skl-157 (idle)
+    skl-158 (idle)
+    skl-159 (idle)
+    skl-160 (idle)
+    skl-161 (idle)
+    vim-000 (idle)
+    vim-002 (idle)
+
+
