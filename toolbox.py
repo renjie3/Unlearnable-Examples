@@ -915,6 +915,11 @@ class PerturbationTool():
                 train_loss_batch_sum += train_loss_batch * perturb.shape[0]
                 train_loss_batch_count += perturb.shape[0]
 
+                # print(eot_grad)
+                # print(torch.sum(eot_grad != 0))
+                # print(torch.sum(eot_grad == 0))
+                # input()
+
                 eta_step = self.step_size * eot_grad.sign() * (-1)
                 sign_print = perturb.grad.data.sign() * (-1)
                 # print("+:", np.sum(sign_print.cpu().numpy() == 1))

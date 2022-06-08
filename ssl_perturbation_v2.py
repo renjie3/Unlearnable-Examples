@@ -640,12 +640,12 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
                 train_noise_data_loader_simclr.dataset.add_kmeans_label(kmeans_labels)
                 flag_cluster = True
         if args.save_kmeans_label:
-            cls_num = 100
-            kmeans_labels1 = find_cluster(model, const_train_loader, random_noise, 3, seed=3, use_feature_find_cluster=False)
-            kmeans_labels2 = find_cluster(model, const_train_loader, random_noise, 4, seed=4, use_feature_find_cluster=True)
-            kmeans_labels3 = find_cluster(model, const_train_loader, random_noise, 5, seed=5, use_feature_find_cluster=False)
-            kmeans_labels = np.stack([kmeans_labels1, kmeans_labels2, kmeans_labels3], axis=0)
-            f = open('./data/kmeans_label/kmeans_cifar100_{}.pkl'.format(cls_num), 'wb')
+            cls_num = 10
+            kmeans_list = []
+            for seed_i in range(10):
+                kmeans_list.append(find_cluster(model, const_train_loader, random_noise, cls_num, seed=seed_i, use_feature_find_cluster=True))
+            kmeans_labels = np.stack(kmeans_list, axis=0)
+            f = open('./data/kmeans_label/kmeans_cifar10_{}_10seed.pkl'.format(cls_num), 'wb')
             pickle.dump(kmeans_labels, f)
             f.close()
             input('kmeans_unlearnable_simclr_label done')

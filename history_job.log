@@ -8459,12 +8459,12 @@ samplewise perturbation
 python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53738140_1_20220515093921_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2
 ---------------------------------------------------------------
 Sun May 15 14:24:04 EDT 2022
-53802986
+53802986 moco bad example
 samplewise perturbation
 python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53727355_1_20220514233656_0.2_512_60_checkpoint_perturbation_epoch_240 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2
 ---------------------------------------------------------------
 Sun May 15 14:24:14 EDT 2022
-53803034
+53803034 moco bad example
 samplewise perturbation
 python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53727356_1_20220514233656_0.2_512_60_checkpoint_perturbation_epoch_240 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2
 ---------------------------------------------------------------
@@ -8699,29 +8699,29 @@ samplewise perturbation
 python supervised_cifar10.py --train_data_type cifar10 --arch resnet18 --pre_load_name unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation_1_out --samplewise
 ---------------------------------------------------------------
 Mon May 16 22:19:44 EDT 2022
-53968083
+53968083 full base
 samplewise perturbation
 python main_train.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
 ---------------------------------------------------------------
 Mon May 16 22:20:08 EDT 2022
-53968090
+53968090 full base
 samplewise perturbation
 python main_train.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
 ---------------------------------------------------------------
 Mon May 16 22:25:36 EDT 2022
-53968199
+53968199 full base
 samplewise perturbation
 python main_train.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
 ---------------------------------------------------------------
-Mon May 16 22:43:36 EDT 2022
-53968511
-samplewise perturbation
-python main_train.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
----------------------------------------------------------------
-Mon May 16 22:43:49 EDT 2022
-53968513
-samplewise perturbation
-python main_train.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
+    Mon May 16 22:43:36 EDT 2022
+    53968511
+    samplewise perturbation
+    python main_train.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
+    ---------------------------------------------------------------
+    Mon May 16 22:43:49 EDT 2022
+    53968513
+    samplewise perturbation
+    python main_train.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 4 --epochs 1000 --knn_eval_freq 10 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0
 ---------------------------------------------------------------
 Tue May 17 02:51:58 EDT 2022
 53977306
@@ -9365,12 +9365,272 @@ samplewise perturbation
 python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53967567_1_20220516222647_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco2_initial_seed3_model --dataset cifar100
 ---------------------------------------------------------------
 Fri May 27 16:08:28 EDT 2022
-54975709
+54975709 good moco base
 samplewise perturbation
 python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53967567_1_20220516222647_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco2_initial_seed3_model --dataset cifar100 --clean_train
 ---------------------------------------------------------------
 Fri May 27 16:08:47 EDT 2022
-54975737
+54975737 good moco base
 samplewise perturbation
 python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53967567_1_20220516222647_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco2_initial_seed3_model --dataset cifar10 --clean_train
+---------------------------------------------------------------
+Fri May 27 19:59:02 EDT 2022
+54990602
+samplewise perturbation
+python moco_transfer.py --batch_size 512 --epochs 1000 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --pre_load_name unlearnable_simsiam_samplew ise_53944286_1_20220516170901_0.2_512_2_checkpoint_perturbation --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise _53944286_1_20220516170901_0.2_512_2_piermaro_model --dataset cifar10 --no_save
+---------------------------------------------------------------
+    Fri May 27 19:59:36 EDT 2022
+    54990625
+    samplewise perturbation
+    python3 -u ssl_perturbation_v2_moco2_continue.py --epochs 40 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 100 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --no_save
+---------------------------------------------------------------
+    Fri May 27 19:59:55 EDT 2022
+    54990628
+    samplewise perturbation
+    python3 -u ssl_perturbation_v2_moco2_continue.py --piermaro_whole_epoch 40 --epochs 40 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 25 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --moco_t 0.2 --asymmetric --SGD_optim --k_grad --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --piermaro_restart_epoch 0 --no_save
+---------------------------------------------------------------
+    Fri May 27 20:52:58 EDT 2022
+    54993913
+    samplewise perturbation
+    python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 50 --epochs 8 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --moco_t 0.2 --asymmetric --SGD_optim --k_grad --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --piermaro_restart_epoch 42 --no_save
+---------------------------------------------------------------
+    Fri May 27 21:15:29 EDT 2022
+    54995071
+    samplewise perturbation
+    python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 50 --epochs 8 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --moco_t 0.2 --asymmetric --SGD_optim --k_grad --load_model --load_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --piermaro_restart_epoch 42 --no_save
+---------------------------------------------------------------
+Sun May 29 23:06:22 EDT 2022
+55148105
+samplewise perturbation
+python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53967567_1_20220516222647_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco2_initial_seed3_model --dataset cifar10 --clean_train --no_momentum_optim
+---------------------------------------------------------------
+Mon May 30 00:14:04 EDT 2022
+55153151
+samplewise perturbation
+python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53967567_1_20220516222647_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco2_initial_seed3_model --dataset cifar10 --clean_train --no_momentum_optim
+---------------------------------------------------------------
+Mon May 30 22:02:08 EDT 2022
+55213493
+samplewise perturbation
+python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_55144403_1_20220529211929_0.2_512_30_checkpoint_perturbation_epoch_200 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2
+---------------------------------------------------------------
+Mon May 30 22:02:14 EDT 2022
+55213496
+samplewise perturbation
+python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_55144403_1_20220529211929_0.2_512_30_checkpoint_perturbation_epoch_200 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2
+---------------------------------------------------------------
+Mon May 30 23:04:58 EDT 2022
+55217381
+samplewise perturbation
+python supervised_cifar10.py --train_data_type cifar100 --arch resnet18 --pre_load_name unlearnable_samplewise_54777615_1_20220525162248_0.5_512_2_checkpoint_perturbation --samplewise
+---------------------------------------------------------------
+Mon May 30 23:05:41 EDT 2022
+55217451
+samplewise perturbation
+python supervised_cifar10.py --train_data_type cifar100 --arch resnet18 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --samplewise
+---------------------------------------------------------------
+Tue May 31 10:47:50 EDT 2022
+55258100
+samplewise perturbation
+python supervised_cifar10.py --train_data_type cifar100 --arch resnet18 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --samplewise
+---------------------------------------------------------------
+Wed Jun  1 15:39:28 EDT 2022
+55339592
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Wed Jun  1 15:39:33 EDT 2022
+55339594
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Wed Jun  1 15:40:13 EDT 2022
+55339626
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Thu Jun  2 00:37:16 EDT 2022
+55369063
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Thu Jun  2 00:37:19 EDT 2022
+55369064
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54777661_1_20220525162248_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Thu Jun  2 15:10:18 EDT 2022
+55397979
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 0 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:21 EDT 2022
+55397980
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:25 EDT 2022
+55397981
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 2 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:28 EDT 2022
+55397982
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 3 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:33 EDT 2022
+55397983
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 4 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:37 EDT 2022
+55397984
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 5 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:39 EDT 2022
+55397985
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 6 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:42 EDT 2022
+55397986
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 7 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:45 EDT 2022
+55397987
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 8 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Thu Jun  2 15:10:49 EDT 2022
+55397988
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 9 --kmeans_label_file kmeans_cifar10_10_10seed
+---------------------------------------------------------------
+Sun Jun  5 11:26:00 EDT 2022
+55508830
+samplewise perturbation
+python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 8 --epochs 1000 --knn_eval_freq 1 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_55259400_1_20220531141305_0.5_512_3_checkpoint_perturbation_epoch_40
+---------------------------------------------------------------
+Sun Jun  5 11:26:13 EDT 2022
+55508834
+samplewise perturbation
+python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 8 --epochs 1000 --knn_eval_freq 1 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_55259400_1_20220531141305_0.5_512_3_checkpoint_perturbation_epoch_40
+---------------------------------------------------------------
+Sun Jun  5 11:29:15 EDT 2022
+55508888
+samplewise perturbation
+python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar10 --batch_size 512 --eval_batch_size 512 --num_workers 8 --epochs 1000 --knn_eval_freq 1 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_55259437_1_20220531141304_0.5_512_3_checkpoint_perturbation_epoch_40
+---------------------------------------------------------------
+Sun Jun  5 15:58:57 EDT 2022
+55514118
+samplewise perturbation
+python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 8 --epochs 1000 --knn_eval_freq 1 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_55259437_1_20220531141304_0.5_512_3_checkpoint_perturbation_epoch_40
+---------------------------------------------------------------
+Sun Jun  5 16:26:49 EDT 2022
+55515209
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 0 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:26:53 EDT 2022
+55515210
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:26:59 EDT 2022
+55515211
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 2 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:01 EDT 2022
+55515212
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 3 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:06 EDT 2022
+55515213
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 4 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:10 EDT 2022
+55515214
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 5 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:13 EDT 2022
+55515215
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 6 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:17 EDT 2022
+55515216
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 7 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:21 EDT 2022
+55515217
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 8 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Sun Jun  5 16:27:24 EDT 2022
+55515219
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 42 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1e-25 --kmeans_index 9 --kmeans_label_file kmeans_cifar10_10_10seed --not_use_normalized
+---------------------------------------------------------------
+Mon Jun  6 13:27:59 EDT 2022
+55572842
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --epochs 1 --batch_size 512 --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 0 --linear_noise_dbindex_weight 1 --not_use_normalized --random_start
+---------------------------------------------------------------
+Mon Jun  6 13:28:05 EDT 2022
+55572843
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --epochs 1 --batch_size 512 --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 0 --linear_noise_dbindex_weight 1 --random_start
+---------------------------------------------------------------
+Mon Jun  6 13:50:03 EDT 2022
+55573807
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --epochs 40 --batch_size 512 --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 0 --linear_noise_dbindex_weight 1 --random_start --not_use_normalized
+---------------------------------------------------------------
+Mon Jun  6 13:50:11 EDT 2022
+55573808
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --epochs 40 --batch_size 512 --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 0 --linear_noise_dbindex_weight 1 --random_start
+---------------------------------------------------------------
+Wed Jun  8 15:18:55 EDT 2022
+55718214
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 200 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 100 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --seed 1
+---------------------------------------------------------------
+Wed Jun  8 15:19:03 EDT 2022
+55718218
+samplewise perturbation
+python3 -u ssl_perturbation_v2.py --epochs 200 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 100 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 1 --seed 1
+---------------------------------------------------------------
+Wed Jun  8 16:16:26 EDT 2022
+55719814
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_55592462_1_20220606190028_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Wed Jun  8 16:16:58 EDT 2022
+55719817
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_55592474_1_20220606190028_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Wed Jun  8 16:17:19 EDT 2022
+55719820
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_55592499_1_20220606190050_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Wed Jun  8 16:17:49 EDT 2022
+55719852
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_55592520_1_20220606190101_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
+---------------------------------------------------------------
+Wed Jun  8 16:18:13 EDT 2022
+55719870
+samplewise perturbation
+python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_55592549_1_20220606190119_0.5_512_2_checkpoint_perturbation_epoch_20 --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save
 ---------------------------------------------------------------

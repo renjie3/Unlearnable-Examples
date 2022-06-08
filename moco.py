@@ -62,6 +62,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from utils import train_diff_transform, train_transform_no_totensor
+
 """### Set arguments"""
 
 # parser = argparse.ArgumentParser(description='Train MoCo on CIFAR-10')
@@ -162,11 +164,11 @@ class SplitBatchNorm(nn.BatchNorm2d):
             running_mean_split = self.running_mean.repeat(self.num_splits)
             running_var_split = self.running_var.repeat(self.num_splits)
             outcome = nn.functional.batch_norm(
-                input.view(-1, C * self.num_splits, H, W), running_mean_split, running_var_split, 
+                input.reshape(-1, C * self.num_splits, H, W), running_mean_split, running_var_split, 
                 self.weight.repeat(self.num_splits), self.bias.repeat(self.num_splits),
-                True, self.momentum, self.eps).view(N, C, H, W)
-            self.running_mean.data.copy_(running_mean_split.view(self.num_splits, C).mean(dim=0))
-            self.running_var.data.copy_(running_var_split.view(self.num_splits, C).mean(dim=0))
+                True, self.momentum, self.eps).reshape(N, C, H, W)
+            self.running_mean.data.copy_(running_mean_split.reshape(self.num_splits, C).mean(dim=0))
+            self.running_var.data.copy_(running_var_split.reshape(self.num_splits, C).mean(dim=0))
             return outcome
         else:
             return nn.functional.batch_norm(
@@ -264,8 +266,26 @@ class ModelMoCo(nn.Module):
 
         return x[idx_shuffle], idx_unshuffle
 
+    def _batch_shuffle_single_gpu_k_grad(self, x):
+        """
+        Batch shuffle, for making use of BatchNorm.
+        """
+        # random shuffle index
+        idx_shuffle = torch.randperm(x.shape[0]).cuda()
+
+        # index for restoring
+        idx_unshuffle = torch.argsort(idx_shuffle)
+
+        return x[idx_shuffle], idx_unshuffle
+
     @torch.no_grad()
     def _batch_unshuffle_single_gpu(self, x, idx_unshuffle):
+        """
+        Undo batch shuffle.
+        """
+        return x[idx_unshuffle]
+
+    def _batch_unshuffle_single_gpu_k_grad(self, x, idx_unshuffle):
         """
         Undo batch shuffle.
         """
@@ -277,14 +297,14 @@ class ModelMoCo(nn.Module):
         q = nn.functional.normalize(q, dim=1)  # already normalized
 
         if k_grad:
+            # input('check it comes here')
             # shuffle for making use of BN
-            im_k_, idx_unshuffle = self._batch_shuffle_single_gpu(im_k)
-
+            im_k_, idx_unshuffle = self._batch_shuffle_single_gpu_k_grad(im_k)
             k = self.encoder_k(im_k_)  # keys: NxC
             k = nn.functional.normalize(k, dim=1)  # already normalized
-
             # undo shuffle
-            k = self._batch_unshuffle_single_gpu(k, idx_unshuffle)
+            k = self._batch_unshuffle_single_gpu_k_grad(k, idx_unshuffle)
+            
         else:
             # compute key features
             with torch.no_grad():  # no gradient to keys
@@ -326,9 +346,9 @@ class ModelMoCo(nn.Module):
             loss
         """
 
-        # update the key encoder
-        with torch.no_grad():  # no gradient to keys
-            self._momentum_update_key_encoder()
+        # # update the key encoder
+        # with torch.no_grad():  # no gradient to keys
+        #     self._momentum_update_key_encoder()
 
         # compute loss
         if self.symmetric:  # asymmetric loss
@@ -394,6 +414,9 @@ def train_moco(net, im_1, im_2, train_optimizer):
     with torch.no_grad():  # no gradient to keys
         net._momentum_update_key_encoder()
 
+    im_1 = train_diff_transform(im_1)
+    im_2 = train_diff_transform(im_2)
+
     loss = net(im_1, im_2)
     
     train_optimizer.zero_grad()
@@ -405,6 +428,9 @@ def train_moco(net, im_1, im_2, train_optimizer):
 def train_moco_noise_return_loss_tensor(net, im_1, im_2, k_grad=False):
     net.eval()
     im_1, im_2 = im_1.cuda(non_blocking=True), im_2.cuda(non_blocking=True)
+
+    im_1 = train_transform_no_totensor(im_1)
+    im_2 = train_transform_no_totensor(im_2)
 
     loss = net(im_1, im_2, k_grad=k_grad)
 

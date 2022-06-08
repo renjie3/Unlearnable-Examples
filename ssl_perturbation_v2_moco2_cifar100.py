@@ -1078,7 +1078,7 @@ def main():
         model.load_state_dict(checkpoints['state_dict'])
 
     if args.SGD_optim:
-        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4)
+        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4, momentum=0.9)
     else:
         optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 

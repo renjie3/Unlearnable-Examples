@@ -616,172 +616,130 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
     for _epoch_idx in range(1, epochs+1):
         epoch_idx = _epoch_idx + args.piermaro_restart_epoch
         train_idx = 0
-        condition = True
-        data_iter = iter(train_loader_simclr)
         sum_train_loss, sum_train_batch_size = 0, 0
         sum_numerator, sum_numerator_count = 0, 0
         sum_denominator, sum_denominator_count = 0, 0
 
-        # flag_cluster = False
-        if args.cluster_wise:
-            if (args.load_model and epoch_idx == 1) or (not args.load_model and epoch_idx == 3):
-                kmeans_labels = find_cluster(model, const_train_loader, random_noise, args.n_cluster)
-                train_noise_data_loader_simclr.dataset.add_kmeans_label(kmeans_labels)
-                flag_cluster = True
-        if args.save_kmeans_label:
-            kmeans_labels1 = find_cluster(model, const_train_loader, random_noise, 10)
-            kmeans_labels2 = find_cluster(model, const_train_loader, random_noise, 100)
-            kmeans_labels3 = find_cluster(model, const_train_loader, random_noise, 500)
-            kmeans_labels = np.stack([kmeans_labels1, kmeans_labels2, kmeans_labels3], axis=0)
-            # f = open('./data/kmeans_label/kmeans_unlearnable_simclr_label.pkl', 'wb')
-            # pickle.dump(kmeans_labels, f)
-            # f.close()
-            input('kmeans_unlearnable_simclr_label done')
-
-        train_loader_simclr.dataset.update_perturb_to_data(random_noise)
+        if epoch_idx == 1:
+            train_loader_simclr.dataset.update_perturb_to_data(random_noise)
         # input()
 
-        while condition:
-            if epoch_idx != 1 or not args.train_perturb_fisrt:
-                if args.attack_type == 'min-min':
-                    # Train Batch for min-min noise
-                    end_of_iteration = "END_OF_ITERATION"
-                    for j in range(0, args.train_step):
-                        _start = time.time()
-                        try:
-                            next_item = next(data_iter, end_of_iteration)
-                            if next_item != end_of_iteration:
-                                (pos_samples_1, pos_samples_2, labels) = next_item
-                                
-                            else:
-                                condition = False
-                                del data_iter
-                                break
-                        except:
-                            # data_iter = iter(data_loader['train_dataset'])
-                            # (pos_1, pos_2, labels) = next(data_iter)
-                            raise('train loader iteration problem')
+        for pos_samples_1, pos_samples_2, labels in tqdm(train_loader_simclr):
 
-                        if args.skip_train_model:
-                            continue
+            pos_samples_1, pos_samples_2, labels = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device)
 
-                        pos_samples_1, pos_samples_2, labels = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device)
+            model.train()
+            for param in model.parameters():
+                param.requires_grad = True
+            batch_train_loss, batch_size_count = train_moco(model, pos_samples_1.to(device), pos_samples_2.to(device), optimizer)
 
-                        model.train()
-                        for param in model.parameters():
-                            param.requires_grad = True
-                        batch_train_loss, batch_size_count = train_moco(model, pos_samples_1.to(device), pos_samples_2.to(device), optimizer)
+            if args.use_supervised_g:
+                g_net.train()
+                for param in g_net.parameters():
+                    param.requires_grad = True
+                train_supervised_batch(g_net, torch.stack(train_pos_1).to(device), labels[:, 1].to(device), supervised_criterion, supervised_optimizer, supervised_transform_train)
+            
+            sum_train_loss += batch_train_loss
+            sum_train_batch_size += batch_size_count
 
-                        if args.use_supervised_g:
-                            g_net.train()
-                            for param in g_net.parameters():
-                                param.requires_grad = True
-                            train_supervised_batch(g_net, torch.stack(train_pos_1).to(device), labels[:, 1].to(device), supervised_criterion, supervised_optimizer, supervised_transform_train)
-                        
-                        sum_train_loss += batch_train_loss
-                        sum_train_batch_size += batch_size_count
+            _end = time.time()
 
-                        _end = time.time()
-
-                        print("traning model time:", _end - _start)
-
-            else:
-                condition = False
+            # print("traning model time:", _end - _start)
 
             # Search For Noise
 
-            if args.use_wholeset_center:
-                noise_centroids = utils.get_centers(random_noise, train_noise_data_loader_simclr.dataset.targets[:, args.linear_noise_dbindex_index], flag_use_normalized)
-            else:
-                noise_centroids = None
+            # if args.use_wholeset_center:
+            #     noise_centroids = utils.get_centers(random_noise, train_noise_data_loader_simclr.dataset.targets[:, args.linear_noise_dbindex_index], flag_use_normalized)
+            # else:
+            #     noise_centroids = None
             
-            train_noise_loss_sum, train_noise_loss_count = 0, 0
-            idx = 0
-            for i, (pos_samples_1, pos_samples_2, labels) in tqdm(enumerate(train_noise_data_loader_simclr), total=len(train_noise_data_loader_simclr), desc="Training images"):
-                pos_samples_1, pos_samples_2, labels, model = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device), model.to(device)
+            # train_noise_loss_sum, train_noise_loss_count = 0, 0
+            # idx = 0
+            # for i, (pos_samples_1, pos_samples_2, labels) in tqdm(enumerate(train_noise_data_loader_simclr), total=len(train_noise_data_loader_simclr), desc="Training images"):
+            #     pos_samples_1, pos_samples_2, labels, model = pos_samples_1.to(device), pos_samples_2.to(device), labels.to(device), model.to(device)
 
-                if args.debug:
-                    print(torch.max(labels[:, args.linear_noise_dbindex_index]))
-                    input('check')
+            #     if args.debug:
+            #         print(torch.max(labels[:, args.linear_noise_dbindex_index]))
+            #         input('check')
 
-                if args.noise_after_transform:
-                    # print('check not come noise_after_transform')
-                    pos_samples_1 = utils.train_diff_transform(pos_samples_1)
-                    pos_samples_2 = utils.train_diff_transform(pos_samples_2)
+            #     if args.noise_after_transform:
+            #         # print('check not come noise_after_transform')
+            #         pos_samples_1 = utils.train_diff_transform(pos_samples_1)
+            #         pos_samples_2 = utils.train_diff_transform(pos_samples_2)
 
-                if args.single_noise_after_transform:
-                    # print('check single aug on 1')
-                    pos_samples_1 = utils.train_diff_transform(pos_samples_1)
+            #     if args.single_noise_after_transform:
+            #         # print('check single aug on 1')
+            #         pos_samples_1 = utils.train_diff_transform(pos_samples_1)
 
-                # Add Sample-wise Noise to each sample
-                batch_noise, batch_start_idx = [], idx
-                batch_simclr_mask = []
-                batch_linear_noise = []
-                batch_mask1 = []
-                batch_mask2 = []
-                for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
-                    sample_noise = random_noise[label[0].item()]
-                    # c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
-                    # mask = np.zeros((c, h, w), np.float32)
-                    # x1, x2, y1, y2 = mask_cord_list[idx]
-                    if type(sample_noise) is np.ndarray:
-                        mask = sample_noise
-                    else:
-                        mask = sample_noise.cpu().numpy()
-                    # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
-                    sample_noise = torch.from_numpy(mask).to(device)
-                    batch_noise.append(sample_noise)
-                    if args.upper_half_linear:
-                        batch_simclr_mask.append(simclr_mask[label[0].item()])
-                        batch_linear_noise.append(linear_separable_noise[label[0].item()])
-                    if args.mask_linear_constraint:
-                        batch_mask1.append(mask1[label[1].item()])
-                        batch_mask2.append(mask2[label[1].item()])
-                    idx += 1
+            #     # Add Sample-wise Noise to each sample
+            #     batch_noise, batch_start_idx = [], idx
+            #     batch_simclr_mask = []
+            #     batch_linear_noise = []
+            #     batch_mask1 = []
+            #     batch_mask2 = []
+            #     for i, (pos_1, pos_2, label) in enumerate(zip(pos_samples_1, pos_samples_2, labels)):
+            #         sample_noise = random_noise[label[0].item()]
+            #         # c, h, w = pos_1.shape[0], pos_1.shape[1], pos_1.shape[2]
+            #         # mask = np.zeros((c, h, w), np.float32)
+            #         # x1, x2, y1, y2 = mask_cord_list[idx]
+            #         if type(sample_noise) is np.ndarray:
+            #             mask = sample_noise
+            #         else:
+            #             mask = sample_noise.cpu().numpy()
+            #         # mask[:, x1: x2, y1: y2] = sample_noise.cpu().numpy()
+            #         sample_noise = torch.from_numpy(mask).to(device)
+            #         batch_noise.append(sample_noise)
+            #         if args.upper_half_linear:
+            #             batch_simclr_mask.append(simclr_mask[label[0].item()])
+            #             batch_linear_noise.append(linear_separable_noise[label[0].item()])
+            #         if args.mask_linear_constraint:
+            #             batch_mask1.append(mask1[label[1].item()])
+            #             batch_mask2.append(mask2[label[1].item()])
+            #         idx += 1
 
-                # Update sample-wise perturbation
-                model.eval()
-                for param in model.parameters():
-                    param.requires_grad = False
-                if args.use_supervised_g:
-                    g_net.eval()
-                    for param in g_net.parameters():
-                        param.requires_grad = False
-                batch_noise = torch.stack(batch_noise).to(device)
-                if args.upper_half_linear:
-                    batch_simclr_mask = torch.stack(batch_simclr_mask).to(device)
-                    batch_linear_noise = torch.stack(batch_linear_noise).to(device)
-                elif args.mask_linear_constraint:
-                    batch_mask1 = torch.stack(batch_mask1).to(device)
-                    batch_mask2 = torch.stack(batch_mask2).to(device)
-                else:
-                    batch_simclr_mask = None
-                    batch_linear_noise = None
-                if flag_cluster:
-                    dbindex_weight = args.dbindex_weight
-                else:
-                    dbindex_weight = 0
-                if args.attack_type == 'min-min':
-                    if args.min_min_attack_fn == "eot_v1":
-                        _, eta, train_noise_loss = noise_generator.min_min_attack_moco_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight, simclr_weight=args.simclr_weight, augmentation_prob=args.augmentation_prob, clean_weight=args.clean_weight, noise_simclr_weight=args.noise_simclr_weight, double_perturb=args.double_perturb, upper_half_linear=args.upper_half_linear, batch_simclr_mask=batch_simclr_mask, batch_linear_noise=batch_linear_noise, mask_linear_constraint=args.mask_linear_constraint, mask1=batch_mask1, mask2=batch_mask2, mask_linear_noise_range=args.mask_linear_noise_range, use_supervised_g=args.use_supervised_g, g_net=g_net, supervised_criterion=supervised_criterion, supervised_weight=args.supervised_weight, supervised_transform_train=supervised_transform_train, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight, linear_noise_dbindex_index=args.linear_noise_dbindex_index, linear_noise_dbindex_weight2=args.linear_noise_dbindex_weight2, linear_noise_dbindex_index2=args.linear_noise_dbindex_index2, use_mean_dbindex=flag_use_mean_dbindex, use_normalized=flag_use_normalized, noise_centroids=noise_centroids, modify_dbindex=args.modify_dbindex, two_stage_PGD=args.two_stage_PGD, model_g_augment_first=args.model_g_augment_first, dbindex_augmentation=args.dbindex_augmentation, linear_xnoise_dbindex_weight=args.linear_xnoise_dbindex_weight, linear_xnoise_dbindex_index=args.linear_xnoise_dbindex_index, k_grad=args.k_grad)
-                    else:
-                        raise('Using wrong min_min_attack_fn in samplewise.')
-                # elif args.attack_type == 'min-max':
-                #     perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
-                else:
-                    raise('Invalid attack')
+            #     # Update sample-wise perturbation
+            #     model.eval()
+            #     for param in model.parameters():
+            #         param.requires_grad = False
+            #     if args.use_supervised_g:
+            #         g_net.eval()
+            #         for param in g_net.parameters():
+            #             param.requires_grad = False
+            #     batch_noise = torch.stack(batch_noise).to(device)
+            #     if args.upper_half_linear:
+            #         batch_simclr_mask = torch.stack(batch_simclr_mask).to(device)
+            #         batch_linear_noise = torch.stack(batch_linear_noise).to(device)
+            #     elif args.mask_linear_constraint:
+            #         batch_mask1 = torch.stack(batch_mask1).to(device)
+            #         batch_mask2 = torch.stack(batch_mask2).to(device)
+            #     else:
+            #         batch_simclr_mask = None
+            #         batch_linear_noise = None
+            #     if flag_cluster:
+            #         dbindex_weight = args.dbindex_weight
+            #     else:
+            #         dbindex_weight = 0
+            #     if args.attack_type == 'min-min':
+            #         if args.min_min_attack_fn == "eot_v1":
+            #             _, eta, train_noise_loss = noise_generator.min_min_attack_moco_return_loss_tensor_eot_v1(pos_samples_1, pos_samples_2, labels, model, optimizer, None, random_noise=batch_noise, batch_size=batch_size, temperature=temperature, flag_strong_aug=args.strong_aug, noise_after_transform=args.noise_after_transform, eot_size=args.eot_size, one_gpu_eot_times=args.one_gpu_eot_times, cross_eot=args.cross_eot, pytorch_aug=args.pytorch_aug, dbindex_weight=dbindex_weight, single_noise_after_transform=args.single_noise_after_transform, no_eval=args.no_eval, dbindex_label_index=args.dbindex_label_index, noise_dbindex_weight=args.noise_dbindex_weight, simclr_weight=args.simclr_weight, augmentation_prob=args.augmentation_prob, clean_weight=args.clean_weight, noise_simclr_weight=args.noise_simclr_weight, double_perturb=args.double_perturb, upper_half_linear=args.upper_half_linear, batch_simclr_mask=batch_simclr_mask, batch_linear_noise=batch_linear_noise, mask_linear_constraint=args.mask_linear_constraint, mask1=batch_mask1, mask2=batch_mask2, mask_linear_noise_range=args.mask_linear_noise_range, use_supervised_g=args.use_supervised_g, g_net=g_net, supervised_criterion=supervised_criterion, supervised_weight=args.supervised_weight, supervised_transform_train=supervised_transform_train, linear_noise_dbindex_weight=args.linear_noise_dbindex_weight, linear_noise_dbindex_index=args.linear_noise_dbindex_index, linear_noise_dbindex_weight2=args.linear_noise_dbindex_weight2, linear_noise_dbindex_index2=args.linear_noise_dbindex_index2, use_mean_dbindex=flag_use_mean_dbindex, use_normalized=flag_use_normalized, noise_centroids=noise_centroids, modify_dbindex=args.modify_dbindex, two_stage_PGD=args.two_stage_PGD, model_g_augment_first=args.model_g_augment_first, dbindex_augmentation=args.dbindex_augmentation, linear_xnoise_dbindex_weight=args.linear_xnoise_dbindex_weight, linear_xnoise_dbindex_index=args.linear_xnoise_dbindex_index, k_grad=args.k_grad)
+            #         else:
+            #             raise('Using wrong min_min_attack_fn in samplewise.')
+            #     # elif args.attack_type == 'min-max':
+            #     #     perturb_img, eta = noise_generator.min_max_attack(images, labels, model, optimizer, criterion, random_noise=batch_noise)
+            #     else:
+            #         raise('Invalid attack')
 
-                for delta, label in zip(eta, labels):
-                    # x1, x2, y1, y2 = mask_cord_list[labels[i].item()]
-                    # delta = delta[:, x1: x2, y1: y2]
-                    if torch.is_tensor(random_noise):
-                        random_noise[label[0].item()] = delta.detach().cpu().clone()
-                    else:
-                        random_noise[label[0].item()] = delta.detach().cpu().numpy()
-                    # print(np.sum(np.isnan(delta.detach().cpu().numpy())))
-                    # print(delta.detach().cpu().numpy())
+            #     for delta, label in zip(eta, labels):
+            #         # x1, x2, y1, y2 = mask_cord_list[labels[i].item()]
+            #         # delta = delta[:, x1: x2, y1: y2]
+            #         if torch.is_tensor(random_noise):
+            #             random_noise[label[0].item()] = delta.detach().cpu().clone()
+            #         else:
+            #             random_noise[label[0].item()] = delta.detach().cpu().numpy()
+            #         # print(np.sum(np.isnan(delta.detach().cpu().numpy())))
+            #         # print(delta.detach().cpu().numpy())
 
-                noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255
+            #     noise_ave_value = np.mean(np.absolute(random_noise.to('cpu').numpy())) * 255
 
             # if args.debug:
             #     test_acc_1, test_acc_5 = test_ssl(model, memory_loader, test_loader, k, temperature, 0, epochs)
@@ -795,7 +753,7 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
         test_acc_1 = test_moco(model.encoder_q, memory_loader, test_loader, epoch_idx, epochs, k, temperature)
         results['test_acc@1'].append(test_acc_1)
         results['test_acc@5'].append(0)
-        results['noise_ave_value'].append(noise_ave_value)
+        results['noise_ave_value'].append(0)
 
         if train_loss < best_loss:
             best_loss = train_loss
@@ -813,9 +771,9 @@ def sample_wise_perturbation(noise_generator, trainer, evaluator, model, criteri
 
         # save statistics
         # print(results)
-        data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
-        if not args.no_save:
-            data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
+        # data_frame = pd.DataFrame(data=results, index=range(1, epoch_idx + 1))
+        # if not args.no_save:
+        #     data_frame.to_csv('results/{}_statistics.csv'.format(save_name_pre), index_label='epoch')
 
         if epoch_idx % 1 == 0 and not args.no_save:
             torch.save(model.state_dict(), 'results/{}_checkpoint_model.pth'.format(save_name_pre))
@@ -1057,7 +1015,7 @@ def main():
         model.load_state_dict(checkpoints['state_dict'])
 
     if args.SGD_optim:
-        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4)
+        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4, momentum=0.9)
     else:
         optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 

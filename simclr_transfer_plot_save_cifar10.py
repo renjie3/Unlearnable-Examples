@@ -388,9 +388,10 @@ if __name__ == '__main__':
 
     # model setup and optimizer config
     model = Model(feature_dim, arch=args.arch).cuda()
-    flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
-    flops, params = clever_format([flops, params])
-    print('# Model Params: {} FLOPs: {}'.format(params, flops))
+    if args.train_data_type == 'CIFAR10':
+        flops, params = profile(model, inputs=(torch.randn(1, 3, 32, 32).cuda(),))
+        flops, params = clever_format([flops, params])
+        print('# Model Params: {} FLOPs: {}'.format(params, flops))
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
     # optimizer = torch.optim.SGD(params=model.parameters(), lr=0.1, weight_decay=0.0005, momentum=0.9)
     c = len(memory_data.classes)

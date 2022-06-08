@@ -510,7 +510,7 @@ if __name__ == '__main__':
             model.load_state_dict(checkpoints['state_dict'])
         except:
             model.load_state_dict(checkpoints)
-        logger.info("File %s loaded!" % (load_model_path))
+        # logger.info("File %s loaded!" % (load_model_path))
 
     if args.load_piermaro_model:
         load_model_path = './results/{}.pth'.format(args.load_piermaro_model_path)

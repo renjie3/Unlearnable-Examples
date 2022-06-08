@@ -92,6 +92,8 @@ parser.add_argument('--job_id', default='', type=str, help='The Slurm JOB ID')
 parser.add_argument('--no_save', action='store_true', help='use a symmetric loss function that backprops to both crops')
 parser.add_argument('--kornia_aug', action='store_true', help='use a symmetric loss function that backprops to both crops')
 parser.add_argument('--dataset', default='cifar10', type=str)
+parser.add_argument('--adam_optim', action='store_true', default=False)
+parser.add_argument('--no_momentum_optim', action='store_true', default=False)
 
 args = parser.parse_args()  # running in command line
 
@@ -126,7 +128,7 @@ args.cos = True
 args.schedule = []  # cos in use
 # args.symmetric = False
 if args.results_dir == '':
-    args.results_dir = './cache-' + datetime.now().strftime("%Y-%m-%d-%H-%M-%S-moco")
+    args.results_dir = './results'
 
 print(args)
 
@@ -473,7 +475,13 @@ def knn_predict(feature, feature_bank, feature_labels, classes, knn_k, knn_t):
 """### Start training"""
 
 # define optimizer
-optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=0.9)
+if args.adam_optim:
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
+else:
+    if args.no_momentum_optim:
+        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=0)
+    else:
+        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=0.9)
 
 # load model if resume
 epoch_start = 1
@@ -487,24 +495,31 @@ if args.resume is not '':
 if args.load_model:
     # checkpoint = torch.load(args.resume)
     model.load_state_dict(torch.load('./results/{}.pth'.format(args.load_model_path)))
-    print('Loaded from: {}'.format(args.resume))
+    print('Loaded from: {}'.format(args.load_model_path))
 
 if args.load_piermaro_model:
     load_model_path = './results/{}.pth'.format(args.load_piermaro_model_path)
     checkpoints = torch.load(load_model_path)
     model.load_state_dict(checkpoints['state_dict'])
+    # for para in checkpoints['state_dict'].keys():
+    #     print(para)
+    # input()
 
-if args.load_model or args.load_piermaro_model:
+if args.load_piermaro_model:
     if 'optimizer' in checkpoints:
         optimizer.load_state_dict(checkpoints['optimizer'])
+        # print(checkpoints['optimizer']['state'])
+        # print(checkpoints['optimizer']['param_groups'])
+        # input()
 
 # logging
 results = {'train_loss': [], 'test_acc@1': []}
+save_name_pre = 'moco_transfer_{}_{}'.format(args.job_id, datetime.now().strftime("%Y%m%d%H%M%S"))
 if not args.no_save:
     if not os.path.exists(args.results_dir):
         os.mkdir(args.results_dir)
     # dump args
-    with open(args.results_dir + '/args.json', 'w') as fid:
+    with open('{}/{}_args.json'.format(args.results_dir, save_name_pre), 'w') as fid:
         json.dump(args.__dict__, fid, indent=2)
 
 # training loop
@@ -516,7 +531,7 @@ for epoch in range(epoch_start, args.epochs + 1):
     # save statistics
     data_frame = pd.DataFrame(data=results, index=range(epoch_start, epoch + 1))
     if not args.no_save:
-        data_frame.to_csv(args.results_dir + '/log.csv', index_label='epoch')
+        data_frame.to_csv('{}/{}_log.csv'.format(args.results_dir, save_name_pre), index_label='epoch')
     # save model
     if not args.no_save:
-        torch.save({'epoch': epoch, 'state_dict': model.state_dict(), 'optimizer' : optimizer.state_dict(),}, args.results_dir + '/model_last.pth')
+        torch.save({'epoch': epoch, 'state_dict': model.state_dict(), 'optimizer' : optimizer.state_dict(),}, '{}/{}_model_last.pth'.format(args.results_dir, save_name_pre))

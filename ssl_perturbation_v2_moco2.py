@@ -1083,7 +1083,7 @@ def main():
         model.load_state_dict(checkpoints['state_dict'])
 
     if args.SGD_optim:
-        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4)
+        optimizer = optim.SGD(model.parameters(), lr=0.3, weight_decay=1e-4, momentum=0.9)
     else:
         optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 
@@ -1156,7 +1156,7 @@ def main():
             if args.pre_load_noise_name != '':
                 random_noise = torch.load("./results/{}.pt".format(args.pre_load_noise_name))
 
-            if args.load_piermaro_model:
+            if args.load_piermaro_model or args.load_model:
                 if 'perturbation' in checkpoints:
                     random_noise = checkpoints['perturbation']
                     print('piermaro random_noise loaded')

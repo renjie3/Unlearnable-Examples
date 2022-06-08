@@ -17,11 +17,17 @@ TRAIN_STEP='2'
 
 # --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --use_supervised_g --model_g_augment_first --pytorch_aug --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10
 
-# MY_CMD="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 0 --linear_noise_dbindex_weight 1 --not_use_normalized --kmeans_index 1 --kmeans_label_file kmeans_cifar10_10 --random_start --local 1 --job_id 10001"
+# MY_CMD="python3 -u ssl_perturbation_v2.py --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --linear_noise_dbindex_weight 1 --kmeans_index 5 --kmeans_label_file kmeans_cifar10_10_10seed --local 1 --no_save"
 
-MY_CMD="python3 -u ssl_perturbation_v2_moco.py --epochs 200 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --debug --SGD_optim --k_grad --local 3 --no_save"
+# MY_CMD="python3 -u ssl_perturbation_v2_moco.py --epochs 200 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 5 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --debug --SGD_optim --k_grad --local 3 --no_save"
 
 # MY_CMD="python3 -u ssl_perturbation_v2_moco2_cifar100.py --epochs 200 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --local 3 --no_save"
+
+# MY_CMD="python3 -u ssl_perturbation_v2_moco2_continue.py --epochs 40 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 100 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --k_grad --moco_t 0.2 --asymmetric --SGD_optim --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --local 3 --no_save"
+
+# MY_CMD="python3 -u ssl_perturbation_v2_moco2.py --piermaro_whole_epoch 50 --epochs 8 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --moco_t 0.2 --asymmetric --SGD_optim --k_grad --load_model --load_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --piermaro_restart_epoch 42 --local 2 --no_save"
+# MY_CMD="python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0"
+# MY_CMD="python3 -u ssl_perturbation_v2_moco.py --piermaro_whole_epoch 42 --epochs 1 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 2 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --linear_noise_dbindex_weight 0 --moco_t 0.2 --asymmetric --SGD_optim --k_grad --seed 2"
 
 # MY_CMD="python3 -u ssl_perturbation_v2_simsiam2.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step ${TRAIN_STEP} --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --simclr_weight 1 --pytorch_aug --linear_noise_dbindex_weight 0 --simsiam_optim --seed 1 --k_grad --local 3 --no_save"
 
@@ -34,7 +40,7 @@ MY_CMD="python3 -u ssl_perturbation_v2_moco.py --epochs 200 --config_path config
 
 # MY_CMD="python3 -u ssl_perturbation_v2_byol.py --epochs 100 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --simclr_weight 1 --cl_algorithm byol --k_grad --local 1 --no_save"
 
-# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_54777666_1_20220525162248_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR100 --pytorch_aug --samplewise --local 2 --no_save"
+MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53967352_1_20220516215154_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --samplewise --pytorch_aug --no_save --local 3"
 
 # MY_CMD="python simclr_transfer_backbone.py --batch_size 512 --epochs 1000 --arch VGG19 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53228692_1_20220509155617_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --local 2 --no_save"
     # 'DenseNet121': DenseNet121,
@@ -48,38 +54,21 @@ MY_CMD="python3 -u ssl_perturbation_v2_moco.py --epochs 200 --config_path config
 
 # MY_CMD="python simsiam_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_53730909_1_20220515043418_0.5_512_2_checkpoint_perturbation_epoch_30 --train_data_type CIFAR10 --pytorch_aug --samplewise --local 3 --no_save"
 
-MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --pre_load_name unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_checkpoint_perturbation --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --dataset cifar10 --local 0 --no_save"
-# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_samplewise_52260407_1_20220502114610_0.5_512_300_checkpoint_perturbation_epoch_40 --samplewise"
+# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --pre_load_name unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_checkpoint_perturbation --load_piermaro_model --load_piermaro_model_path unlearnable_simsiam_samplewise_53944286_1_20220516170901_0.2_512_2_piermaro_model --dataset cifar10 --local 0 --no_save"
+# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_55144403_1_20220529211929_0.2_512_30_checkpoint_perturbation_epoch_130 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco_initial_seed2_model --local 1 --no_save"
 
-# MY_CMD="python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 8 --epochs 1000 --knn_eval_freq 1 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_53967366_1_20220516221838_0.5_512_2_checkpoint_perturbation --local 1"
+# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_55259262_1_20220531140608_0.2_512_30_checkpoint_perturbation_epoch_200 --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --dataset cifar100 --local 2"
+
+# MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --pre_load_name unlearnable_simsiam_samplewise_53967567_1_20220516222647_0.2_512_2_checkpoint_perturbation --samplewise --lr 0.3 --wd 1e-4 --moco-t 0.2 --load_model --load_model_path moco2_initial_seed3_model --dataset cifar10 --clean_train --no_momentum_optim --no_save"
+
+# MY_CMD="python main_train_transfer.py --method simsiam --arch resnet18 --dataset cifar100 --batch_size 512 --eval_batch_size 512 --num_workers 8 --epochs 1000 --knn_eval_freq 1 --lr 0.06 --wd 5e-4 --gpu 0 --trial 0 --pre_load_name unlearnable_samplewise_55259437_1_20220531141304_0.5_512_3_checkpoint_perturbation_epoch_40 --local 3"
 
 # MY_CMD="python3 -u byol_transfer_clean_train.py --piermaro_whole_epoch 1000 --epochs 50 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52866856_1_20220507200828_0.5_512_2_checkpoint_perturbation_epoch_20_byol_optim --train_data_type CIFAR10 --samplewise --pytorch_aug --clean_train --local 3 --no_save"
 
 # MY_CMD="python byol_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_byol_samplewise_53758198_1_20220515130952_0.5_512_2_checkpoint_perturbation --train_data_type CIFAR10 --pytorch_aug --samplewise --local 2 --no_save"
 
 # MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52903345_1_20220508015828_0.5_512_2_checkpoint_perturbation_epoch_40 --save_img_group --train_data_type CIFAR10 --samplewise --local 1"
-# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_52866656_1_20220507200824_0.5_512_2_checkpoint_perturbation_epoch_30 --save_noise_input_space --train_data_type CIFAR100 --samplewise --local 3"
-# unlearnable_samplewise_53599423_1_20220512202247_0.5_512_2_checkpoint_perturbation
-# 52734683 unlearnable_samplewise_52734683_1_20220507001155_0.5_512_2_checkpoint_perturbation
-# unlearnable_samplewise_52428866_1_20220505211256_0.5_512_2_checkpoint_perturbation
-# unlearnable_samplewise_52806124_1_20220507111200_0.5_512_2_checkpoint_perturbation
-# unlearnable_samplewise_52806123_1_20220507111158_0.5_512_2_checkpoint_perturbation 0.08
-
-# 52865694 unlearnable_samplewise_52865694_1_20220507200052_0.5_512_2_checkpoint_perturbation
-# 52866132 unlearnable_samplewise_52866132_1_20220507200522_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866270 unlearnable_samplewise_52866270_1_20220507200522_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866443 unlearnable_samplewise_52866443_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866444 unlearnable_samplewise_52866444_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866445 unlearnable_samplewise_52866445_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866446 unlearnable_samplewise_52866446_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866447 unlearnable_samplewise_52866447_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866448 unlearnable_samplewise_52866448_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866449 unlearnable_samplewise_52866449_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866450 unlearnable_samplewise_52866450_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866563 unlearnable_samplewise_52866563_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866589 unlearnable_samplewise_52866589_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
-# 52866590 unlearnable_samplewise_52866590_1_20220507200823_0.5_512_2_checkpoint_perturbation_epoch_10
-# unlearnable_samplewise_54057939_1_20220518112915_0.5_512_40_checkpoint_perturbation
+# MY_CMD="python simclr_transfer.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --pre_load_name unlearnable_samplewise_55259400_1_20220531141305_0.5_512_3_checkpoint_perturbation_epoch_40 --save_noise_input_space --train_data_type CIFAR10 --samplewise --local 3"
 
 # try this 52802261
 
@@ -100,7 +89,7 @@ MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --samplewise --lr
 
     # unlearnable_samplewise_54057939_1_20220518112915_0.5_512_40_checkpoint_perturbation
 
-# MY_CMD="python supervised_cifar10.py --train_data_type cifar100 --arch resnet18 --pre_load_name unlearnable_samplewise_54637274_1_20220524211138_0.5_512_2_checkpoint_perturbation --samplewise --local 3 --no_save"
+# MY_CMD="python supervised_cifar10.py --train_data_type cifar100 --arch resnet18 --pre_load_name unlearnable_samplewise_55259513_1_20220531145304_0.5_512_2_checkpoint_perturbation_epoch_40 --samplewise --local 3 --no_save"
 # unlearnable_samplewise_52866449_1_20220507200521_0.5_512_2_checkpoint_perturbation_epoch_10
 # unlearnable_samplewise_52428805_1_20220505181516_0.5_512_2_checkpoint_perturbation_epoch_20
 
@@ -123,11 +112,15 @@ MY_CMD="python moco_transfer.py --batch_size 512 --epochs 1000 --samplewise --lr
 
 # MY_CMD="python simclr_transfer_plot.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --clean_train --samplewise --load_model --load_model_path transfer_53838020_1_20220515160226_final_model --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --train_data_type CIFAR100 --save_name kmeans100_2 --local 1"
 
-# MY_CMD="python simclr_transfer_plot_save_cifar10.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --clean_train --samplewise --load_model --load_model_path 20211008231026_128_0.5_200_512_1000_model --train_data_type CIFAR10 --save_name gt --local 1"
+# MY_CMD="python simclr_transfer_plot_save_cifar10.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --clean_train --samplewise --load_model --load_model_path 20211008231026_128_0.5_200_512_1000_model --kmeans_index 9 --kmeans_label_file kmeans_cifar10_10_10seed --train_data_type CIFAR10 --save_name cifar10_10seed_9 --local 3"
 
 # MY_CMD="python simclr_transfer_plot.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --samplewise --clean_train --load_model --load_model_path 128_0.5_200_512_1000_model --local 2"
 
 # MY_CMD="python3 -u ssl_perturbation_v2.py --piermaro_whole_epoch 40 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR100 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 20 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 1 --seed 1 --load_piermaro_model --load_piermaro_model_path unlearnable_samplewise_53726271_1_20220514232843_0.5_512_2_piermaro_model --piermaro_restart_epoch 38"
+
+# MY_CMD="python3 -u ssl_perturbation_v2_save_kmeans_label.py --piermaro_whole_epoch 42 --epochs 2 --config_path configs/cifar10 --exp_name path/to/your/experiment/folder --version resnet18 --train_data_type CIFAR10 --noise_shape 50000 3 32 32 --epsilon 8 --num_steps 20 --step_size 0.8 --attack_type min-min --perturb_type samplewise --train_step 2 --min_min_attack_fn eot_v1 --strong_aug --eot_size 1 --shuffle_train_perturb_data --pytorch_aug --linear_noise_dbindex_weight 0.8 --local 3 --load_model --load_model_path 20211008231026_128_0.5_200_512_1000_model --save_kmeans_label --no_save"
+
+# MY_CMD="python simclr_transfer_plot_save_cifar10.py --batch_size 512 --epochs 1000 --arch resnet18 --perturbation_budget 1 --clean_train --samplewise --load_model --load_model_path transfer_53838020_1_20220515160226_final_model --kmeans_index 2 --kmeans_label_file kmeans_cifar100_100 --train_data_type CIFAR100 --save_name kmeans100_2 --local 3"
 
 
 echo $MY_CMD

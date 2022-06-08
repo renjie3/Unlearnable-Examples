@@ -1057,6 +1057,8 @@ class PytorchAugCIFAR100Pair(CIFAR100):
                 kmeans_filepath = os.path.join(root, "kmeans_label/{}.pkl".format(kmeans_label_file))
             with open(kmeans_filepath, "rb") as f:
                 kmeans_labels = pickle.load(f)[kmeans_index]
+                # print(kmeans_labels)
+                # input()
                 print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
             self.targets = kmeans_labels
@@ -1148,6 +1150,8 @@ class CIFAR100Pair(CIFAR100):
             with open(kmeans_filepath, "rb") as f:
                 kmeans_labels = pickle.load(f)[kmeans_index]
                 print(kmeans_filepath)
+                # print(kmeans_labels)
+                # input()
                 print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
             self.targets = kmeans_labels
@@ -1686,6 +1690,8 @@ class TransferCIFAR100Pair(CIFAR100):
                 with open(kmeans_filepath, "rb") as f:
                     kmeans_labels = pickle.load(f)[kmeans_index]
                     print(kmeans_filepath)
+                    # print(kmeans_labels[:100])
+                    # input()
                     print("kmeans_label_num: ", np.max(kmeans_labels)+1)
 
                 self.targets = kmeans_labels
